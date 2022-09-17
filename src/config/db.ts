@@ -16,6 +16,10 @@ export const connectDB = () =>
       reject(error);
     });
 
+    db.on("disconnected", () => {
+      console.log(`Disconnected from database successfully`);
+    });
+
     db.once("open", () => {
       console.log(`Connected to database successfully`);
       resolve(mongoose);

@@ -1,23 +1,25 @@
 import dotenv from "dotenv";
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
-import cookieParser from "cookie-parser";
-import bodyParser from "body-parser";
-// import { connectDB } from "@";
+// import cookieParser from "cookie-parser";
+import { errorHandler } from "middlewares/error";
 import { connectDB } from "config/db";
+import userModel from "models/User.schema";
+
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 8080;
-import { errorHandler } from "middlewares/error";
 
 // connect to DB
 connectDB();
 
 //ErrorHandler (Should be last piece of middleware)
+app.use(cors());
 app.use(errorHandler);
 
 app.get("/", (req: Request, res: Response) => {
+  // const newUser = userModel.create({})
   res.send("Express + TypeScript Server");
 });
 
