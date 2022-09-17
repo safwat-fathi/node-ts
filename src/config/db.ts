@@ -4,9 +4,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const MONGO_URI = process.env.MONGO_URI as string;
-console.log(MONGO_URI);
 
-export const connection = () =>
+export const connectDB = () =>
   new Promise((resolve, reject) => {
     mongoose.connect(MONGO_URI);
 
