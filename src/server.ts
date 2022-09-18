@@ -4,7 +4,9 @@ import cors from "cors";
 // import cookieParser from "cookie-parser";
 import { errorHandler } from "middlewares/error";
 import { connectDB } from "config/db";
-import userModel from "models/User.schema";
+
+// routes
+import homeRouter from "routes/home.route";
 
 dotenv.config();
 
@@ -17,11 +19,11 @@ connectDB();
 //ErrorHandler (Should be last piece of middleware)
 app.use(cors());
 app.use(errorHandler);
-
-app.get("/", (req: Request, res: Response) => {
-  // const newUser = userModel.create({})
-  res.send("Express + TypeScript Server");
-});
+app.use(homeRouter);
+// app.get("/", (req: Request, res: Response) => {
+//   // const newUser = userModel.create({})
+//   res.send("Express + TypeScript Server");
+// });
 
 // const server = app.listen(port, () => {
 //   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
