@@ -25,3 +25,5 @@ export const connectDB = () =>
       resolve(mongoose);
     });
   });
+
+export const disconnectDB = () => mongoose.connection.close();
