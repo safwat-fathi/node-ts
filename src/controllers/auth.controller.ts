@@ -1,18 +1,21 @@
 import { Request, Response, NextFunction } from "express";
 import { UserModel } from "models/user/user.model";
-// import { RoleModel } from "models/role/role.model";
 import { sign } from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { validationResult } from "express-validator";
 
 export const signUp = async (req: Request, res: Response) => {
   res.setHeader("Content-Type", "application/json");
-  console.log(req.body);
 
   const errors = validationResult(req);
 
-  if (!errors.isEmpty())
-    return res.status(400).json({ errors: errors.array() }).end();
+  if (!errors.isEmpty()) {
+    const errorsMapped = errors
+      .array()
+      .map((err) => ({ param: err.param, message: err.msg }));
+
+    return res.status(400).json({ errors: errorsMapped });
+  }
 
   try {
     const user = new UserModel({
