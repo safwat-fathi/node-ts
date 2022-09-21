@@ -17,16 +17,16 @@ export const checkDuplicate = async (
 
     if (email) {
       res.status(400).json({ message: "Failed! Email is already in use!" });
-      res.end();
+      return;
     }
 
     if (phone) {
       res.status(400).json({ message: "Failed! Email is already in use!" });
-      res.end();
+      return;
     }
   } catch (err) {
     res.status(500).json({ message: err });
-    res.end();
+    return;
   }
 
   next();

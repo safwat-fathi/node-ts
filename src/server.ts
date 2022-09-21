@@ -5,7 +5,7 @@ import cors from "cors";
 import { errorHandler } from "middlewares/error";
 import { connectDB } from "config/db.config";
 // seeders
-import { seedRoles } from "seeder/roles.seed";
+import { seedRoles } from "seeders/roles.seed";
 
 // routes
 import homeRouter from "routes/home.route";
