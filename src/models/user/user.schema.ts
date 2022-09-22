@@ -7,7 +7,7 @@ export const userSchema = new Schema<User>({
   phone: {
     type: String,
     required: true,
-    match: /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/,
+    match: /\d{3}\s?\d{4}-?\d{4}/gm,
   },
   password: { type: String, required: true },
   roles: [
