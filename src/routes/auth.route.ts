@@ -32,15 +32,15 @@ router.post(
     .withMessage("Password is required")
     .trim()
     .escape(),
-  // check("password_confirm", "Password confirmation is required").custom(
-  //   (value, { req }) => {
-  //     if (value !== req.body.password_confirm) {
-  //       throw new Error("Password confirmation does not match given password");
-  //     }
+  check("password_confirm", "Password confirmation is required").custom(
+    (value, { req }) => {
+      if (value !== req.body.password_confirm) {
+        throw new Error("Password confirmation does not match given password");
+      }
 
-  //     return true;
-  //   }
-  // ),
+      return true;
+    }
+  ),
   check("phone")
     .exists()
     .withMessage("Phone is required")
