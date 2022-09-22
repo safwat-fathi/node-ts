@@ -12,7 +12,6 @@ export const signup = async (req: Request, res: Response) => {
 
   const errors = validationResult(req);
 
-  console.log("errors:", errors);
   if (!errors.isEmpty()) {
     const errorsMapped = errors
       .array()
@@ -20,9 +19,6 @@ export const signup = async (req: Request, res: Response) => {
 
     return res.status(400).json({ errors: errorsMapped });
   }
-
-  console.log("No errors");
-  console.log(req.body);
 
   const hashedPassword = await bcrypt.hash(req.body.password, 8);
 
@@ -44,13 +40,20 @@ export const signup = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
   try {
+    if (req.session.userId) {
+      res.status(401).json({
+        message:
+          "Already logged in, Please request a password reset if you suspect this is not you.",
+      });
+      return;
+    }
+
     const user = await UserModel.findOne({ email: req.body.email });
 
     if (!user) {
       res.status(404).json({ message: "User Not found" });
       return;
     }
-    console.log(user);
 
     const passwordIsValid = await bcrypt.compare(
       req.body.password,
@@ -69,6 +72,8 @@ export const login = async (req: Request, res: Response) => {
       algorithm: "HS256",
       expiresIn: 86400,
     });
+
+    req.session.userId = user.id;
 
     res.status(200).json({
       message: "Logged in successfully",
