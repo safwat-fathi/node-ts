@@ -1,19 +1,19 @@
 [
   {
-    "_id": "c0b6d8d7-a840-4143-8b57-bb5b77034d49",
-    "colId": "fde300ca-7e84-4f74-af1c-305cf4e066b2",
-    "containerId": "97b288b6-693c-4b8e-9b69-cd29eb99cdaf",
+    "_id": "f8955c45-8a71-4ff8-8fc7-e5399e90cb8e",
+    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+    "containerId": "",
     "name": "signup",
     "url": "{{baseUrl}}/auth/signup",
     "method": "POST",
     "sortNum": 10000,
-    "created": "2022-09-21T13:03:50.352Z",
-    "modified": "2022-09-21T14:49:06.001Z",
+    "created": "2022-09-22T08:41:41.481Z",
+    "modified": "2022-09-22T09:15:04.933Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"awdawd\",\n  \"email\": \"awd@awd.co\",\n  \"phone\": \"00201143341684\",\n  \"password\": \"wdwadDDADD1\",\n  \"password_confirm\": \"wdwadDDADD1\"\n}",
+      "raw": "{\n  \"name\": \"safwat\",\n  \"email\": \"test@test.com\",\n  \"phone\": \"01012345678\",\n  \"password\": \"0101DdDdAaAa\",\n  \"password_confirm\": \"0101DdDdAaAa\"\n}",
       "form": []
     },
     "tests": []
