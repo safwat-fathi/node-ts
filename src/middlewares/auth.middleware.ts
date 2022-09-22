@@ -1,6 +1,13 @@
+import dotenv from "dotenv";
+import { CustomJwtPayload } from "types/jwt";
 import { NextFunction, Request, Response } from "express";
 import { body } from "express-validator";
+import { verify } from "jsonwebtoken";
 import { UserModel } from "models/user/user.model";
+
+dotenv.config();
+
+const secret = (process.env.SECRET as string) || "";
 
 export const checkDuplicate = async (
   req: Request,
@@ -108,4 +115,28 @@ export const checkRolesExisted = async (
   }
 
   next();
+};
+
+export const verifyToken = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const token: string = req.headers.authorization?.split("  ")[1] || "";
+  console.log(token);
+
+  if (!token) {
+    res.status(401).json({ message: "Unauthorized" }).end();
+    return;
+  }
+
+  try {
+    const decoded = verify(token, secret) as CustomJwtPayload;
+
+    req.body.userId = decoded.id;
+
+    next();
+  } catch (err) {
+    res.status(401).json({ message: err }).end();
+  }
 };

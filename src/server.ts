@@ -4,7 +4,7 @@ import compression from "compression";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import session from "express-session";
-import { errorHandler } from "middlewares/error";
+import { errorHandler } from "middlewares/error.middleware";
 import { connectDB } from "config/db.config";
 // seeders
 import { seedRoles } from "seeders/roles.seed";
@@ -38,10 +38,6 @@ app.use(homeRouter);
 app.use(authRouter);
 //ErrorHandler (Should be last piece of middleware)
 app.use(errorHandler);
-// app.get("/", (req: Request, res: Response) => {
-//   // const newUser = userModel.create({})
-//   res.send("Express + TypeScript Server");
-// });
 
 const server = app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);

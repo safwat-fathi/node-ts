@@ -7,7 +7,7 @@ import {
   validatePasswordMatch,
   validatePhone,
   validatePassword,
-} from "middlewares/auth/verifyRegister.middleware";
+} from "middlewares/auth.middleware";
 
 const router = Router();
 
