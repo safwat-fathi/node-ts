@@ -7,11 +7,12 @@ import session from "express-session";
 import { errorHandler } from "middlewares/error.middleware";
 import { connectDB } from "config/db.config";
 // seeders
-import { seedRoles } from "seeders/roles.seed";
+import { seedSubscriptions } from "seeders/subscription.seed";
 
 // routes
 import homeRouter from "routes/test.route";
 import authRouter from "routes/auth.route";
+import userRouter from "routes/user.route";
 
 dotenv.config();
 
@@ -21,7 +22,7 @@ const secret = (process.env.SECRET as string) || "";
 
 // connect to DB
 connectDB();
-seedRoles();
+seedSubscriptions();
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
@@ -36,6 +37,7 @@ app.use(
 app.use(compression());
 app.use(homeRouter);
 app.use(authRouter);
+app.use(userRouter);
 //ErrorHandler (Should be last piece of middleware)
 app.use(errorHandler);
 

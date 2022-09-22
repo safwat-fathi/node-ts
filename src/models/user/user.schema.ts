@@ -15,16 +15,13 @@ export const userSchema = new Schema<User>({
     match: /\d{3}\s?\d{4}-?\d{4}/gm,
   },
   password: { type: String, required: true },
-  roles: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Role",
-    },
-  ],
+  subscription: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Subscription",
+    required: true,
+  },
 });
 
-userSchema.pre("save", (next) => {
-  console.log("saved!");
-
-  next();
-});
+// userSchema.pre("save", (next) => {
+//   next();
+// });

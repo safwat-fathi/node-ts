@@ -16,20 +16,17 @@ export const checkDuplicate = async (
 ) => {
   try {
     const email = await UserModel.findOne({
-      name: req.body.name,
+      name: req.body.email,
     });
 
     const phone = await UserModel.findOne({
       phone: req.body.phone,
     });
 
-    if (email) {
-      res.status(400).json({ message: "Failed! Email is already in use!" });
-      return;
-    }
-
-    if (phone) {
-      res.status(400).json({ message: "Failed! Email is already in use!" });
+    if (phone || email) {
+      res
+        .status(400)
+        .json({ message: "Sorry, email or phone is already in use!" });
       return;
     }
   } catch (err) {

@@ -7,8 +7,8 @@ export const testSchema = new Schema<Test>({
   propThree: { type: String, enum: ["Value_1", "Value_2"], required: false },
 });
 
-testSchema.pre("save", (next) => {
-  console.log("saved!");
+// testSchema.pre("save", (next) => {
+//   console.log("saved!");
 
-  next();
-});
+//   next();
+// });

@@ -14,12 +14,12 @@ const router = Router();
 // signup
 router.post(
   "/auth/signup",
-  checkDuplicate,
   validateName,
   validateEmail,
   validatePassword,
   validatePasswordMatch,
   validatePhone,
+  checkDuplicate,
   signup
 );
 // login

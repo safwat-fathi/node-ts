@@ -1,4 +1,4 @@
-import { type } from "os";
+import { ObjectId } from "mongoose";
 
 enum TestEnum {
   Value_1 = "Value_1",
@@ -16,12 +16,11 @@ export interface User {
   email: string;
   password: string;
   phone: string;
-  roles: {
-    type: string;
-    ref: string;
-  }[];
+  subscription: ObjectId;
 }
 
-export interface Role {
-  name: "user" | "moderator" | "admin";
+export enum Subscription {
+  basic = "basic",
+  silver = "silver",
+  gold = "gold",
 }

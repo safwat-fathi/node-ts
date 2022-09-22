@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import { NextFunction, Request, Response } from "express";
+import { SubscriptionModel } from "models/subscription/subscription.model";
 import { UserModel } from "models/user/user.model";
 import { sign } from "jsonwebtoken";
 import bcrypt from "bcryptjs";
@@ -10,8 +11,6 @@ dotenv.config();
 const secret = (process.env.SECRET as string) || "";
 
 export const signup = async (req: Request, res: Response) => {
-  res.setHeader("Content-Type", "application/json");
-
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -30,6 +29,7 @@ export const signup = async (req: Request, res: Response) => {
       email: req.body.email,
       phone: req.body.phone,
       password: hashedPassword,
+      subscription: req.body.subscription,
     });
 
     await user.save();

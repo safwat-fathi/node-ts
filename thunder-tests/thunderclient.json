@@ -8,12 +8,12 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2022-09-22T08:41:41.481Z",
-    "modified": "2022-09-22T12:00:04.843Z",
+    "modified": "2022-09-22T14:56:29.252Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"safwat\",\n  \"email\": \"test@test.com\",\n  \"phone\": \"01012345678\",\n  \"password\": \"0101DdDdAaAa\",\n  \"password_confirm\": \"0101DdDdAaAa\"\n}",
+      "raw": "{\n  \"name\": \"ali\",\n  \"email\": \"test@tewsta.com\",\n  \"phone\": \"01012045648\",\n  \"password\": \"0101DdDdAaAa\",\n  \"password_confirm\": \"0101DdDdAaAa\",\n  \"subscription\" : \"632c735a299e8c117fd63fa0\"\n}",
       "form": []
     },
     "tests": []
@@ -27,12 +27,12 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-22T09:25:40.291Z",
-    "modified": "2022-09-22T12:47:03.411Z",
+    "modified": "2022-09-22T15:08:53.275Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"test@test.com\",\n  \"password\": \"0101DdDdAaAa\"\n}",
+      "raw": "{\n  \"email\": \"test@tewsta.com\",\n  \"password\": \"0101DdDdAaAa\"\n}",
       "form": []
     },
     "tests": []
@@ -66,6 +66,24 @@
     "modified": "2022-09-22T12:09:56.055Z",
     "headers": [],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "9a9a3be0-8c37-443f-903e-d34f5d8ca554",
+    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+    "containerId": "",
+    "name": "getBySubscription",
+    "url": "{{baseUrl}}/user/632c735a299e8c117fd63fa0",
+    "method": "GET",
+    "sortNum": 50000,
+    "created": "2022-09-22T14:58:00.194Z",
+    "modified": "2022-09-22T15:09:06.430Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmM3NzlkZGIxNWNiNDM1ZWRlNGJlZiIsIm5hbWUiOiJhbGkiLCJpYXQiOjE2NjM4NTkzMzN9.miGSQj1_wOyvhpHbvQ4lWivtz5g5t2wgOvHmMv5vCKA"
+    },
     "tests": []
   }
 ]
