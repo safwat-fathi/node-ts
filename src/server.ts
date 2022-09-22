@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express, { Express } from "express";
+import compression from "compression";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import session from "express-session";
@@ -32,6 +33,7 @@ app.use(
     cookie: { httpOnly: true, maxAge: 21600000 },
   })
 );
+app.use(compression());
 app.use(homeRouter);
 app.use(authRouter);
 //ErrorHandler (Should be last piece of middleware)
