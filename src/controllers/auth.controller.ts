@@ -1,11 +1,13 @@
 import dotenv from "dotenv";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { UserModel } from "models/user/user.model";
 import { sign } from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { validationResult } from "express-validator";
 
 dotenv.config();
+
+const secret = (process.env.SECRET as string) || "";
 
 export const signup = async (req: Request, res: Response) => {
   res.setHeader("Content-Type", "application/json");
@@ -40,7 +42,7 @@ export const signup = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
   try {
-    if (req.session.userId) {
+    if (req.session.loggedIn) {
       res.status(401).json({
         message:
           "Already logged in, Please request a password reset if you suspect this is not you.",
@@ -68,12 +70,9 @@ export const login = async (req: Request, res: Response) => {
       return;
     }
 
-    const token = sign({ id: user._id }, process.env.SECRET as string, {
-      algorithm: "HS256",
-      expiresIn: 86400,
-    });
+    const token = sign({ id: user.id, name: user.name }, secret);
 
-    req.session.userId = user.id;
+    req.session.loggedIn = true;
 
     res.status(200).json({
       message: "Logged in successfully",
@@ -86,5 +85,15 @@ export const login = async (req: Request, res: Response) => {
   } catch (err) {
     res.status(500).json({ message: err });
     return;
+  }
+};
+
+export const logout = (req: Request, res: Response, next: NextFunction) => {
+  if (req.session.loggedIn) {
+    req.session.loggedIn = false;
+
+    res.status(200).json({ message: "Logged out successfully" });
+  } else {
+    res.status(404).json({ message: "Not logged in" });
   }
 };

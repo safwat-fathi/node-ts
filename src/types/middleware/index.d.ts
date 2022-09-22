@@ -8,11 +8,10 @@
 //   }
 // }
 
-import session from "express-session";
+import session, { SessionData } from "express-session";
 
 declare module "express-session" {
-  export interface SessionData {
-    user: { [key: string]: any };
-    userId: string;
+  export interface SessionData extends SessionData {
+    loggedIn: boolean;
   }
 }

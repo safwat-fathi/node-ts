@@ -9,7 +9,7 @@ import { connectDB } from "config/db.config";
 import { seedRoles } from "seeders/roles.seed";
 
 // routes
-import homeRouter from "routes/home.route";
+import homeRouter from "routes/test.route";
 import authRouter from "routes/auth.route";
 
 dotenv.config();
@@ -24,7 +24,14 @@ seedRoles();
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
-app.use(session({ secret, saveUninitialized: false, resave: false }));
+app.use(
+  session({
+    secret,
+    saveUninitialized: false,
+    resave: false,
+    cookie: { httpOnly: true, maxAge: 21600000 },
+  })
+);
 app.use(homeRouter);
 app.use(authRouter);
 //ErrorHandler (Should be last piece of middleware)

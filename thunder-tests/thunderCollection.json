@@ -4,9 +4,29 @@
     "colName": "nodets",
     "created": "2022-09-22T08:41:34.656Z",
     "sortNum": 10000,
-    "folders": [],
+    "folders": [
+      {
+        "_id": "97fbbf4e-ec0c-4bde-b2cc-07d96dcb6e22",
+        "name": "auth",
+        "containerId": "",
+        "created": "2022-09-22T12:00:01.061Z",
+        "sortNum": 10000,
+        "settings": {
+          "headers": [],
+          "auth": {
+            "type": "bearer",
+            "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmMyODk1NWEwN2VhN2IwZWI0ZDEzYiIsImlhdCI6MTY2Mzg0OTc0NCwiZXhwIjoxNjYzOTM2MTQ0fQ.lTfyHsKizcS_dVoA_UfS8CcoZH1kJOAmgcPvQaln3gk"
+          },
+          "tests": []
+        }
+      }
+    ],
     "settings": {
       "headers": [],
+      "auth": {
+        "type": "bearer",
+        "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmMyODk1NWEwN2VhN2IwZWI0ZDEzYiIsImlhdCI6MTY2Mzg0ODkzMSwiZXhwIjoxNjYzOTM1MzMxfQ.gRW7tlmj_TQrp0Cmf904Vqc6pyKZnsBz6aw3L2BfaUk"
+      },
       "tests": [],
       "envId": "270a27b4-2ff5-4da0-a120-1dec051c3d4b"
     }
