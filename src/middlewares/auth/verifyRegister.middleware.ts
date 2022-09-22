@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { body } from "express-validator";
 import { UserModel } from "models/user/user.model";
 
 export const checkDuplicate = async (
@@ -31,6 +32,63 @@ export const checkDuplicate = async (
 
   next();
 };
+
+// express validators
+export const validateName = body("name")
+  .exists()
+  .bail()
+  .withMessage("Name  is required")
+  .isAlpha()
+  .trim()
+  .escape();
+
+export const validateEmail = body("email")
+  .exists()
+  .withMessage("Email is required")
+  .bail()
+  .isEmail()
+  .withMessage("Invalid email")
+  .bail()
+  .normalizeEmail()
+  .trim()
+  .escape();
+
+export const validatePassword = body("password")
+  .isStrongPassword({
+    minLength: 8,
+    minLowercase: 4,
+    minUppercase: 4,
+    minNumbers: 1,
+    returnScore: true,
+  })
+  .trim()
+  .escape();
+
+export const validatePasswordMatch = body(
+  "password_confirm",
+  "Password confirmation is required"
+).custom((value, { req }) => {
+  if (!value) {
+    throw new Error("Password confirm is required");
+  }
+
+  if (value !== req.body.password_confirm) {
+    throw new Error("Password did not match");
+  }
+
+  return true;
+});
+
+export const validatePhone = body("phone")
+  .escape()
+  .exists()
+  .withMessage("Phone is required")
+  .bail()
+  .matches(/\d{3}\s?\d{4}-?\d{4}/gm)
+  .withMessage("Phone is not valid egyptian mobile number")
+  .bail()
+  .trim()
+  .escape();
 
 export const checkRolesExisted = async (
   req: Request,

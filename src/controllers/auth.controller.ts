@@ -12,6 +12,7 @@ export const signup = async (req: Request, res: Response) => {
 
   const errors = validationResult(req);
 
+  console.log("errors:", errors);
   if (!errors.isEmpty()) {
     const errorsMapped = errors
       .array()
@@ -20,12 +21,17 @@ export const signup = async (req: Request, res: Response) => {
     return res.status(400).json({ errors: errorsMapped });
   }
 
+  console.log("No errors");
+  console.log(req.body);
+
+  const hashedPassword = await bcrypt.hash(req.body.password, 8);
+
   try {
     const user = new UserModel({
       name: req.body.name,
-      phone: req.body.phone,
       email: req.body.email,
-      password: await bcrypt.hash(req.body.password, 8),
+      phone: req.body.phone,
+      password: hashedPassword,
     });
 
     await user.save();
