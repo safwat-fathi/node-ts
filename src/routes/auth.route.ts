@@ -17,25 +17,25 @@ router.post(
     .normalizeEmail()
     .trim()
     .escape(),
-  check(
-    "password",
-    "Password must be 8+ characters long and contain a number and has at least 4 lower case and 4 upper case"
-  )
-    .isStrongPassword({
-      minLength: 8,
-      minLowercase: 4,
-      minUppercase: 4,
-      minNumbers: 1,
-    })
-    .not()
-    .isEmpty()
+  check("password")
+    .notEmpty()
     .withMessage("Password is required")
+    .isStrongPassword({
+      returnScore: true,
+    })
+    // .withMessage(
+    //   "Password must be 8+ characters long and contain a number and has at least 4 lower case and 4 upper case"
+    // )
     .trim()
     .escape(),
   check("password_confirm", "Password confirmation is required").custom(
     (value, { req }) => {
+      if (!value) {
+        throw new Error("Password confirm is required");
+      }
+
       if (value !== req.body.password_confirm) {
-        throw new Error("Password confirmation does not match given password");
+        throw new Error("Password did not match");
       }
 
       return true;
@@ -44,7 +44,7 @@ router.post(
   check("phone")
     .exists()
     .withMessage("Phone is required")
-    .isMobilePhone("ar-EG")
+    // .isMobilePhone("ar-EG")
     .notEmpty()
     .trim()
     .escape(),

@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "fde300ca-7e84-4f74-af1c-305cf4e066b2",
+    "colName": "node-ts",
+    "created": "2022-09-21T13:03:35.797Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "97b288b6-693c-4b8e-9b69-cd29eb99cdaf",
+        "name": "auth",
+        "containerId": "",
+        "created": "2022-09-21T13:03:42.914Z",
+        "sortNum": 10000
+      }
+    ],
+    "settings": {
+      "headers": [],
+      "tests": [],
+      "envId": "d6fe54fb-7183-4d17-bba7-78ff4d95a5c3"
+    }
+  }
+]
