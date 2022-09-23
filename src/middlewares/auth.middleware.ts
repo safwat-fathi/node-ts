@@ -119,16 +119,15 @@ export const verifyToken = async (
   res: Response,
   next: NextFunction
 ) => {
-  const token: string = req.headers.authorization?.split("  ")[1] || "";
-  console.log(token);
-
+  const token: string = req.headers.authorization || "";
+  // console.log(token);
   if (!token) {
     res.status(401).json({ message: "Unauthorized" }).end();
     return;
   }
 
   try {
-    const decoded = verify(token, secret) as CustomJwtPayload;
+    const decoded = verify(token?.split(" ")[1], secret) as CustomJwtPayload;
 
     req.body.userId = decoded.id;
 
