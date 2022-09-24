@@ -8,18 +8,36 @@ export interface User {
   subscription: ObjectId;
 }
 
-export enum Subscription {
-  basic = "basic",
-  silver = "silver",
-  gold = "gold",
+// export enum Subscription {
+//   basic = "basic",
+//   silver = "silver",
+//   gold = "gold",
+// }
+
+export interface Subscription {
+  name: "basic" | "silver" | "gold";
+}
+
+export enum ProductImage {
+  thumbnail = "thumbnail",
+  cover = "cover",
+  card = "card",
 }
 
 export interface Product {
   name: string;
   description: string;
-  inStock: number;
-  images: { type: "thumbnail" | "cover" | "card"; url: string }[];
-  category: ObjectId[];
+  price: number;
+  stock: number;
+  images: { type: ProductImage; url: string }[];
+  categories: ObjectId[];
   size?: string;
   color?: string;
+}
+
+export interface Category {
+  name: string;
+  description: string;
+  sub: ObjectId[] | null;
+  parent: ObjectId | null;
 }

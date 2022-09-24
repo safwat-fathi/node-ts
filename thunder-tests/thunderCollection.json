@@ -19,6 +19,13 @@
           },
           "tests": []
         }
+      },
+      {
+        "_id": "573d6734-4184-4221-9bb2-051a6d82b1f6",
+        "name": "products",
+        "containerId": "",
+        "created": "2022-09-24T13:13:34.551Z",
+        "sortNum": 20000
       }
     ],
     "settings": {

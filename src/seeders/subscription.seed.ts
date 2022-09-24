@@ -18,7 +18,9 @@ export const seedSubscriptions = () => {
           name: "gold",
         },
       ])
-        .then((roles) => console.log(`${roles.length} roles created`))
+        .then((subscriptions) =>
+          console.log(`${subscriptions.length} subscriptions created`)
+        )
         .catch((err) => console.log(err));
     }
   });

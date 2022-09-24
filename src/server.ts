@@ -8,11 +8,13 @@ import { errorHandler } from "middlewares/error.middleware";
 import { connectDB } from "config/db.config";
 // seeders
 import { seedSubscriptions } from "seeders/subscription.seed";
+import { seedCategories } from "seeders/categories.seed";
+import { seedProducts } from "seeders/products.seed";
 
-// routes
-import homeRouter from "routes/test.route";
+// routes imports
 import authRouter from "routes/auth.route";
 import userRouter from "routes/user.route";
+import productsRouter from "routes/products.route";
 
 dotenv.config();
 
@@ -22,7 +24,13 @@ const secret = (process.env.SECRET as string) || "";
 
 // connect to DB
 connectDB();
+
+// seeders
 seedSubscriptions();
+seedCategories();
+seedProducts();
+
+app.use(compression());
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
@@ -34,10 +42,11 @@ app.use(
     cookie: { httpOnly: true, maxAge: 21600000 },
   })
 );
-app.use(compression());
-app.use(homeRouter);
+
+// routes
 app.use(authRouter);
 app.use(userRouter);
+app.use(productsRouter);
 //ErrorHandler (Should be last piece of middleware)
 app.use(errorHandler);
 

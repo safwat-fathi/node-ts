@@ -8,5 +8,6 @@ export const subscriptionSchema = new Schema<Subscription>({
       values: ["basic", "silver", "gold"],
       message: "{VALUE} is not supported",
     },
+    default: "basic",
   },
 });
