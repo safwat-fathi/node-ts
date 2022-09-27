@@ -21,7 +21,7 @@ export const seedSubscriptions = () => {
         .then((subscriptions) =>
           console.log(`${subscriptions.length} subscriptions created`)
         )
-        .catch((err) => console.log(err));
+        .catch((err) => console.log("Subscriptions seeder error:", err));
     }
   });
 };

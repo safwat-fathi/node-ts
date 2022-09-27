@@ -26,7 +26,7 @@ export const seedProducts = () => {
         },
       ])
         .then((products) => console.log(`${products.length} products created`))
-        .catch((err) => console.log(err));
+        .catch((err) => console.log("Products seeder error:", err));
     }
   });
 };
