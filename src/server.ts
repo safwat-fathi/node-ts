@@ -7,9 +7,10 @@ import session from "express-session";
 import { errorHandler } from "middlewares/error.middleware";
 import { connectDB } from "config/db.config";
 // seeders
-import { seedSubscriptions } from "seeders/subscription.seed";
-import { seedCategories } from "seeders/categories.seed";
-import { seedProducts } from "seeders/products.seed";
+import { seedSubscriptions } from "seeders/subscription.seeder";
+import { seedCategories } from "seeders/categories.seeder";
+import { seedProducts } from "seeders/products.seeder";
+// import {  } from "seeders/users.seeder";
 
 // routes imports
 import authRouter from "routes/auth.route";

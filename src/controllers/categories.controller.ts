@@ -14,7 +14,7 @@ export const findCategoryByName = async (req: Request, res: Response) => {
       return;
     }
 
-    res.status(200).json({ data: category, message: `Found category` });
+    res.status(200).json({ data: category, message: `Category found` });
   } catch (err) {
     res.status(500).json({ message: err });
     return;

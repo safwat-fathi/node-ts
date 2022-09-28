@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { SubscriptionModel } from "models/subscription/subscription.model";
 import { UserModel } from "models/user/user.model";
 import { sign } from "jsonwebtoken";
@@ -85,11 +85,10 @@ export const login = async (req: Request, res: Response) => {
 
     res.status(200).json({
       message: "Logged in successfully",
-      // id: user._id,
-      // name: user.name,
-      // email: user.email,
-      // phone: user.phone,
-      accessToken: token,
+      data: {
+        accessToken: token,
+        user,
+      },
     });
   } catch (err) {
     res.status(500).json({ message: err });
@@ -97,7 +96,7 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const logout = (req: Request, res: Response, next: NextFunction) => {
+export const logout = (req: Request, res: Response) => {
   if (req.session.loggedIn) {
     req.session.loggedIn = false;
 
