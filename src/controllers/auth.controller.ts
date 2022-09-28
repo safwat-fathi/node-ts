@@ -23,13 +23,22 @@ export const signup = async (req: Request, res: Response) => {
 
   const hashedPassword = await bcrypt.hash(req.body.password, 8);
 
+  const subscription = await SubscriptionModel.findOne({
+    name: new RegExp(req.body.subscription, "i"),
+  });
+
+  if (!subscription) {
+    res.status(402).json({ message: "subscription is not valid" });
+    return;
+  }
+
   try {
     const user = new UserModel({
       name: req.body.name,
       email: req.body.email,
       phone: req.body.phone,
       password: hashedPassword,
-      subscription: req.body.subscription,
+      subscription: subscription.id,
     });
 
     await user.save();
