@@ -9,3 +9,4 @@
 
 - moderators role for users (to add products)
 - admin role for users (to make CRUD operations on users)
+- add cookies as access token to user on login and destroy on logout
