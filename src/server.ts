@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import express, { Express } from "express";
 import compression from "compression";
 import cors from "cors";
-import cookieParser from "cookie-parser";
+// import cookieParser from "cookie-parser";
 import session from "express-session";
 import { errorHandler } from "middlewares/error.middleware";
 import { connectDB } from "config/db.config";
@@ -10,7 +10,6 @@ import { connectDB } from "config/db.config";
 import { seedSubscriptions } from "seeders/subscription.seeder";
 import { seedCategories } from "seeders/categories.seeder";
 import { seedProducts } from "seeders/products.seeder";
-// import {  } from "seeders/users.seeder";
 
 // routes imports
 import authRouter from "routes/auth.route";
@@ -35,7 +34,7 @@ seedProducts();
 app.use(compression());
 app.use(cors());
 app.use(express.json());
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(
   session({
     secret,

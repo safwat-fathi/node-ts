@@ -7,23 +7,35 @@ export const productSchema = new Schema<Product>(
     description: { type: String, required: true },
     price: { type: Number, required: true, min: 0 },
     stock: { type: Number, required: true, min: 0 },
-    images: [
-      {
-        type: {
-          type: String,
-          enum: {
-            values: ["card", "cover", "thumbnail"],
-            message: "{VALUE} is not supported",
+    images: {
+      type: [
+        {
+          imgType: {
+            type: String,
+            enum: {
+              values: ["card", "cover", "thumbnail"],
+              message: "{VALUE} is not supported",
+            },
+            default: "thumbnail",
+            required: true,
           },
-          default: "thumbnail",
-          required: true,
+          url: { type: String, required: true },
+          _id: false,
         },
-        url: { type: String, required: true },
-      },
-    ],
-    categories: [
-      { type: Schema.Types.ObjectId, ref: "Category", required: true },
-    ],
+      ],
+      required: true,
+      validate: (
+        val: { imgType: "card" | "cover" | "thumbnail"; url: string }[]
+      ) => Array.isArray(val) && val.length > 0,
+    },
+    categories: {
+      type: [Schema.Types.ObjectId],
+      ref: "Category",
+      required: true,
+      validate: (val: Schema.Types.ObjectId[]) =>
+        Array.isArray(val) && val.length > 0,
+    },
+
     size: Number,
     color: String,
   },

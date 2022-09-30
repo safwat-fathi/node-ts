@@ -96,5 +96,24 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "f30a5c15-a190-4774-988f-1aedc80b7acc",
+    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+    "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
+    "name": "add",
+    "url": "{{baseUrl}}/products/add",
+    "method": "POST",
+    "sortNum": 80000,
+    "created": "2022-09-30T11:18:22.983Z",
+    "modified": "2022-09-30T12:02:09.202Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"product1021\",\n  \"categories\": [\"63328f9607af47b1fc1b12d9\", \"63328f9607af47b1fc1b12db\"],\n  \"stock\": 50,\n  \"images\": [{\"type\": \"cover\", \"url\": \"https://www.theihcc.com/wp-content/uploads/2020/12/taking-a-drug-test-1024x800.jpg\"}],\n  \"price\": 23,\n  \"description\": \"just a description\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]
