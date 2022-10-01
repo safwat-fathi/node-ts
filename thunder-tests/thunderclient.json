@@ -115,5 +115,24 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "9d00d433-959b-4bf1-9387-118f712e831a",
+    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+    "containerId": "0ad87be2-c243-42c8-9dd9-2b36621bbcd8",
+    "name": "add",
+    "url": "{{baseUrl}}/orders/add",
+    "method": "POST",
+    "sortNum": 90000,
+    "created": "2022-10-01T12:38:37.170Z",
+    "modified": "2022-10-01T12:48:20.702Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"user\": \"632c779ddb15cb435ede4bef\",\n  \"products\": [{\"product\": \"6336d28fddca91102c3920ad\", \"qty\": 4}, {\"product\": \"6336d2197d2801618f66d545\", \"qty\": 3}],\n  \"total\": 200,\n  \"address\": \"cairo - ramsis sq - Lmon bridge\",\n  \"delivery\": \"2022-10-22\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

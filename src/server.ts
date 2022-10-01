@@ -16,6 +16,7 @@ import authRouter from "routes/auth.route";
 import userRouter from "routes/user.route";
 import productsRouter from "routes/products.route";
 import categoriesRouter from "routes/categories.route";
+import ordersRouter from "routes/orders.route";
 
 dotenv.config();
 
@@ -49,6 +50,7 @@ app.use(authRouter);
 app.use(userRouter);
 app.use(productsRouter);
 app.use(categoriesRouter);
+app.use(ordersRouter);
 //ErrorHandler (Should be last piece of middleware)
 app.use(errorHandler);
 

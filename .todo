@@ -11,3 +11,9 @@
 - admin role for users (to make CRUD operations on users)
 - seeder
 - orders
+
+## Orders
+
+- CRUD operations
+- update product stock based on order qty
+- calculate total based on products price

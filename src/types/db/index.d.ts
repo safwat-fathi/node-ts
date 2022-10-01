@@ -6,13 +6,8 @@ export interface User {
   password: string;
   phone: string;
   subscription: ObjectId;
+  orders: ObjectId[];
 }
-
-// export enum Subscription {
-//   basic = "basic",
-//   silver = "silver",
-//   gold = "gold",
-// }
 
 export interface Subscription {
   name: "basic" | "silver" | "gold";
@@ -40,4 +35,12 @@ export interface Category {
   description: string;
   sub: ObjectId[] | null;
   parent: ObjectId | null;
+}
+
+export interface Order {
+  user: ObjectId;
+  products: { product: ObjectId; qty: number }[];
+  address: string;
+  delivery: Date;
+  total: number;
 }
