@@ -125,12 +125,12 @@
     "method": "POST",
     "sortNum": 90000,
     "created": "2022-10-01T12:38:37.170Z",
-    "modified": "2022-10-01T12:48:20.702Z",
+    "modified": "2022-10-03T05:12:04.095Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"user\": \"632c779ddb15cb435ede4bef\",\n  \"products\": [{\"product\": \"6336d28fddca91102c3920ad\", \"qty\": 4}, {\"product\": \"6336d2197d2801618f66d545\", \"qty\": 3}],\n  \"total\": 200,\n  \"address\": \"cairo - ramsis sq - Lmon bridge\",\n  \"delivery\": \"2022-10-22\"\n}",
+      "raw": "{\n  \"user\": \"632c779ddb15cb435ede4bef\",\n  \"products\": [{\"product\": \"6336d28fddca91102c3920ad\", \"quantity\": 4}, {\"product\": \"6336d2197d2801618f66d545\", \"quantity\": 3}],\n  \"total\": 200,\n  \"address\": \"cairo - ramsis sq - Lmon bridge\",\n  \"delivery\": \"2022-10-22\"\n}",
       "form": []
     },
     "tests": []
