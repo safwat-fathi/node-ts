@@ -39,7 +39,7 @@ export interface Category {
 
 export interface Order {
   user: ObjectId;
-  products: { product: ObjectId; qty: number }[];
+  products: { product: ObjectId; quantity: number }[];
   address: string;
   delivery: Date;
   total: number;

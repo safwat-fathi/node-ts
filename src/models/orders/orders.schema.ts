@@ -13,12 +13,12 @@ export const OrderSchema = new Schema<Order>({
           required: true,
           _id: false,
         },
-        qty: Number,
+        quantity: Number,
         _id: false,
       },
     ],
     required: true,
-    validate: (val: { product: Schema.Types.ObjectId; qty: number }[]) =>
+    validate: (val: { product: Schema.Types.ObjectId; quantity: number }[]) =>
       Array.isArray(val) && val.length > 0,
   },
   address: { type: String, required: true },
