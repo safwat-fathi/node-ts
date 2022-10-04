@@ -1,6 +1,6 @@
-import { ObjectId } from "mongoose";
+import { ObjectId, Document } from "mongoose";
 
-export interface User {
+export interface User extends Document {
   name: string;
   email: string;
   password: string;
@@ -9,7 +9,7 @@ export interface User {
   orders: ObjectId[];
 }
 
-export interface Subscription {
+export interface Subscription extends Document {
   name: "basic" | "silver" | "gold";
 }
 
@@ -19,7 +19,7 @@ export enum ProductImage {
   card = "card",
 }
 
-export interface Product {
+export interface Product extends Document {
   name: string;
   description: string;
   price: number;
@@ -30,14 +30,14 @@ export interface Product {
   color?: string;
 }
 
-export interface Category {
+export interface Category extends Document {
   name: string;
   description: string;
   sub: ObjectId[] | null;
   parent: ObjectId | null;
 }
 
-export interface Order {
+export interface Order extends Document {
   user: ObjectId;
   products: { product: ObjectId; quantity: number }[];
   address: string;
