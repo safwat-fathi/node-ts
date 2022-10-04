@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const MONGO_URI = process.env.MONGO_URI as string;
+console.log("NODE_ENV:", process.env.NODE_ENV);
+mongoose.set("debug", process.env.NODE_ENV === "development" ? true : false);
 
 export const connectDB = () =>
   new Promise((resolve, reject) => {

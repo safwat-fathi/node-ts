@@ -22,7 +22,7 @@
     "mongoose": "^6.6.1"
   },
   "scripts": {
-    "dev": "nodemon ./src"
+    "dev": "NODE_ENV=development nodemon ./src"
   },
   "devDependencies": {
     "@swc/core": "^1.3.1",
