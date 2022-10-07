@@ -15,5 +15,10 @@
 ## Orders
 
 - CRUD operations
-- update product stock based on order qty
-- calculate total based on products price
+
+  - ✔ add new order
+  - read order
+  - update order
+  - delete order
+- ✔ update product stock based on order qty
+- ✔ calculate total based on products price
