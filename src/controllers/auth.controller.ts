@@ -23,12 +23,11 @@ export const signup = async (req: Request, res: Response) => {
 
   const hashedPassword = await bcrypt.hash(req.body.password, 8);
 
-  const subscription = await SubscriptionModel.findOne({
-    name: new RegExp(req.body.subscription, "i"),
-  });
+  const subscription = await SubscriptionModel.findOne({id: req.body.subscription});
+    // name: new RegExp(req.body.subscription, "i"),
 
   if (!subscription) {
-    res.status(402).json({ message: "subscription is not valid" });
+    res.status(400).json({ message: "subscription is not valid" });
     return;
   }
 
@@ -38,7 +37,8 @@ export const signup = async (req: Request, res: Response) => {
       email: req.body.email,
       phone: req.body.phone,
       password: hashedPassword,
-      subscription: subscription.id,
+      subscription: subscription._id,
+			orders: []
     });
 
     await user.save();
