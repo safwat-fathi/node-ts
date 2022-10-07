@@ -21,6 +21,11 @@ export const userSchema = new Schema<User>(
       ref: "Subscription",
       required: true,
     },
+		orders: {
+			type: [Schema.Types.ObjectId],
+			ref: "Order",
+			required: true
+		}
   },
   {
     timestamps: true,
