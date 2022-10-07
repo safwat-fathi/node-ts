@@ -8,12 +8,12 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2022-09-22T08:41:41.481Z",
-    "modified": "2022-09-22T14:56:29.252Z",
+    "modified": "2022-10-07T12:47:57.993Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"ali\",\n  \"email\": \"test@tewsta.com\",\n  \"phone\": \"01012045648\",\n  \"password\": \"0101DdDdAaAa\",\n  \"password_confirm\": \"0101DdDdAaAa\",\n  \"subscription\" : \"632c735a299e8c117fd63fa0\"\n}",
+      "raw": "{\n  \"name\": \"ali\",\n  \"email\": \"test@test.com\",\n  \"phone\": \"01012045640\",\n  \"password\": \"0101DdDdAaAa\",\n  \"password_confirm\": \"0101DdDdAaAa\",\n  \"subscription\" : \"\"\n}",
       "form": []
     },
     "tests": []
@@ -125,12 +125,12 @@
     "method": "POST",
     "sortNum": 90000,
     "created": "2022-10-01T12:38:37.170Z",
-    "modified": "2022-10-04T05:14:38.756Z",
+    "modified": "2022-10-07T12:48:19.292Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"user\": \"632c779ddb15cb435ede4bef\",\n  \"products\": [{\"product\": \"6336d28fddca91102c3920ad\", \"quantity\": 1}, {\"product\": \"6336d2197d2801618f66d545\", \"quantity\": 1}],\n  \"total\": 200,\n  \"address\": \"cairo - ramsis sq - Lmon bridge\",\n  \"delivery\": \"2022-10-22\"\n}",
+      "raw": "{\n  \"user\": \"63401fe1e0412c9f02751bc2\",\n  \"products\": [{\"product\": \"6336d28fddca91102c3920ad\", \"quantity\": 1}, {\"product\": \"6336d2197d2801618f66d545\", \"quantity\": 1}],\n  \"address\": \"cairo - ramsis sq - Lmon bridge\",\n  \"delivery\": \"2022-10-22\"\n}",
       "form": []
     },
     "tests": []
