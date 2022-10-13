@@ -22,3 +22,9 @@
   - delete order (should it be deleted?)
 - ✔ update product stock based on order qty
 - ✔ calculate total based on products price
+
+## Misc
+
+- build project
+- host project
+- lint command
