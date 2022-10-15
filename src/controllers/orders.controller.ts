@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { UserModel } from "models/user/user.model";
 import { OrderModel } from "models/orders/orders.model";
 import { ProductModel } from "models/products/products.model";
-import { Product, User, Order } from "types/db";
+import { Product, Order } from "types/db";
 // import { ObjectId } from "mongoose";
 
 export const addOrder = async (req: Request, res: Response) => {
@@ -23,7 +23,7 @@ export const addOrder = async (req: Request, res: Response) => {
 		
 		let orderTotal = 0
 		
-    for (let i in products) {
+    for (const i in products) {
       const productId = products[i].product;
       const qty = products[i].quantity;
       const product: Product | null = await ProductModel.findOne({

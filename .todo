@@ -16,6 +16,7 @@
 
 - CRUD operations
 
+  - add verify token to orders routes
   - ✔ add new order
   - read order
   - update order
@@ -27,4 +28,4 @@
 
 - build project
 - host project
-- lint command
+- linter command
