@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { findCategoryByName } from "controllers/categories.controller";
 
-const router = Router();
+const category = Router();
 
 // search
-router.get("/category/:categoryName", findCategoryByName);
+category.get("/:categoryName", findCategoryByName);
 
 // create
 
-export default router;
+export default category;

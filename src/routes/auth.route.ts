@@ -9,11 +9,11 @@ import {
   validatePassword,
 } from "middlewares/auth.middleware";
 
-const router = Router();
+const auth = Router();
 
 // signup
-router.post(
-  "/auth/signup",
+auth.post(
+  "/signup",
   validateName,
   validateEmail,
   validatePassword,
@@ -23,8 +23,8 @@ router.post(
   signup
 );
 // login
-router.post("/auth/login", validateEmail, validatePassword, login);
+auth.post("/login", validateEmail, validatePassword, login);
 // logout
-router.get("/auth/logout", logout);
+auth.get("/logout", logout);
 
-export default router;
+export default auth;

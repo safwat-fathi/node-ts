@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { addOrder } from "controllers/orders.controller";
 
-const router = Router();
+const orders = Router();
 
 // * CREATE
-router.post("/orders/add", addOrder);
+orders.post("/add", addOrder);
 
-export default router;
+export default orders;

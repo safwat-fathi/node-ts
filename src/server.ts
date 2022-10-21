@@ -10,13 +10,8 @@ import { connectDB } from "config/db.config";
 import { seedSubscriptions } from "seeders/subscription.seeder";
 import { seedCategories } from "seeders/categories.seeder";
 import { seedProducts } from "seeders/products.seeder";
-
-// routes imports
-import authRouter from "routes/auth.route";
-import userRouter from "routes/user.route";
-import productsRouter from "routes/products.route";
-import categoriesRouter from "routes/categories.route";
-import ordersRouter from "routes/orders.route";
+// routes
+import routes from "routes";
 
 dotenv.config();
 
@@ -46,11 +41,7 @@ app.use(express.json());
 // );
 
 // routes
-app.use(authRouter);
-app.use(userRouter);
-app.use(productsRouter);
-app.use(categoriesRouter);
-app.use(ordersRouter);
+app.use("/api", routes);
 //ErrorHandler (Should be last piece of middleware)
 app.use(errorHandler);
 

@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { findByCategory, addProduct } from "controllers/products.controller";
 
-const router = Router();
+const products = Router();
 
 // * SEARCH
-router.get("/products/:categoryId", findByCategory);
+products.get("/:categoryId", findByCategory);
 
 // * CREATE
-router.post("/products/add", addProduct);
+products.post("/add", addProduct);
 
-export default router;
+export default products;
