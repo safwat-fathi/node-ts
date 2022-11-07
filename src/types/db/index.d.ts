@@ -41,6 +41,7 @@ export interface Order extends Document {
   user: ObjectId;
   products: { product: ObjectId; quantity: number }[];
   address: string;
+  status: "active" | "pending" | "delivered" | "cancelled";
   delivery: Date;
   total: number;
 }

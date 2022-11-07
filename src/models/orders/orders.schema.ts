@@ -21,6 +21,7 @@ export const OrderSchema = new Schema<Order>({
     validate: (val: { product: Schema.Types.ObjectId; quantity: number }[]) =>
       Array.isArray(val) && val.length > 0,
   },
+  status: { type: String, required: true },
   address: { type: String, required: true },
   delivery: { type: Date, default: Date.now, required: true },
 });

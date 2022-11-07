@@ -3,6 +3,9 @@
 ## Products
 
 - CRUD operations update (stock, image, etc...)
+- sorting
+- filters
+- pagination
 - seeder
 
 ## Users
@@ -23,10 +26,11 @@
   - delete order (should it be deleted?)
 - ✔ update product stock based on order qty
 - ✔ calculate total based on products price
+- middleware for order status check before add any product to it
 
 ## Misc
 
-- build project
+- ✔ build (compile) project
 - host project
-- linter command
+- ✔ linter command
 - slug builder
