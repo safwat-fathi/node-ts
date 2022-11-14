@@ -2,6 +2,7 @@ import { model } from "mongoose";
 import { User } from "types/db";
 import { userSchema } from "./user.schema";
 import { hashPassword } from "utils/auth";
+import { CustomJwtPayload } from "types/jwt";
 
 export const UserModel = model<User>("User", userSchema);
 
@@ -27,4 +28,6 @@ export class UserStore {
       throw new Error(`error user signup ${err}`);
     }
   }
+
+  async generateToken(): Promise<CustomJwtPayload> {}
 }
