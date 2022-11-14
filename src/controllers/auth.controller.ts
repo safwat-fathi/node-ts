@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { Request, Response } from "express";
-import { SubscriptionModel } from "models/subscription/subscription.model";
-import { UserModel } from "models/user/user.model";
+import { SubscriptionStore } from "models/subscription/subscription.model";
+import { UserStore } from "models/user/user.model";
 import { sign } from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { validationResult } from "express-validator";
@@ -11,39 +11,40 @@ dotenv.config();
 const secret = (process.env.SECRET as string) || "";
 
 export const signup = async (req: Request, res: Response) => {
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    const errorsMapped = errors
-      .array()
-      .map((err) => ({ param: err.param, message: err.msg }));
-
-    return res.status(400).json({ errors: errorsMapped });
-  }
-
-  const hashedPassword = await bcrypt.hash(req.body.password, 8);
-
-  const subscription = await SubscriptionModel.findOne({id: req.body.subscription});
-    // name: new RegExp(req.body.subscription, "i"),
-
-  if (!subscription) {
-    res.status(400).json({ message: "subscription is not valid" });
-    return;
-  }
-
   try {
-    const user = new UserModel({
+    const userStore = new UserStore();
+    const subscriptionStore = new SubscriptionStore();
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      const errorsMapped = errors
+        .array()
+        .map((err) => ({ param: err.param, message: err.msg }));
+
+      return res.status(400).json({ errors: errorsMapped });
+    }
+
+    const subscription = await subscriptionStore.show(req.body.subscription);
+
+    if (!subscription) {
+      res.status(422).json({ message: "subscription is not valid" });
+      return;
+    }
+
+    const user = await userStore.signup({
       name: req.body.name,
       email: req.body.email,
       phone: req.body.phone,
-      password: hashedPassword,
-      subscription: subscription._id,
-			orders: []
+      password: req.body.password,
+      subscription: subscription.id,
+      orders: [],
     });
 
-    await user.save();
-
-    res.status(201).json({ message: "User registered successfully" }).end();
+    res
+      .status(201)
+      .json({ user, message: "User registered successfully" })
+      .end();
   } catch (err) {
     res.status(500).json({ message: err }).end();
   }
