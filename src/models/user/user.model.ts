@@ -1,8 +1,7 @@
 import { model } from "mongoose";
 import { User } from "types/db";
 import { userSchema } from "./user.schema";
-import { hashPassword } from "utils/auth";
-import { CustomJwtPayload } from "types/jwt";
+import { hashPassword, comparePassword } from "utils/auth";
 
 export const UserModel = model<User>("User", userSchema);
 
@@ -29,5 +28,26 @@ export class UserStore {
     }
   }
 
-  async generateToken(): Promise<CustomJwtPayload> {}
+  async login(u: Partial<User>): Promise<User | null> {
+    try {
+      const user = await UserModel.findOne({ email: u.email });
+
+      if (!user) {
+        return null;
+      }
+
+      const passwordIsValid = await comparePassword(
+        u.password as string,
+        user.password
+      );
+
+      if (!passwordIsValid) {
+        return null;
+      }
+
+      return user;
+    } catch (err) {
+      throw new Error(`error user login. Error: ${err}`);
+    }
+  }
 }

@@ -1,4 +1,11 @@
 import bcrypt from "bcryptjs";
+import { CustomJwtPayload } from "types/jwt";
+import { sign } from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const secret = (process.env.SECRET as string) || "";
 
 /**
  * Hash given password
@@ -32,5 +39,24 @@ export const comparePassword = async (
     return passwordIsValid;
   } catch (err) {
     throw new Error(`error comparing password ${err}`);
+  }
+};
+
+/**
+ * Generate JWT access token
+ * @param {string} id Unique user id
+ * @param {string} name User name
+ * @returns {string} Returns access token
+ */
+export const generateAccessToken = async (
+  id: string,
+  name: string
+): Promise<string> => {
+  try {
+    const token = sign({ id, name }, secret);
+
+    return token;
+  } catch (err) {
+    throw new Error(`error generate token ${err}`);
   }
 };
