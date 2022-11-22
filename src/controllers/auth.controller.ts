@@ -1,9 +1,8 @@
 import dotenv from "dotenv";
 import { Request, Response } from "express";
 import { SubscriptionStore } from "models/subscription/subscription.model";
+import { generateAccessToken } from "utils/auth";
 import { UserStore } from "models/user/user.model";
-import { sign } from "jsonwebtoken";
-import bcrypt from "bcryptjs";
 import { validationResult } from "express-validator";
 
 dotenv.config();
@@ -52,35 +51,26 @@ export const signup = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
   try {
+    const { email, password } = req.body;
+
     if (req.session.loggedIn) {
-      res.status(401).json({
+      return res.status(401).json({
         message:
           "Already logged in, Please request a password reset if you suspect this is not you.",
       });
-      return;
     }
 
-    const user = await UserModel.findOne({ email: req.body.email });
+    const userStore = new UserStore();
+
+    const user = await userStore.login({ email, password });
 
     if (!user) {
-      res.status(404).json({ message: "User Not found" });
-      return;
+      return res
+        .status(422)
+        .json({ message: "Please enter valid email or password" });
     }
 
-    const passwordIsValid = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
-
-    if (!passwordIsValid) {
-      res.status(401).json({
-        accessToken: null,
-        message: "Please enter valid email or password",
-      });
-      return;
-    }
-
-    const token = sign({ id: user.id, name: user.name }, secret);
+    const token = generateAccessToken(user.id, user.name);
 
     req.session.loggedIn = true;
 
