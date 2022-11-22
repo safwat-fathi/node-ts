@@ -34,3 +34,4 @@
 - host project
 - ✔ linter command
 - slug builder
+- add husky to pre commit (low priority)
