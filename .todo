@@ -5,7 +5,16 @@
 - CRUD operations update (stock, image, etc...)
 - sorting
 - filters
-- pagination
+- pagination:
+  - send total pages
+  - send total docs count
+  - send current page
+  - send last page
+  - data hash
+  - next page link
+  - prev page link
+  - first page link
+  - last page link
 - seeder
 
 ## Users

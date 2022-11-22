@@ -14,15 +14,13 @@ export const index = async (req: Request, res: Response) => {
     // * using skip & limit
     // const products = await productStore.index(parseInt(skip), parseInt(limit));
     // * using page number
-    const products = await productStore.index(null, null, parseInt(page));
+    const data = await productStore.index(null, null, parseInt(page));
 
-    if (products.length === 0) {
+    if (data.products.length === 0) {
       return res.status(200).json({ data: [], message: `No products found` });
     }
 
-    return res
-      .status(200)
-      .json({ data: products, message: `Found ${products.length} products` });
+    return res.status(200).json({ ...data, links: {} });
   } catch (err) {
     return res.status(500).json({ message: err });
   }
