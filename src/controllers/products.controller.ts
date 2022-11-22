@@ -2,11 +2,36 @@ import { Request, Response } from "express";
 import { CategoryModel } from "models/categories/categories.model";
 import { ProductModel } from "models/products/products.model";
 import { Category } from "types/db";
+import { ProductStore } from "models/products/products.model";
+// * Index
+// * ----------
+export const index = async (req: Request, res: Response) => {
+  const { skip, limit, page } = req.params;
+
+  const productStore = new ProductStore();
+
+  try {
+    // * using skip & limit
+    // const products = await productStore.index(parseInt(skip), parseInt(limit));
+    // * using page number
+    const products = await productStore.index(null, null, parseInt(page));
+
+    if (products.length === 0) {
+      return res.status(200).json({ data: [], message: `No products found` });
+    }
+
+    return res
+      .status(200)
+      .json({ data: products, message: `Found ${products.length} products` });
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
+};
 
 // * SEARCH
 // * ----------
 export const findByCategory = async (req: Request, res: Response) => {
-  const categoryId = req.params.categoryId;
+  const { categoryId } = req.params;
 
   try {
     const products = await ProductModel.find({ categories: categoryId });
