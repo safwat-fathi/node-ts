@@ -3,9 +3,15 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const MONGO_URI = process.env.MONGO_URI as string;
+const { MONGO_URI_DEV, MONGO_URI_PROD, NODE_ENV } = process.env || {
+  MONGO_URI_DEV: "",
+  MONGO_URI_PROD: "",
+  NODE_ENV: "dev",
+};
 
-mongoose.set("debug", process.env.NODE_ENV === "development" ? true : false);
+const MONGO_URI = NODE_ENV === "dev" ? MONGO_URI_DEV : MONGO_URI_PROD;
+
+mongoose.set("debug", NODE_ENV === "dev" ? true : false);
 
 export const connectDB = () =>
   new Promise((resolve, reject) => {
@@ -19,7 +25,7 @@ export const connectDB = () =>
     });
 
     db.on("disconnected", () => {
-      console.log(`Disconnected from database successfully`);
+      console.log(`Database disconnected`);
     });
 
     db.once("open", () => {

@@ -16,8 +16,7 @@ import routes from "routes";
 dotenv.config();
 
 const app: Express = express();
-const port = (process.env.PORT as string) || 8080;
-// const secret = (process.env.SECRET as string) || "";
+const port = <number>process.env.PORT || 8080;
 
 // connect to DB
 connectDB();
@@ -50,7 +49,7 @@ const server = app.listen(port, () => {
 });
 
 // cb function accepts two params error and promise
-process.on("unhandledRejection", (error) => {
+process.on("unhandledRejection", error => {
   console.log(`Logged Error: ${error}`);
   server.close(() => process.exit(1));
 });
