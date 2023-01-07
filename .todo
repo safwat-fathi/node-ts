@@ -50,3 +50,8 @@
 - ✔ linter command
 - slug builder
 - add husky to pre commit (low priority)
+
+## WebSocket [ws npm package](https://www.npmjs.com/package/ws)
+
+- for chat
+- orders notification
