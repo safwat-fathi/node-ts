@@ -1,5 +1,4 @@
 import http from "http";
-import WebSocket from "ws";
 import dotenv from "dotenv";
 import express, { Express } from "express";
 import compression from "compression";
@@ -43,20 +42,6 @@ const server = http.createServer(app).listen(PORT, () => {
   // console.log(`WebSocket is running on port ${PORT}`);
 });
 
-export const wss = new WebSocket.Server({ server }, () => {
-  console.log(`WebSocket is running at ws://localhost:8080`);
-});
-
-wss.on("connection", (ws, req) => {
-  console.log("*************");
-  console.log(`ws connected at: ${new Date().toLocaleString()}`);
-  console.log("*************");
-
-  ws.on("error", err => {
-    console.log("Error:", err);
-    // server.close(() => process.exit(1));
-  });
-});
 // cb function accepts two params error and promise
 process.on("unhandledRejection", error => {
   console.log(`Logged Error: ${error}`);
