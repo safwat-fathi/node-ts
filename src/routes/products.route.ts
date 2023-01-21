@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { findByCategory, addProduct } from "controllers/products.controller";
+import { verifyToken } from "middlewares/auth.middleware";
 
 const products = Router();
 
@@ -7,6 +8,6 @@ const products = Router();
 products.get("/:categoryId", findByCategory);
 
 // * CREATE
-products.post("/add", addProduct);
+products.post("/add", verifyToken, addProduct);
 
 export default products;

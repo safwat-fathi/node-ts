@@ -3,6 +3,7 @@
 ## Global
 
 - add success boolean to every response json object whether request is success or fail
+- add error handling middleware for controllers  
 
 ## Readme
 

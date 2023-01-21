@@ -5,17 +5,14 @@ import { body } from "express-validator";
 import { verify } from "jsonwebtoken";
 import { UserModel } from "models/user/user.model";
 import { HttpError } from "errors/http";
+import { asyncHandler } from "./async.middleware";
 
 dotenv.config();
 
 const secret = (process.env.SECRET as string) || "";
 
-export const checkDuplicate = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
+export const checkDuplicate = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
     const email = await UserModel.findOne({
       name: req.body.email,
     });
@@ -25,19 +22,14 @@ export const checkDuplicate = async (
     });
 
     if (phone || email) {
-      res.status(400).json({
-        success: false,
-        error: { message: "Sorry, email or phone is already in use!" },
-      });
-      return;
+      return next(
+        new HttpError(400, "Sorry, email or phone is already in use!")
+      );
     }
-  } catch (err) {
-    res.status(500).json({ success: false, error: { message: err } });
-    return;
-  }
 
-  next();
-};
+    next();
+  }
+);
 
 // express validators
 export const validateName = body("name")
@@ -98,18 +90,18 @@ export const validatePhone = body("phone")
 
 export const checkRolesExisted = async (
   req: Request,
-  res: Response,
+  _: Response,
   next: NextFunction
 ) => {
   if (req.body.roles) {
     for (let i = 0; i < req.body.roles.length; i++) {
       if (!["user", "admin", "moderator"].includes(req.body.roles[i])) {
-        return res.status(400).send({
-          success: false,
-          error: {
-            message: `Failed! Role ${req.body.roles[i]} does not exist!`,
-          },
-        });
+        return next(
+          new HttpError(
+            400,
+            `Failed! Role ${req.body.roles[i]} does not exist!`
+          )
+        );
       }
     }
   }
@@ -117,23 +109,16 @@ export const checkRolesExisted = async (
   next();
 };
 
-export const verifyToken = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const token: string = req.headers.authorization || "";
-  console.log("token", token);
+export const verifyToken = asyncHandler(
+  async (req: Request, _, next: NextFunction) => {
+    const token: string = req.headers.authorization || "";
 
-  if (!token) {
-    return next(new HttpError(401, "Unauthorized"));
-  }
+    if (!token) {
+      return next(new HttpError(401, "Unauthorized"));
+    }
 
-  try {
     const decoded = <CustomJwtPayload>verify(token?.split(" ")[1], secret);
 
     req.body.userId = decoded.id;
-  } catch (err) {
-    next(new HttpError(500, `${err}`));
   }
-};
+);

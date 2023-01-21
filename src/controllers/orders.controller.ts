@@ -4,22 +4,17 @@ import { OrderModel } from "models/orders/orders.model";
 import { ProductModel } from "models/products/products.model";
 import { Product, Order } from "types/db";
 import { HttpError } from "errors/http";
+import { asyncHandler } from "middlewares/async.middleware";
 // import { ObjectId } from "mongoose";
 
-export const addOrder = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const { products, user }: Order = req.body;
+export const addOrder = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { products, user }: Order = req.body;
 
-  try {
     const orderOwner = await UserModel.findOne({ user });
 
     if (!orderOwner) {
-      return res
-        .status(404)
-        .json({ success: false, error: { message: "No user found" } });
+      return new HttpError(404, "No user found");
     }
 
     let orderTotal = 0;
@@ -32,19 +27,14 @@ export const addOrder = async (
       });
 
       if (!product) {
-        return res.status(404).json({
-          success: false,
-          error: { message: `Product not found` },
-        });
+        return new HttpError(404, "Product not found");
       }
 
       if (product && product.stock < qty) {
-        return res.status(400).json({
-          success: false,
-          error: {
-            message: `Product ${product.name} does not have enough stock`,
-          },
-        });
+        return new HttpError(
+          400,
+          `Product ${product.name} does not have enough stock`
+        );
       }
 
       if (product) {
@@ -77,7 +67,5 @@ export const addOrder = async (
       success: true,
       data: newOrder,
     });
-  } catch (err) {
-    next(new HttpError(500, `${err}`));
   }
-};
+);

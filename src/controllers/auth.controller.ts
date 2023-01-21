@@ -1,21 +1,13 @@
-// import dotenv from "dotenv";
 import { NextFunction, Request, Response } from "express";
 import { SubscriptionStore } from "models/subscription/subscription.model";
 import { generateAccessToken } from "utils/auth";
 import { UserStore } from "models/user/user.model";
 import { validationResult } from "express-validator";
 import { HttpError } from "errors/http";
+import { asyncHandler } from "middlewares/async.middleware";
 
-// dotenv.config();
-
-// const secret = (process.env.SECRET as string) || "";
-
-export const signup = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
+export const signup = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
     const userStore = new UserStore();
     const subscriptionStore = new SubscriptionStore();
 
@@ -45,27 +37,20 @@ export const signup = async (
     });
 
     res.status(201).json({ success: true, data: user });
-  } catch (err) {
-    next(new HttpError(500, `${err}`));
   }
-};
+);
 
-export const login = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
+export const login = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
 
     if (req.session.loggedIn) {
-      return res.status(401).json({
-        success: false,
-        error: {
-          message:
-            "Already logged in, Please request a password reset if you suspect this is not you.",
-        },
-      });
+      return next(
+        new HttpError(
+          401,
+          "Already logged in, Please request a password reset if you suspect this is not you."
+        )
+      );
     }
 
     const userStore = new UserStore();
@@ -87,13 +72,11 @@ export const login = async (
         user,
       },
     });
-  } catch (err) {
-    next(new HttpError(500, `${err}`));
   }
-};
+);
 
-export const logout = (req: Request, res: Response, next: NextFunction) => {
-  try {
+export const logout = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
     if (req.session.loggedIn) {
       req.session.loggedIn = false;
 
@@ -101,7 +84,5 @@ export const logout = (req: Request, res: Response, next: NextFunction) => {
     } else {
       return next(new HttpError(404, "Not logged in"));
     }
-  } catch (err) {
-    next(new HttpError(500, `${err}`));
   }
-};
+);
