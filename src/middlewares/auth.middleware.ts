@@ -24,13 +24,14 @@ export const checkDuplicate = async (
     });
 
     if (phone || email) {
-      res
-        .status(400)
-        .json({ message: "Sorry, email or phone is already in use!" });
+      res.status(400).json({
+        success: false,
+        message: "Sorry, email or phone is already in use!",
+      });
       return;
     }
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ success: false, message: err });
     return;
   }
 
@@ -102,11 +103,12 @@ export const checkRolesExisted = async (
   if (req.body.roles) {
     for (let i = 0; i < req.body.roles.length; i++) {
       if (!["user", "admin", "moderator"].includes(req.body.roles[i])) {
-        res.status(400).send({
+        return res.status(400).send({
+          success: false,
           message: `Failed! Role ${req.body.roles[i]} does not exist!`,
         });
 
-        res.end();
+        // res.end();
       }
     }
   }
@@ -120,19 +122,21 @@ export const verifyToken = async (
   next: NextFunction
 ) => {
   const token: string = req.headers.authorization || "";
-  // console.log(token);
+
   if (!token) {
-    res.status(401).json({ message: "Unauthorized" }).end();
-    return;
+    return res
+      .status(401)
+      .json({ success: false, message: "Unauthorized" })
+      .end();
   }
 
   try {
-    const decoded = verify(token?.split(" ")[1], secret) as CustomJwtPayload;
+    const decoded = <CustomJwtPayload>verify(token?.split(" ")[1], secret);
 
     req.body.userId = decoded.id;
 
     next();
   } catch (err) {
-    res.status(401).json({ message: err }).end();
+    res.status(401).json({ success: false, message: err }).end();
   }
 };
