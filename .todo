@@ -1,5 +1,9 @@
 # TODO list
 
+## Global
+
+- add success boolean to every response json object whether request is success or fail
+
 ## Readme
 
 - whats is this project?
