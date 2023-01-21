@@ -1,4 +1,6 @@
+import { HttpError } from "errors/http";
 import { NextFunction, Request, Response } from "express";
+import { Error } from "mongoose";
 
 /**
  * Custom error handler to standardize error objects returned to
@@ -10,15 +12,24 @@ import { NextFunction, Request, Response } from "express";
  * @param next NextFunction function provided by Express
  */
 export const errorHandler = (
-  err: TypeError,
+  err: HttpError,
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  console.log("from error middleware", err.stack);
+  let castError = null;
 
-  res.status(500).json({
+  // handle bad ObjectId mongoose requests
+  if (err.stack?.includes("CastError")) {
+    castError = new HttpError(404, "Resource not found");
+  }
+
+  res.status(err.status || 500).json({
     success: false,
-    error: err.message,
+    error: castError
+      ? castError.message
+      : err.errors
+      ? err.errors
+      : err.message || "Server Error",
   });
 };

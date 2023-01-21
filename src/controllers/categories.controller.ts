@@ -1,7 +1,12 @@
-import { Request, Response } from "express";
+import { HttpError } from "errors/http";
+import { NextFunction, Request, Response } from "express";
 import { CategoryModel } from "models/categories/categories.model";
 
-export const findCategoryByName = async (req: Request, res: Response) => {
+export const findCategoryByName = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const categoryName = req.params.categoryName;
 
   try {
@@ -10,14 +15,13 @@ export const findCategoryByName = async (req: Request, res: Response) => {
     });
 
     if (!category) {
-      res.status(404).json({ success: false, message: `Not found` });
-      return;
+      return res
+        .status(404)
+        .json({ success: false, error: { message: `Not found` } });
     }
 
-    res
-      .status(200)
-      .json({ success: true, data: category, message: `Category found` });
+    res.status(200).json({ success: true, data: category });
   } catch (err) {
-    res.status(500).json({ success: false, message: err });
+    next(new HttpError(500, `${err}`));
   }
 };

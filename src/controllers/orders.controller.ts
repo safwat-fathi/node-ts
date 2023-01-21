@@ -1,19 +1,25 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { UserModel } from "models/user/user.model";
 import { OrderModel } from "models/orders/orders.model";
 import { ProductModel } from "models/products/products.model";
 import { Product, Order } from "types/db";
+import { HttpError } from "errors/http";
 // import { ObjectId } from "mongoose";
 
-export const addOrder = async (req: Request, res: Response) => {
+export const addOrder = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const { products, user }: Order = req.body;
 
   try {
     const orderOwner = await UserModel.findOne({ user });
 
     if (!orderOwner) {
-      res.status(404).json({ success: false, message: "No user found" });
-      return;
+      return res
+        .status(404)
+        .json({ success: false, error: { message: "No user found" } });
     }
 
     let orderTotal = 0;
@@ -28,14 +34,16 @@ export const addOrder = async (req: Request, res: Response) => {
       if (!product) {
         return res.status(404).json({
           success: false,
-          message: `Product not found`,
+          error: { message: `Product not found` },
         });
       }
 
       if (product && product.stock < qty) {
         return res.status(400).json({
           success: false,
-          message: `Product ${product.name} does not have enough stock`,
+          error: {
+            message: `Product ${product.name} does not have enough stock`,
+          },
         });
       }
 
@@ -68,9 +76,8 @@ export const addOrder = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       data: newOrder,
-      message: "Order added successfully",
     });
   } catch (err) {
-    res.status(500).json({ success: false, message: err });
+    next(new HttpError(500, `${err}`));
   }
 };

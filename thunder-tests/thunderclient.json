@@ -8,12 +8,12 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2022-09-22T08:41:41.481Z",
-    "modified": "2022-10-21T16:43:29.511Z",
+    "modified": "2023-01-21T14:25:48.787Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"ali\",\n  \"email\": \"test@tfesft.com\",\n  \"phone\": \"01082045644\",\n  \"password\": \"0101DdDdAaAa\",\n  \"password_confirm\": \"0101DdDdAaAa\",\n  \"subscription\" : \"\"\n}",
+      "raw": "{\n  \n}",
       "form": []
     },
     "tests": []
@@ -60,7 +60,7 @@
     "method": "GET",
     "sortNum": 50000,
     "created": "2022-09-22T14:58:00.194Z",
-    "modified": "2022-10-21T16:34:42.633Z",
+    "modified": "2023-01-21T13:52:22.096Z",
     "headers": [],
     "params": [],
     "auth": {
@@ -78,7 +78,7 @@
     "method": "GET",
     "sortNum": 60000,
     "created": "2022-09-24T13:13:47.339Z",
-    "modified": "2022-10-21T16:34:23.031Z",
+    "modified": "2023-01-21T14:47:04.019Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -125,7 +125,7 @@
     "method": "POST",
     "sortNum": 90000,
     "created": "2022-10-01T12:38:37.170Z",
-    "modified": "2022-10-21T16:34:37.857Z",
+    "modified": "2023-01-21T12:46:04.811Z",
     "headers": [],
     "params": [],
     "body": {

@@ -4,6 +4,7 @@ import { NextFunction, Request, Response } from "express";
 import { body } from "express-validator";
 import { verify } from "jsonwebtoken";
 import { UserModel } from "models/user/user.model";
+import { HttpError } from "errors/http";
 
 dotenv.config();
 
@@ -26,12 +27,12 @@ export const checkDuplicate = async (
     if (phone || email) {
       res.status(400).json({
         success: false,
-        message: "Sorry, email or phone is already in use!",
+        error: { message: "Sorry, email or phone is already in use!" },
       });
       return;
     }
   } catch (err) {
-    res.status(500).json({ success: false, message: err });
+    res.status(500).json({ success: false, error: { message: err } });
     return;
   }
 
@@ -105,10 +106,10 @@ export const checkRolesExisted = async (
       if (!["user", "admin", "moderator"].includes(req.body.roles[i])) {
         return res.status(400).send({
           success: false,
-          message: `Failed! Role ${req.body.roles[i]} does not exist!`,
+          error: {
+            message: `Failed! Role ${req.body.roles[i]} does not exist!`,
+          },
         });
-
-        // res.end();
       }
     }
   }
@@ -122,21 +123,17 @@ export const verifyToken = async (
   next: NextFunction
 ) => {
   const token: string = req.headers.authorization || "";
+  console.log("token", token);
 
   if (!token) {
-    return res
-      .status(401)
-      .json({ success: false, message: "Unauthorized" })
-      .end();
+    return next(new HttpError(401, "Unauthorized"));
   }
 
   try {
     const decoded = <CustomJwtPayload>verify(token?.split(" ")[1], secret);
 
     req.body.userId = decoded.id;
-
-    next();
   } catch (err) {
-    res.status(401).json({ success: false, message: err }).end();
+    next(new HttpError(500, `${err}`));
   }
 };

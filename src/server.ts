@@ -1,4 +1,3 @@
-import http from "http";
 import dotenv from "dotenv";
 import express, { Express } from "express";
 import compression from "compression";
@@ -34,12 +33,8 @@ app.use("/api", routes);
 //ErrorHandler (Should be last piece of middleware)
 app.use(errorHandler);
 
-// const server = app.listen(PORT, () => {
-//   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
-// });
-const server = http.createServer(app).listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
-  // console.log(`WebSocket is running on port ${PORT}`);
 });
 
 // cb function accepts two params error and promise
