@@ -1,7 +1,7 @@
 import { Schema } from "mongoose";
 import { User } from "types/db";
 
-export const userSchema = new Schema<User>(
+export const UserSchema = new Schema<User>(
   {
     name: { type: String, required: true, match: /^[a-zA-Z ]*$/ },
     email: {
@@ -21,17 +21,17 @@ export const userSchema = new Schema<User>(
       ref: "Subscription",
       required: true,
     },
-		orders: {
-			type: [Schema.Types.ObjectId],
-			ref: "Order",
-			required: true
-		}
+    orders: {
+      type: [Schema.Types.ObjectId],
+      ref: "Order",
+      required: true,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-// userSchema.pre("save", (next) => {
+// UserSchema.pre("save", (next) => {
 //   next();
 // });

@@ -102,11 +102,11 @@
     "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
     "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
     "name": "add",
-    "url": "{{baseUrl}}/products/add",
+    "url": "{{baseUrl}}/api/products/add",
     "method": "POST",
     "sortNum": 80000,
     "created": "2022-09-30T11:18:22.983Z",
-    "modified": "2022-09-30T12:02:09.202Z",
+    "modified": "2023-01-21T16:30:00.183Z",
     "headers": [],
     "params": [],
     "body": {

@@ -1,10 +1,10 @@
 import { model, ObjectId } from "mongoose";
 import { Subscription } from "types/db";
-import { subscriptionSchema } from "./subscription.schema";
+import { SubscriptionSchema } from "./subscription.schema";
 
 export const SubscriptionModel = model<Subscription>(
   "Subscription",
-  subscriptionSchema
+  SubscriptionSchema
 );
 
 export class SubscriptionStore {

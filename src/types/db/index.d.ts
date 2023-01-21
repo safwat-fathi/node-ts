@@ -22,6 +22,7 @@ export enum ProductImage {
 export interface Product extends Document {
   name: string;
   description: string;
+  slug: string;
   price: number;
   stock: number;
   images: { type: ProductImage; url: string }[];

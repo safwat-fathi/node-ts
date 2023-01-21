@@ -1,9 +1,9 @@
 import { model } from "mongoose";
 import { Product } from "types/db";
-import { productSchema } from "./products.schema";
+import { ProductSchema } from "./products.schema";
 import { createHash } from "crypto";
 
-export const ProductModel = model<Product>("Product", productSchema);
+export const ProductModel = model<Product>("Product", ProductSchema);
 
 export class ProductStore {
   async index(

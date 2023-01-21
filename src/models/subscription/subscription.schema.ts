@@ -1,7 +1,7 @@
 import { Schema } from "mongoose";
 import { Subscription } from "types/db/index";
 
-export const subscriptionSchema = new Schema<Subscription>({
+export const SubscriptionSchema = new Schema<Subscription>({
   name: {
     type: String,
     enum: {
