@@ -1,13 +1,13 @@
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import { Request, Response } from "express";
 import { SubscriptionStore } from "models/subscription/subscription.model";
 import { generateAccessToken } from "utils/auth";
 import { UserStore } from "models/user/user.model";
 import { validationResult } from "express-validator";
 
-dotenv.config();
+// dotenv.config();
 
-const secret = (process.env.SECRET as string) || "";
+// const secret = (process.env.SECRET as string) || "";
 
 export const signup = async (req: Request, res: Response) => {
   try {
@@ -19,15 +19,17 @@ export const signup = async (req: Request, res: Response) => {
     if (!errors.isEmpty()) {
       const errorsMapped = errors
         .array()
-        .map((err) => ({ param: err.param, message: err.msg }));
+        .map(err => ({ param: err.param, message: err.msg }));
 
-      return res.status(400).json({ errors: errorsMapped });
+      return res.status(400).json({ success: false, errors: errorsMapped });
     }
 
     const subscription = await subscriptionStore.show(req.body.subscription);
 
     if (!subscription) {
-      res.status(422).json({ message: "subscription is not valid" });
+      res
+        .status(422)
+        .json({ success: false, message: "subscription is not valid" });
       return;
     }
 
@@ -42,10 +44,10 @@ export const signup = async (req: Request, res: Response) => {
 
     res
       .status(201)
-      .json({ user, message: "User registered successfully" })
+      .json({ success: true, user, message: "User registered successfully" })
       .end();
   } catch (err) {
-    res.status(500).json({ message: err }).end();
+    res.status(500).json({ success: false, message: err }).end();
   }
 };
 
@@ -55,6 +57,7 @@ export const login = async (req: Request, res: Response) => {
 
     if (req.session.loggedIn) {
       return res.status(401).json({
+        success: false,
         message:
           "Already logged in, Please request a password reset if you suspect this is not you.",
       });
@@ -65,9 +68,10 @@ export const login = async (req: Request, res: Response) => {
     const user = await userStore.login({ email, password });
 
     if (!user) {
-      return res
-        .status(422)
-        .json({ message: "Please enter valid email or password" });
+      return res.status(422).json({
+        success: false,
+        message: "Please enter valid email or password",
+      });
     }
 
     const token = generateAccessToken(user.id, user.name);
@@ -75,6 +79,7 @@ export const login = async (req: Request, res: Response) => {
     req.session.loggedIn = true;
 
     res.status(200).json({
+      success: true,
       message: "Logged in successfully",
       data: {
         accessToken: token,
@@ -82,8 +87,7 @@ export const login = async (req: Request, res: Response) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ message: err });
-    return;
+    res.status(500).json({ success: false, message: err });
   }
 };
 
@@ -91,8 +95,8 @@ export const logout = (req: Request, res: Response) => {
   if (req.session.loggedIn) {
     req.session.loggedIn = false;
 
-    res.status(200).json({ message: "Logged out successfully" });
+    res.status(200).json({ success: true, message: "Logged out successfully" });
   } else {
-    res.status(404).json({ message: "Not logged in" });
+    res.status(404).json({ success: false, message: "Not logged in" });
   }
 };

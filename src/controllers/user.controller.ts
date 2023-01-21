@@ -7,9 +7,12 @@ export const findBySubId = async (req: Request, res: Response) => {
   const users = await UserModel.find({ subscription: req.params.subId });
 
   if (!users) {
-    res.status(404).json({ message: "Nothing found" });
-    return;
+    return res.status(404).json({ success: false, message: "Nothing found" });
   }
 
-  res.status(200).json({ message: `Found ${users.length} users`, data: users });
+  res.status(200).json({
+    success: true,
+    message: `Found ${users.length} users`,
+    data: users,
+  });
 };

@@ -6,74 +6,71 @@ import { Product, Order } from "types/db";
 // import { ObjectId } from "mongoose";
 
 export const addOrder = async (req: Request, res: Response) => {
-  const {
-    products,
-    user,
-  }: Order =
-    req.body;
+  const { products, user }: Order = req.body;
 
   try {
     const orderOwner = await UserModel.findOne({ user });
 
     if (!orderOwner) {
-      res.status(404).json({ message: "No user found" });
+      res.status(404).json({ success: false, message: "No user found" });
       return;
     }
 
-		
-		let orderTotal = 0
-		
+    let orderTotal = 0;
+
     for (const i in products) {
       const productId = products[i].product;
       const qty = products[i].quantity;
       const product: Product | null = await ProductModel.findOne({
-				_id: productId,
+        _id: productId,
       });
-			
+
       if (!product) {
-				res.status(404).json({
-					message: `Product not found`,
+        return res.status(404).json({
+          success: false,
+          message: `Product not found`,
         });
-        return false;
       }
-			
+
       if (product && product.stock < qty) {
-        res.status(400).json({
+        return res.status(400).json({
+          success: false,
           message: `Product ${product.name} does not have enough stock`,
         });
-        return false;
       }
-			
+
       if (product) {
-				orderTotal += product.price
+        orderTotal += product.price;
         product.updateOne({ stock: product.stock - qty });
-				
+
         await product.save();
       }
     }
 
-		// if (orderTotal !== total) {
-		// 	res.status(400).json({
-		// 		message: `Order total is not correct`,
-		// 	});
-		// 	return false;
-		// }
-		
+    // if (orderTotal !== total) {
+    // 	res.status(400).json({
+    // 		message: `Order total is not correct`,
+    // 	});
+    // 	return false;
+    // }
+
     const newOrder = await OrderModel.create({
-			user,
+      user,
       products,
-			total: orderTotal,
+      total: orderTotal,
       ...req.body,
     });
-		
-		// add order to user document
-		await orderOwner.updateOne({$push: {orders: newOrder.id}})
+
+    // add order to user document
+    await orderOwner.updateOne({ $push: { orders: newOrder.id } });
     await newOrder.save();
-		
-    res
-      .status(200)
-      .json({ data: newOrder, message: "Order added successfully" });
+
+    res.status(200).json({
+      success: true,
+      data: newOrder,
+      message: "Order added successfully",
+    });
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ success: false, message: err });
   }
 };

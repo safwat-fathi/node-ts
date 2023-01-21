@@ -17,12 +17,14 @@ export const index = async (req: Request, res: Response) => {
     const data = await productStore.index(null, null, parseInt(page));
 
     if (data.products.length === 0) {
-      return res.status(200).json({ data: [], message: `No products found` });
+      return res
+        .status(200)
+        .json({ success: true, data: [], message: `No products found` });
     }
 
-    return res.status(200).json({ ...data, links: {} });
+    return res.status(200).json({ success: true, ...data, links: {} });
   } catch (err) {
-    return res.status(500).json({ message: err });
+    return res.status(500).json({ success: false, message: err });
   }
 };
 
@@ -35,16 +37,20 @@ export const findByCategory = async (req: Request, res: Response) => {
     const products = await ProductModel.find({ categories: categoryId });
 
     if (products.length === 0) {
-      res.status(200).json({ message: `No products match this search` });
+      res
+        .status(200)
+        .json({ success: true, message: `No products match this search` });
       return;
     }
 
-    res
-      .status(200)
-      .json({ data: products, message: `Found ${products.length} products` });
+    res.status(200).json({
+      success: true,
+      data: products,
+      message: `Found ${products.length} products`,
+    });
     console.log(products);
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ success: false, message: err });
     return;
   }
 };
@@ -56,16 +62,20 @@ export const findByName = async (req: Request, res: Response) => {
     const products = await ProductModel.find({ categories: categoryId });
 
     if (products.length === 0) {
-      res.status(200).json({ message: `No products match this search` });
+      res
+        .status(200)
+        .json({ success: false, message: `No products match this search` });
       return;
     }
 
-    res
-      .status(200)
-      .json({ data: products, message: `Found ${products.length} products` });
+    res.status(200).json({
+      success: true,
+      data: products,
+      message: `Found ${products.length} products`,
+    });
     console.log(products);
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ success: false, message: err });
     return;
   }
 };
@@ -82,9 +92,10 @@ export const addProduct = async (req: Request, res: Response) => {
     });
 
     if (categoriesFound && categoriesFound.length === 0) {
-      res
-        .status(404)
-        .json({ message: "No categories match passed categories" });
+      res.status(404).json({
+        success: false,
+        message: "No categories match passed categories",
+      });
       return;
     }
 
@@ -94,10 +105,12 @@ export const addProduct = async (req: Request, res: Response) => {
 
     await newProduct.save();
 
-    res
-      .status(201)
-      .json({ data: newProduct, message: "Product created successfully" });
+    res.status(201).json({
+      success: false,
+      data: newProduct,
+      message: "Product created successfully",
+    });
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ success: false, message: err });
   }
 };

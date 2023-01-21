@@ -10,13 +10,14 @@ export const findCategoryByName = async (req: Request, res: Response) => {
     });
 
     if (!category) {
-      res.status(404).json({ message: `Not found` });
+      res.status(404).json({ success: false, message: `Not found` });
       return;
     }
 
-    res.status(200).json({ data: category, message: `Category found` });
+    res
+      .status(200)
+      .json({ success: true, data: category, message: `Category found` });
   } catch (err) {
-    res.status(500).json({ message: err });
-    return;
+    res.status(500).json({ success: false, message: err });
   }
 };
