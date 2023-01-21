@@ -7,6 +7,8 @@ declare global {
       MONGO_URI_DEV: string;
       MONGO_URI_PROD: string;
       SECRET: string;
+      GEOCODER_API_KEY: string;
+      GEOCODER_API_SECRET: string;
     }
   }
 }

@@ -34,7 +34,7 @@ app.use("/api", routes);
 app.use(errorHandler);
 
 const server = app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
+  console.log(`⚡️[server]: Server is running at ${PORT}`);
 });
 
 // cb function accepts two params error and promise

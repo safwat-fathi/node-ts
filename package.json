@@ -20,6 +20,7 @@
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.1",
+    "node-geocoder": "^4.2.0",
     "slugify": "^1.6.5"
   },
   "scripts": {
@@ -37,6 +38,7 @@
     "@types/jsonwebtoken": "^8.5.9",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^18.7.18",
+    "@types/node-geocoder": "^3.24.5",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "eslint": "^8.25.0",

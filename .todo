@@ -5,6 +5,8 @@
 - add success boolean to every response json object whether request is success or fail
 - add error handling middleware for controllers
 - Schema validations as products
+- test pre save hooks (products, users)
+- add geocode address on order model
 
 ## Readme
 
