@@ -61,9 +61,11 @@ export const ProductSchema = new Schema<Product>(
   }
 );
 
-// ProductSchema.pre<Product>("save", (next: CallbackWithoutResultAndOptionalError) => {
-//   // this.
-//   console.log(this.);
+ProductSchema.pre<Product>(
+  "save",
+  function (next: CallbackWithoutResultAndOptionalError) {
+    this.slug = slugify(this.name, { lower: true });
 
-//   next();
-// });
+    next();
+  }
+);

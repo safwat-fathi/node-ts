@@ -1,5 +1,6 @@
-import { Schema } from "mongoose";
+import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
 import { User } from "types/db";
+import { hashPassword } from "utils/auth";
 
 export const UserSchema = new Schema<User>(
   {
@@ -32,6 +33,14 @@ export const UserSchema = new Schema<User>(
   }
 );
 
-// UserSchema.pre("save", (next) => {
-//   next();
-// });
+UserSchema.pre<User>(
+  "save",
+  async function (next: CallbackWithoutResultAndOptionalError) {
+    // hash password
+    const hashedPassword = await hashPassword(this.password);
+
+    this.password = hashedPassword;
+
+    next();
+  }
+);

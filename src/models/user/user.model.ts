@@ -1,21 +1,18 @@
 import { model } from "mongoose";
 import { User } from "types/db";
 import { UserSchema } from "./user.schema";
-import { hashPassword, comparePassword } from "utils/auth";
+import { comparePassword } from "utils/auth";
 
 export const UserModel = model<User>("User", UserSchema);
 
 export class UserStore {
   async signup(u: Partial<User>): Promise<User> {
     try {
-      // hash password
-      const hashedPassword = await hashPassword(u.password as string);
-
       const user = new UserModel({
         name: u.name,
         email: u.email,
         phone: u.phone,
-        password: hashedPassword,
+        password: u.password,
         subscription: u.subscription,
         orders: [],
       });
@@ -37,7 +34,7 @@ export class UserStore {
       }
 
       const passwordIsValid = await comparePassword(
-        u.password as string,
+        <string>u.password,
         user.password
       );
 
