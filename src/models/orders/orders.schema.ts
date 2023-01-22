@@ -28,11 +28,11 @@ export const OrderSchema = new Schema<Order>({
 });
 
 // geocode & create address field
-OrderSchema.pre(
-  "save",
-  async function (next: CallbackWithoutResultAndOptionalError) {
-    const loc = await geocoder.geocode(this.address);
+// OrderSchema.pre(
+//   "save",
+//   async function (next: CallbackWithoutResultAndOptionalError) {
+//     const loc = await geocoder.geocode(this.address);
 
-    next();
-  }
-);
+//     next();
+//   }
+// );

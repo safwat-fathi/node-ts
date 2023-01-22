@@ -1,15 +1,18 @@
 import dotenv from "dotenv";
-dotenv.config();
-import node_geocoder, { BaseOptions, Options } from "node-geocoder";
+import node_geocoder, { Options } from "node-geocoder";
 
-const { MONGO_URI_DEV, GEOCODER_API_KEY } = process.env || "";
-console.log("GEOCODER_API_KEY", GEOCODER_API_KEY);
+dotenv.config();
+
+const { GEOCODER_API_KEY, GEOCODER_API_PROVIDER } = process.env || {
+  GEOCODER_API_KEY: "",
+  GEOCODER_API_PROVIDER: "",
+};
 
 const options: Options = {
-  provider: "mapquest",
-  // apiKey: "",
-  // apiKey: <string>process.env.GEOCODER_API_KEY,
-  // apiKey: "4UcpQGWpSYuNYQY04vUpP96ixN0ocXyA",
+  provider: <"freegeoip" | "mapbox" | "locationiq" | "mapquest">(
+    GEOCODER_API_PROVIDER
+  ),
+  apiKey: <string>GEOCODER_API_KEY,
   httpAdapter: "http",
   formatter: null,
 };

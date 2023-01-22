@@ -9,7 +9,9 @@
     "jwt",
     "authentication",
     "mongodb",
-    "typescript"
+    "typescript",
+    "RESTapi",
+    "e-commerce"
   ],
   "dependencies": {
     "bcryptjs": "^2.4.3",
