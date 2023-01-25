@@ -12,7 +12,6 @@ export const send = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     // message body, sendTo user id
     const { message, sendTo } = req.body;
-    console.log("request body: ", { message, sendTo });
 
     Notification.emit("new", { message, sendTo });
 
@@ -22,8 +21,6 @@ export const send = asyncHandler(
 
 export const receive = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    console.log("connected");
-
     const headers: IncomingHttpHeaders = {
       "content-type": "text/event-stream",
       connection: "keep-alive",
@@ -31,29 +28,16 @@ export const receive = asyncHandler(
       "content-encoding": "utf8",
       "Access-Control-Allow-Origin": "*",
     };
+    // write headers and response with success
     res.writeHead(200, headers);
-    // res.setHeader("Content-Type", "text/event-stream");
-    // res.setHeader("Cache-Control", "no-cache");
-    // res.setHeader("Connection", "keep-alive");
 
-    // only if you want anyone to access this endpoint
-    // res.setHeader("Access-Control-Allow-Origin", "*");
-
-    // res.flushHeaders();
-    // setInterval(() => {
-    //   res.write("wdawdawd");
-    // }, 1000);
     Notification.on("new", data => {
-      console.log("new event: ", data);
+      const { message, sendTo } = data;
 
-      // res.write(JSON.stringify({ data }));
-      res.write("ddddddddddddddd");
+      res.write(`data: ${JSON.stringify({ message, sendTo })}\n\n`);
     });
-    // next();
-    req.on("close", () => {
-      console.log("closed");
 
-      res.end();
-    });
+    // response end if connection closed
+    req.on("close", () => res.end());
   }
 );

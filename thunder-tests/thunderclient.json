@@ -153,5 +153,19 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "b4bf36fe-6206-49a1-92af-fba32a35b1bd",
+    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+    "containerId": "5149c2cf-1a6d-45a2-ad85-73d6d18e59fc",
+    "name": "receive",
+    "url": "{{baseUrl}}/api/notifications/receive",
+    "method": "GET",
+    "sortNum": 110000,
+    "created": "2023-01-25T16:31:50.885Z",
+    "modified": "2023-01-25T16:33:09.962Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
