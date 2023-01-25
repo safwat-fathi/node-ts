@@ -134,5 +134,24 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "883ad715-6bd9-4c8e-8c5a-b06e22775b48",
+    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+    "containerId": "5149c2cf-1a6d-45a2-ad85-73d6d18e59fc",
+    "name": "send",
+    "url": "{{baseUrl}}/api/notifications/send",
+    "method": "POST",
+    "sortNum": 100000,
+    "created": "2023-01-25T05:58:44.518Z",
+    "modified": "2023-01-25T06:54:06.614Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"message\": \"Heellllooooooo!\",\n  \"sendTo\": \"Test\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

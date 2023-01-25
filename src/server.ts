@@ -10,6 +10,7 @@ import { seedCategories } from "seeders/categories.seeder";
 import { seedProducts } from "seeders/products.seeder";
 // routes
 import routes from "routes";
+import { EventEmitter } from "stream";
 
 dotenv.config();
 
@@ -36,6 +37,8 @@ app.use(errorHandler);
 const server = app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at ${PORT}`);
 });
+
+export const Notification = new EventEmitter();
 
 // cb function accepts two params error and promise
 process.on("unhandledRejection", error => {
