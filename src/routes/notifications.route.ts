@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { send, receive } from "controllers/notifications.controller";
 
-const notification = Router();
+const notifications = Router();
 
 // send to all
-notification.post("/send", send);
-notification.get("/receive", receive);
+notifications.post("/send", send);
+notifications.get("/receive", receive);
 
 // create
 
-export default notification;
+export default notifications;
