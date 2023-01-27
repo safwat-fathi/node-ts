@@ -1,11 +1,11 @@
 import { model } from "mongoose";
 import { Product } from "types/db";
-import { ProductSchema } from "./products.schema";
+import { ProductsSchema } from "./products.schema";
 import { createHash } from "crypto";
 
-export const ProductModel = model<Product>("Product", ProductSchema);
+export const ProductsModel = model<Product>("Product", ProductsSchema);
 
-export class ProductStore {
+export class ProductsStore {
   async index(
     skip: number | null = 0,
     limit: number | null = 10,
@@ -16,14 +16,14 @@ export class ProductStore {
   }> {
     try {
       // * dynamic page size
-      // const products = ProductModel.find({}).skip(skip).limit(limit);
+      // const products = ProductsModel.find({}).skip(skip).limit(limit);
       // * fixed page size
       const PAGE_SIZE = 10;
       const SKIP = ((page as number) - 1) * PAGE_SIZE;
 
       const [products, count] = await Promise.all([
-        ProductModel.find({}).skip(SKIP).limit(PAGE_SIZE),
-        ProductModel.estimatedDocumentCount(),
+        ProductsModel.find({}).skip(SKIP).limit(PAGE_SIZE),
+        ProductsModel.estimatedDocumentCount(),
       ]);
 
       // hashing data

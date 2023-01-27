@@ -2,7 +2,7 @@ import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
 import { Product } from "types/db";
 import slugify from "slugify";
 
-export const ProductSchema = new Schema<Product>(
+export const ProductsSchema = new Schema<Product>(
   {
     name: {
       type: String,
@@ -61,7 +61,7 @@ export const ProductSchema = new Schema<Product>(
   }
 );
 
-ProductSchema.pre<Product>(
+ProductsSchema.pre<Product>(
   "save",
   function (next: CallbackWithoutResultAndOptionalError) {
     this.slug = slugify(this.name, { lower: true });
