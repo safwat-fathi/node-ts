@@ -8,7 +8,10 @@ export const OrderSchema = new Schema<Order>({
     ref: "User",
     required: [true, "{VALUE} can not be null"],
   },
-  total: { type: Number, required: [true, "{VALUE} can not be null"] },
+  total: {
+    type: Number,
+    required: [true, "{VALUE} can not be null"],
+  },
   products: {
     type: [
       {
@@ -26,8 +29,18 @@ export const OrderSchema = new Schema<Order>({
     validate: (val: { product: Schema.Types.ObjectId; quantity: number }[]) =>
       Array.isArray(val) && val.length > 0,
   },
-  status: { type: String, required: [true, "{VALUE} can not be null"] },
-  address: { type: String, required: [true, "{VALUE} can not be null"] },
+  status: {
+    type: String,
+    enum: {
+      values: ["active", "pending", "delivered", "cancelled"],
+      message: "{VALUE} is not supported",
+    },
+    required: [true, "{VALUE} can not be null"],
+  },
+  address: {
+    type: String,
+    required: [true, "{VALUE} can not be null"],
+  },
   delivery: {
     type: Date,
     default: Date.now,

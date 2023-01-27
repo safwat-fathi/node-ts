@@ -1,10 +1,10 @@
-import { ProductModel } from "models/products/products.model";
+import { ProductsModel } from "models/products/products.model";
 import dotenv from "dotenv";
 
 dotenv.config();
 
 export const seedProducts = () => {
-  ProductModel.estimatedDocumentCount({}, (err, count) => {
+  ProductsModel.estimatedDocumentCount({}, (err, count) => {
     // ProductModel.collection.drop();
     if (!err && count === 0) {
       // ProductModel.insertMany([

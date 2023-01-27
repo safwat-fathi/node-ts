@@ -9,32 +9,48 @@ export class ShopsStore {
   async index(
     skip: number | null = 0,
     limit: number | null = 10,
-    page: number = 1
+    page: number = 1,
+    geolocation: [string, string],
+    distance: number
   ): Promise<{
-    products: Shop[];
+    shops: Shop[];
     meta: { current_page: number; total_pages: number; hash: string };
   }> {
     try {
       // * dynamic page size
-      // const products = ShopsModel.find({}).skip(skip).limit(limit);
+      // const shops = ShopsModel.find({}).skip(skip).limit(limit);
+
+      const lng = geolocation[0];
+      const lat = geolocation[1];
+      // earth radius is 6378 km
+      const radius = distance / 6378;
+
       // * fixed page size
       const PAGE_SIZE = 10;
       const SKIP = ((page as number) - 1) * PAGE_SIZE;
 
-      const [products, count] = await Promise.all([
-        ShopsModel.find({}).skip(SKIP).limit(PAGE_SIZE),
+      const [shops, count] = await Promise.all([
+        ShopsModel.find({
+          location: {
+            $geoWithin: {
+              $centerSphere: [[lng, lat], radius],
+            },
+          },
+        })
+          .skip(SKIP)
+          .limit(PAGE_SIZE),
         ShopsModel.estimatedDocumentCount(),
       ]);
 
       // hashing data
-      const data_stringified = JSON.stringify(products);
+      const data_stringified = JSON.stringify(shops);
       const data_hash = createHash("md5")
         .update(data_stringified)
         .copy()
         .digest("hex");
 
       return {
-        products,
+        shops,
         meta: {
           current_page: page,
           total_pages: Math.ceil(count / PAGE_SIZE),
@@ -42,7 +58,7 @@ export class ShopsStore {
         },
       };
     } catch (err) {
-      throw new Error(`error indexing products: ${err}`);
+      throw new Error(`error indexing shops: ${err}`);
     }
   }
 }

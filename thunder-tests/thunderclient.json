@@ -167,5 +167,40 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "9faa8687-3989-40f9-9ad9-e6353a865cd9",
+    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+    "containerId": "3717f0b1-c73a-4326-a636-8cf7851e40fe",
+    "name": "index",
+    "url": "{{baseUrl}}/api/shops?location=[lng,lat]&limit=10&skip=0&page=1",
+    "method": "GET",
+    "sortNum": 120000,
+    "created": "2023-01-27T14:49:27.205Z",
+    "modified": "2023-01-27T14:50:53.326Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "location",
+        "value": "[lng,lat]",
+        "isPath": false
+      },
+      {
+        "name": "limit",
+        "value": "10",
+        "isPath": false
+      },
+      {
+        "name": "skip",
+        "value": "0",
+        "isPath": false
+      },
+      {
+        "name": "page",
+        "value": "1",
+        "isPath": false
+      }
+    ],
+    "tests": []
   }
 ]

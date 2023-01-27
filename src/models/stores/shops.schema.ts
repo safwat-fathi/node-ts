@@ -23,7 +23,6 @@ export const ShopsSchema = new Schema<Shop>(
             required: [true, "Please add image type"],
           },
           url: { type: String, required: true },
-          required: [true, "Please add logo"],
           _id: false,
         },
       ],
@@ -35,7 +34,7 @@ export const ShopsSchema = new Schema<Shop>(
       ],
     },
     location: {
-      type: [String],
+      type: [String, String],
       validate: [
         (val: [string, string]) => Array.isArray(val) && val.length === 2,
         "{PATH} Must has 2 entries",
