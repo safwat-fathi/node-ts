@@ -8,7 +8,14 @@ import { asyncHandler } from "middlewares/async.middleware";
 // * Index
 // * ----------
 export const index = asyncHandler(async (req: Request, res: Response) => {
-  const { skip, limit, page } = req.params;
+  const { sort, skip, limit, page } = req.params as {
+    location: unknown;
+    sort: "asc" | "desc";
+    filter: "price" | "review";
+    skip: string;
+    limit: string;
+    page: string;
+  };
 
   const productStore = new ProductsStore();
 
