@@ -13,6 +13,13 @@ export interface Subscription extends Document {
   name: "basic" | "silver" | "gold";
 }
 
+export enum OrderStatus {
+  active = "active",
+  pending = "pending",
+  delivered = "delivered",
+  cancelled = "cancelled",
+}
+
 export enum ProductImage {
   thumbnail = "thumbnail",
   cover = "cover",
@@ -54,7 +61,7 @@ export interface Order extends Document {
   user: ObjectId;
   products: { product: ObjectId; quantity: number }[];
   address: string;
-  status: "active" | "pending" | "delivered" | "cancelled";
+  status: OrderStatus;
   delivery: Date;
   total: number;
 }
