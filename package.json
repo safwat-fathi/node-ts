@@ -26,9 +26,9 @@
     "slugify": "^1.6.5"
   },
   "scripts": {
-    "start": "NODE_ENV=dev nodemon ./src",
+    "start": "NODE_ENV=development nodemon ./src",
     "lint": "eslint ./src --ext .ts",
-    "build": "yarn lint && NODE_ENV=prod tsc --build"
+    "build": "yarn lint && NODE_ENV=production tsc --build"
   },
   "devDependencies": {
     "@swc/core": "^1.3.1",

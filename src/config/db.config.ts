@@ -6,12 +6,12 @@ dotenv.config();
 const { MONGO_URI_DEV, MONGO_URI_PROD, NODE_ENV } = process.env || {
   MONGO_URI_DEV: "",
   MONGO_URI_PROD: "",
-  NODE_ENV: "dev",
+  NODE_ENV: "development",
 };
 
-const MONGO_URI = NODE_ENV === "dev" ? MONGO_URI_DEV : MONGO_URI_PROD;
+const MONGO_URI = NODE_ENV === "development" ? MONGO_URI_DEV : MONGO_URI_PROD;
 
-mongoose.set("debug", NODE_ENV === "dev" ? true : false);
+mongoose.set("debug", NODE_ENV === "development" ? true : false);
 
 export const connectDB = () =>
   new Promise((resolve, reject) => {
