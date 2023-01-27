@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { CategoryModel } from "models/categories/categories.model";
-import { ProductModel } from "models/products/products.model";
+import { ProductsStore, ProductsModel } from "models/products/products.model";
 import { Category } from "types/db";
-import { ProductStore } from "models/products/products.model";
 import { HttpError } from "errors/http";
 import { asyncHandler } from "middlewares/async.middleware";
 
@@ -11,7 +10,7 @@ import { asyncHandler } from "middlewares/async.middleware";
 export const index = asyncHandler(async (req: Request, res: Response) => {
   const { skip, limit, page } = req.params;
 
-  const productStore = new ProductStore();
+  const productStore = new ProductsStore();
 
   // * using skip & limit
   // const products = await productStore.index(parseInt(skip), parseInt(limit));
@@ -32,7 +31,7 @@ export const index = asyncHandler(async (req: Request, res: Response) => {
 export const findByCategory = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { categoryId } = req.params;
-    const products = await ProductModel.find({ categories: categoryId });
+    const products = await ProductsModel.find({ categories: categoryId });
 
     if (products.length === 0) {
       return next(new HttpError(404, `No products match this search`));
@@ -50,7 +49,7 @@ export const findByName = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const categoryId = req.params.categoryId;
 
-    const products = await ProductModel.find({ categories: categoryId });
+    const products = await ProductsModel.find({ categories: categoryId });
 
     if (products.length === 0) {
       return next(new HttpError(404, `No products match this search`));
@@ -80,7 +79,7 @@ export const addProduct = asyncHandler(
       return next(new HttpError(404, "No categories match passed categories"));
     }
 
-    const newProduct = await ProductModel.create({
+    const newProduct = await ProductsModel.create({
       ...req.body,
     });
 
