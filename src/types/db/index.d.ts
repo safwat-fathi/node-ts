@@ -19,6 +19,11 @@ export enum ProductImage {
   card = "card",
 }
 
+export enum ShopLogo {
+  thumbnail = "thumbnail",
+  cover = "cover",
+}
+
 export interface Product extends Document {
   name: string;
   description: string;
@@ -29,6 +34,13 @@ export interface Product extends Document {
   categories: ObjectId[];
   size?: string;
   color?: string;
+}
+
+export interface Shop extends Document {
+  name: string;
+  slug: string;
+  logo: { type: ShopLogo; url: string }[];
+  location: [string, string];
 }
 
 export interface Category extends Document {
