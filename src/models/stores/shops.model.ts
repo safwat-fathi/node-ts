@@ -1,29 +1,29 @@
 import { model } from "mongoose";
-import { Shop } from "types/db";
+import { Shop, StoreDB } from "types/db";
 import { ShopsSchema } from "./shops.schema";
 import { createHash } from "crypto";
 
 export const ShopsModel = model<Shop>("Shop", ShopsSchema);
 
-export class ShopsStore {
+export class ShopsStore implements StoreDB<Shop> {
   async index(
     skip: number | null = 0,
     limit: number | null = 10,
-    page: number = 1,
-    geolocation: [string, string],
-    distance: number
+    page: number = 1
+    // geolocation: [string, string],
+    // distance: number
   ): Promise<{
-    shops: Shop[];
+    data: Shop[];
     meta: { current_page: number; total_pages: number; hash: string };
   }> {
     try {
       // * dynamic page size
       // const shops = ShopsModel.find({}).skip(skip).limit(limit);
 
-      const lng = geolocation[0];
-      const lat = geolocation[1];
+      // const lng = geolocation[0];
+      // const lat = geolocation[1];
       // earth radius is 6378 km
-      const radius = distance / 6378;
+      // const radius = distance / 6378;
 
       // * fixed page size
       const PAGE_SIZE = 10;
@@ -31,11 +31,11 @@ export class ShopsStore {
 
       const [shops, count] = await Promise.all([
         ShopsModel.find({
-          location: {
-            $geoWithin: {
-              $centerSphere: [[lng, lat], radius],
-            },
-          },
+          // location: {
+          //   $geoWithin: {
+          //     $centerSphere: [[lng, lat], radius],
+          //   },
+          // },
         })
           .skip(SKIP)
           .limit(PAGE_SIZE),
@@ -50,7 +50,7 @@ export class ShopsStore {
         .digest("hex");
 
       return {
-        shops,
+        data: shops,
         meta: {
           current_page: page,
           total_pages: Math.ceil(count / PAGE_SIZE),

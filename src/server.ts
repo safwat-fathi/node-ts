@@ -1,3 +1,4 @@
+import fs from "fs";
 import dotenv from "dotenv";
 import express, { Express } from "express";
 import compression from "compression";

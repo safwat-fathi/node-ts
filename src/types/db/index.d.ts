@@ -1,5 +1,17 @@
 import { ObjectId, Document } from "mongoose";
 
+export interface StoreDB<T> {
+  index: (
+    skip: number | null,
+    limit: number | null,
+    page: number,
+    ...args: any
+  ) => Promise<{
+    data: T[];
+    meta: { current_page: number; total_pages: number; hash: string };
+  }>;
+}
+
 export interface User extends Document {
   name: string;
   email: string;

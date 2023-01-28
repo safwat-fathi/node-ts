@@ -21,7 +21,7 @@ export const index = asyncHandler(async (req: Request, res: Response) => {
   // * using skip & limit
   // const products = await productStore.index(parseInt(skip), parseInt(limit));
   // * using page number
-  const data = await productStore.index(null, null, +page);
+  const { data, meta } = await productStore.index(null, null, +page);
 
   // if (data.products.length === 0) {
   //   return res
@@ -29,9 +29,7 @@ export const index = asyncHandler(async (req: Request, res: Response) => {
   //     .json({ success: true, data: [] });
   // }
 
-  return res
-    .status(200)
-    .json({ success: true, data: data.products, meta: data.meta, links: {} });
+  return res.status(200).json({ success: true, data, meta, links: {} });
 });
 
 // * SEARCH

@@ -13,7 +13,7 @@ export class ProductsStore {
     sort: "asc" | "desc" | null = null,
     filter: "price" | "review" | null = null
   ): Promise<{
-    products: Product[];
+    data: Product[];
     meta: { current_page: number; total_pages: number; hash: string };
   }> {
     try {
@@ -39,7 +39,7 @@ export class ProductsStore {
         .digest("hex");
 
       return {
-        products,
+        data: products,
         meta: {
           current_page: page,
           total_pages: Math.ceil(count / PAGE_SIZE),

@@ -17,7 +17,7 @@
 ## Products
 
 - CRUD operations update (stock, image, etc...)
-- sorting
+- sorting (review, price)
 - filters
 - pagination:
   - send total pages
@@ -35,6 +35,7 @@
 ## Shops
 
 - CRUD operations
+- sort (reviews)
 - find
 - filters
 - pagination:
