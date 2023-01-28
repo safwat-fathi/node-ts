@@ -7,6 +7,7 @@
 - Schema validations as products
 - test pre save hooks (products, users)
 - add geocode address on order model
+- add role auth middleware
 
 ## Readme
 
@@ -56,6 +57,7 @@
 - admin role for users (to make CRUD operations on users)
 - seeder
 - orders
+- role
 
 ## Orders
 
