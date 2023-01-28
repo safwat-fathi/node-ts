@@ -11,6 +11,7 @@ import { seedProducts } from "seeders/products.seeder";
 // routes
 import routes from "routes";
 import { EventEmitter } from "stream";
+import WebSocketServer from "websocket";
 
 dotenv.config();
 
@@ -37,6 +38,9 @@ app.use(errorHandler);
 const server = app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at ${PORT}`);
 });
+
+const wss = new WebSocketServer(server);
+wss.attachEventListeners();
 
 export const Notification = new EventEmitter();
 

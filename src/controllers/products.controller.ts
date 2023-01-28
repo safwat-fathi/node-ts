@@ -8,8 +8,7 @@ import { asyncHandler } from "middlewares/async.middleware";
 // * Index
 // * ----------
 export const index = asyncHandler(async (req: Request, res: Response) => {
-  const { sort, skip, limit, page } = req.params as {
-    location: unknown;
+  const { sort, filter, skip, limit, page } = req.params as {
     sort: "asc" | "desc";
     filter: "price" | "review";
     skip: string;

@@ -9,7 +9,9 @@ export class ProductsStore {
   async index(
     skip: number | null = 0,
     limit: number | null = 10,
-    page: number = 1
+    page: number = 1,
+    sort: "asc" | "desc" | null = null,
+    filter: "price" | "review" | null = null
   ): Promise<{
     products: Product[];
     meta: { current_page: number; total_pages: number; hash: string };
@@ -21,10 +23,13 @@ export class ProductsStore {
       const PAGE_SIZE = 10;
       const SKIP = ((page as number) - 1) * PAGE_SIZE;
 
-      const [products, count] = await Promise.all([
-        ProductsModel.find({}).skip(SKIP).limit(PAGE_SIZE),
-        ProductsModel.estimatedDocumentCount(),
-      ]);
+			if (sort && filter) {
+				
+			}
+			const [products, count] = await Promise.all([
+				ProductsModel.find({price: {[sort === "desc"? '$lte' : '$gt']: }}).skip(SKIP).limit(PAGE_SIZE),
+				ProductsModel.estimatedDocumentCount(),
+			]);
 
       // hashing data
       const data_stringified = JSON.stringify(products);
