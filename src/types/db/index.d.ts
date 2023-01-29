@@ -11,6 +11,10 @@ export interface StoreDB<T> {
     data: T[];
     meta: { current_page: number; total_pages: number; hash: string };
   }>;
+
+  find?: (findBy: string) => Promise<{
+    data: T[];
+  }>;
 }
 
 export interface User extends Document {

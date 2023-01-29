@@ -51,7 +51,7 @@ export class ShopsStore implements StoreDB<Shop> {
         ShopsModel.estimatedDocumentCount(),
       ]);
 
-      // hashing data
+      // hashing data to help client identify data has changed
       const data_stringified = JSON.stringify(shops);
       const data_hash = createHash("md5")
         .update(data_stringified)

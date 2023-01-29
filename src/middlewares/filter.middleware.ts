@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { StoreDB } from "types/db";
 import { asyncHandler } from "./async.middleware";
 
-export const sort = <T>(store: StoreDB<T>) =>
+export const filter = <T>(store: StoreDB<T>) =>
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     // const { sortBy } = req.params as {
     //   sortBy: string;

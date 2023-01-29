@@ -16,7 +16,7 @@ export const paginate = <T>(store: StoreDB<T>) =>
       by: sortBy || "default",
       type: sortType || "descend",
     });
-    // {by: sortBy, type: sortType }
+
     res.locals.dataPaginated = { data, meta, links: {} };
 
     next();
