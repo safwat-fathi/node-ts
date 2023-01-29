@@ -37,13 +37,11 @@ export const index = asyncHandler(
     //   // +distance
     // );
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        data: res.dataPaginated.data,
-        meta: res.dataPaginated.meta,
-        links: res.dataPaginated.links,
-      });
+    return res.status(200).json({
+      success: true,
+      data: res.locals.dataPaginated.data,
+      meta: res.locals.dataPaginated.meta,
+      links: res.locals.dataPaginated.links,
+    });
   }
 );

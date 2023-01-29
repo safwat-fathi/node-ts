@@ -10,8 +10,8 @@ export class ProductsStore {
     skip: number | null = 0,
     limit: number | null = 10,
     page: number = 1,
-    sort: "asc" | "desc" | null = null,
-    filter: "price" | "review" | null = null
+    sort?: { by: string; type: "ascend" | "descend" }
+    // filter: "price" | "review" | null = null
   ): Promise<{
     data: Product[];
     meta: { current_page: number; total_pages: number; hash: string };
@@ -20,16 +20,25 @@ export class ProductsStore {
       // * dynamic page size
       // const products = ProductsModel.find({}).skip(skip).limit(limit);
       // * fixed page size
-      const PAGE_SIZE = 10;
-      const SKIP = ((page as number) - 1) * PAGE_SIZE;
+      const PAGE_SIZE = limit || 10;
+      const SKIP = skip || ((page as number) - 1) * PAGE_SIZE;
 
-			if (sort && filter) {
-				
-			}
-			const [products, count] = await Promise.all([
-				ProductsModel.find({price: {[sort === "desc"? '$lte' : '$gt']: }}).skip(SKIP).limit(PAGE_SIZE),
-				ProductsModel.estimatedDocumentCount(),
-			]);
+      const [products, count] = await Promise.all([
+        ProductsModel.find(
+          // filters by model props (name, price, etc...)
+          {},
+          null,
+          // options (sort, pagination, etc...)
+          {
+            ...(sort && {
+              sort: { [sort.by]: sort.type === "ascend" ? 1 : -1 },
+            }),
+          }
+        )
+          .skip(SKIP)
+          .limit(PAGE_SIZE),
+        ProductsModel.estimatedDocumentCount(),
+      ]);
 
       // hashing data
       const data_stringified = JSON.stringify(products);

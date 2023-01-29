@@ -5,7 +5,8 @@ export interface StoreDB<T> {
     skip: number | null,
     limit: number | null,
     page: number,
-    ...args: any
+    sort?: { by: string; type: "ascend" | "descend" }
+    // ...args: any
   ) => Promise<{
     data: T[];
     meta: { current_page: number; total_pages: number; hash: string };

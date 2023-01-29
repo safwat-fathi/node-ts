@@ -4,12 +4,4 @@ declare namespace Express {
       loggedIn: boolean;
     };
   }
-
-  export interface Response {
-    dataPaginated: {
-      data: any[];
-      meta: { current_page: number; total_pages: number; hash: string };
-      links: {};
-    };
-  }
 }

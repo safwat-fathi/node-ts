@@ -9,9 +9,10 @@ export class ShopsStore implements StoreDB<Shop> {
   async index(
     skip: number | null = 0,
     limit: number | null = 10,
-    page: number = 1
-    // geolocation: [string, string],
-    // distance: number
+    page = 1,
+    // geolocation?: [string, string],
+    // distance?: number
+    sort?: { by: string; type: "ascend" | "descend" }
   ): Promise<{
     data: Shop[];
     meta: { current_page: number; total_pages: number; hash: string };
@@ -26,17 +27,25 @@ export class ShopsStore implements StoreDB<Shop> {
       // const radius = distance / 6378;
 
       // * fixed page size
-      const PAGE_SIZE = 10;
-      const SKIP = ((page as number) - 1) * PAGE_SIZE;
+      const PAGE_SIZE = limit || 10;
+      const SKIP = skip || ((page as number) - 1) * PAGE_SIZE;
 
       const [shops, count] = await Promise.all([
-        ShopsModel.find({
-          // location: {
-          //   $geoWithin: {
-          //     $centerSphere: [[lng, lat], radius],
-          //   },
-          // },
-        })
+        ShopsModel.find(
+          {
+            // location: {
+            //   $geoWithin: {
+            //     $centerSphere: [[lng, lat], radius],
+            //   },
+            // },
+          },
+          null,
+          {
+            ...(sort && {
+              sort: { [sort.by]: sort.type === "ascend" ? 1 : -1 },
+            }),
+          }
+        )
           .skip(SKIP)
           .limit(PAGE_SIZE),
         ShopsModel.estimatedDocumentCount(),
