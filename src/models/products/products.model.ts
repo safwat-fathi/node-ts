@@ -1,11 +1,11 @@
 import { model } from "mongoose";
-import { Product } from "types/db";
+import { Product, StoreDB } from "types/db";
 import { ProductsSchema } from "./products.schema";
 import { createHash } from "crypto";
 
 export const ProductsModel = model<Product>("Product", ProductsSchema);
 
-export class ProductsStore {
+export class ProductsStore implements StoreDB<Product> {
   async index(
     skip: number | null = 0,
     limit: number | null = 10,
