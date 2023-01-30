@@ -21,14 +21,14 @@ export class SubscriptionStore implements StoreDB<Subscription> {
     }
   }
 
-  async find(findBy: {
+  async find(find: {
     by: string;
     value: any;
-  }): Promise<Subscription | Subscription[] | null> {
+  }): Promise<{ data: Subscription | Subscription[] } | null> {
     try {
       const subscription: Subscription | Subscription[] =
         await SubscriptionModel.find({
-          [findBy.by]: findBy.value,
+          [find.by]: find.value,
         });
 
       if (!subscription) {
@@ -37,7 +37,7 @@ export class SubscriptionStore implements StoreDB<Subscription> {
 
       return { data: subscription };
     } catch (err) {
-      throw new Error(`error getting subscription ${err}`);
+      throw new Error(`error finding subscriptions ${err}`);
     }
   }
 }

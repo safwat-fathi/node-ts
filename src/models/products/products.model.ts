@@ -59,4 +59,23 @@ export class ProductsStore implements StoreDB<Product> {
       throw new Error(`error indexing products: ${err}`);
     }
   }
+
+  async find(find: {
+    by: string;
+    value: any;
+  }): Promise<{ data: Product | Product[] } | null> {
+    try {
+      const product: Product | Product[] = await ProductsModel.find({
+        [find.by]: find.value,
+      });
+
+      if (!product) {
+        return null;
+      }
+
+      return { data: product };
+    } catch (err) {
+      throw new Error(`error finding products ${err}`);
+    }
+  }
 }

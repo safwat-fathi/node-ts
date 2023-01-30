@@ -12,9 +12,7 @@ export interface StoreDB<T> {
     meta?: { current_page: number; total_pages: number; hash: string };
   }>;
 
-  find?: (findBy: { by: string; value: any }) => Promise<{
-    data: T | T[] | null;
-  }>;
+  find: (find: { by: string; value: any }) => Promise<{ data: T | T[] } | null>;
 }
 
 export interface User extends Document {

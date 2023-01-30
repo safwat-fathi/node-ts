@@ -70,4 +70,23 @@ export class ShopsStore implements StoreDB<Shop> {
       throw new Error(`error indexing shops: ${err}`);
     }
   }
+
+  async find(find: {
+    by: string;
+    value: any;
+  }): Promise<{ data: Shop | Shop[] } | null> {
+    try {
+      const shop: Shop | Shop[] = await ShopsModel.find({
+        [find.by]: find.value,
+      });
+
+      if (!shop) {
+        return null;
+      }
+
+      return { data: shop };
+    } catch (err) {
+      throw new Error(`error finding shops ${err}`);
+    }
+  }
 }
