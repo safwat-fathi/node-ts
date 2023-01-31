@@ -1,8 +1,8 @@
-import { Schema } from "mongoose";
-import { Category } from "types/db";
+import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
+import { CategoryDoc } from "types/db";
 import { CategoryModel } from "./categories.model";
 
-export const categorySchema = new Schema<Category>(
+export const categorySchema = new Schema<CategoryDoc>(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
@@ -20,12 +20,16 @@ export const categorySchema = new Schema<Category>(
   { timestamps: true }
 );
 
-categorySchema.pre("save", async function (next) {
-  if (this.parent !== null) {
-    const parentDoc = await CategoryModel.findById(this.parent);
+// update parent sub when sub category created
+categorySchema.pre<CategoryDoc>(
+  "save",
+  async function (next: CallbackWithoutResultAndOptionalError) {
+    if (this.parent !== null) {
+      const parentDoc = await CategoryModel.findById(this.parent);
 
-    await parentDoc?.updateOne({ $push: { sub: this.id } });
+      await parentDoc?.updateOne({ $push: { sub: this.id } });
+    }
+
+    next();
   }
-
-  next();
-});
+);

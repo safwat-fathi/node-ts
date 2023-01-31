@@ -1,5 +1,5 @@
 import { model } from "mongoose";
-import { Category } from "types/db";
+import { CategoryDoc } from "types/db";
 import { categorySchema } from "./categories.schema";
 
-export const CategoryModel = model<Category>("Category", categorySchema);
+export const CategoryModel = model<CategoryDoc>("Category", categorySchema);

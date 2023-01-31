@@ -1,8 +1,8 @@
 import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
-import { Order } from "types/db";
+import { OrderDoc } from "types/db";
 import { geocoder } from "utils/geocoder";
 
-export const OrderSchema = new Schema<Order>({
+export const OrderSchema = new Schema<OrderDoc>({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
@@ -49,7 +49,7 @@ export const OrderSchema = new Schema<Order>({
 });
 
 // geocode & create address field
-// OrderSchema.pre(
+// OrderSchema.pre<OrderDoc>(
 //   "save",
 //   async function (next: CallbackWithoutResultAndOptionalError) {
 //     const loc = await geocoder.geocode(this.address);

@@ -1,8 +1,8 @@
 import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
-import { Product } from "types/db";
+import { ProductDoc } from "types/db";
 import slugify from "slugify";
 
-export const ProductsSchema = new Schema<Product>(
+export const ProductsSchema = new Schema<ProductDoc>(
   {
     name: {
       type: String,
@@ -61,7 +61,8 @@ export const ProductsSchema = new Schema<Product>(
   }
 );
 
-ProductsSchema.pre<Product>(
+// slugify every prod before save
+ProductsSchema.pre<ProductDoc>(
   "save",
   function (next: CallbackWithoutResultAndOptionalError) {
     this.slug = slugify(this.name, { lower: true });

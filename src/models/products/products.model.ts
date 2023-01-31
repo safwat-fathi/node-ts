@@ -5,7 +5,7 @@ import { createHash } from "crypto";
 
 export const ProductsModel = model<Product>("Product", ProductsSchema);
 
-export class ProductsStore implements StoreDB<Product> {
+export class ProductsStore implements Partial<StoreDB<Product>> {
   async index(
     skip: number | null = 0,
     limit: number | null = 10,
@@ -61,12 +61,12 @@ export class ProductsStore implements StoreDB<Product> {
   }
 
   async find(find: {
-    by: string;
+    by: { [key in keyof Product]: string };
     value: any;
   }): Promise<{ data: Product | Product[] } | null> {
     try {
       const product: Product | Product[] = await ProductsModel.find({
-        [find.by]: find.value,
+        [String(find.by)]: find.value,
       });
 
       if (!product) {

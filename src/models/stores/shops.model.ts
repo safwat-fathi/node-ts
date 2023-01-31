@@ -1,11 +1,11 @@
 import { model } from "mongoose";
-import { Shop, StoreDB } from "types/db";
+import { Shop, ShopDoc, StoreDB } from "types/db";
 import { ShopsSchema } from "./shops.schema";
 import { createHash } from "crypto";
 
-export const ShopsModel = model<Shop>("Shop", ShopsSchema);
+export const ShopsModel = model<ShopDoc>("Shop", ShopsSchema);
 
-export class ShopsStore implements StoreDB<Shop> {
+export class ShopsStore implements Partial<StoreDB<Shop>> {
   async index(
     skip: number | null = 0,
     limit: number | null = 10,
@@ -72,12 +72,12 @@ export class ShopsStore implements StoreDB<Shop> {
   }
 
   async find(find: {
-    by: string;
+    by: { [key in keyof Shop]: string };
     value: any;
   }): Promise<{ data: Shop | Shop[] } | null> {
     try {
       const shop: Shop | Shop[] = await ShopsModel.find({
-        [find.by]: find.value,
+        [String(find.by)]: find.value,
       });
 
       if (!shop) {

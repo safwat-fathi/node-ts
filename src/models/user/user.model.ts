@@ -1,9 +1,9 @@
 import { model } from "mongoose";
-import { User } from "types/db";
+import { User, UserDoc } from "types/db";
 import { UserSchema } from "./user.schema";
 import { comparePassword } from "utils/auth";
 
-export const UserModel = model<User>("User", UserSchema);
+export const UserModel = model<UserDoc>("User", UserSchema);
 
 export class UserStore {
   async signup(u: Partial<User>): Promise<User> {

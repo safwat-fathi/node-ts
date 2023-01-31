@@ -1,14 +1,14 @@
 import { model, ObjectId } from "mongoose";
-import { Subscription } from "types/db";
+import { Subscription, SubscriptionDoc } from "types/db";
 import { SubscriptionSchema } from "./subscription.schema";
 import { StoreDB } from "types/db";
 
-export const SubscriptionModel = model<Subscription>(
+export const SubscriptionModel = model<SubscriptionDoc>(
   "Subscription",
   SubscriptionSchema
 );
 
-export class SubscriptionStore implements StoreDB<Subscription> {
+export class SubscriptionStore implements Partial<StoreDB<Subscription>> {
   async index(): Promise<{
     data: Subscription[];
   }> {
@@ -22,13 +22,13 @@ export class SubscriptionStore implements StoreDB<Subscription> {
   }
 
   async find(find: {
-    by: string;
+    by: { [key in keyof Subscription]: string };
     value: any;
   }): Promise<{ data: Subscription | Subscription[] } | null> {
     try {
       const subscription: Subscription | Subscription[] =
         await SubscriptionModel.find({
-          [find.by]: find.value,
+          [String(find.by)]: find.value,
         });
 
       if (!subscription) {
