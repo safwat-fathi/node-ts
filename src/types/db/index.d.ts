@@ -12,10 +12,15 @@ export interface StoreDB<T> {
     meta?: { current_page: number; total_pages: number; hash: string };
   }>;
 
-  find: (find: { by: string; value: any }) => Promise<{ data: T | T[] } | null>;
+  find: (find: {
+    by: { [key in keyof T]: string };
+    value: any;
+  }) => Promise<{ data: T | T[] } | null>;
+
+  delete: () => void;
 }
 
-export interface User extends Document {
+export interface User {
   name: string;
   email: string;
   password: string;
@@ -23,10 +28,12 @@ export interface User extends Document {
   subscription: ObjectId;
   orders: ObjectId[];
 }
+export interface UserDoc extends User, Document {}
 
-export interface Subscription extends Document {
+export interface Subscription {
   name: "basic" | "silver" | "gold";
 }
+export interface SubscriptionDoc extends Subscription, Document {}
 
 export enum OrderStatus {
   active = "active",
@@ -46,7 +53,7 @@ export enum ShopLogo {
   cover = "cover",
 }
 
-export interface Product extends Document {
+export interface Product {
   name: string;
   description: string;
   slug: string;
@@ -57,22 +64,25 @@ export interface Product extends Document {
   size?: string;
   color?: string;
 }
+export interface ProductDoc extends Product, Document {}
 
-export interface Shop extends Document {
+export interface Shop {
   name: string;
   slug: string;
   logo: { type: ShopLogo; url: string }[];
   location: [string, string];
 }
+export interface ShopDoc extends Shop, Document {}
 
-export interface Category extends Document {
+export interface Category {
   name: string;
   description: string;
   sub: ObjectId[] | null;
   parent: ObjectId | null;
 }
+export interface CategoryDoc extends Category, Document {}
 
-export interface Order extends Document {
+export interface Order {
   user: ObjectId;
   products: { product: ObjectId; quantity: number }[];
   address: string;
@@ -80,3 +90,4 @@ export interface Order extends Document {
   delivery: Date;
   total: number;
 }
+export interface OrderDoc extends Document, Order {}
