@@ -23,12 +23,6 @@ export const index = asyncHandler(async (req: Request, res: Response) => {
   // * using page number
   const { data, meta } = await productStore.index(null, null, +page);
 
-  // if (data.products.length === 0) {
-  //   return res
-  //     .status(200)
-  //     .json({ success: true, data: [] });
-  // }
-
   return res.status(200).json({ success: true, data, meta, links: {} });
 });
 

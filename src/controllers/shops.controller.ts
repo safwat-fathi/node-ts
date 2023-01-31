@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { ShopsStore } from "models/stores/shops.model";
-import { HttpError } from "errors/http";
+// import { ShopsStore } from "models/stores/shops.model";
+// import { HttpError } from "errors/http";
 import { asyncHandler } from "middlewares/async.middleware";
 
 // * Index
