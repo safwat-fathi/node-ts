@@ -5,11 +5,16 @@ import {
   index,
 } from "controllers/products.controller";
 import { verifyToken } from "middlewares/auth.middleware";
+import { paginate } from "middlewares/paginate.middleware";
+import { Product } from "types/db";
+import { ProductsStore } from "models/products/products.model";
 
 const products = Router();
 
+const productStore = new ProductsStore();
+
 // * INDEX
-products.get("/", index);
+products.get("/", paginate<Product>(productStore.index), index);
 
 // * SEARCH
 products.get("/:categoryId", findByCategory);

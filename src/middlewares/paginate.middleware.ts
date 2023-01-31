@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { StoreDB } from "types/db";
 import { asyncHandler } from "./async.middleware";
 
-export const paginate = <T>(store: StoreDB<T>) =>
+export const paginate = <T>(index: StoreDB<T>["index"]) =>
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { sortBy, sortType, skip, limit, page } = req.params as {
       skip: string;
@@ -12,7 +12,7 @@ export const paginate = <T>(store: StoreDB<T>) =>
       sortType: "ascend" | "descend";
     };
 
-    const { data, meta } = await store.index(+skip, +limit, +page, {
+    const { data, meta } = await index(+skip, +limit, +page, {
       by: sortBy || "default",
       type: sortType || "descend",
     });

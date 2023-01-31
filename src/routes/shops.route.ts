@@ -10,7 +10,7 @@ const shops = Router();
 const shopsStore = new ShopsStore();
 
 // * INDEX
-shops.get("/", paginate<Shop>(shopsStore), index);
+shops.get("/", paginate<Shop>(shopsStore.index), index);
 
 // * SEARCH
 // shops.get("/:categoryId", findByCategory);
