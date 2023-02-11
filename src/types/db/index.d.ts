@@ -2,20 +2,15 @@ import { ObjectId, Document } from "mongoose";
 
 export interface StoreDB<T> {
   index: (
-    skip: number | null,
-    limit: number | null,
-    page: number,
+    skip: number,
+    pageSize: number,
+    // page: number,
     sort?: { by: string; type: "ascend" | "descend" }
     // ...args: any
-  ) => Promise<{
-    data: T[];
-    meta?: { current_page: number; total_pages: number; hash: string };
-  }>;
+  ) => Promise<[T[], number]>; // return array of T type and count of found data
+  // meta?: { current_page: number; total_pages: number; hash: string };
 
-  find: (find: {
-    by: { [key in keyof T]: string };
-    value: any;
-  }) => Promise<{ data: T | T[] } | null>;
+  find: (find: { by: keyof T; value: any }) => Promise<T | T[] | null>;
 
   delete: () => void;
 }

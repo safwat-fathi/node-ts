@@ -4,28 +4,37 @@ import { hashPassword } from "utils/auth";
 
 export const UserSchema = new Schema<User>(
   {
-    name: { type: String, required: true, match: /^[a-zA-Z ]*$/ },
+    name: {
+      type: String,
+      required: [true, "name required"],
+      match: [/^[a-zA-Z ]*$/, "name is not valid"],
+    },
     email: {
       type: String,
-      required: true,
-      match:
+      required: [true, "email required"],
+      match: [
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        "must use valid email address",
+      ],
     },
     phone: {
       type: String,
-      required: true,
-      match: /\d{3}\s?\d{4}-?\d{4}/gm,
+      required: [true, "phone required"],
+      match: [
+        /\d{3}\s?\d{4}-?\d{4}/gm,
+        "phone must be egyptian valid mobile number",
+      ],
     },
-    password: { type: String, required: true },
-    subscription: {
-      type: Schema.Types.ObjectId,
-      ref: "Subscription",
-      required: true,
-    },
+    password: { type: String, required: [true, "password required"] },
+    // subscription: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "Subscription",
+    //   required: true,
+    // },
     orders: {
       type: [Schema.Types.ObjectId],
       ref: "Order",
-      required: true,
+      default: [],
     },
   },
   {

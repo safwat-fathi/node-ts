@@ -23,7 +23,7 @@ auth.post(
   signup
 );
 // login
-auth.post("/login", validateEmail, validatePassword, login);
+auth.post("/login", login);
 // logout
 auth.get("/logout", logout);
 

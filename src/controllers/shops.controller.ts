@@ -7,13 +7,10 @@ import { asyncHandler } from "middlewares/async.middleware";
 // * ----------
 export const index = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { location, distance } = req.params as {
-      location: unknown;
-      distance: string;
-      // skip: string;
-      // limit: string;
-      // page: string;
-    };
+    // const { location, distance } = req.params as {
+    //   location: unknown;
+    //   distance: string;
+    // };
 
     // check location
     // if (!location || !Array.isArray(location)) {
@@ -23,19 +20,6 @@ export const index = asyncHandler(
     // if (!location || !Array.isArray(location)) {
     //   return next(new HttpError(400, `must use location`));
     // }
-
-    // const shopStore = new ShopsStore();
-
-    // * using skip & limit
-    // const products = await shopStore.index(parseInt(skip), parseInt(limit));
-    // * using page number
-    // const { data, meta } = await shopStore.index(
-    //   null,
-    //   null,
-    //   // +page,
-    //   // location as [string, string],
-    //   // +distance
-    // );
 
     return res.status(200).json({
       success: true,

@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { SubscriptionStore } from "models/subscription/subscription.model";
 import { generateAccessToken } from "utils/auth";
 import { UserStore } from "models/user/user.model";
 import { validationResult } from "express-validator";
@@ -8,8 +7,8 @@ import { asyncHandler } from "middlewares/async.middleware";
 
 export const signup = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
+    const { name, email, phone, password, subscription } = req.body;
     const userStore = new UserStore();
-    const subscriptionStore = new SubscriptionStore();
 
     const errors = validationResult(req);
 
@@ -21,18 +20,16 @@ export const signup = asyncHandler(
       return next(new HttpError(400, "Signup failed", errorsMapped));
     }
 
-    const subscription = await subscriptionStore.show(req.body.subscription);
-
     if (!subscription) {
       return next(new HttpError(422, "subscription is not valid"));
     }
 
     const user = await userStore.signup({
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      password: req.body.password,
-      subscription: subscription.id,
+      name,
+      email,
+      phone,
+      password,
+      subscription,
       orders: [],
     });
 
@@ -43,6 +40,8 @@ export const signup = asyncHandler(
 export const login = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
+    console.log("req.session", req.session);
+    console.log("req.sessionID", req.sessionID);
 
     if (req.session.loggedIn) {
       return next(
