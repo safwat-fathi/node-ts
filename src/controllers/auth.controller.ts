@@ -7,7 +7,7 @@ import { asyncHandler } from "middlewares/async.middleware";
 
 export const signup = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { name, email, phone, password, subscription } = req.body;
+    const { name, email, phone, password } = req.body;
     const userStore = new UserStore();
 
     const errors = validationResult(req);
@@ -20,16 +20,11 @@ export const signup = asyncHandler(
       return next(new HttpError(400, "Signup failed", errorsMapped));
     }
 
-    if (!subscription) {
-      return next(new HttpError(422, "subscription is not valid"));
-    }
-
     const user = await userStore.signup({
       name,
       email,
       phone,
       password,
-      subscription,
       orders: [],
     });
 
@@ -42,8 +37,9 @@ export const login = asyncHandler(
     const { email, password } = req.body;
     console.log("req.session", req.session);
     console.log("req.sessionID", req.sessionID);
+    console.log("req.session.userId", req.session.userId);
 
-    if (req.session.loggedIn) {
+    if (req.session.userId) {
       return next(
         new HttpError(
           401,
@@ -62,7 +58,7 @@ export const login = asyncHandler(
 
     const token = generateAccessToken(user.id, user.name);
 
-    req.session.loggedIn = true;
+    req.session.userId = user.id;
 
     res.status(200).json({
       success: true,
@@ -76,8 +72,12 @@ export const login = asyncHandler(
 
 export const logout = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    if (req.session.loggedIn) {
-      req.session.loggedIn = false;
+    if (req.session.userId) {
+      req.session.userId = null;
+
+      req.session.destroy(err => {
+        next(new HttpError(404, err));
+      });
 
       res.status(200).json({ success: true });
     } else {

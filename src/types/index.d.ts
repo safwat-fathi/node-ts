@@ -1,7 +1,7 @@
-declare namespace Express {
-  export interface Request {
-    session: {
-      loggedIn: boolean;
-    };
+import "express-session"; // don't forget to import the original module
+
+declare module "express-session" {
+  interface SessionData {
+    userId: string | null;
   }
 }
