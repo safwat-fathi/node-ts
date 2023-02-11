@@ -20,7 +20,7 @@ export interface User {
   email: string;
   password: string;
   phone: string;
-  subscription: ObjectId;
+  address: string[];
   orders: ObjectId[];
 }
 export interface UserDoc extends User, Document {}

@@ -26,11 +26,10 @@ export const UserSchema = new Schema<User>(
       ],
     },
     password: { type: String, required: [true, "password required"] },
-    // subscription: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "Subscription",
-    //   required: true,
-    // },
+    address: {
+      type: [String],
+      default: [],
+    },
     orders: {
       type: [Schema.Types.ObjectId],
       ref: "Order",

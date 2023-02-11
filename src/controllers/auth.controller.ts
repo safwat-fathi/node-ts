@@ -35,11 +35,8 @@ export const signup = asyncHandler(
 export const login = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
-    console.log("req.session", req.session);
-    console.log("req.sessionID", req.sessionID);
-    console.log("req.session.userId", req.session.userId);
 
-    if (req.session.userId) {
+    if (req.session.userToken) {
       return next(
         new HttpError(
           401,
@@ -56,9 +53,9 @@ export const login = asyncHandler(
       return next(new HttpError(422, "Please enter valid email or password"));
     }
 
-    const token = generateAccessToken(user.id, user.name);
+    const token = await generateAccessToken(user.id, user.name);
 
-    req.session.userId = user.id;
+    req.session.userToken = token;
 
     res.status(200).json({
       success: true,
@@ -72,11 +69,11 @@ export const login = asyncHandler(
 
 export const logout = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    if (req.session.userId) {
-      req.session.userId = null;
+    if (req.session.userToken) {
+      req.session.userToken = "";
 
       req.session.destroy(err => {
-        next(new HttpError(404, err));
+        if (err) next(new HttpError(404, err));
       });
 
       res.status(200).json({ success: true });

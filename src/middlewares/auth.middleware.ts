@@ -23,6 +23,7 @@ export const checkDuplicate = asyncHandler(
       { by: "email", value: email },
       { by: "phone", value: phone },
     ]);
+    console.log("🚀 ~ user", user);
 
     if (user) {
       return next(

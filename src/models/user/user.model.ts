@@ -13,7 +13,6 @@ export class UserStore implements Partial<StoreDB<User>> {
         email: u.email,
         phone: u.phone,
         password: u.password,
-        subscription: u.subscription,
         orders: [],
       });
 
@@ -60,27 +59,27 @@ export class UserStore implements Partial<StoreDB<User>> {
         }[]
   ): Promise<UserDoc | UserDoc[] | null> {
     try {
-      let user = null;
+      let users: any = [];
 
       if (Array.isArray(find)) {
-        let query = [];
+        let query: any = [];
 
         for (let i in find) {
-          query.push({ [String(find[i].by)]: find[i].value });
+          query = [...query, { [String(find[i].by)]: find[i].value }];
         }
 
-        user = await UserModel.find({
-          $or: [query],
+        users = await UserModel.find({
+          $or: query,
         });
       } else {
-        user = await UserModel.find({ [String(find.by)]: find.value });
+        users = await UserModel.findOne({ [String(find.by)]: find.value });
       }
 
-      if (!user) {
+      if (!users || users.length === 0) {
         return null;
       }
 
-      return user;
+      return users;
     } catch (err) {
       throw new Error(`error finding users ${err}`);
     }

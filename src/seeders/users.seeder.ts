@@ -7,7 +7,7 @@ dotenv.config();
 export const seedUsers = async () => {
   UserModel.estimatedDocumentCount({}, async (err, count) => {
     // drop all stored docs
-    UserModel.collection.drop();
+    // UserModel.collection.drop();
 
     if (err) throw new Error(`${err}`);
 
@@ -15,21 +15,24 @@ export const seedUsers = async () => {
       await UserModel.insertMany([
         {
           name: "Safwat",
-          email: "test@example.com",
-          phone: "01100000000",
+          email: "test1@example.com",
+          phone: "01100000001",
           password: await hashPassword("123456789"),
+          address: "cairo - el nozha",
         },
         {
           name: "Hamza",
-          email: "test@example.com",
-          phone: "01100000000",
+          email: "test2@example.com",
+          phone: "01100000002",
           password: await hashPassword("123456789"),
+          address: "giza - zayed",
         },
         {
           name: "Ali",
-          email: "test@example.com",
-          phone: "01100000000",
+          email: "test3@example.com",
+          phone: "01100000003",
           password: await hashPassword("123456789"),
+          address: "alexandria - Kafr abdo",
         },
       ]);
     }
