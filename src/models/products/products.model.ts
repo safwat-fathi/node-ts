@@ -7,22 +7,15 @@ export const ProductsModel = model<Product>("Product", ProductsSchema);
 
 export class ProductsStore implements Partial<StoreDB<Product>> {
   async index(
-    skip: number | null = 0,
-    limit: number | null = 10,
-    page: number = 1,
+    // skip: number | null = 0,
+    // limit: number | null = 10,
+    skip: number = 0,
+    pageSize: number,
+    // page: number = 1,
     sort?: { by: string; type: "ascend" | "descend" }
     // filter: "price" | "review" | null = null
-  ): Promise<{
-    data: Product[];
-    meta: { current_page: number; total_pages: number; hash: string };
-  }> {
+  ): Promise<[Product[], number]> {
     try {
-      // * dynamic page size
-      // const products = ProductsModel.find({}).skip(skip).limit(limit);
-      // * fixed page size
-      const PAGE_SIZE = limit || 10;
-      const SKIP = skip || ((page as number) - 1) * PAGE_SIZE;
-
       const [products, count] = await Promise.all([
         ProductsModel.find(
           // filters by model props (name, price, etc...)
@@ -35,37 +28,23 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
             }),
           }
         )
-          .skip(SKIP)
-          .limit(PAGE_SIZE),
+          .skip(skip)
+          .limit(pageSize),
         ProductsModel.estimatedDocumentCount(),
       ]);
 
-      // hashing data to help client identify data has changed
-      const data_stringified = JSON.stringify(products);
-      const data_hash = createHash("md5")
-        .update(data_stringified)
-        .copy()
-        .digest("hex");
-
-      return {
-        data: products,
-        meta: {
-          current_page: page,
-          total_pages: Math.ceil(count / PAGE_SIZE),
-          hash: data_hash,
-        },
-      };
+      return [products, count];
     } catch (err) {
       throw new Error(`error indexing products: ${err}`);
     }
   }
 
   async find(find: {
-    by: { [key in keyof Product]: string };
+    by: keyof Product;
     value: any;
-  }): Promise<{ data: Product | Product[] } | null> {
+  }): Promise<Product | Product[] | null> {
     try {
-      const product: Product | Product[] = await ProductsModel.find({
+      const product = await ProductsModel.find({
         [String(find.by)]: find.value,
       });
 
@@ -73,7 +52,7 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
         return null;
       }
 
-      return { data: product };
+      return product;
     } catch (err) {
       throw new Error(`error finding products ${err}`);
     }
