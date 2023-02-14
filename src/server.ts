@@ -31,7 +31,7 @@ seedUsers();
 app.use(compression());
 app.use(cors());
 app.use(express.json());
-app.use(session({ secret: SECRET }));
+app.use(session({ secret: SECRET, resave: true, saveUninitialized: true }));
 // routes
 app.use("/api", routes);
 //ErrorHandler (Should be last piece of middleware)
@@ -47,9 +47,9 @@ wss.attachEventListeners();
 export const Notification = new EventEmitter();
 
 // cb function accepts two params error and promise
-process.on("unhandledRejection", error => {
-  console.log(`Logged Error: ${error}`);
-  server.close(() => process.exit(1));
-});
+// process.on("unhandledRejection", error => {
+//   console.log(`Logged Error: ${error}`);
+//   server.close(() => process.exit(1));
+// });
 
 export default app;
