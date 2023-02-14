@@ -8,6 +8,7 @@
 - test pre save hooks (products, users)
 - add geocode address on order model
 - add role auth middleware
+- add winston as logger
 
 ## Readme
 
