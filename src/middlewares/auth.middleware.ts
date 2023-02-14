@@ -23,7 +23,6 @@ export const checkDuplicate = asyncHandler(
       { by: "email", value: email },
       { by: "phone", value: phone },
     ]);
-    console.log("🚀 ~ user", user);
 
     if (user) {
       return next(
@@ -112,26 +111,24 @@ export const validatePhone = body("phone")
   .trim()
   .escape();
 
-export const checkRolesExisted = async (
-  req: Request,
-  _: Response,
-  next: NextFunction
-) => {
-  if (req.body.roles) {
-    for (let i = 0; i < req.body.roles.length; i++) {
-      if (!["user", "admin", "moderator"].includes(req.body.roles[i])) {
-        return next(
-          new HttpError(
-            400,
-            `Failed! Role ${req.body.roles[i]} does not exist!`
-          )
-        );
+export const checkRolesExisted = asyncHandler(
+  async (req: Request, _: Response, next: NextFunction) => {
+    if (req.body.roles) {
+      for (let i = 0; i < req.body.roles.length; i++) {
+        if (!["user", "admin", "moderator"].includes(req.body.roles[i])) {
+          return next(
+            new HttpError(
+              400,
+              `Failed! Role ${req.body.roles[i]} does not exist!`
+            )
+          );
+        }
       }
     }
-  }
 
-  next();
-};
+    next();
+  }
+);
 
 export const verifyToken = asyncHandler(
   async (req: Request, _, next: NextFunction) => {
