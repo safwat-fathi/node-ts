@@ -5,20 +5,18 @@ dotenv.config();
 
 export const seedCategories = () => {
   CategoryModel.estimatedDocumentCount({}, async (err, count) => {
-    if (!err && count === 0) {
-      const foodParent = await CategoryModel.create({
-        name: "Foods",
-        description: "All food",
-        parent: null,
-      });
+    // drop all stored docs
+    // CategoryModel.collection.drop();
 
-      await CategoryModel.create({
-        name: "Cereal, dry Instant",
-        description:
-          "All dry Instant cereal, regular and high protein, with or without fruit. which have been specially formulated or processed for use by infants up to 12 months of age",
-        parent: foodParent.id,
-        sub: null,
-      });
+    if (err) throw new Error(`${err}`);
+
+    if (count === 0) {
+      CategoryModel.insertMany([
+        { name: "Shirts", description: "All Shirts", parent: null },
+        { name: "Foods", description: "All food", parent: null },
+      ])
+        .then(users => console.log(`${users.length} users created`))
+        .catch(err => new Error(`Categories::seeder::${err}`));
     }
   });
 };

@@ -3,30 +3,40 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const seedProducts = () => {
+export const seedProducts = async () => {
   ProductsModel.estimatedDocumentCount({}, (err, count) => {
+    // drop all stored docs
     // ProductModel.collection.drop();
-    if (!err && count === 0) {
-      // ProductModel.insertMany([
-      //   {
-      //     name: "Corn Flakes",
-      //     description: "For breakfast",
-      //     images: [{ url: "http://test.images.cornFlakes" }],
-      //     price: 24,
-      //     stock: 120,
-      //     categories: ["632ef4de7683d5e43f3360b1", "632ef18512f70440d2b9e68c"],
-      //   },
-      //   {
-      //     name: "Oats",
-      //     description: "For any time at day meal",
-      //     images: [{ url: "http://test.images.oats" }],
-      //     price: 29,
-      //     stock: 20,
-      //     categories: ["632ef4de7683d5e43f3360b1", "632ef18512f70440d2b9e68d"],
-      //   },
-      // ])
-      //   .then((products) => console.log(`${products.length} products created`))
-      //   .catch((err) => console.log("Products seeder error:", err));
+
+    if (err) throw new Error(`${err}`);
+
+    if (count === 0) {
+      ProductsModel.insertMany([
+        {
+          name: "Long Sleeve White Shirt",
+          description: "Long sleeve white shirt - spring collection",
+          images: [{ url: "http://test.images.white-shirt" }],
+          price: {
+            egp: 240,
+            usd: 9,
+          },
+          stock: 120,
+          categories: [],
+        },
+        {
+          name: "Grey Sweatshirt",
+          description: "Grey sweatshirt with hoodie - winter collection",
+          images: [{ url: "http://test.images.grey-sweatshirt" }],
+          price: {
+            egp: 600,
+            usd: 20,
+          },
+          stock: 90,
+          categories: [],
+        },
+      ])
+        .then(products => console.log(`${products.length} products created`))
+        .catch(err => new Error(`Products::seeder::${err}`));
     }
   });
 };

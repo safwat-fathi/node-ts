@@ -12,7 +12,7 @@ export const seedUsers = async () => {
     if (err) throw new Error(`${err}`);
 
     if (count === 0) {
-      await UserModel.insertMany([
+      UserModel.insertMany([
         {
           name: "Safwat",
           email: "test1@example.com",
@@ -34,7 +34,9 @@ export const seedUsers = async () => {
           password: await hashPassword("123456789"),
           address: "alexandria - Kafr abdo",
         },
-      ]);
+      ])
+        .then(users => console.log(`${users.length} users created`))
+        .catch(err => new Error(`Users::seeder::${err}`));
     }
   });
 };
