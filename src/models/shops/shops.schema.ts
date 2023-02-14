@@ -1,6 +1,6 @@
 import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
 import { Shop } from "types/db";
-import slugify from "slugify";
+import { slugify } from "utils/string";
 
 export const ShopsSchema = new Schema<Shop>(
   {
@@ -49,7 +49,7 @@ export const ShopsSchema = new Schema<Shop>(
 ShopsSchema.pre<Shop>(
   "save",
   function (next: CallbackWithoutResultAndOptionalError) {
-    this.slug = slugify(this.name, { lower: true });
+    this.slug = slugify(this.name);
 
     next();
   }
