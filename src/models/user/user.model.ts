@@ -1,5 +1,5 @@
 import { model } from "mongoose";
-import { StoreDB, User, UserDoc } from "types/db";
+import { StoreDB, TFindBy, User, UserDoc } from "types/db";
 import { UserSchema } from "./user.schema";
 import { comparePassword } from "utils/auth";
 
@@ -20,7 +20,7 @@ export class UserStore implements Partial<StoreDB<User>> {
 
       return user;
     } catch (err) {
-      throw new Error(`error user signup ${err}`);
+      throw new Error(`UserStore::signup::${err}`);
     }
   }
 
@@ -43,20 +43,12 @@ export class UserStore implements Partial<StoreDB<User>> {
 
       return user;
     } catch (err) {
-      throw new Error(`error user login. Error: ${err}`);
+      throw new Error(`UserStore::login::${err}`);
     }
   }
 
   async find(
-    find:
-      | {
-          by: keyof User;
-          value: any;
-        }
-      | {
-          by: keyof User;
-          value: any;
-        }[]
+    find: TFindBy<User> | TFindBy<User>[]
   ): Promise<UserDoc | UserDoc[] | null> {
     try {
       let users: any = [];
@@ -81,7 +73,7 @@ export class UserStore implements Partial<StoreDB<User>> {
 
       return users;
     } catch (err) {
-      throw new Error(`error finding users ${err}`);
+      throw new Error(`UserStore::find::${err}`);
     }
   }
 }
