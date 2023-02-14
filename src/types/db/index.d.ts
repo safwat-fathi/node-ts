@@ -1,16 +1,27 @@
 import { ObjectId, Document } from "mongoose";
 
+enum SortOrder {
+  Ascend = "ascend",
+  Descend = "descend",
+}
+
+type TFindBy<T> = {
+  by: keyof T;
+  value: string | number;
+};
+
+type TSortBy = { by: string; type: keyof typeof SortOrder };
+
 export interface StoreDB<T> {
   index: (
     skip: number,
     pageSize: number,
     // page: number,
-    sort?: { by: string; type: "ascend" | "descend" }
+    sort?: TSortBy
     // ...args: any
   ) => Promise<[T[], number]>; // return array of T type and count of found data
-  // meta?: { current_page: number; total_pages: number; hash: string };
 
-  find: (find: { by: keyof T; value: any }) => Promise<T | T[] | null>;
+  find: (find: TFindArg<T> | TFindArg<T>[]) => Promise<T | T[] | null>;
 
   delete: () => void;
 }
