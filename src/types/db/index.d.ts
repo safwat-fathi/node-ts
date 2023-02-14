@@ -1,6 +1,6 @@
 import { ObjectId, Document } from "mongoose";
 
-enum SortOrder {
+export enum SortOrder {
   Ascend = "ascend",
   Descend = "descend",
 }
@@ -36,8 +36,14 @@ export interface User {
 }
 export interface UserDoc extends User, Document {}
 
+export enum SubscriptionType {
+  Basic = "basic",
+  Silver = "silver",
+  Gold = "gold",
+}
+
 export interface Subscription {
-  name: "basic" | "silver" | "gold";
+  type: keyof typeof SubscriptionType;
 }
 export interface SubscriptionDoc extends Subscription, Document {}
 
