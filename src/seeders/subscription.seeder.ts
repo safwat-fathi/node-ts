@@ -7,7 +7,7 @@
 //   SubscriptionModel.estimatedDocumentCount({}, (err, count) => {
 //     // RoleModel.collection.drop();
 //     if (!err && count === 0) {
-//       SubscriptionModel.insertMany([
+//       SubscriptionModel.collection.insertMany([
 //         {
 //           name: "basic",
 //         },
@@ -19,7 +19,7 @@
 //         },
 //       ])
 //         .then((subscriptions) =>
-//           console.log(`${subscriptions.length} subscriptions created`)
+//           console.log(`${subscriptions.insertedCount} subscriptions created`)
 //         )
 //         .catch((err) => console.log("Subscriptions seeder error:", err));
 //     }

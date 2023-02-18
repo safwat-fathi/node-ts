@@ -51,7 +51,7 @@ export class UserStore implements Partial<StoreDB<User>> {
     find: TFindBy<User> | TFindBy<User>[]
   ): Promise<UserDoc | UserDoc[] | null> {
     try {
-      let users: any = [];
+      let users: UserDoc | UserDoc[] | null = [];
 
       if (Array.isArray(find)) {
         let query: any = [];
@@ -67,7 +67,7 @@ export class UserStore implements Partial<StoreDB<User>> {
         users = await UserModel.findOne({ [String(find.by)]: find.value });
       }
 
-      if (!users || users.length === 0) {
+      if (!users) {
         return null;
       }
 

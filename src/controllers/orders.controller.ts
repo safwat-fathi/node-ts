@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { UserModel } from "models/user/user.model";
 import { OrderModel } from "models/orders/orders.model";
 import { ProductsModel } from "models/products/products.model";
-import { Product, Order } from "types/db";
+import { Order, ProductDoc } from "types/db";
 import { HttpError } from "errors/http";
 import { asyncHandler } from "middlewares/async.middleware";
 // import { ObjectId } from "mongoose";
@@ -22,7 +22,7 @@ export const addOrder = asyncHandler(
     for (const i in products) {
       const productId = products[i].product;
       const qty = products[i].quantity;
-      const product: Product | null = await ProductsModel.findOne({
+      const product: ProductDoc | null = await ProductsModel.findOne({
         _id: productId,
       });
 

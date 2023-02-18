@@ -1,20 +1,35 @@
-import { model } from "mongoose";
-import { Product, StoreDB } from "types/db";
+import { CategoryStore } from "models/categories/categories.model";
+import { Document, HydratedDocument, model } from "mongoose";
+import {
+  Product,
+  ProductDoc,
+  StoreDB,
+  TFindBy,
+  TQuery,
+  TSortBy,
+} from "types/db";
 import { ProductsSchema } from "./products.schema";
-import { createHash } from "crypto";
 
 export const ProductsModel = model<Product>("Product", ProductsSchema);
 
+export const withFilters = async (filters?: TFindBy<Product>) => {
+  const query = ProductsModel.find({
+    name: ["Long Sleeve White Shirt", "Grey Sweatshirt"],
+  });
+
+  query.getFilter();
+
+  const res = await query.exec();
+  console.log("🚀 ~ withFilters ~ res", res);
+};
+
 export class ProductsStore implements Partial<StoreDB<Product>> {
   async index(
-    // skip: number | null = 0,
-    // limit: number | null = 10,
     skip: number = 0,
     pageSize: number,
-    // page: number = 1,
-    sort?: { by: string; type: "ascend" | "descend" }
-    // filter: "price" | "review" | null = null
-  ): Promise<[Product[], number]> {
+    sort?: TSortBy | null,
+    filters?: TQuery<Product>
+  ): Promise<[ProductDoc[], number]> {
     try {
       const [products, count] = await Promise.all([
         ProductsModel.find(
@@ -24,7 +39,7 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
           // options (sort, pagination, etc...)
           {
             ...(sort && {
-              sort: { [sort.by]: sort.type === "ascend" ? 1 : -1 },
+              sort: { [sort.by]: sort.type },
             }),
           }
         )
@@ -35,26 +50,51 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
 
       return [products, count];
     } catch (err) {
-      throw new Error(`error indexing products: ${err}`);
+      throw new Error(`ProductStore::index::${err}`);
     }
   }
 
-  async find(find: {
-    by: keyof Product;
-    value: any;
-  }): Promise<Product | Product[] | null> {
+  async find(
+    find: TFindBy<Product> | TFindBy<Product>[]
+  ): Promise<ProductDoc | ProductDoc[] | null> {
     try {
-      const product = await ProductsModel.find({
-        [String(find.by)]: find.value,
-      });
+      let products: ProductDoc | ProductDoc[] | null = [];
 
-      if (!product) {
+      if (Array.isArray(find)) {
+        let query: any = [];
+
+        for (let i in find) {
+          query = [...query, { [String(find[i].by)]: find[i].value }];
+        }
+
+        products = await ProductsModel.find({
+          $or: query,
+        });
+      } else {
+        products = await ProductsModel.findOne({
+          [String(find.by)]: find.value,
+        });
+      }
+
+      if (!products) {
         return null;
       }
 
+      return products;
+    } catch (err) {
+      throw new Error(`ProductStore::find::${err}`);
+    }
+  }
+
+  async create(newProduct: Product): Promise<ProductDoc> {
+    try {
+      const product = await ProductsModel.create(newProduct);
+
+      await product.save();
+
       return product;
     } catch (err) {
-      throw new Error(`error finding products ${err}`);
+      throw new Error(`ProductStore::find::${err}`);
     }
   }
 }

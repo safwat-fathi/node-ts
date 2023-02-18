@@ -34,7 +34,6 @@ app.use(express.json());
 app.use(session({ secret: SECRET, resave: true, saveUninitialized: true }));
 // routes
 app.use("/api", routes);
-//ErrorHandler (Should be last piece of middleware)
 app.use(errorHandler);
 
 const server = app.listen(PORT, () => {
@@ -45,11 +44,5 @@ const wss = new WebSocketServer(server);
 wss.attachEventListeners();
 
 export const Notification = new EventEmitter();
-
-// cb function accepts two params error and promise
-// process.on("unhandledRejection", error => {
-//   console.log(`Logged Error: ${error}`);
-//   server.close(() => process.exit(1));
-// });
 
 export default app;

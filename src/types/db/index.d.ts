@@ -1,27 +1,37 @@
-import { ObjectId, Document } from "mongoose";
+import {
+  ObjectId,
+  QuerySelector,
+  HydratedDocument,
+  FilterQuery,
+  SortOrder,
+} from "mongoose";
 
-export enum SortOrder {
-  Ascend = "ascend",
-  Descend = "descend",
-}
+type TDoc<T> = HydratedDocument<T>;
 
 type TFindBy<T> = {
   by: keyof T;
-  value: string | number;
+  value: any;
 };
 
-type TSortBy = { by: string; type: keyof typeof SortOrder };
+type TQuery<T> = FilterQuery<T> & QuerySelector<T>;
+
+const TT: TQuery<Product> = { $gt: 4 };
+type TSortBy = { by: string; type: SortOrder };
 
 export interface StoreDB<T> {
   index: (
     skip: number,
     pageSize: number,
     // page: number,
-    sort?: TSortBy
+    sort?: TSortBy | null
     // ...args: any
-  ) => Promise<[T[], number]>; // return array of T type and count of found data
+  ) => Promise<[HydratedDocument<T>[], number]>; // return array of T type and count of found data
 
-  find: (find: TFindArg<T> | TFindArg<T>[]) => Promise<T | T[] | null>;
+  find: (
+    find: TFindBy<T> | TFindBy<T>[]
+  ) => Promise<TDoc<T> | TDoc<T>[] | null>;
+
+  create: (newValue: T) => Promise<TDoc<T>>;
 
   delete: () => void;
 }
@@ -34,7 +44,7 @@ export interface User {
   address: string[];
   orders: ObjectId[];
 }
-export interface UserDoc extends User, Document {}
+export type UserDoc = TDoc<User>;
 
 export enum SubscriptionType {
   Basic = "basic",
@@ -45,7 +55,7 @@ export enum SubscriptionType {
 export interface Subscription {
   type: keyof typeof SubscriptionType;
 }
-export interface SubscriptionDoc extends Subscription, Document {}
+export type SubscriptionDoc = TDoc<Subscription>;
 
 export enum OrderStatus {
   active = "active",
@@ -73,10 +83,8 @@ export interface Product {
   stock: number;
   images: { type: ProductImage; url: string }[];
   categories: ObjectId[];
-  size?: string;
-  color?: string;
 }
-export interface ProductDoc extends Product, Document {}
+export type ProductDoc = TDoc<Product>;
 
 export interface Shop {
   name: string;
@@ -84,7 +92,7 @@ export interface Shop {
   logo: { type: ShopLogo; url: string }[];
   location: [string, string];
 }
-export interface ShopDoc extends Shop, Document {}
+export type ShopDoc = TDoc<Shop>;
 
 export interface Category {
   name: string;
@@ -92,7 +100,7 @@ export interface Category {
   sub: ObjectId[] | null;
   parent: ObjectId | null;
 }
-export interface CategoryDoc extends Category, Document {}
+export type CategoryDoc = TDoc<Category>;
 
 export interface Order {
   user: ObjectId;
@@ -102,4 +110,4 @@ export interface Order {
   delivery: Date;
   total: number;
 }
-export interface OrderDoc extends Document, Order {}
+export type OrderDoc = HydratedDocument<Order>;

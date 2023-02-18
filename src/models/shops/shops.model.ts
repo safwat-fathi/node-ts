@@ -1,5 +1,5 @@
 import { model } from "mongoose";
-import { Shop, ShopDoc, StoreDB } from "types/db";
+import { Shop, ShopDoc, TSortBy, StoreDB } from "types/db";
 import { ShopsSchema } from "./shops.schema";
 
 export const ShopsModel = model<ShopDoc>("Shop", ShopsSchema);
@@ -10,7 +10,7 @@ export class ShopsStore implements Partial<StoreDB<Shop>> {
     pageSize: number,
     // geolocation?: [string, string],
     // distance?: number
-    sort?: { by: string; type: "ascend" | "descend" }
+    sort?: TSortBy | null
   ): Promise<[Shop[], number]> {
     try {
       // const lng = geolocation[0];
@@ -21,7 +21,7 @@ export class ShopsStore implements Partial<StoreDB<Shop>> {
       const [shops, count] = await Promise.all([
         ShopsModel.find({}, null, {
           ...(sort && {
-            sort: { [sort.by]: sort.type === "ascend" ? 1 : -1 },
+            sort: { [sort.by]: sort.type },
           }),
         })
           .skip(skip)
@@ -31,7 +31,7 @@ export class ShopsStore implements Partial<StoreDB<Shop>> {
 
       return [shops, count];
     } catch (err) {
-      throw new Error(`error indexing shops: ${err}`);
+      throw new Error(`ShopsStore::index::${err}`);
     }
   }
 
@@ -50,7 +50,7 @@ export class ShopsStore implements Partial<StoreDB<Shop>> {
 
       return shop;
     } catch (err) {
-      throw new Error(`error finding shops ${err}`);
+      throw new Error(`ShopsStore::find::${err}`);
     }
   }
 }

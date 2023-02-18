@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  findByName,
   findByCategory,
   addProduct,
   index,
@@ -16,10 +17,7 @@ const productStore = new ProductsStore();
 // * INDEX
 products.get("/", paginate<Product>(productStore.index), index);
 
-// * SEARCH
-products.get("/:categoryId", findByCategory);
-
 // * CREATE
-products.post("/add", verifyToken, addProduct);
+products.post("/add", addProduct);
 
 export default products;

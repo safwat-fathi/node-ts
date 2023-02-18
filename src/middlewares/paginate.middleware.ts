@@ -2,24 +2,27 @@ import { NextFunction, Request, Response } from "express";
 import { StoreDB } from "types/db";
 import { asyncHandler } from "./async.middleware";
 import { createHash } from "crypto";
+import { SortOrder } from "mongoose";
 
 export const paginate = <T>(index: StoreDB<T>["index"]) =>
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    const { sortBy, sortType, skip, limit, page } = req.params as {
+    const { sortBy, sortType, skip, limit, page } = req.query as {
       skip: string;
       limit: string;
       page: string;
       sortBy: string;
-      sortType: "ascend" | "descend";
+      sortType: SortOrder;
     };
-
     const PAGE_SIZE = +limit || 10;
-    const SKIP = skip || (+page - 1) * PAGE_SIZE;
+    const SKIP = +skip || (+page - 1) * PAGE_SIZE;
+    const sort = sortBy
+      ? {
+          by: sortBy,
+          type: sortType || "descend",
+        }
+      : null;
 
-    const [data, count] = await index(+SKIP, PAGE_SIZE, {
-      by: sortBy || "default",
-      type: sortType || "descend",
-    });
+    const [data, count] = await index(SKIP, PAGE_SIZE, sort);
 
     // hashing data to help client identify data has changed
     const data_stringified = JSON.stringify(data);

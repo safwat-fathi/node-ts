@@ -11,11 +11,12 @@ export const seedCategories = () => {
     if (err) throw new Error(`${err}`);
 
     if (count === 0) {
-      CategoryModel.insertMany([
-        { name: "Shirts", description: "All Shirts", parent: null },
-        { name: "Foods", description: "All food", parent: null },
-      ])
-        .then(users => console.log(`${users.length} users created`))
+      CategoryModel.collection
+        .insertMany([
+          { name: "Shirts", description: "All Shirts", parent: null },
+          { name: "Foods", description: "All food", parent: null },
+        ])
+        .then(users => console.log(`${users.insertedCount} users created`))
         .catch(err => new Error(`Categories::seeder::${err}`));
     }
   });

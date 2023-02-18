@@ -12,30 +12,31 @@ export const seedUsers = async () => {
     if (err) throw new Error(`${err}`);
 
     if (count === 0) {
-      UserModel.insertMany([
-        {
-          name: "Safwat",
-          email: "test1@example.com",
-          phone: "01100000001",
-          password: await hashPassword("123456789"),
-          address: "cairo - el nozha",
-        },
-        {
-          name: "Hamza",
-          email: "test2@example.com",
-          phone: "01100000002",
-          password: await hashPassword("123456789"),
-          address: "giza - zayed",
-        },
-        {
-          name: "Ali",
-          email: "test3@example.com",
-          phone: "01100000003",
-          password: await hashPassword("123456789"),
-          address: "alexandria - Kafr abdo",
-        },
-      ])
-        .then(users => console.log(`${users.length} users created`))
+      UserModel.collection
+        .insertMany([
+          {
+            name: "Safwat",
+            email: "test1@example.com",
+            phone: "01100000001",
+            password: await hashPassword("123456789"),
+            address: "cairo - el nozha",
+          },
+          {
+            name: "Hamza",
+            email: "test2@example.com",
+            phone: "01100000002",
+            password: await hashPassword("123456789"),
+            address: "giza - zayed",
+          },
+          {
+            name: "Ali",
+            email: "test3@example.com",
+            phone: "01100000003",
+            password: await hashPassword("123456789"),
+            address: "alexandria - Kafr abdo",
+          },
+        ])
+        .then(users => console.log(`${users.insertedCount} users created`))
         .catch(err => new Error(`Users::seeder::${err}`));
     }
   });

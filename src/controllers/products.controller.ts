@@ -1,29 +1,19 @@
 import { NextFunction, Request, Response } from "express";
 import { CategoryModel } from "models/categories/categories.model";
 import { ProductsStore, ProductsModel } from "models/products/products.model";
-import { Category } from "types/db";
+import { CategoryDoc, Product } from "types/db";
 import { HttpError } from "errors/http";
 import { asyncHandler } from "middlewares/async.middleware";
 
 // * Index
 // * ----------
 export const index = asyncHandler(async (req: Request, res: Response) => {
-  const { sort, filter, skip, limit, page } = req.params as {
-    sort: "asc" | "desc";
-    filter: "price" | "review";
-    skip: string;
-    limit: string;
-    page: string;
-  };
-
-  const productStore = new ProductsStore();
-
-  // * using skip & limit
-  // const products = await productStore.index(parseInt(skip), parseInt(limit));
-  // * using page number
-  const { data, meta } = await productStore.index(null, null, +page);
-
-  return res.status(200).json({ success: true, data, meta, links: {} });
+  return res.status(200).json({
+    success: true,
+    data: res.locals.dataPaginated.data,
+    meta: res.locals.dataPaginated.meta,
+    links: res.locals.dataPaginated.links,
+  });
 });
 
 // * SEARCH
@@ -68,10 +58,12 @@ export const findByName = asyncHandler(
 // * ----------
 export const addProduct = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { categories } = req.body;
+    const { categories } = req.body as Product;
+
+    const productsStore = new ProductsStore();
 
     // check if there is a category match the passed one
-    const categoriesFound: Category[] = await CategoryModel.find({
+    const categoriesFound: CategoryDoc[] = await CategoryModel.find({
       _id: { $in: categories },
     });
 
@@ -79,11 +71,7 @@ export const addProduct = asyncHandler(
       return next(new HttpError(404, "No categories match passed categories"));
     }
 
-    const newProduct = await ProductsModel.create({
-      ...req.body,
-    });
-
-    await newProduct.save();
+    const newProduct = await productsStore.create(req.body);
 
     res.status(201).json({
       success: true,

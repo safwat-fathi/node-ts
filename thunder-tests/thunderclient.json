@@ -8,12 +8,12 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2022-09-22T08:41:41.481Z",
-    "modified": "2023-02-11T18:28:51.572Z",
+    "modified": "2023-02-14T05:00:56.840Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"safwat\",\n  \"email\": \"test2@ex.com\",\n  \"phone\": \"01100000100\",\n  \"password\": \"123456789\",\n  \"password_confirm\": \"123456789\"\n}",
+      "raw": "{\n  \"name\": \"safwat\",\n  \"email\": \"test3@ex.com\",\n  \"phone\": \"01100000200\",\n  \"password\": \"123456789\",\n  \"password_confirm\": \"123456789\"\n}",
       "form": []
     },
     "tests": []
@@ -106,12 +106,12 @@
     "method": "POST",
     "sortNum": 80000,
     "created": "2022-09-30T11:18:22.983Z",
-    "modified": "2023-01-21T16:30:00.183Z",
+    "modified": "2023-02-18T19:48:21.986Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"product1021\",\n  \"categories\": [\"63328f9607af47b1fc1b12d9\", \"63328f9607af47b1fc1b12db\"],\n  \"stock\": 50,\n  \"images\": [{\"type\": \"cover\", \"url\": \"https://www.theihcc.com/wp-content/uploads/2020/12/taking-a-drug-test-1024x800.jpg\"}],\n  \"price\": 23,\n  \"description\": \"just a description\"\n}",
+      "raw": "{\n  \"name\": \"Black Beans\",\n  \"categories\": [\"63b5186722c09d075e4c7e12\"],\n  \"stock\": 50,\n  \"images\": [{\"type\": \"cover\", \"url\": \"https://www.theihcc.com/wp-content/uploads/2020/12/taking-a-drug-test-1024x800.jpg\"}],\n  \"price\": 23,\n  \"description\": \"Egyptian cooked black beans\"\n}",
       "form": []
     },
     "tests": []
@@ -198,6 +198,37 @@
       {
         "name": "page",
         "value": "1",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
+    "_id": "a2a80773-42c4-4a54-8c6b-dd62b48853a1",
+    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+    "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
+    "name": "index",
+    "url": "{{baseUrl}}/api/products?page=1&limit=10",
+    "method": "GET",
+    "sortNum": 130000,
+    "created": "2023-02-17T12:55:55.621Z",
+    "modified": "2023-02-18T19:48:27.840Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "page",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "skip",
+        "value": "0",
+        "isDisabled": true,
+        "isPath": false
+      },
+      {
+        "name": "limit",
+        "value": "10",
         "isPath": false
       }
     ],
