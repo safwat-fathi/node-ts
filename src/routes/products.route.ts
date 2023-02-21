@@ -7,6 +7,7 @@ import {
 } from "controllers/products.controller";
 import { verifyToken } from "middlewares/auth.middleware";
 import { paginate } from "middlewares/paginate.middleware";
+import { filter } from "middlewares/filter.middleware";
 import { Product } from "types/db";
 import { ProductsStore } from "models/products/products.model";
 
@@ -15,7 +16,12 @@ const products = Router();
 const productStore = new ProductsStore();
 
 // * INDEX
-products.get("/", paginate<Product>(productStore.index), index);
+products.get(
+  "/",
+  filter<Product>(),
+  paginate<Product>(productStore.index),
+  index
+);
 
 // * CREATE
 products.post("/add", addProduct);

@@ -208,11 +208,11 @@
     "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
     "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
     "name": "index",
-    "url": "{{baseUrl}}/api/products?page=1&limit=10",
+    "url": "{{baseUrl}}/api/products?page=1&limit=10&name=Grey Sweatshirt",
     "method": "GET",
     "sortNum": 130000,
     "created": "2023-02-17T12:55:55.621Z",
-    "modified": "2023-02-18T19:48:27.840Z",
+    "modified": "2023-02-21T06:05:44.378Z",
     "headers": [],
     "params": [
       {
@@ -229,6 +229,11 @@
       {
         "name": "limit",
         "value": "10",
+        "isPath": false
+      },
+      {
+        "name": "name",
+        "value": "Grey Sweatshirt",
         "isPath": false
       }
     ],

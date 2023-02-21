@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { StoreDB } from "types/db";
+import { StoreDB, TSortOrder } from "types/db";
 import { asyncHandler } from "./async.middleware";
 import { createHash } from "crypto";
-import { SortOrder } from "mongoose";
 
 export const paginate = <T>(index: StoreDB<T>["index"]) =>
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
@@ -11,7 +10,7 @@ export const paginate = <T>(index: StoreDB<T>["index"]) =>
       limit: string;
       page: string;
       sortBy: string;
-      sortType: SortOrder;
+      sortType: TSortOrder;
     };
     const PAGE_SIZE = +limit || 10;
     const SKIP = +skip || (+page - 1) * PAGE_SIZE;

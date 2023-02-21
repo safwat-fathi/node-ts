@@ -6,8 +6,8 @@ export const ShopsModel = model<ShopDoc>("Shop", ShopsSchema);
 
 export class ShopsStore implements Partial<StoreDB<Shop>> {
   async index(
-    skip: number = 0,
-    pageSize: number,
+    skip?: number,
+    pageSize?: number,
     // geolocation?: [string, string],
     // distance?: number
     sort?: TSortBy | null
@@ -24,8 +24,8 @@ export class ShopsStore implements Partial<StoreDB<Shop>> {
             sort: { [sort.by]: sort.type },
           }),
         })
-          .skip(skip)
-          .limit(pageSize),
+          .skip(skip || 0)
+          .limit(pageSize || 10),
         ShopsModel.estimatedDocumentCount(),
       ]);
 
@@ -35,20 +35,19 @@ export class ShopsStore implements Partial<StoreDB<Shop>> {
     }
   }
 
-  async find(find: {
-    by: keyof Shop;
-    value: any;
-  }): Promise<Shop | Shop[] | null> {
+  async filter(
+    filters: TFindBy<T> | TFindBy<T>[]
+  ): Promise<Shop | Shop[] | null> {
     try {
-      const shop: Shop | Shop[] = await ShopsModel.find({
-        [String(find.by)]: find.value,
+      const shops: Shop | Shop[] = await ShopsModel.find({
+        [String(filters.by)]: filters.value,
       });
 
-      if (!shop) {
+      if (!shops) {
         return null;
       }
 
-      return shop;
+      return shops;
     } catch (err) {
       throw new Error(`ShopsStore::find::${err}`);
     }

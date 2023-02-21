@@ -1,5 +1,5 @@
 import { CategoryStore } from "models/categories/categories.model";
-import { Document, HydratedDocument, model } from "mongoose";
+import { model, Query } from "mongoose";
 import {
   Product,
   ProductDoc,
@@ -12,21 +12,26 @@ import { ProductsSchema } from "./products.schema";
 
 export const ProductsModel = model<Product>("Product", ProductsSchema);
 
-export const withFilters = async (filters?: TFindBy<Product>) => {
-  const query = ProductsModel.find({
-    name: ["Long Sleeve White Shirt", "Grey Sweatshirt"],
-  });
+export const withFilters = async (
+  filters: TFindBy<Product> | TFindBy<Product>[]
+) => {
+  let query: Query<Product[], Product>;
 
-  query.getFilter();
+  if (!Array.isArray(filters)) {
+    query = ProductsModel.find({
+      [filters.by]: filters.value,
+    });
+    query.getFilter();
 
-  const res = await query.exec();
-  console.log("🚀 ~ withFilters ~ res", res);
+    const res = await query.exec();
+    console.log("🚀 ~ withFilters ~ res", res);
+  }
 };
 
 export class ProductsStore implements Partial<StoreDB<Product>> {
   async index(
-    skip: number = 0,
-    pageSize: number,
+    skip?: number,
+    pageSize?: number,
     sort?: TSortBy | null,
     filters?: TQuery<Product>
   ): Promise<[ProductDoc[], number]> {
@@ -43,8 +48,8 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
             }),
           }
         )
-          .skip(skip)
-          .limit(pageSize),
+          .skip(skip || 0)
+          .limit(pageSize || 10),
         ProductsModel.estimatedDocumentCount(),
       ]);
 
@@ -54,33 +59,46 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
     }
   }
 
-  async find(
-    find: TFindBy<Product> | TFindBy<Product>[]
+  async filter(
+    filters: TFindBy<Product> | TFindBy<Product>[]
   ): Promise<ProductDoc | ProductDoc[] | null> {
     try {
-      let products: ProductDoc | ProductDoc[] | null = [];
+      let query: Query<Product[], Product>;
 
-      if (Array.isArray(find)) {
-        let query: any = [];
-
-        for (let i in find) {
-          query = [...query, { [String(find[i].by)]: find[i].value }];
-        }
-
-        products = await ProductsModel.find({
-          $or: query,
+      if (!Array.isArray(filters)) {
+        query = ProductsModel.find({
+          [filters.by]: filters.value,
         });
-      } else {
-        products = await ProductsModel.findOne({
-          [String(find.by)]: find.value,
-        });
+        query.getFilter();
+
+        const res = await query.exec();
+        console.log("🚀 ~ withFilters ~ res", res);
       }
 
-      if (!products) {
-        return null;
-      }
+      return [];
+      // let products: ProductDoc | ProductDoc[] | null = [];
 
-      return products;
+      // if (Array.isArray(filters)) {
+      //   let query: any = [];
+
+      //   for (let i in filters) {
+      //     query = [...query, { [String(filters[i].by)]: filters[i].value }];
+      //   }
+
+      //   products = await ProductsModel.find({
+      //     $or: query,
+      //   });
+      // } else {
+      //   products = await ProductsModel.findOne({
+      //     [String(filters.by)]: filters.value,
+      //   });
+      // }
+
+      // if (!products) {
+      //   return null;
+      // }
+
+      // return products;
     } catch (err) {
       throw new Error(`ProductStore::find::${err}`);
     }

@@ -6,29 +6,31 @@ import {
   SortOrder,
 } from "mongoose";
 
-type TDoc<T> = HydratedDocument<T>;
+export type TDoc<T> = HydratedDocument<T>;
 
-type TFindBy<T> = {
+export type TFindBy<T> = {
   by: keyof T;
   value: any;
 };
 
-type TQuery<T> = FilterQuery<T> & QuerySelector<T>;
+export type TSortOrder = SortOrder;
 
-const TT: TQuery<Product> = { $gt: 4 };
+// type TQuery<T> = FilterQuery<T> & QuerySelector<T>;
+type TQuery<T> = FilterQuery<T>;
+
 type TSortBy = { by: string; type: SortOrder };
 
 export interface StoreDB<T> {
   index: (
-    skip: number,
-    pageSize: number,
+    skip?: number,
+    pageSize?: number,
     // page: number,
     sort?: TSortBy | null
     // ...args: any
   ) => Promise<[HydratedDocument<T>[], number]>; // return array of T type and count of found data
 
-  find: (
-    find: TFindBy<T> | TFindBy<T>[]
+  filter: (
+    filters: TFindBy<T> | TFindBy<T>[]
   ) => Promise<TDoc<T> | TDoc<T>[] | null>;
 
   create: (newValue: T) => Promise<TDoc<T>>;

@@ -1,5 +1,6 @@
 import { ProductsModel } from "models/products/products.model";
 import dotenv from "dotenv";
+import { slugify } from "utils/string";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ export const seedProducts = () => {
         .insertMany([
           {
             name: "Long Sleeve White Shirt",
+            slug: slugify("Long Sleeve White Shirt"),
             description: "Long sleeve white shirt - spring collection",
             images: [{ url: "http://test.images.white-shirt" }],
             price: 240,
@@ -23,6 +25,7 @@ export const seedProducts = () => {
           },
           {
             name: "Grey Sweatshirt",
+            slug: slugify("Grey Sweatshirt"),
             description: "Grey sweatshirt with hoodie - winter collection",
             images: [{ url: "http://test.images.grey-sweatshirt" }],
             price: 600,
