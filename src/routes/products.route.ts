@@ -18,7 +18,7 @@ const productStore = new ProductsStore();
 // * INDEX
 products.get(
   "/",
-  filter<Product>(),
+  filter<Product>(productStore.filter),
   paginate<Product>(productStore.index),
   index
 );

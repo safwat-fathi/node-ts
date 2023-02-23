@@ -1,10 +1,10 @@
-import { CategoryStore } from "models/categories/categories.model";
+// import { CategoryStore } from "models/categories/categories.model";
 import { model, Query } from "mongoose";
 import {
   Product,
   ProductDoc,
   StoreDB,
-  TFindBy,
+  // TFindBy,
   TQuery,
   TSortBy,
 } from "types/db";
@@ -13,7 +13,7 @@ import { ProductsSchema } from "./products.schema";
 export const ProductsModel = model<Product>("Product", ProductsSchema);
 
 export const withFilters = async (
-  filters: TFindBy<Product> | TFindBy<Product>[]
+  filters: TQuery<Product> | TQuery<Product>[]
 ) => {
   let query: Query<Product[], Product>;
 
@@ -60,7 +60,7 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
   }
 
   async filter(
-    filters: TFindBy<Product> | TFindBy<Product>[]
+    filters: TQuery<Product> | TQuery<Product>[]
   ): Promise<ProductDoc | ProductDoc[] | null> {
     try {
       let query: Query<Product[], Product>;
@@ -72,7 +72,7 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
         query.getFilter();
 
         const res = await query.exec();
-        console.log("🚀 ~ withFilters ~ res", res);
+        // console.log("🚀 ~ product store - filter res:", res);
       }
 
       return [];
@@ -100,7 +100,7 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
 
       // return products;
     } catch (err) {
-      throw new Error(`ProductStore::find::${err}`);
+      throw new Error(`ProductStore::filter::${err}`);
     }
   }
 
@@ -112,7 +112,7 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
 
       return product;
     } catch (err) {
-      throw new Error(`ProductStore::find::${err}`);
+      throw new Error(`ProductStore::create::${err}`);
     }
   }
 }

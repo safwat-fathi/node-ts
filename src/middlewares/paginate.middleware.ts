@@ -12,6 +12,8 @@ export const paginate = <T>(index: StoreDB<T>["index"]) =>
       sortBy: string;
       sortType: TSortOrder;
     };
+    console.log("🚀 ~ asyncHandler ~ req.query:", req.query);
+
     const PAGE_SIZE = +limit || 10;
     const SKIP = +skip || (+page - 1) * PAGE_SIZE;
     const sort = sortBy

@@ -1,52 +1,71 @@
-import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
+import { Schema } from "mongoose";
 import { OrderDoc } from "types/db";
-import { geocoder } from "utils/geocoder";
+// import { geocoder } from "utils/geocoder";
 
-export const OrderSchema = new Schema<OrderDoc>({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: [true, "{VALUE} can not be null"],
-  },
-  total: {
-    type: Number,
-    required: [true, "{VALUE} can not be null"],
-  },
-  products: {
-    type: [
-      {
-        product: {
-          type: Schema.Types.ObjectId,
-          ref: "Product",
-          required: [true, "{VALUE} can not be null"],
+export const OrderSchema = new Schema<OrderDoc>(
+  {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "{VALUE} can not be null"],
+    },
+    total: {
+      type: Number,
+      required: [true, "{VALUE} can not be null"],
+    },
+    products: {
+      type: [
+        {
+          product: {
+            type: Schema.Types.ObjectId,
+            ref: "Product",
+            required: [true, "{VALUE} can not be null"],
+            _id: false,
+          },
+          quantity: Number,
           _id: false,
         },
-        quantity: Number,
-        _id: false,
-      },
-    ],
-    required: [true, "{VALUE} can not be null"],
-    validate: (val: { product: Schema.Types.ObjectId; quantity: number }[]) =>
-      Array.isArray(val) && val.length > 0,
-  },
-  status: {
-    type: String,
-    enum: {
-      values: ["active", "pending", "delivered", "cancelled"],
-      message: "{VALUE} is not supported",
+      ],
+      required: [true, "{VALUE} can not be null"],
+      validate: (val: { product: Schema.Types.ObjectId; quantity: number }[]) =>
+        Array.isArray(val) && val.length > 0,
     },
-    required: [true, "{VALUE} can not be null"],
+    status: {
+      type: String,
+      enum: {
+        // active: still in user cart user
+        // confirmed: confirmed by user
+        // on-route: confirmed by seller
+        // delivered: delivered to user
+        // cancelled: cancelled by user
+        // terminated: cancelled by seller
+        values: [
+          "active",
+          "confirmed",
+          "on-route",
+          "delivered",
+          "cancelled",
+          "terminated",
+        ],
+        default: "active",
+        message: "{VALUE} is not supported",
+      },
+      required: [true, "{VALUE} can not be null"],
+    },
+    address: {
+      type: String,
+      required: [true, "{VALUE} can not be null"],
+    },
+    delivery: {
+      type: Date,
+      default: Date.now,
+      required: [true, "{VALUE} can not be null"],
+    },
   },
-  address: {
-    type: String,
-    required: [true, "{VALUE} can not be null"],
-  },
-  delivery: {
-    type: Date,
-    default: Date.now,
-    required: [true, "{VALUE} can not be null"],
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 // geocode & create address field
 // OrderSchema.pre<OrderDoc>(

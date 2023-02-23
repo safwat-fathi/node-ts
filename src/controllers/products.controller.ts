@@ -8,6 +8,11 @@ import { asyncHandler } from "middlewares/async.middleware";
 // * Index
 // * ----------
 export const index = asyncHandler(async (req: Request, res: Response) => {
+  // console.log("****************");
+
+  // console.log("res.locals.dataPaginated", res.locals.dataPaginated);
+  // console.log("****************");
+
   return res.status(200).json({
     success: true,
     data: res.locals.dataPaginated.data,

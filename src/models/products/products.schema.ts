@@ -53,8 +53,6 @@ export const ProductsSchema = new Schema<ProductDoc>(
       validate: (val: Schema.Types.ObjectId[]) =>
         Array.isArray(val) && val.length > 0,
     },
-    size: Number,
-    color: String,
   },
   {
     timestamps: true,

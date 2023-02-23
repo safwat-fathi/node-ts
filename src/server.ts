@@ -13,7 +13,6 @@ import routes from "routes";
 import { EventEmitter } from "stream";
 import WebSocketServer from "websocket";
 import { seedUsers } from "seeders/users.seeder";
-import { withFilters } from "models/products/products.model";
 
 dotenv.config();
 
@@ -36,12 +35,7 @@ app.use(session({ secret: SECRET, resave: true, saveUninitialized: true }));
 // routes
 app.use("/api", routes);
 app.use(errorHandler);
-// withFilters({
-//   by: "name",
-//   value: ["Long Sleeve White Shirt", "Grey Sweatshirt"],
-// })
-//   .then(res => console.log(res))
-//   .catch(err => console.log(err));
+
 const server = app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at ${PORT}`);
 });

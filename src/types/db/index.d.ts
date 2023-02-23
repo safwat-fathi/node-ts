@@ -9,8 +9,8 @@ import {
 export type TDoc<T> = HydratedDocument<T>;
 
 export type TFindBy<T> = {
-  by: keyof T;
-  value: any;
+  by?: keyof T;
+  value?: any;
 };
 
 export type TSortOrder = SortOrder;
@@ -30,7 +30,7 @@ export interface StoreDB<T> {
   ) => Promise<[HydratedDocument<T>[], number]>; // return array of T type and count of found data
 
   filter: (
-    filters: TFindBy<T> | TFindBy<T>[]
+    filters: TQuery<T> | TQuery<T>[]
   ) => Promise<TDoc<T> | TDoc<T>[] | null>;
 
   create: (newValue: T) => Promise<TDoc<T>>;
@@ -59,11 +59,13 @@ export interface Subscription {
 }
 export type SubscriptionDoc = TDoc<Subscription>;
 
-export enum OrderStatus {
+export enum OrderStatusEnum {
   active = "active",
-  pending = "pending",
+  confirmed = "confirmed",
+  onRoute = "on-route",
   delivered = "delivered",
   cancelled = "cancelled",
+  terminated = "terminated",
 }
 
 export enum ProductImage {
@@ -108,8 +110,17 @@ export interface Order {
   user: ObjectId;
   products: { product: ObjectId; quantity: number }[];
   address: string;
-  status: OrderStatus;
+  status: OrderStatusEnum;
   delivery: Date;
   total: number;
 }
 export type OrderDoc = HydratedDocument<Order>;
+
+export interface Review {
+  title: string;
+  comment: string;
+  user: ObjectId;
+  product: ObjectId;
+  rating: number;
+}
+export type ReviewDoc = HydratedDocument<Review>;
