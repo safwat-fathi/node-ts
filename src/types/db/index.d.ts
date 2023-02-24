@@ -27,11 +27,9 @@ export interface StoreDB<T> {
     // page: number,
     sort?: TSortBy | null
     // ...args: any
-  ) => Promise<[HydratedDocument<T>[], number]>; // return array of T type and count of found data
+  ) => Promise<[T[], number]>; // return array of T type and count of found data
 
-  filter: (
-    filters: TQuery<T> | TQuery<T>[]
-  ) => Promise<TDoc<T> | TDoc<T>[] | null>;
+  filter: (filters: TQuery<T> | TQuery<T>[]) => Promise<T | T[] | null>;
 
   create: (newValue: T) => Promise<TDoc<T>>;
 
