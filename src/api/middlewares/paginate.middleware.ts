@@ -1,32 +1,26 @@
 import { NextFunction, Request, Response } from "express";
-import { StoreDB, TSortOrder } from "types/db";
+import { Product, StoreDB, TSortOrder } from "types/db";
 import { asyncHandler } from "./async.middleware";
 import { createHash } from "crypto";
 import { HttpError } from "lib/classes/errors/http";
+import { QuerySelector } from "mongoose";
 
 export const paginate = <T>(index: StoreDB<T>["index"]) =>
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    const { sortBy, sortOrder, skip, limit, page, ...rest } = {
+    const { skip, limit, page, sort, filter } = {
       ...req.query,
     } as {
       skip: string;
       limit: string;
       page: string;
-      sortBy: string;
-      sortOrder: TSortOrder;
+      sort: any;
+      filter: any;
     };
 
     const PAGE_SIZE = +limit || 10;
     const SKIP = +skip || (+page - 1) * PAGE_SIZE;
-    const sort =
-      sortBy && sortOrder
-        ? {
-            by: sortBy,
-            type: sortOrder || "descend",
-          }
-        : null;
 
-    const [data, count] = await index(SKIP, PAGE_SIZE, sort, rest);
+    const [data, count] = await index(SKIP, PAGE_SIZE, sort, filter);
 
     const current_page = +page;
     const total_pages = Math.ceil(count / PAGE_SIZE);

@@ -1,5 +1,3 @@
-import CryptoJS from "crypto-js";
-
 export const slugify = (text: string) => {
   return (
     text
@@ -23,14 +21,8 @@ export const isSafeToParse = (v: string): boolean => {
   return true;
 };
 
-export const decrypt = (encrypted: string) => {
-  // const ciphertext = CryptoJS.AES.encrypt(
-  //   JSON.stringify(params),
-  //   process.env.CIPHER_TEXT_SECRET
-  // ).toString();
-  const bytes = CryptoJS.AES.decrypt(encrypted, process.env.CIPHER_TEXT_SECRET);
+export const encode = (str: string): string =>
+  Buffer.from(str).toString("base64");
 
-  const originalText = bytes.toString(CryptoJS.enc.Utf8);
-
-  return originalText;
-};
+export const decode = (str: string): string =>
+  Buffer.from(str, "base64").toString("ascii");

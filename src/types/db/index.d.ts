@@ -1,6 +1,6 @@
 import {
   ObjectId,
-  QuerySelector,
+  // QuerySelector,
   HydratedDocument,
   FilterQuery,
   SortOrder,
@@ -8,15 +8,9 @@ import {
 
 export type TDoc<T> = HydratedDocument<T>;
 
-export type TFindBy<T> = {
-  by?: keyof T;
-  value?: any;
-};
-
 export type TSortOrder = SortOrder;
 
-// type TQuery<T> = FilterQuery<T> & QuerySelector<T>;
-type TQuery<T> = Record<keyof Product, any>;
+// type TQuery<T> = QuerySelector<T>;
 
 type TSortBy = { by: string; type: SortOrder };
 
@@ -25,12 +19,12 @@ export interface StoreDB<T> {
     skip?: number,
     pageSize?: number,
     sort?: TSortBy | null,
-    filters?: TQuery
+    filter?: any | null
   ) => Promise<[T[], number]>; // return array of T type and count of found data
 
-  filter: (filters: TQuery) => Promise<T | T[] | null>;
+  create: (newDoc: T) => Promise<TDoc<T>>;
 
-  create: (newValue: T) => Promise<TDoc<T>>;
+  update: (docToUpdate: T) => Promise<TDoc<T>>;
 
   delete: () => void;
 }

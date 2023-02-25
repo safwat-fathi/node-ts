@@ -208,11 +208,11 @@
     "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
     "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
     "name": "index",
-    "url": "{{baseUrl}}/api/products?page=1&sort[price]=asc&filter[price][$gte]=300&filter[stock][$lt]=1&filter[price][$lte]=900&filter[name]=Grey Sweatshirt",
+    "url": "{{baseUrl}}/api/products/?page=1&sort[price]=asc&filter[price][$lte]=500",
     "method": "GET",
     "sortNum": 130000,
     "created": "2023-02-17T12:55:55.621Z",
-    "modified": "2023-02-25T12:34:20.388Z",
+    "modified": "2023-02-25T20:10:17.193Z",
     "headers": [],
     "params": [
       {
@@ -238,23 +238,26 @@
         "isPath": false
       },
       {
-        "name": "filter[price][$gte]",
-        "value": "300",
+        "name": "filter[name]",
+        "value": "Grey Sweatshirt",
+        "isDisabled": true,
         "isPath": false
       },
       {
-        "name": "filter[stock][$lt]",
+        "name": "filter[price][$gte]",
+        "value": "100",
+        "isDisabled": true,
+        "isPath": false
+      },
+      {
+        "name": "filter[stock][$gte]",
         "value": "1",
+        "isDisabled": true,
         "isPath": false
       },
       {
         "name": "filter[price][$lte]",
-        "value": "900",
-        "isPath": false
-      },
-      {
-        "name": "filter[name]",
-        "value": "Grey Sweatshirt",
+        "value": "500",
         "isPath": false
       }
     ],
