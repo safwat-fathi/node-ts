@@ -6,7 +6,9 @@ import { HttpError } from "lib/classes/errors/http";
 
 export const paginate = <T>(index: StoreDB<T>["index"]) =>
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    const { sortBy, sortOrder, skip, limit, page } = { ...req.query } as {
+    const { sortBy, sortOrder, skip, limit, page, ...rest } = {
+      ...req.query,
+    } as {
       skip: string;
       limit: string;
       page: string;
@@ -24,10 +26,14 @@ export const paginate = <T>(index: StoreDB<T>["index"]) =>
           }
         : null;
 
-    const [data, count] = await index(SKIP, PAGE_SIZE, sort);
+    const [data, count] = await index(SKIP, PAGE_SIZE, sort, rest);
 
     const current_page = +page;
     const total_pages = Math.ceil(count / PAGE_SIZE);
+
+    if (!page || +page <= 0) {
+      next(new HttpError(404, `Page requested not found`));
+    }
 
     if (current_page > total_pages) {
       next(

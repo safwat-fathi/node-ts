@@ -1,4 +1,5 @@
 // import { CategoryStore } from "api/models/categories/categories.model";
+import { isSafeToParse } from "lib/utils/string";
 import { model, Query } from "mongoose";
 import {
   Product,
@@ -12,17 +13,15 @@ import { ProductsSchema } from "./products.schema";
 
 export const ProductsModel = model<Product>("Product", ProductsSchema);
 
-export const withFilters: <T>(f: TQuery<T>) => void = async (
-  filters: TQuery<Product>
-) => {
-  const query: Query<Product[], Product> =
-    ProductsModel.find(filters).where("rating");
+// export const withFilters: <T>(f: TQuery) => void = async (filters: TQuery) => {
+//   const query: Query<Product[], Product> =
+//     ProductsModel.find(filters).where("rating");
 
-  query.getFilter();
+//   query.getFilter();
 
-  const res = await query.exec();
-  console.log("🚀 ~ withFilters ~ res", res);
-};
+//   const res = await query.exec();
+//   console.log("🚀 ~ withFilters ~ res", res);
+// };
 
 export class ProductsStore implements Partial<StoreDB<Product>> {
   async index(
@@ -31,6 +30,48 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
     sort?: TSortBy | null,
     filters?: TQuery<Product>
   ): Promise<[Product[], number]> {
+    // console.log("🚀 ~ filters:", filters);
+
+    // parse params
+    if (filters) {
+      let key: keyof Product;
+
+      for (key in filters) {
+        if (isSafeToParse(filters[key])) {
+          switch (key) {
+            case "price":
+              filters[key] = JSON.parse(filters[key]);
+              break;
+            case "stock":
+              filters[key] = JSON.parse(filters[key]) ? 1 : 0;
+              break;
+            default:
+              break;
+          }
+
+          // if array
+          // if (Array.isArray(JSON.parse(filters[key]))) {
+          //   console.log("🚀 ~ is array:", JSON.parse(filters[key]));
+          // }
+
+          // // if boolean
+          // if (typeof JSON.parse(filters[key]) === "boolean") {
+          //   console.log("🚀 ~ is boolean:", JSON.parse(filters[key]));
+          // }
+
+          // // if null or undefined
+          // if (!JSON.parse(filters[key])) {
+          //   console.log("🚀 ~ is null or undefined:", JSON.parse(filters[key]));
+          // }
+        } else {
+          console.log("🚀 ~ filters[key] not parsed:", filters[key]);
+        }
+        console.log("🚀 ~ filters[key] parsed:", filters[key]);
+      }
+    }
+
+    // const query: Query<Product[], Product> = ProductsModel.find({}).where("name").in(['']);
+
     try {
       const [products, count] = await Promise.all([
         ProductsModel.find(
@@ -55,15 +96,10 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
     }
   }
 
-  async filter(
-    // filters: TQuery<Product> | TQuery<Product>[]
-    filters: TQuery<Product>
-  ): Promise<Product | Product[] | null> {
+  async filter(filters: TQuery<Product>): Promise<Product | Product[] | null> {
     try {
-      let query: Query<Product[], Product>;
-
       // if (!Array.isArray(filters)) {
-      query = ProductsModel.find(filters);
+      const query: Query<Product[], Product> = ProductsModel.find(filters);
       // query = ProductsModel.find({
       //   [filters.by]: filters.value,
       // });

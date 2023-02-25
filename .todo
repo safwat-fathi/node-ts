@@ -21,6 +21,7 @@
 - CRUD operations update (stock, image, etc...)
 - sorting (review, price)
 - filters in StoreDB
+- compare products
 - pagination:
   - send total pages
   - send total docs count

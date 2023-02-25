@@ -16,7 +16,7 @@ export type TFindBy<T> = {
 export type TSortOrder = SortOrder;
 
 // type TQuery<T> = FilterQuery<T> & QuerySelector<T>;
-type TQuery<T> = FilterQuery<T>;
+type TQuery<T> = Record<keyof Product, any>;
 
 type TSortBy = { by: string; type: SortOrder };
 
@@ -24,12 +24,11 @@ export interface StoreDB<T> {
   index: (
     skip?: number,
     pageSize?: number,
-    // page: number,
-    sort?: TSortBy | null
-    // ...args: any
+    sort?: TSortBy | null,
+    filters?: TQuery
   ) => Promise<[T[], number]>; // return array of T type and count of found data
 
-  filter: (filters: TQuery<T> | TQuery<T>[]) => Promise<T | T[] | null>;
+  filter: (filters: TQuery) => Promise<T | T[] | null>;
 
   create: (newValue: T) => Promise<TDoc<T>>;
 

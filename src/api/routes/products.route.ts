@@ -19,7 +19,7 @@ const productStore = new ProductsStore();
 products.get(
   "/",
   filter<Product>(productStore.filter),
-  paginate<Product>(productStore.index),
+  // paginate<Product>(productStore.index),
   index
 );
 
