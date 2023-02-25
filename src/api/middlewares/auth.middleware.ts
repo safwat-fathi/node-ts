@@ -7,7 +7,6 @@ import { UserStore } from "api/models/user/user.model";
 // import { SubscriptionStore } from "api/models/subscription/subscription.model";
 import { HttpError } from "lib/classes/errors/http";
 import { asyncHandler } from "./async.middleware";
-import { User } from "types/db";
 
 dotenv.config();
 

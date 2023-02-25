@@ -3,7 +3,6 @@ import { Product, StoreDB, TSortOrder } from "types/db";
 import { asyncHandler } from "./async.middleware";
 import { createHash } from "crypto";
 import { HttpError } from "lib/classes/errors/http";
-import { QuerySelector } from "mongoose";
 
 export const paginate = <T>(index: StoreDB<T>["index"]) =>
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {

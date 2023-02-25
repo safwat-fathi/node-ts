@@ -1,11 +1,11 @@
 import dotenv from "dotenv";
-import qs from "qs";
 import express, { Express } from "express";
 import session from "express-session";
 import compression from "compression";
 import cors from "cors";
 import { errorHandler } from "api/middlewares/error.middleware";
 import { connectDB } from "config/db.config";
+import mongoSanitize from "express-mongo-sanitize";
 // seeders
 import { seedCategories } from "lib/seeders/categories.seeder";
 import { seedProducts } from "lib/seeders/products.seeder";
@@ -14,6 +14,7 @@ import routes from "api/routes";
 import { EventEmitter } from "stream";
 import WebSocketServer from "websocket";
 import { seedUsers } from "lib/seeders/users.seeder";
+import helmet from "helmet";
 
 dotenv.config();
 
@@ -32,6 +33,16 @@ seedUsers();
 app.use(compression());
 app.use(cors());
 app.use(express.json());
+// sanitize data
+app.use(
+  mongoSanitize({
+    onSanitize: ({ req, key }) => {
+      console.warn(`This request[${key}] is sanitized`, req);
+    },
+  })
+);
+// security headers
+app.use(helmet());
 app.use(session({ secret: SECRET, resave: true, saveUninitialized: true }));
 // routes
 app.use("/api", routes);
