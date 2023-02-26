@@ -6,6 +6,30 @@ import { ProductsSchema } from "./products.schema";
 
 export const ProductsModel = model<Product>("Product", ProductsSchema);
 
+const mapFilters = (filter: any) => {
+  let filterCopy = { ...filter };
+
+  try {
+    for (let key in filterCopy) {
+      if (isSafeToParse(filterCopy[key])) {
+        if (typeof JSON.parse(filterCopy[key]) === "number") {
+          filterCopy[key] = { $gte: +filterCopy[key] };
+        }
+
+        if (Array.isArray(JSON.parse(filterCopy[key]))) {
+          const arr = JSON.parse(filterCopy[key]);
+
+          filterCopy[key] = { $gte: arr[0], $lte: arr[1] };
+        }
+      }
+    }
+
+    return filterCopy;
+  } catch (error) {
+    throw new Error(`mapFilters::${error}`);
+  }
+};
+
 export class ProductsStore implements Partial<StoreDB<Product>> {
   async index(
     skip?: number,
@@ -14,10 +38,12 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
     filter?: any | null
   ): Promise<[Product[], number]> {
     try {
+      const filtersMapped = mapFilters(filter);
+
       const [products, count] = await Promise.all([
         ProductsModel.find(
           // filter by model props (name, price, stock, etc...)
-          filter ? filter : {},
+          filtersMapped || {},
           null,
           // options (sort, pagination, etc...)
           {

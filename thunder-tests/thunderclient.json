@@ -208,11 +208,11 @@
     "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
     "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
     "name": "index",
-    "url": "{{baseUrl}}/api/products/?page=1&sort[price]=asc&filter[price][$lte]=500",
+    "url": "{{baseUrl}}/api/products/?page=1&sort[price]=desc&filter[stock]=1",
     "method": "GET",
     "sortNum": 130000,
     "created": "2023-02-17T12:55:55.621Z",
-    "modified": "2023-02-25T20:10:17.193Z",
+    "modified": "2023-02-26T18:42:05.721Z",
     "headers": [],
     "params": [
       {
@@ -234,7 +234,7 @@
       },
       {
         "name": "sort[price]",
-        "value": "asc",
+        "value": "desc",
         "isPath": false
       },
       {
@@ -244,20 +244,14 @@
         "isPath": false
       },
       {
-        "name": "filter[price][$gte]",
-        "value": "100",
-        "isDisabled": true,
-        "isPath": false
-      },
-      {
-        "name": "filter[stock][$gte]",
+        "name": "filter[stock]",
         "value": "1",
-        "isDisabled": true,
         "isPath": false
       },
       {
-        "name": "filter[price][$lte]",
-        "value": "500",
+        "name": "filter[price]",
+        "value": "[100, 900]",
+        "isDisabled": true,
         "isPath": false
       }
     ],
