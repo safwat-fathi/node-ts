@@ -15,6 +15,8 @@ import { EventEmitter } from "stream";
 import WebSocketServer from "websocket";
 import { seedUsers } from "lib/seeders/users.seeder";
 import helmet from "helmet";
+import { rateLimit } from "express-rate-limit";
+import hpp from "hpp";
 
 dotenv.config();
 
@@ -30,9 +32,22 @@ seedCategories();
 seedProducts();
 seedUsers();
 
+// rate limiting
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use(limiter);
+// compress
 app.use(compression());
+// cors policy
 app.use(cors());
+// parse json body requests
 app.use(express.json());
+// prevent param pollution
+app.use(hpp());
 // sanitize data
 app.use(
   mongoSanitize({
@@ -43,6 +58,7 @@ app.use(
 );
 // security headers
 app.use(helmet());
+// session middleware
 app.use(session({ secret: SECRET, resave: true, saveUninitialized: true }));
 // routes
 app.use("/api", routes);
