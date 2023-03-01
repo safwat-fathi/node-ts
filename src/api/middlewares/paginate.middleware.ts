@@ -15,11 +15,13 @@ export const paginate = <T>(index: StoreDB<T>["index"]) =>
       sort: any;
       filter: any;
     };
+    console.log("🚀 ~ asyncHandler ~ filter:", filter);
 
     const PAGE_SIZE = +limit || 10;
     const SKIP = +skip || (+page - 1) * PAGE_SIZE;
 
-    const [data, count] = await index(SKIP, PAGE_SIZE, sort, filter);
+    // const [data, count] = await index(SKIP, PAGE_SIZE, sort, filter);
+    const [data, count] = await index(SKIP, PAGE_SIZE, sort);
 
     const current_page = +page;
     const total_pages = Math.ceil(count / PAGE_SIZE);
