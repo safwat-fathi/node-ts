@@ -208,11 +208,11 @@
     "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
     "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
     "name": "index",
-    "url": "{{baseUrl}}/api/products/?page=1&sort[price]=desc&filter[stock]=1",
+    "url": "{{baseUrl}}/api/products/?page=1&sort[price]=desc&filter[price][gte]=100&filter[price][lte]=300",
     "method": "GET",
     "sortNum": 130000,
     "created": "2023-02-17T12:55:55.621Z",
-    "modified": "2023-02-26T18:42:05.721Z",
+    "modified": "2023-03-02T06:07:20.833Z",
     "headers": [],
     "params": [
       {
@@ -239,19 +239,24 @@
       },
       {
         "name": "filter[name]",
-        "value": "Grey Sweatshirt",
+        "value": "shirt",
         "isDisabled": true,
         "isPath": false
       },
       {
-        "name": "filter[stock]",
+        "name": "filter[stock][gte]",
         "value": "1",
+        "isDisabled": true,
         "isPath": false
       },
       {
-        "name": "filter[price]",
-        "value": "[100, 900]",
-        "isDisabled": true,
+        "name": "filter[price][gte]",
+        "value": "100",
+        "isPath": false
+      },
+      {
+        "name": "filter[price][lte]",
+        "value": "300",
         "isPath": false
       }
     ],

@@ -1,11 +1,11 @@
 import { model } from "mongoose";
-import { StoreDB, TFindBy, User, UserDoc } from "types/db";
+import { StoreDB, User, UserDoc } from "types/db";
 import { UserSchema } from "./user.schema";
 import { comparePassword } from "lib/utils/auth";
 
 export const UserModel = model<UserDoc>("User", UserSchema);
 
-export class UserStore implements Partial<StoreDB<User>> {
+export class UserStore {
   async signup(u: Partial<User>): Promise<UserDoc> {
     try {
       const user = new UserModel({
@@ -47,33 +47,33 @@ export class UserStore implements Partial<StoreDB<User>> {
     }
   }
 
-  async find(
-    find: TFindBy<User> | TFindBy<User>[]
-  ): Promise<UserDoc | UserDoc[] | null> {
-    try {
-      let users: UserDoc | UserDoc[] | null = [];
+  // async find(
+  //   find: TFindBy<User> | TFindBy<User>[]
+  // ): Promise<UserDoc | UserDoc[] | null> {
+  //   try {
+  //     let users: UserDoc | UserDoc[] | null = [];
 
-      if (Array.isArray(find)) {
-        let query: any = [];
+  //     if (Array.isArray(find)) {
+  //       let query: any = [];
 
-        for (let i in find) {
-          query = [...query, { [String(find[i].by)]: find[i].value }];
-        }
+  //       for (let i in find) {
+  //         query = [...query, { [String(find[i].by)]: find[i].value }];
+  //       }
 
-        users = await UserModel.find({
-          $or: query,
-        });
-      } else {
-        users = await UserModel.findOne({ [String(find.by)]: find.value });
-      }
+  //       users = await UserModel.find({
+  //         $or: query,
+  //       });
+  //     } else {
+  //       users = await UserModel.findOne({ [String(find.by)]: find.value });
+  //     }
 
-      if (!users) {
-        return null;
-      }
+  //     if (!users) {
+  //       return null;
+  //     }
 
-      return users;
-    } catch (err) {
-      throw new Error(`UserStore::find::${err}`);
-    }
-  }
+  //     return users;
+  //   } catch (err) {
+  //     throw new Error(`UserStore::find::${err}`);
+  //   }
+  // }
 }

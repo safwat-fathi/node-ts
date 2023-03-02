@@ -52,7 +52,7 @@ app.use(hpp());
 app.use(
   mongoSanitize({
     onSanitize: ({ req, key }) => {
-      console.warn(`This request[${key}] is sanitized`, req);
+      console.error(`This request[${key}] is sanitized`, req.query);
     },
   })
 );

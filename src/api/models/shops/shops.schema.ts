@@ -30,14 +30,15 @@ export const ShopsSchema = new Schema<Shop>(
       validate: [
         (val: { imgType: "cover" | "thumbnail"; url: string }[]) =>
           Array.isArray(val) && val.length > 0,
-        "{PATH} Must has 3 entries",
+        "{PATH} Must have 3 entries",
       ],
     },
+    // TODO: add city to the location
     location: {
       type: [String, String],
       validate: [
         (val: [string, string]) => Array.isArray(val) && val.length === 2,
-        "{PATH} Must has 2 entries",
+        "{PATH} Must have 2 entries",
       ],
     },
   },

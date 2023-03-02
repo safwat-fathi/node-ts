@@ -1,34 +1,9 @@
 // import { CategoryStore } from "api/models/categories/categories.model";
-import { isSafeToParse } from "lib/utils/string";
 import { model, Query } from "mongoose";
 import { Product, ProductDoc, StoreDB, TSortBy } from "types/db";
 import { ProductsSchema } from "./products.schema";
 
 export const ProductsModel = model<Product>("Product", ProductsSchema);
-
-const mapFilters = (filter: any) => {
-  let filterCopy = { ...filter };
-
-  try {
-    for (let key in filterCopy) {
-      if (isSafeToParse(filterCopy[key])) {
-        if (typeof JSON.parse(filterCopy[key]) === "number") {
-          filterCopy[key] = { $gte: +filterCopy[key] };
-        }
-
-        if (Array.isArray(JSON.parse(filterCopy[key]))) {
-          const arr = JSON.parse(filterCopy[key]);
-
-          filterCopy[key] = { $gte: arr[0], $lte: arr[1] };
-        }
-      }
-    }
-
-    return filterCopy;
-  } catch (error) {
-    throw new Error(`mapFilters::${error}`);
-  }
-};
 
 export class ProductsStore implements Partial<StoreDB<Product>> {
   async index(
@@ -38,22 +13,23 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
     filter?: any | null
   ): Promise<[Product[], number]> {
     try {
-      const filtersMapped = mapFilters(filter);
+      const query = ProductsModel.find(
+        // filter by model fields (name, price, stock, etc...)
+        filter || {},
+        // select model fields to return
+        null,
+        // options (sort, pagination, etc...)
+        {
+          ...(sort && {
+            sort,
+          }),
+        }
+      )
+        .skip(skip || 0)
+        .limit(pageSize || 10);
 
       const [products, count] = await Promise.all([
-        ProductsModel.find(
-          // filter by model props (name, price, stock, etc...)
-          filtersMapped || {},
-          null,
-          // options (sort, pagination, etc...)
-          {
-            ...(sort && {
-              sort,
-            }),
-          }
-        )
-          .skip(skip || 0)
-          .limit(pageSize || 10),
+        query.exec(),
         ProductsModel.estimatedDocumentCount(),
       ]);
 

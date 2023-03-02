@@ -11,6 +11,7 @@ export const UserSchema = new Schema<User>(
     },
     email: {
       type: String,
+      unique: true,
       required: [true, "email required"],
       match: [
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -19,6 +20,7 @@ export const UserSchema = new Schema<User>(
     },
     phone: {
       type: String,
+      unique: true,
       required: [true, "phone required"],
       match: [
         /\d{3}\s?\d{4}-?\d{4}/gm,

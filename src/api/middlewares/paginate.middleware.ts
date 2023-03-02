@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { Product, StoreDB, TSortOrder } from "types/db";
+import { StoreDB } from "types/db";
 import { asyncHandler } from "./async.middleware";
 import { createHash } from "crypto";
 import { HttpError } from "lib/classes/errors/http";
+import { processQuery } from "lib/utils/mongoose";
 
 export const paginate = <T>(index: StoreDB<T>["index"]) =>
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
@@ -15,13 +16,13 @@ export const paginate = <T>(index: StoreDB<T>["index"]) =>
       sort: any;
       filter: any;
     };
-    console.log("🚀 ~ asyncHandler ~ filter:", filter);
+    // process filter to match mongo query operators
+    const filterProcessed = processQuery(filter);
 
     const PAGE_SIZE = +limit || 10;
     const SKIP = +skip || (+page - 1) * PAGE_SIZE;
 
-    // const [data, count] = await index(SKIP, PAGE_SIZE, sort, filter);
-    const [data, count] = await index(SKIP, PAGE_SIZE, sort);
+    const [data, count] = await index(SKIP, PAGE_SIZE, sort, filterProcessed);
 
     const current_page = +page;
     const total_pages = Math.ceil(count / PAGE_SIZE);

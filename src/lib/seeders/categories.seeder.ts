@@ -8,6 +8,9 @@ export const seedCategories = () => {
     // drop all stored docs
     // CategoryModel.collection.drop();
 
+    // Rebuild all indexes
+    // await CategoryModel.syncIndexes();
+
     if (err) throw new Error(`${err}`);
 
     if (count === 0) {

@@ -2,6 +2,7 @@ import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
 import { ProductDoc } from "types/db";
 import { slugify } from "lib/utils/string";
 
+// TODO: fuzzy search by name (https://stackoverflow.com/questions/44833817/mongodb-full-and-partial-text-search)
 export const ProductsSchema = new Schema<ProductDoc>(
   {
     name: {

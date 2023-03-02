@@ -5,9 +5,12 @@ import { slugify } from "lib/utils/string";
 dotenv.config();
 
 export const seedProducts = () => {
-  ProductsModel.estimatedDocumentCount({}, (err, count) => {
+  ProductsModel.estimatedDocumentCount({}, async (err, count) => {
     // drop all stored docs
     // ProductsModel.collection.drop();
+
+    // Rebuild all indexes
+    // await ProductsModel.syncIndexes();
 
     if (err) throw new Error(`${err}`);
 
