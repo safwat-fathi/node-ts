@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 import { generateAccessToken } from "lib/utils/auth";
-import { UserStore } from "api/models/user/user.model";
 import { validationResult } from "express-validator";
 import { HttpError } from "lib/classes/errors/http";
 import { asyncHandler } from "api/middlewares/async.middleware";
+import { UserService } from "services/users.service";
 
 export const signup = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { name, email, phone, password } = req.body;
-    const userStore = new UserStore();
+    const userService = new UserService();
 
     const errors = validationResult(req);
 
@@ -20,12 +20,11 @@ export const signup = asyncHandler(
       return next(new HttpError(400, "Signup failed", errorsMapped));
     }
 
-    const user = await userStore.signup({
+    const user = await userService.create({
       name,
       email,
       phone,
       password,
-      orders: [],
     });
 
     res.status(201).json({ success: true, data: user });
@@ -45,9 +44,9 @@ export const login = asyncHandler(
       );
     }
 
-    const userStore = new UserStore();
+    const userService = new UserService();
 
-    const user = await userStore.login({ email, password });
+    const user = await userService.login({ email, password });
 
     if (!user) {
       return next(new HttpError(422, "Please enter valid email or password"));

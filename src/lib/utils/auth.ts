@@ -1,5 +1,4 @@
 import bcrypt from "bcryptjs";
-import { CustomJwtPayload } from "types/jwt";
 import { sign } from "jsonwebtoken";
 import dotenv from "dotenv";
 

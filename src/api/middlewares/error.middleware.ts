@@ -1,6 +1,5 @@
 import { HttpError } from "lib/classes/errors/http";
 import { NextFunction, Request, Response } from "express";
-import { Error } from "mongoose";
 
 /**
  * Custom error handler to standardize error objects returned to

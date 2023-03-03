@@ -1,12 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { CategoryModel } from "api/models/categories/categories.model";
-import {
-  ProductsStore,
-  ProductsModel,
-} from "api/models/products/products.model";
+import { CategoryModel } from "models/categories/categories.model";
+import { ProductModel } from "models/products/products.model";
 import { CategoryDoc, Product } from "types/db";
 import { HttpError } from "lib/classes/errors/http";
 import { asyncHandler } from "api/middlewares/async.middleware";
+import { ProductService } from "services/products.service";
 
 // * Index
 // * ----------
@@ -24,7 +22,7 @@ export const index = asyncHandler(async (req: Request, res: Response) => {
 export const findByCategory = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { categoryId } = req.params;
-    const products = await ProductsModel.find({ categories: categoryId });
+    const products = await ProductModel.find({ categories: categoryId });
 
     if (products.length === 0) {
       return next(new HttpError(404, `No products match this search`));
@@ -42,7 +40,7 @@ export const findByName = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const categoryId = req.params.categoryId;
 
-    const products = await ProductsModel.find({ categories: categoryId });
+    const products = await ProductModel.find({ categories: categoryId });
 
     if (products.length === 0) {
       return next(new HttpError(404, `No products match this search`));
@@ -63,7 +61,7 @@ export const addProduct = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { categories } = req.body as Product;
 
-    const productsStore = new ProductsStore();
+    const productService = new ProductService();
 
     // check if there is a category match the passed one
     const categoriesFound: CategoryDoc[] = await CategoryModel.find({
@@ -74,7 +72,7 @@ export const addProduct = asyncHandler(
       return next(new HttpError(404, "No categories match passed categories"));
     }
 
-    const newProduct = await productsStore.create(req.body);
+    const newProduct = await productService.create(req.body);
 
     res.status(201).json({
       success: true,

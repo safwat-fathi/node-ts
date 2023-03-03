@@ -1,41 +1,43 @@
-import { Document, model } from "mongoose";
-import { Category, CategoryDoc, StoreDB, TFindBy, TSortBy } from "types/db";
-import { categorySchema } from "./categories.schema";
+import { CategoryModel } from "models/categories/categories.model";
+import { Category, CategoryDoc, Service, TSortBy } from "types/db";
 
-export const CategoryModel = model<CategoryDoc>("Category", categorySchema);
-
-export class CategoryStore implements Partial<StoreDB<Category>> {
+export class CategoryService implements Partial<Service<Category>> {
   async index(
     skip?: number,
     pageSize?: number,
-    sort?: TSortBy | null
+    sort?: TSortBy | null,
+    filter?: any | null
   ): Promise<[CategoryDoc[], number]> {
     try {
+      const query = CategoryModel.find(
+        // filter by model fields
+        filter || {},
+        // select model fields to return
+        null,
+        // options (sort, pagination, etc...)
+        {
+          ...(sort && {
+            sort,
+          }),
+        }
+      )
+        .skip(skip || 0)
+        .limit(pageSize || 10);
+
       const [categories, count] = await Promise.all([
-        CategoryModel.find(
-          // filters by model props (name, price, etc...)
-          {},
-          null,
-          // options (sort, pagination, etc...)
-          {
-            ...(sort && {
-              sort: { [sort.by]: sort.type },
-            }),
-          }
-        )
-          .skip(skip || 0)
-          .limit(pageSize || 10),
+        query.exec(),
         CategoryModel.estimatedDocumentCount(),
       ]);
 
       return [categories, count];
     } catch (err) {
-      throw new Error(`CategoryStore::index::${err}`);
+      throw new Error(`CategoryService::index::${err}`);
     }
   }
 
   async find(
-    find: TFindBy<Category> | TFindBy<Category>[]
+    // find: TFindBy<Category> | TFindBy<Category>[]
+    find: any
   ): Promise<CategoryDoc | CategoryDoc[] | null> {
     try {
       let categories: CategoryDoc | CategoryDoc[] | null = [];
@@ -62,7 +64,7 @@ export class CategoryStore implements Partial<StoreDB<Category>> {
 
       return categories;
     } catch (err) {
-      throw new Error(`CategoryStore::find::${err}`);
+      throw new Error(`CategoryService::find::${err}`);
     }
   }
 }

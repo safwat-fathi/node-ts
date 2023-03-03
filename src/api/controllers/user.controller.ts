@@ -1,5 +1,5 @@
 // import { NextFunction, Request, Response } from "express";
-// import { UserModel } from "api/models/user/user.model";
+// import { UserModel } from "models/user/user.model";
 // import { HttpError } from "lib/classes/errors/http";
 // import { asyncHandler } from "api/middlewares/async.middleware";
 

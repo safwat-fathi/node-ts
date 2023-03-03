@@ -4,7 +4,7 @@ import { CategoryModel } from "./categories.model";
 
 export const categorySchema = new Schema<CategoryDoc>(
   {
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     description: { type: String, required: true },
     sub: {
       type: [{ type: Schema.Types.ObjectId, ref: "Category" }],
@@ -13,7 +13,6 @@ export const categorySchema = new Schema<CategoryDoc>(
     parent: {
       type: Schema.Types.ObjectId,
       ref: "Category",
-      // required: true,
       default: null,
     },
   },

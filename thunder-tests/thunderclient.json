@@ -8,12 +8,12 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2022-09-22T08:41:41.481Z",
-    "modified": "2023-02-14T05:00:56.840Z",
+    "modified": "2023-03-03T19:56:03.693Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"safwat\",\n  \"email\": \"test3@ex.com\",\n  \"phone\": \"01100000200\",\n  \"password\": \"123456789\",\n  \"password_confirm\": \"123456789\"\n}",
+      "raw": "{\n  \"name\": \"safwat\",\n  \"email\": \"test3@ex.com\",\n  \"phone\": \"01100000200\",\n  \"password\": \"123456789\",\n  \"password_confirm\": \"123056789\"\n}",
       "form": []
     },
     "tests": []
@@ -87,14 +87,26 @@
     "_id": "ff30d83c-0fbb-4600-969d-20ef5a7573da",
     "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
     "containerId": "6d8f1806-956f-4d27-a4d4-3e782da419ee",
-    "name": "getByName",
-    "url": "{{baseUrl}}/api/category/foods",
+    "name": "index",
+    "url": "{{baseUrl}}/api/category/?page=1",
     "method": "GET",
     "sortNum": 70000,
     "created": "2022-09-27T05:03:25.294Z",
-    "modified": "2022-10-21T16:34:32.471Z",
+    "modified": "2023-03-03T21:25:35.363Z",
     "headers": [],
-    "params": [],
+    "params": [
+      {
+        "name": "page",
+        "value": "1",
+        "isPath": false
+      },
+      {
+        "name": "filter[name]",
+        "value": "Cloths",
+        "isDisabled": true,
+        "isPath": false
+      }
+    ],
     "tests": []
   },
   {
@@ -208,11 +220,11 @@
     "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
     "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
     "name": "index",
-    "url": "{{baseUrl}}/api/products/?page=1&sort[price]=desc&filter[price][gte]=100&filter[price][lte]=300",
+    "url": "{{baseUrl}}/api/products/?page=1&sort[price]=desc&filter[name]=shirt",
     "method": "GET",
     "sortNum": 130000,
     "created": "2023-02-17T12:55:55.621Z",
-    "modified": "2023-03-02T06:07:20.833Z",
+    "modified": "2023-03-03T21:03:59.874Z",
     "headers": [],
     "params": [
       {
@@ -240,7 +252,6 @@
       {
         "name": "filter[name]",
         "value": "shirt",
-        "isDisabled": true,
         "isPath": false
       },
       {
@@ -252,11 +263,13 @@
       {
         "name": "filter[price][gte]",
         "value": "100",
+        "isDisabled": true,
         "isPath": false
       },
       {
         "name": "filter[price][lte]",
         "value": "300",
+        "isDisabled": true,
         "isPath": false
       }
     ],

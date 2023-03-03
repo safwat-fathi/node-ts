@@ -4,9 +4,11 @@
  * @returns {object} Returns mongodb query with filter operators
  */
 export const processQuery = (
-  query: Record<string, string>
-): Record<string, string> => {
+  query: Record<string, string> | null
+): Record<string, string> | null => {
   try {
+    if (!query) return null;
+
     const queryStringified = JSON.stringify(query);
 
     const queryProcessed = queryStringified.replace(

@@ -1,4 +1,4 @@
-import { UserModel } from "api/models/user/user.model";
+import { UserModel } from "models/user/user.model";
 import { hashPassword } from "lib/utils/auth";
 import dotenv from "dotenv";
 
@@ -9,7 +9,10 @@ export const seedUsers = async () => {
     // drop all stored docs
     // UserModel.collection.drop();
 
-    if (err) throw new Error(`${err}`);
+    // Rebuild all indexes
+    await UserModel.syncIndexes();
+
+    if (err) throw new Error(`seedUsers::${err}`);
 
     if (count === 0) {
       UserModel.collection

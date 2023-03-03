@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { UserModel } from "api/models/user/user.model";
-import { OrderModel } from "api/models/orders/orders.model";
-import { ProductsModel } from "api/models/products/products.model";
+import { UserModel } from "models/user/user.model";
+import { OrderModel } from "models/orders/orders.model";
+import { ProductModel } from "models/products/products.model";
 import { Order, ProductDoc } from "types/db";
 import { HttpError } from "lib/classes/errors/http";
 import { asyncHandler } from "api/middlewares/async.middleware";
@@ -22,7 +22,7 @@ export const addOrder = asyncHandler(
     for (const i in products) {
       const productId = products[i].product;
       const qty = products[i].quantity;
-      const product: ProductDoc | null = await ProductsModel.findOne({
+      const product: ProductDoc | null = await ProductModel.findOne({
         _id: productId,
       });
 

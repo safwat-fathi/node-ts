@@ -1,20 +1,12 @@
-import {
-  ObjectId,
-  // QuerySelector,
-  HydratedDocument,
-  FilterQuery,
-  SortOrder,
-} from "mongoose";
+import { ObjectId, HydratedDocument, FilterQuery, SortOrder } from "mongoose";
 
 export type TDoc<T> = HydratedDocument<T>;
 
 export type TSortOrder = SortOrder;
 
-// type TQuery<T> = QuerySelector<T>;
-
 type TSortBy = { by: string; type: SortOrder };
 
-export interface StoreDB<T> {
+export interface Service<T> {
   index: (
     skip?: number,
     pageSize?: number,

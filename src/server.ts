@@ -73,9 +73,20 @@ const server = app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at ${PORT}`);
 });
 
+// websocket server
 const wss = new WebSocketServer(server);
 wss.attachEventListeners();
 
 export const Notification = new EventEmitter();
+
+process.on("uncaughtException", error => {
+  console.log("Server::uncaughtException::", error);
+  process.exit(1); // exit application
+});
+
+process.on("unhandledRejection", (error, promise) => {
+  console.log("Server::unhandledRejection::promise", promise);
+  console.log("Server::unhandledRejection::error", error);
+});
 
 export default app;

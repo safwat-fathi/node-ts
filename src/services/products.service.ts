@@ -1,11 +1,7 @@
-// import { CategoryStore } from "api/models/categories/categories.model";
-import { model, Query } from "mongoose";
-import { Product, ProductDoc, StoreDB, TSortBy } from "types/db";
-import { ProductsSchema } from "./products.schema";
+import { ProductModel } from "models/products/products.model";
+import { Product, ProductDoc, Service, TSortBy } from "types/db";
 
-export const ProductsModel = model<Product>("Product", ProductsSchema);
-
-export class ProductsStore implements Partial<StoreDB<Product>> {
+export class ProductService implements Partial<Service<Product>> {
   async index(
     skip?: number,
     pageSize?: number,
@@ -13,7 +9,7 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
     filter?: any | null
   ): Promise<[Product[], number]> {
     try {
-      const query = ProductsModel.find(
+      const query = ProductModel.find(
         // filter by model fields (name, price, stock, etc...)
         filter || {},
         // select model fields to return
@@ -30,24 +26,24 @@ export class ProductsStore implements Partial<StoreDB<Product>> {
 
       const [products, count] = await Promise.all([
         query.exec(),
-        ProductsModel.estimatedDocumentCount(),
+        ProductModel.estimatedDocumentCount(),
       ]);
 
       return [products, count];
     } catch (err) {
-      throw new Error(`ProductStore::index::${err}`);
+      throw new Error(`ProductService::index::${err}`);
     }
   }
 
   async create(newProduct: Product): Promise<ProductDoc> {
     try {
-      const product = await ProductsModel.create(newProduct);
+      const product = await ProductModel.create(newProduct);
 
       await product.save();
 
       return product;
     } catch (err) {
-      throw new Error(`ProductStore::create::${err}`);
+      throw new Error(`ProductService::create::${err}`);
     }
   }
 }

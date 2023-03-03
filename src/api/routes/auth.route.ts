@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { signup, login, logout } from "api/controllers/auth.controller";
 import {
-  checkDuplicate,
   validateEmail,
   validateName,
   validatePasswordMatch,
@@ -19,7 +18,6 @@ auth.post(
   validatePassword,
   validatePasswordMatch,
   validatePhone,
-  checkDuplicate,
   signup
 );
 // login

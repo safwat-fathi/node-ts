@@ -3,35 +3,12 @@ import { CustomJwtPayload } from "types/jwt";
 import { NextFunction, Request, Response } from "express";
 import { body } from "express-validator";
 import { verify } from "jsonwebtoken";
-import { UserStore } from "api/models/user/user.model";
-// import { SubscriptionStore } from "api/models/subscription/subscription.model";
 import { HttpError } from "lib/classes/errors/http";
 import { asyncHandler } from "./async.middleware";
 
 dotenv.config();
 
 const secret = (process.env.SECRET as string) || "";
-
-export const checkDuplicate = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { email, phone } = req.body as { email: string; phone: string };
-
-    const userStore = new UserStore();
-
-    const user = await userStore.find([
-      { by: "email", value: email },
-      { by: "phone", value: phone },
-    ]);
-
-    if (user) {
-      return next(
-        new HttpError(400, "Sorry, email or phone is already in use!")
-      );
-    }
-
-    next();
-  }
-);
 
 // export const validateSubscription = asyncHandler(
 //   async (req: Request, res: Response, next: NextFunction) => {

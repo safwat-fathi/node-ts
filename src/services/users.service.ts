@@ -1,12 +1,9 @@
-import { model } from "mongoose";
-import { StoreDB, User, UserDoc } from "types/db";
-import { UserSchema } from "./user.schema";
 import { comparePassword } from "lib/utils/auth";
+import { UserModel } from "models/user/user.model";
+import { Service, User, UserDoc } from "types/db";
 
-export const UserModel = model<UserDoc>("User", UserSchema);
-
-export class UserStore {
-  async signup(u: Partial<User>): Promise<UserDoc> {
+export class UserService implements Partial<Service<User>> {
+  async create(u: Partial<User>): Promise<UserDoc> {
     try {
       const user = new UserModel({
         name: u.name,
@@ -20,7 +17,7 @@ export class UserStore {
 
       return user;
     } catch (err) {
-      throw new Error(`UserStore::signup::${err}`);
+      throw new Error(`UserService::signup::${err}`);
     }
   }
 
@@ -43,7 +40,7 @@ export class UserStore {
 
       return user;
     } catch (err) {
-      throw new Error(`UserStore::login::${err}`);
+      throw new Error(`UserService::login::${err}`);
     }
   }
 
@@ -73,7 +70,7 @@ export class UserStore {
 
   //     return users;
   //   } catch (err) {
-  //     throw new Error(`UserStore::find::${err}`);
+  //     throw new Error(`UserService::find::${err}`);
   //   }
   // }
 }

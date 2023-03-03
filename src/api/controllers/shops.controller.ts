@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-// import { ShopsStore } from "api/models/stores/shops.model";
+// import { ShopsStore } from "models/stores/shops.model";
 // import { HttpError } from "lib/classes/errors/http";
 import { asyncHandler } from "api/middlewares/async.middleware";
 

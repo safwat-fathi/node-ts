@@ -15,7 +15,12 @@ export const ProductsSchema = new Schema<ProductDoc>(
       required: [true, "{VALUE} can not be null"],
       maxlength: [500, "Description can not be more than 500 characters"],
     },
-    slug: String,
+    slug: {
+      type: String,
+      required: [true, "{VALUE} can not be null"],
+      // index: true,
+      unique: true,
+    },
     price: {
       type: Number,
       required: [true, "{VALUE} can not be null"],

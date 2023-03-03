@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-import { StoreDB } from "types/db";
+import { Service, TSortBy } from "types/db";
 import { asyncHandler } from "./async.middleware";
 import { createHash } from "crypto";
 import { HttpError } from "lib/classes/errors/http";
 import { processQuery } from "lib/utils/mongoose";
 
-export const paginate = <T>(index: StoreDB<T>["index"]) =>
+export const paginate = <T>(index: Service<T>["index"]) =>
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { skip, limit, page, sort, filter } = {
       ...req.query,
@@ -13,8 +13,8 @@ export const paginate = <T>(index: StoreDB<T>["index"]) =>
       skip: string;
       limit: string;
       page: string;
-      sort: any;
-      filter: any;
+      sort: TSortBy | null;
+      filter: any | null;
     };
     // process filter to match mongo query operators
     const filterProcessed = processQuery(filter);

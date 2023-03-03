@@ -1,21 +1,24 @@
-import { ProductsModel } from "api/models/products/products.model";
+import { CategoryModel } from "models/categories/categories.model";
+import { ProductModel } from "models/products/products.model";
 import dotenv from "dotenv";
 import { slugify } from "lib/utils/string";
 
 dotenv.config();
 
 export const seedProducts = () => {
-  ProductsModel.estimatedDocumentCount({}, async (err, count) => {
+  ProductModel.estimatedDocumentCount({}, async (err, count) => {
+    const categoryCloths = await CategoryModel.findOne({ name: "Cloths" });
+
     // drop all stored docs
-    // ProductsModel.collection.drop();
+    // ProductModel.collection.drop();
 
     // Rebuild all indexes
-    // await ProductsModel.syncIndexes();
+    await ProductModel.syncIndexes();
 
     if (err) throw new Error(`${err}`);
 
     if (count === 0) {
-      ProductsModel.collection
+      ProductModel.collection
         .insertMany([
           {
             name: "Long Sleeve White Shirt",
@@ -24,7 +27,7 @@ export const seedProducts = () => {
             images: [{ url: "http://test.images.white-shirt" }],
             price: 240,
             stock: 120,
-            categories: [],
+            categories: [categoryCloths?._id],
           },
           {
             name: "Grey Sweatshirt",
@@ -33,7 +36,7 @@ export const seedProducts = () => {
             images: [{ url: "http://test.images.grey-sweatshirt" }],
             price: 600,
             stock: 90,
-            categories: [],
+            categories: [categoryCloths?._id],
           },
         ])
         .then(products =>
