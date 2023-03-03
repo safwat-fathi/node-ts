@@ -87,6 +87,17 @@ process.on("uncaughtException", error => {
 process.on("unhandledRejection", (error, promise) => {
   console.log("Server::unhandledRejection::promise", promise);
   console.log("Server::unhandledRejection::error", error);
+  process.exit(1); // exit application
+});
+
+process.on("SIGTERM", error => {
+  console.log("Server::SIGTERM", error);
+  process.exit(0); // exit application
+});
+
+process.on("SIGINT", error => {
+  console.log("Server::SIGINT", error);
+  process.exit(0); // exit application
 });
 
 export default app;
