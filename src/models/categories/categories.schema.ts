@@ -8,27 +8,54 @@ export const categorySchema = new Schema<CategoryDoc>(
     description: { type: String, required: true },
     sub: {
       type: [{ type: Schema.Types.ObjectId, ref: "Category" }],
-      default: null,
+      default: [],
     },
     parent: {
       type: Schema.Types.ObjectId,
       ref: "Category",
-      default: null,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: { virtuals: true },
+  }
 );
 
-// update parent sub when sub category created
+// Cascade delete categories when a parent category is deleted
+categorySchema.pre<CategoryDoc>(
+  "remove",
+  async function (next: CallbackWithoutResultAndOptionalError) {
+    await CategoryModel.deleteMany({ parent: this._id });
+
+    next();
+  }
+);
+
+// Update parent sub when sub category created
 categorySchema.pre<CategoryDoc>(
   "save",
   async function (next: CallbackWithoutResultAndOptionalError) {
     if (this.parent !== null) {
       const parentDoc = await CategoryModel.findById(this.parent);
 
-      await parentDoc?.updateOne({ $push: { sub: this.id } });
+      if (!parentDoc) {
+        return next(new Error("parent document not found"));
+      }
+
+      await parentDoc.updateOne({ $push: { sub: this.id } });
     }
 
     next();
   }
 );
+
+// Reverse populate with virtuals
+// categorySchema.virtual("sub", {
+//   ref: "Category",
+//   localField: "_id",
+//   foreignField: "parent",
+//   justOne: false,
+// });

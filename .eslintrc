@@ -13,6 +13,7 @@
     "plugin:@typescript-eslint/recommended"
   ],
 	"rules": {
+		"no-useless-escape": 1
 		// "no-console": 1
 	}
 }

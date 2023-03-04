@@ -17,55 +17,17 @@ export const index = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
-// * SEARCH
-// * ----------
-export const findByCategory = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { categoryId } = req.params;
-    const products = await ProductModel.find({ categories: categoryId });
-
-    if (products.length === 0) {
-      return next(new HttpError(404, `No products match this search`));
-    }
-
-    res.status(200).json({
-      success: true,
-      data: products,
-      message: `Found ${products.length} products`,
-    });
-  }
-);
-
-export const findByName = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const categoryId = req.params.categoryId;
-
-    const products = await ProductModel.find({ categories: categoryId });
-
-    if (products.length === 0) {
-      return next(new HttpError(404, `No products match this search`));
-    }
-
-    res.status(200).json({
-      success: true,
-      data: products,
-      message: `Found ${products.length} products`,
-    });
-    console.log(products);
-  }
-);
-
 // * CREATE
 // * ----------
-export const addProduct = asyncHandler(
+export const create = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { categories } = req.body as Product;
+    const { category } = req.body as Product;
 
     const productService = new ProductService();
 
     // check if there is a category match the passed one
     const categoriesFound: CategoryDoc[] = await CategoryModel.find({
-      _id: { $in: categories },
+      _id: { $in: category },
     });
 
     if (categoriesFound && categoriesFound.length === 0) {

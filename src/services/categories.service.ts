@@ -1,10 +1,11 @@
 import { CategoryModel } from "models/categories/categories.model";
+import { ObjectId } from "mongoose";
 import { Category, CategoryDoc, Service, TSortBy } from "types/db";
 
 export class CategoryService implements Partial<Service<Category>> {
   async index(
-    skip?: number,
-    pageSize?: number,
+    skip?: number | null,
+    pageSize?: number | null,
     sort?: TSortBy | null,
     filter?: any | null
   ): Promise<[CategoryDoc[], number]> {
@@ -22,7 +23,9 @@ export class CategoryService implements Partial<Service<Category>> {
         }
       )
         .skip(skip || 0)
-        .limit(pageSize || 10);
+        .limit(pageSize || 10)
+        .populate("sub");
+      // .select("name description");
 
       const [categories, count] = await Promise.all([
         query.exec(),
@@ -35,36 +38,58 @@ export class CategoryService implements Partial<Service<Category>> {
     }
   }
 
-  async find(
-    // find: TFindBy<Category> | TFindBy<Category>[]
-    find: any
-  ): Promise<CategoryDoc | CategoryDoc[] | null> {
+  async create(newCategory: Category): Promise<CategoryDoc> {
     try {
-      let categories: CategoryDoc | CategoryDoc[] | null = [];
+      const { name } = newCategory;
 
-      if (Array.isArray(find)) {
-        let query: any = [];
+      // check if already exist
+      const foundCategory = await CategoryModel.findOne({ name });
 
-        for (let i in find) {
-          query = [...query, { [String(find[i].by)]: find[i].value }];
-        }
-
-        categories = await CategoryModel.find({
-          $or: query,
-        });
-      } else {
-        categories = await CategoryModel.findOne({
-          [String(find.by)]: find.value,
-        });
+      if (foundCategory) {
+        throw new Error(`Category ${name} already exists`);
       }
 
-      if (!categories) {
-        return null;
-      }
+      const category = await CategoryModel.create(newCategory);
 
-      return categories;
+      await category.save();
+
+      return category;
     } catch (err) {
-      throw new Error(`CategoryService::find::${err}`);
+      throw new Error(`CategoryService::create::${err}`);
+    }
+  }
+
+  async update(category: Category): Promise<CategoryDoc> {
+    try {
+      const { name } = category;
+
+      const updatedCategory = await CategoryModel.findOneAndUpdate(
+        { name },
+        category,
+        { returnOriginal: false, upsert: false }
+      );
+
+      if (!updatedCategory) {
+        throw new Error(`Category ${name} update failed`);
+      }
+
+      return updatedCategory;
+    } catch (err) {
+      throw new Error(`CategoryService::update::${err}`);
+    }
+  }
+
+  async delete(categoryId: ObjectId): Promise<void> {
+    try {
+      const categoryToDelete = await CategoryModel.findById(categoryId);
+
+      if (!categoryToDelete) {
+        throw new Error(`Category not found`);
+      }
+
+      await categoryToDelete.remove();
+    } catch (err) {
+      throw new Error(`CategoryService::delete::${err}`);
     }
   }
 }

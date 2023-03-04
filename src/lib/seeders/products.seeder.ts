@@ -10,7 +10,7 @@ export const seedProducts = () => {
     const categoryCloths = await CategoryModel.findOne({ name: "Cloths" });
 
     // drop all stored docs
-    // ProductModel.collection.drop();
+    ProductModel.collection.drop();
 
     // Rebuild all indexes
     await ProductModel.syncIndexes();
@@ -27,7 +27,7 @@ export const seedProducts = () => {
             images: [{ url: "http://test.images.white-shirt" }],
             price: 240,
             stock: 120,
-            categories: [categoryCloths?._id],
+            category: [categoryCloths?._id],
           },
           {
             name: "Grey Sweatshirt",
@@ -36,7 +36,7 @@ export const seedProducts = () => {
             images: [{ url: "http://test.images.grey-sweatshirt" }],
             price: 600,
             stock: 90,
-            categories: [categoryCloths?._id],
+            category: [categoryCloths?._id],
           },
         ])
         .then(products =>

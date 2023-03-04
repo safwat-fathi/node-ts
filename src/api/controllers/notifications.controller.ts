@@ -2,11 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import { IncomingHttpHeaders } from "http";
 import { asyncHandler } from "api/middlewares/async.middleware";
 import { Notification } from "server";
-import { Stream } from "stream";
+// import { Stream } from "stream";
 
 // send to specific clients
 // get from DB
-let clients: { id: string; response: Response }[] = [];
+// const clients: { id: string; response: Response }[] = [];
 
 export const send = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

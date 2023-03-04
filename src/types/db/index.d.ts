@@ -18,7 +18,7 @@ export interface Service<T> {
 
   update: (docToUpdate: T) => Promise<TDoc<T>>;
 
-  delete: () => void;
+  delete: (docToDelete: ObjectId) => Promise<void>;
 }
 
 export interface User {
@@ -69,7 +69,7 @@ export interface Product {
   price: number;
   stock: number;
   images: { type: ProductImage; url: string }[];
-  categories: ObjectId[];
+  category: ObjectId[];
 }
 export type ProductDoc = TDoc<Product>;
 

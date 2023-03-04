@@ -52,7 +52,7 @@ export const ProductsSchema = new Schema<ProductDoc>(
         val: { imgType: "card" | "cover" | "thumbnail"; url: string }[]
       ) => Array.isArray(val) && val.length > 0,
     },
-    categories: {
+    category: {
       type: [Schema.Types.ObjectId],
       ref: "Category",
       required: [true, "{VALUE} can not be null"],
@@ -65,7 +65,7 @@ export const ProductsSchema = new Schema<ProductDoc>(
   }
 );
 
-// slugify every prod before save
+// slugify every product before save
 ProductsSchema.pre<ProductDoc>(
   "save",
   function (next: CallbackWithoutResultAndOptionalError) {

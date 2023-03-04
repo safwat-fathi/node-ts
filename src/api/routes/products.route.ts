@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   // findByName,
   // findByCategory,
-  addProduct,
+  create,
   index,
 } from "api/controllers/products.controller";
 import { verifyToken } from "api/middlewares/auth.middleware";
@@ -18,6 +18,6 @@ const productService = new ProductService();
 products.get("/", paginate<Product>(productService.index), index);
 
 // * CREATE
-products.post("/add", verifyToken, addProduct);
+products.post("/add", verifyToken, create);
 
 export default products;

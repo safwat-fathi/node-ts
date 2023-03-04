@@ -48,7 +48,7 @@ app.use(cors());
 app.use(express.json());
 // prevent param pollution
 app.use(hpp());
-// sanitize data
+// sanitize query params of mongo operators
 app.use(
   mongoSanitize({
     onSanitize: ({ req, key }) => {

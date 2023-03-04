@@ -92,7 +92,7 @@
     "method": "GET",
     "sortNum": 70000,
     "created": "2022-09-27T05:03:25.294Z",
-    "modified": "2023-03-03T21:25:35.363Z",
+    "modified": "2023-03-04T05:37:27.352Z",
     "headers": [],
     "params": [
       {
@@ -101,8 +101,8 @@
         "isPath": false
       },
       {
-        "name": "filter[name]",
-        "value": "Cloths",
+        "name": "filter[_id]",
+        "value": "6402d74853ec4dfeb6222707",
         "isDisabled": true,
         "isPath": false
       }
@@ -273,6 +273,51 @@
         "isPath": false
       }
     ],
+    "tests": []
+  },
+  {
+    "_id": "41eaf634-ffa9-4b24-a12e-641cff19b04f",
+    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+    "containerId": "6d8f1806-956f-4d27-a4d4-3e782da419ee",
+    "name": "create",
+    "url": "{{baseUrl}}/api/category/create",
+    "method": "POST",
+    "sortNum": 140000,
+    "created": "2023-03-04T05:53:00.316Z",
+    "modified": "2023-03-04T13:16:24.338Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "page",
+        "value": "1",
+        "isDisabled": true,
+        "isPath": false
+      }
+    ],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"a1\",\n  \"description\": \"All girls cloths\",\n  \"parent\": \"6403449ba102fc2419977529\",\n  \"sub\": []\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "82e6e71f-e8b8-4b4e-a7f3-a38b88b1c04d",
+    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+    "containerId": "6d8f1806-956f-4d27-a4d4-3e782da419ee",
+    "name": "update",
+    "url": "{{baseUrl}}/api/category/update",
+    "method": "POST",
+    "sortNum": 150000,
+    "created": "2023-03-04T06:48:35.933Z",
+    "modified": "2023-03-04T06:58:12.340Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Women Clohs\",\n  \"description\": \"All women --cloths\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]

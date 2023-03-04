@@ -18,6 +18,7 @@ export const seedCategories = () => {
         name: "Cloths",
         description: "All Cloths",
         parent: null,
+        sub: [],
       });
 
       CategoryModel.collection
@@ -26,10 +27,11 @@ export const seedCategories = () => {
             name: "Shirts",
             description: "All Shirts",
             parent: parentClothsCategory.insertedId,
+            sub: [],
           },
-          { name: "Food", description: "All food", parent: null },
+          { name: "Food", description: "All food", parent: null, sub: [] },
         ])
-        .then(users => console.log(`${users.insertedCount} users created`))
+        .then(users => console.log(`${users.insertedCount} category created`))
         .catch(err => new Error(`Categories::seeder::${err}`));
     }
   });

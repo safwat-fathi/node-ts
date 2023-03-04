@@ -27,18 +27,18 @@ export const paginate = <T>(index: Service<T>["index"]) =>
     const current_page = +page;
     const total_pages = Math.ceil(count / PAGE_SIZE);
 
-    if (!page || +page <= 0) {
-      next(new HttpError(404, `Page requested not found`));
+    if (!current_page || current_page <= 0) {
+      next(new HttpError(404, `Page requested not valid or no page provided`));
     }
 
-    if (current_page > total_pages) {
-      next(
-        new HttpError(
-          404,
-          `Page requested not found current total pages is: ${total_pages}`
-        )
-      );
-    }
+    // if (current_page > total_pages) {
+    //   next(
+    //     new HttpError(
+    //       404,
+    //       `Page requested not found, current total pages is: ${total_pages}`
+    //     )
+    //   );
+    // }
 
     // hashing data to help client identify data has changed
     const data_stringified = JSON.stringify(data);
