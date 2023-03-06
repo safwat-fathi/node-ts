@@ -52,38 +52,6 @@
     "tests": []
   },
   {
-    "_id": "9a9a3be0-8c37-443f-903e-d34f5d8ca554",
-    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
-    "containerId": "",
-    "name": "getBySubscription",
-    "url": "{{baseUrl}}/api/user/632c735a299e8c117fd63fa0",
-    "method": "GET",
-    "sortNum": 50000,
-    "created": "2022-09-22T14:58:00.194Z",
-    "modified": "2023-01-21T13:52:22.096Z",
-    "headers": [],
-    "params": [],
-    "auth": {
-      "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmM3NzlkZGIxNWNiNDM1ZWRlNGJlZiIsIm5hbWUiOiJhbGkiLCJpYXQiOjE2NjM5MjE3NDR9.7QP4c8ow9tuJ4Ad6cjPGWr1iLiLCOTkqBzMJ8W50pIk"
-    },
-    "tests": []
-  },
-  {
-    "_id": "da7f09cf-7c95-461a-b4b3-d49c46fd358a",
-    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
-    "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
-    "name": "getByCategory",
-    "url": "{{baseUrl}}/api/products/632ef4de7683d5e43f3360b1",
-    "method": "GET",
-    "sortNum": 60000,
-    "created": "2022-09-24T13:13:47.339Z",
-    "modified": "2023-01-21T14:47:04.019Z",
-    "headers": [],
-    "params": [],
-    "tests": []
-  },
-  {
     "_id": "ff30d83c-0fbb-4600-969d-20ef5a7573da",
     "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
     "containerId": "6d8f1806-956f-4d27-a4d4-3e782da419ee",
@@ -113,17 +81,17 @@
     "_id": "f30a5c15-a190-4774-988f-1aedc80b7acc",
     "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
     "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
-    "name": "add",
-    "url": "{{baseUrl}}/api/products/add",
+    "name": "create",
+    "url": "{{baseUrl}}/api/products/create",
     "method": "POST",
     "sortNum": 80000,
     "created": "2022-09-30T11:18:22.983Z",
-    "modified": "2023-02-18T19:48:21.986Z",
+    "modified": "2023-03-06T22:47:33.192Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"Black Beans\",\n  \"categories\": [\"63b5186722c09d075e4c7e12\"],\n  \"stock\": 50,\n  \"images\": [{\"type\": \"cover\", \"url\": \"https://www.theihcc.com/wp-content/uploads/2020/12/taking-a-drug-test-1024x800.jpg\"}],\n  \"price\": 23,\n  \"description\": \"Egyptian cooked black beans\"\n}",
+      "raw": "{\n  \"name\": \"Black Shirt\",\n  \"categories\": [\"64066d7986f0b9221ab5e427\"],\n  \"stock\": 50,\n  \"images\": [{\"type\": \"cover\", \"url\": \"https://www.theihcc.com/wp-content/uploads/2020/12/taking-a-drug-test-1024x800.jpg\"}],\n  \"price\": 23,\n  \"description\": \"Egyptian cotton shirt\"\n}",
       "form": []
     },
     "tests": []

@@ -2,7 +2,7 @@ import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
 import { CategoryDoc } from "types/db";
 import { CategoryModel } from "./categories.model";
 
-export const categorySchema = new Schema<CategoryDoc>(
+export const CategorySchema = new Schema<CategoryDoc>(
   {
     name: { type: String, required: true, unique: true },
     description: { type: String, required: true },
@@ -17,15 +17,15 @@ export const categorySchema = new Schema<CategoryDoc>(
   },
   {
     timestamps: true,
-    toJSON: {
-      virtuals: true,
-    },
-    toObject: { virtuals: true },
+    // toJSON: {
+    //   virtuals: true,
+    // },
+    // toObject: { virtuals: true },
   }
 );
 
 // Cascade delete categories when a parent category is deleted
-categorySchema.pre<CategoryDoc>(
+CategorySchema.pre<CategoryDoc>(
   "remove",
   async function (next: CallbackWithoutResultAndOptionalError) {
     await CategoryModel.deleteMany({ parent: this._id });
@@ -34,9 +34,9 @@ categorySchema.pre<CategoryDoc>(
   }
 );
 
-// Update parent sub when sub category created
-categorySchema.pre<CategoryDoc>(
-  "save",
+// Update a parent sub categories when new sub category created
+CategorySchema.pre<CategoryDoc>(
+  "validate",
   async function (next: CallbackWithoutResultAndOptionalError) {
     if (this.parent !== null) {
       const parentDoc = await CategoryModel.findById(this.parent);
@@ -53,7 +53,7 @@ categorySchema.pre<CategoryDoc>(
 );
 
 // Reverse populate with virtuals
-// categorySchema.virtual("sub", {
+// CategorySchema.virtual("sub", {
 //   ref: "Category",
 //   localField: "_id",
 //   foreignField: "parent",

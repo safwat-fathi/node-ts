@@ -10,22 +10,29 @@ export class CategoryService implements Partial<Service<Category>> {
     filter?: any | null
   ): Promise<[CategoryDoc[], number]> {
     try {
-      const query = CategoryModel.find(
-        // filter by model fields
-        filter || {},
-        // select model fields to return
-        null,
-        // options (sort, pagination, etc...)
-        {
-          ...(sort && {
-            sort,
-          }),
-        }
-      )
-        .skip(skip || 0)
-        .limit(pageSize || 10)
-        .populate("sub");
-      // .select("name description");
+      let query = null;
+
+      // if not pagination its find query
+      if (!skip && !pageSize && !sort) {
+        query = CategoryModel.find(filter);
+      } else {
+        query = CategoryModel.find(
+          // filter by model fields
+          filter || {},
+          // select model fields to return
+          null,
+          // options (sort, pagination, etc...)
+          {
+            ...(sort && {
+              sort,
+            }),
+          }
+        )
+          .skip(skip || 0)
+          .limit(pageSize || 10)
+          .populate("sub");
+        // .select("name description");
+      }
 
       const [categories, count] = await Promise.all([
         query.exec(),

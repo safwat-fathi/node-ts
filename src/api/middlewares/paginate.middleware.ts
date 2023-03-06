@@ -17,12 +17,17 @@ export const paginate = <T>(index: Service<T>["index"]) =>
       filter: any | null;
     };
     // process filter to match mongo query operators
-    const filterProcessed = processQuery(filter);
+    const filterQueryProcessed = processQuery(filter);
 
     const PAGE_SIZE = +limit || 10;
     const SKIP = +skip || (+page - 1) * PAGE_SIZE;
 
-    const [data, count] = await index(SKIP, PAGE_SIZE, sort, filterProcessed);
+    const [data, count] = await index(
+      SKIP,
+      PAGE_SIZE,
+      sort,
+      filterQueryProcessed
+    );
 
     const current_page = +page;
     const total_pages = Math.ceil(count / PAGE_SIZE);

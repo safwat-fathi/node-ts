@@ -16,6 +16,10 @@
 - technologies used?
 - installation?
 
+## Categories
+
+- check CRUD operations
+
 ## Products
 
 - CRUD operations update (stock, image, etc...)
@@ -62,6 +66,10 @@
 - seeder
 - orders
 - role
+
+## Reviews
+
+- CRUD operations
 
 ## Orders
 

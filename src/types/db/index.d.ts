@@ -69,7 +69,7 @@ export interface Product {
   price: number;
   stock: number;
   images: { type: ProductImage; url: string }[];
-  category: ObjectId[];
+  categories: ObjectId[];
 }
 export type ProductDoc = TDoc<Product>;
 
