@@ -1,6 +1,6 @@
 import { Router } from "express";
-// import { findBySubId } from "api/controllers/user.controller";
-import { verifyToken } from "api/middlewares/auth.middleware";
+// import { findBySubId } from "src/api/controllers/user.controller";
+import { verifyToken } from "src/api/middlewares/auth.middleware";
 
 const user = Router();
 

@@ -1,7 +1,7 @@
-import { CategoryModel } from "models/categories/categories.model";
-import { ProductModel } from "models/products/products.model";
+import { CategoryModel } from "src/models//categories/categories.model";
+import { ProductModel } from "src/models//products/products.model";
 import dotenv from "dotenv";
-import { slugify } from "lib/utils/string";
+import { slugify } from "src/lib/utils/string";
 
 dotenv.config();
 

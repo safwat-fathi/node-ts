@@ -1,5 +1,5 @@
-import { UserModel } from "models/user/user.model";
-import { hashPassword } from "lib/utils/auth";
+import { UserModel } from "src/models//user/user.model";
+import { hashPassword } from "src/lib/utils/auth";
 import dotenv from "dotenv";
 
 dotenv.config();

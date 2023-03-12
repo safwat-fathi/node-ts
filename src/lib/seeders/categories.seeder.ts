@@ -1,4 +1,4 @@
-import { CategoryModel } from "models/categories/categories.model";
+import { CategoryModel } from "src/models//categories/categories.model";
 import dotenv from "dotenv";
 
 dotenv.config();

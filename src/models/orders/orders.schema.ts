@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
-import { OrderDoc } from "types/db";
-// import { geocoder } from "lib/utils/geocoder";
+import { OrderDoc } from "src/types/db";
+// import { geocoder } from "src/lib/utils/geocoder";
 
 export const OrderSchema = new Schema<OrderDoc>(
   {

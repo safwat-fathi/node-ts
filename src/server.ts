@@ -3,17 +3,17 @@ import express, { Express } from "express";
 import session from "express-session";
 import compression from "compression";
 import cors from "cors";
-import { errorHandler } from "api/middlewares/error.middleware";
-import { connectDB } from "config/db.config";
+import { errorHandler } from "src/api/middlewares/error.middleware";
+import { connectDB } from "src/config/db.config";
 import mongoSanitize from "express-mongo-sanitize";
 // seeders
-import { seedCategories } from "lib/seeders/categories.seeder";
-import { seedProducts } from "lib/seeders/products.seeder";
+import { seedCategories } from "src/lib/seeders/categories.seeder";
+import { seedProducts } from "src/lib/seeders/products.seeder";
 // routes
-import routes from "api/routes";
+import routes from "src/api/routes";
 import { EventEmitter } from "stream";
-import WebSocketServer from "websocket";
-import { seedUsers } from "lib/seeders/users.seeder";
+import WebSocketServer from "src/websocket";
+import { seedUsers } from "src/lib/seeders/users.seeder";
 import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 import hpp from "hpp";

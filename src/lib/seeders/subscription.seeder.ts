@@ -1,4 +1,4 @@
-// import { SubscriptionModel } from "models/subscription/subscription.model";
+// import { SubscriptionModel } from "src/models//subscription/subscription.model";
 // import dotenv from "dotenv";
 
 // dotenv.config();

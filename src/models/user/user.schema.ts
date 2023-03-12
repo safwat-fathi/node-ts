@@ -1,6 +1,6 @@
 import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
-import { User } from "types/db";
-import { hashPassword } from "lib/utils/auth";
+import { User } from "src/types/db";
+import { hashPassword } from "src/lib/utils/auth";
 
 export const UserSchema = new Schema<User>(
   {

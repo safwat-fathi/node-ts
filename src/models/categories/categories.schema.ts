@@ -1,5 +1,5 @@
 import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
-import { CategoryDoc } from "types/db";
+import { CategoryDoc } from "src/types/db";
 import { CategoryModel } from "./categories.model";
 
 export const CategorySchema = new Schema<CategoryDoc>(

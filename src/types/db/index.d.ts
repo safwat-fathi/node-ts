@@ -7,18 +7,18 @@ export type TSortOrder = SortOrder;
 type TSortBy = { by: string; type: SortOrder };
 
 export interface Service<T> {
-  index: (
+  index(
     skip?: number,
     pageSize?: number,
     sort?: TSortBy | null,
     filter?: any | null
-  ) => Promise<[T[], number]>; // return array of T type and count of found data
+  ): Promise<[T[], number]>; // return array of T type and count of found data
 
-  create: (newDoc: T) => Promise<TDoc<T>>;
+  create(newDoc: T): Promise<TDoc<T>>;
 
-  update: (docToUpdate: T) => Promise<TDoc<T>>;
+  update(docToUpdate: T): Promise<TDoc<T>>;
 
-  delete: (docToDelete: ObjectId) => Promise<void>;
+  delete(docToDelete: ObjectId): Promise<void>;
 }
 
 export interface User {

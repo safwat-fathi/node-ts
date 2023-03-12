@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { asyncHandler } from "api/middlewares/async.middleware";
-import { HttpError } from "lib/classes/errors/http";
-import { Category } from "types/db";
-import { CategoryService } from "services/categories.service";
+import { asyncHandler } from "src/api/middlewares/async.middleware";
+import { HttpError } from "src/lib/classes/errors/http";
+import { Category } from "src/types/db";
+import { CategoryService } from "src/services/categories.service";
 
 export const index = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

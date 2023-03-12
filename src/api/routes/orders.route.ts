@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { addOrder } from "api/controllers/orders.controller";
-import { verifyToken } from "api/middlewares/auth.middleware";
+import { create } from "src/api/controllers/orders.controller";
+// import { verifyToken } from "src/api/middlewares/auth.middleware";
 
 const orders = Router();
 
 // * CREATE
-orders.post("/add", verifyToken, addOrder);
+orders.post("/create", /* verifyToken, */ create);
 
 export default orders;
