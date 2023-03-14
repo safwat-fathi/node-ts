@@ -1,4 +1,4 @@
-import { HttpError } from "src/lib/classes/errors/http";
+import { HttpError } from "@lib/classes/errors/http";
 import { NextFunction, Request, Response } from "express";
 
 /**

@@ -1,5 +1,5 @@
-import { OrderModel } from "src/models//orders/orders.model";
-import { Order, OrderDoc, Service, TSortBy } from "src/types/db";
+import { OrderModel } from "@models/orders/orders.model";
+import { Order, OrderDoc, Service, TSortBy } from "@/types/db";
 
 export class ProductService implements Partial<Service<Order>> {
   async index(

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { IncomingHttpHeaders } from "http";
-import { asyncHandler } from "src/api/middlewares/async.middleware";
-import { Notification } from "src/server";
+import { asyncHandler } from "@api/middlewares/async.middleware";
+import { Notification } from "server";
 // import { Stream } from "stream";
 
 // send to specific clients
@@ -31,7 +31,7 @@ export const receive = asyncHandler(
     // write headers and response with success
     res.writeHead(200, headers);
 
-    Notification.on("new", data => {
+    Notification.on("new", (data: any) => {
       const { message, sendTo } = data;
 
       res.write(`data: ${JSON.stringify({ message, sendTo })}\n\n`);

@@ -1,5 +1,5 @@
 // import { Schema } from "mongoose";
-// import { Subscription } from "src/types/db/index";
+// import { Subscription } from "@/types/db/index";
 
 // export const SubscriptionSchema = new Schema<Subscription>({
 //   name: {

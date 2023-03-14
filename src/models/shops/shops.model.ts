@@ -1,5 +1,5 @@
 import { model } from "mongoose";
-import { ShopDoc } from "src/types/db";
+import { ShopDoc } from "@/types/db";
 import { ShopsSchema } from "./shops.schema";
 
 export const ShopModel = model<ShopDoc>("Shop", ShopsSchema);

@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { Service, TSortBy } from "src/types/db";
+import { Service, TSortBy } from "@/types/db";
 import { asyncHandler } from "./async.middleware";
 import { createHash } from "crypto";
-import { HttpError } from "src/lib/classes/errors/http";
-import { processQuery } from "src/lib/utils/mongoose";
+import { HttpError } from "@lib/classes/errors/http";
+import { processQuery } from "@lib/utils/mongoose";
 
 export const paginate = <T>(index: Service<T>["index"]) =>
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {

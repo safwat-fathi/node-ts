@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { generateAccessToken } from "src/lib/utils/auth";
+import { generateAccessToken } from "@lib/utils/auth";
 import { validationResult } from "express-validator";
-import { HttpError } from "src/lib/classes/errors/http";
-import { asyncHandler } from "src/api/middlewares/async.middleware";
-import { UserService } from "src/services/users.service";
+import { HttpError } from "@lib/classes/errors/http";
+import { asyncHandler } from "@api/middlewares/async.middleware";
+import { UserService } from "@services/users.service";
 
 export const signup = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

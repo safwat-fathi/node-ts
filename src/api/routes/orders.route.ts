@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { create } from "src/api/controllers/orders.controller";
-// import { verifyToken } from "src/api/middlewares/auth.middleware";
+import { create } from "@api/controllers/orders.controller";
+// import { verifyToken } from "@api/middlewares/auth.middleware";
 
 const orders = Router();
 

@@ -1,9 +1,9 @@
 import dotenv from "dotenv";
-import { CustomJwtPayload } from "src/types/jwt";
+import { CustomJwtPayload } from "@/types/jwt";
 import { NextFunction, Request, Response } from "express";
 import { body } from "express-validator";
 import { verify } from "jsonwebtoken";
-import { HttpError } from "src/lib/classes/errors/http";
+import { HttpError } from "@lib/classes/errors/http";
 import { asyncHandler } from "./async.middleware";
 
 dotenv.config();

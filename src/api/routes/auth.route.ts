@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { signup, login, logout } from "src/api/controllers/auth.controller";
+import { signup, login, logout } from "@api/controllers/auth.controller";
 import {
   validateEmail,
   validateName,
   validatePasswordMatch,
   validatePhone,
   validatePassword,
-} from "src/api/middlewares/auth.middleware";
+} from "@api/middlewares/auth.middleware";
 
 const auth = Router();
 

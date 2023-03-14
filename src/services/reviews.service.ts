@@ -1,5 +1,5 @@
-import { ReviewModel } from "src/models//reviews/reviews.model";
-import { Review, ReviewDoc } from "src/types/db";
+import { ReviewModel } from "@models/reviews/reviews.model";
+import { Review, ReviewDoc } from "@/types/db";
 
 export class ReviewService {
   async create(newReview: Review): Promise<ReviewDoc> {

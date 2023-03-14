@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { ReviewDoc } from "src/types/db";
+import { ReviewDoc } from "@/types/db";
 
 export const ReviewSchema = new Schema<ReviewDoc>(
   {

@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { UserModel } from "src/models//user/user.model";
-import { OrderModel } from "src/models//orders/orders.model";
-import { ProductModel } from "src/models//products/products.model";
-import { Order, ProductDoc } from "src/types/db";
-import { HttpError } from "src/lib/classes/errors/http";
-import { asyncHandler } from "src/api/middlewares/async.middleware";
+import { UserModel } from "@models/user/user.model";
+import { OrderModel } from "@models/orders/orders.model";
+import { ProductModel } from "@models/products/products.model";
+import { Order, ProductDoc } from "@/types/db";
+import { HttpError } from "@lib/classes/errors/http";
+import { asyncHandler } from "@api/middlewares/async.middleware";
 
 export const create = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

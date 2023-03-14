@@ -1,6 +1,6 @@
-import { CategoryModel } from "src/models//categories/categories.model";
+import { CategoryModel } from "@models/categories/categories.model";
 import { ObjectId } from "mongoose";
-import { Category, CategoryDoc, Service, TSortBy } from "src/types/db";
+import { Category, CategoryDoc, Service, TSortBy } from "@/types/db";
 
 export class CategoryService implements Partial<Service<Category>> {
   async index(

@@ -1,6 +1,6 @@
-import { comparePassword } from "src/lib/utils/auth";
-import { UserModel } from "src/models//user/user.model";
-import { Service, User, UserDoc } from "src/types/db";
+import { comparePassword } from "@lib/utils/auth";
+import { UserModel } from "@models/user/user.model";
+import { Service, User, UserDoc } from "@/types/db";
 
 export class UserService implements Partial<Service<User>> {
   async create(u: Partial<User>): Promise<UserDoc> {
