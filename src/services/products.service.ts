@@ -9,20 +9,28 @@ export class ProductService implements Partial<Service<Product>> {
     filter?: any | null
   ): Promise<[Product[], number]> {
     try {
-      const query = ProductModel.find(
-        // filter by model fields (name, price, stock, etc...)
-        filter || {},
-        // select model fields to return
-        null,
-        // options (sort, pagination, etc...)
-        {
-          ...(sort && {
-            sort,
-          }),
-        }
-      )
-        .skip(skip || 0)
-        .limit(pageSize || 10);
+      let query = null;
+
+      // if not pagination its find query
+      if (!skip && !pageSize && !sort) {
+        query = ProductModel.find(filter);
+      } else {
+        query = ProductModel.find(
+          // filter by model fields
+          filter || {},
+          // select model fields to return
+          null,
+          // options (sort, pagination, etc...)
+          {
+            ...(sort && {
+              sort,
+            }),
+          }
+        )
+          .skip(skip || 0)
+          .limit(pageSize || 10)
+          .populate({ path: "categories", select: "name" });
+      }
 
       const [products, count] = await Promise.all([
         query.exec(),

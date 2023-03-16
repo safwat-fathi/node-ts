@@ -2,9 +2,10 @@
 
 ## Global
 
-- add success boolean to every response json object whether request is success or fail
-- add error handling middleware for controllers
-- Schema validations as products
+- common logic for index service needs a generic function that takes model and returns query (watch chapter 6 lesson advanced-results-middleware in nodejs masterclass course)
+- ✔ add success boolean to every response json object whether request is success or fail
+- ✔ add error handling middleware for controllers
+- ✔ Schema validations as products
 - test pre save hooks (products, users)
 - add geocode address on order model
 - add role auth middleware

@@ -12,12 +12,12 @@ export const processQuery = (
     const queryStringified = JSON.stringify(query);
 
     const queryProcessed = queryStringified.replace(
-      /\b(gte|lt|lte|gt|in)\b/gi,
+      /\b(search|text|gte|lt|lte|gt|in)\b/gi,
       match => `$${match}`
     );
 
     return JSON.parse(queryProcessed);
   } catch (error) {
-    throw new Error(`Utils::processQuery::${error}`);
+    throw new Error(`Utils::mongoose::processQuery::${error}`);
   }
 };

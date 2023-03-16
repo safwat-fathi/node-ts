@@ -31,9 +31,9 @@
     "ws": "^8.12.0"
   },
   "scripts": {
-    "start": "NODE_ENV=development nodemon .",
+    "start": "NODE_ENV=development nodemon ./src",
     "lint": "eslint ./src --ext .ts",
-    "debug": "node --inspect --require ts-node/register server.ts",
+    "debug": "NODE_ENV=development node --inspect --require ts-node/register tsconfig-paths/register ./src/server.ts",
     "build": "yarn lint && NODE_ENV=production rm -rf dist && tsc --build && tsc-alias"
   },
   "devDependencies": {

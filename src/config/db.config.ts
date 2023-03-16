@@ -12,6 +12,7 @@ const { MONGO_URI_DEV, MONGO_URI_PROD, NODE_ENV } = process.env || {
 const MONGO_URI = NODE_ENV === "development" ? MONGO_URI_DEV : MONGO_URI_PROD;
 
 mongoose.set("debug", NODE_ENV === "development" ? true : false);
+mongoose.set("strictQuery", false);
 
 export const connectDB = () =>
   new Promise((resolve, reject) => {

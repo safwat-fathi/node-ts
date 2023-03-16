@@ -60,9 +60,10 @@ app.use(
 app.use(helmet());
 // session middleware
 app.use(session({ secret: SECRET, resave: true, saveUninitialized: true }));
+// error handler middleware
+app.use(errorHandler);
 // routes
 app.use("/api", routes);
-app.use(errorHandler);
 
 // fix issue parsing query params array limit
 // app.set("query parser", function (str: string) {

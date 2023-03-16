@@ -65,6 +65,20 @@ export const ProductsSchema = new Schema<ProductDoc>(
   }
 );
 
+ProductsSchema.index({ name: "text" });
+
+// ProductsSchema.pre(
+//   "find",
+//   function (next: CallbackWithoutResultAndOptionalError) {
+//     console.log("****************");
+//     console.log(this.getFilter());
+
+//     console.log("****************");
+
+//     next();
+//   }
+// );
+
 // slugify every product before save
 ProductsSchema.pre<ProductDoc>(
   "validate",

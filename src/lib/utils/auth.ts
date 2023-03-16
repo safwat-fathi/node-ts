@@ -18,7 +18,7 @@ export const hashPassword = async (password: string): Promise<string> => {
 
     return hashedPassword;
   } catch (err) {
-    throw new Error(`error hashing password ${err}`);
+    throw new Error(`Utils::auth::hashPassword::${err}`);
   }
 };
 
@@ -37,7 +37,7 @@ export const comparePassword = async (
 
     return passwordIsValid;
   } catch (err) {
-    throw new Error(`error comparing password ${err}`);
+    throw new Error(`Utils::auth::comparePassword::${err}`);
   }
 };
 
@@ -56,6 +56,6 @@ export const generateAccessToken = async (
 
     return token;
   } catch (err) {
-    throw new Error(`error generate token ${err}`);
+    throw new Error(`Utils::auth::generateAccessToken::${err}`);
   }
 };
