@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import dotenvExpand from "dotenv-expand";
 import express, { Express } from "express";
 import session from "express-session";
 import compression from "compression";
@@ -19,6 +20,7 @@ import WebSocketServer from "websocket";
 import { seedUsers } from "@lib/seeders/users.seeder";
 
 dotenv.config();
+dotenvExpand.expand(dotenv.config());
 
 const app: Express = express();
 const PORT = <number>process.env.HTTP_SERVER_PORT || 8080;
@@ -79,6 +81,8 @@ const wss = new WebSocketServer(server);
 wss.attachEventListeners();
 
 export const Notification = new EventEmitter();
+console.log(process.env.MONGO_DB_USER);
+console.log(process.env.MONGO_URI_PROD);
 
 process.on("uncaughtException", error => {
   console.log("Server::uncaughtException::", error);

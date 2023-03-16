@@ -11,6 +11,8 @@ declare global {
       GEOCODER_API_KEY: string;
       GEOCODER_API_PROVIDER: string;
       GEOCODER_API_SECRET: string;
+      MONGO_DB_USER: string;
+      MONGO_DB_PASS: string;
     }
   }
 }
