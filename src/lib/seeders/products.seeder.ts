@@ -10,12 +10,12 @@ export const seedProducts = () => {
     const categoryCloths = await CategoryModel.findOne({ name: "Cloths" });
 
     // drop all stored docs
-    ProductModel.collection.drop();
+    // ProductModel.collection.drop();
 
     // Rebuild all indexes
     await ProductModel.syncIndexes();
 
-    if (err) throw new Error(`${err}`);
+    if (err || !categoryCloths) throw new Error(`${err}`);
 
     if (count === 0) {
       ProductModel.collection

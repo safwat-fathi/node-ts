@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import dotenvExpand from "dotenv-expand";
+import MongoStore from "connect-mongo";
 import express, { Express } from "express";
 import session from "express-session";
 import compression from "compression";
@@ -9,18 +9,17 @@ import hpp from "hpp";
 import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
 import { errorHandler } from "@api/middlewares/error.middleware";
-import { connectDB } from "@config//db.config";
+import { connectDB, MONGO_URI } from "@config//db.config";
 // seeders
 import { seedCategories } from "@lib/seeders/categories.seeder";
 import { seedProducts } from "@lib/seeders/products.seeder";
+import { seedUsers } from "@lib/seeders/users.seeder";
 // routes
 import routes from "@api/routes";
 import { EventEmitter } from "stream";
 import WebSocketServer from "websocket";
-import { seedUsers } from "@lib/seeders/users.seeder";
 
 dotenv.config();
-dotenvExpand.expand(dotenv.config());
 
 const app: Express = express();
 const PORT = <number>process.env.HTTP_SERVER_PORT || 8080;
@@ -61,7 +60,15 @@ app.use(
 // security headers
 app.use(helmet());
 // session middleware
-app.use(session({ secret: SECRET, resave: true, saveUninitialized: true }));
+app.use(
+  session({
+    secret: SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
+    store: MongoStore.create({ mongoUrl: MONGO_URI }),
+  })
+);
 // error handler middleware
 app.use(errorHandler);
 // routes
@@ -81,8 +88,6 @@ const wss = new WebSocketServer(server);
 wss.attachEventListeners();
 
 export const Notification = new EventEmitter();
-console.log(process.env.MONGO_DB_USER);
-console.log(process.env.MONGO_URI_PROD);
 
 process.on("uncaughtException", error => {
   console.log("Server::uncaughtException::", error);

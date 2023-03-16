@@ -1,7 +1,9 @@
 import mongoose, { Connection } from "mongoose";
 import dotenv from "dotenv";
+import dotenvExpand from "dotenv-expand";
 
 dotenv.config();
+dotenvExpand.expand(dotenv.config());
 
 const { MONGO_URI_DEV, MONGO_URI_PROD, NODE_ENV } = process.env || {
   MONGO_URI_DEV: "",
@@ -9,7 +11,8 @@ const { MONGO_URI_DEV, MONGO_URI_PROD, NODE_ENV } = process.env || {
   NODE_ENV: "development",
 };
 
-const MONGO_URI = NODE_ENV === "development" ? MONGO_URI_DEV : MONGO_URI_PROD;
+export const MONGO_URI =
+  NODE_ENV === "development" ? MONGO_URI_DEV : MONGO_URI_PROD;
 
 mongoose.set("debug", NODE_ENV === "development" ? true : false);
 mongoose.set("strictQuery", false);
