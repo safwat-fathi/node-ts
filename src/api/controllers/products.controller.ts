@@ -35,7 +35,7 @@ export const create = asyncHandler(
     );
 
     if (!categoriesFound || count === 0) {
-      return next(new HttpError(429, "No categories match passed categories"));
+      return next(new HttpError(429, `No categories match ${categories}`));
     }
 
     const newProduct = await productService.create(req.body);

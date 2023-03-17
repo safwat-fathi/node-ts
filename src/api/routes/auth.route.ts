@@ -6,6 +6,7 @@ import {
   validatePasswordMatch,
   validatePhone,
   validatePassword,
+  checkDuplicate,
 } from "@api/middlewares/auth.middleware";
 
 const auth = Router();
@@ -13,6 +14,7 @@ const auth = Router();
 // signup
 auth.post(
   "/signup",
+  checkDuplicate,
   validateName,
   validateEmail,
   validatePassword,

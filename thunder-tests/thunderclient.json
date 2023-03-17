@@ -27,12 +27,12 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-09-22T09:25:40.291Z",
-    "modified": "2023-02-11T13:05:50.756Z",
+    "modified": "2023-03-17T13:28:04.076Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"123456789\"\n}",
+      "raw": "{\n  \"email\": \"test3@ex.com\",\n  \"password\": \"123456789\"\n}",
       "form": []
     },
     "tests": []

@@ -6,7 +6,7 @@ dotenv.config();
 export const seedCategories = () => {
   CategoryModel.estimatedDocumentCount({}, async (err, count) => {
     // drop all stored docs
-    // CategoryModel.collection.drop();
+    CategoryModel.collection.drop();
 
     // Rebuild all indexes
     await CategoryModel.syncIndexes();

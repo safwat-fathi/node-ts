@@ -5,6 +5,7 @@ import { body } from "express-validator";
 import { verify } from "jsonwebtoken";
 import { HttpError } from "@lib/classes/errors/http";
 import { asyncHandler } from "./async.middleware";
+import { UserService } from "@/services/users.service";
 
 dotenv.config();
 
@@ -86,6 +87,22 @@ export const validatePhone = body("phone")
   .bail()
   .trim()
   .escape();
+
+export const checkDuplicate = asyncHandler(
+  async (req: Request, _: Response, next: NextFunction) => {
+    const { email, password } = req.body;
+
+    const userService = new UserService();
+
+    const user = await userService.login({ email, password });
+
+    if (user) {
+      return next(new HttpError(409, `Email ${email} already is in use`));
+    }
+
+    next();
+  }
+);
 
 export const checkRolesExisted = asyncHandler(
   async (req: Request, _: Response, next: NextFunction) => {

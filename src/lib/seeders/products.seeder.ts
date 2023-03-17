@@ -10,7 +10,7 @@ export const seedProducts = () => {
     const categoryCloths = await CategoryModel.findOne({ name: "Cloths" });
 
     // drop all stored docs
-    // ProductModel.collection.drop();
+    ProductModel.collection.drop();
 
     // Rebuild all indexes
     await ProductModel.syncIndexes();

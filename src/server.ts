@@ -11,9 +11,7 @@ import mongoSanitize from "express-mongo-sanitize";
 import { errorHandler } from "@api/middlewares/error.middleware";
 import { connectDB, MONGO_URI } from "@config//db.config";
 // seeders
-import { seedCategories } from "@lib/seeders/categories.seeder";
-import { seedProducts } from "@lib/seeders/products.seeder";
-import { seedUsers } from "@lib/seeders/users.seeder";
+import { runSeeders } from "@lib/seeders";
 // routes
 import routes from "@api/routes";
 import { EventEmitter } from "stream";
@@ -22,16 +20,14 @@ import WebSocketServer from "websocket";
 dotenv.config();
 
 const app: Express = express();
-const PORT = <number>process.env.HTTP_SERVER_PORT || 8080;
+const PORT = <number>process.env.HTTP_SERVER_PORT || 8000;
 const SECRET = <string>process.env.SECRET || "";
 
 // connect to DB
 connectDB();
 
 // seeders
-seedCategories();
-seedProducts();
-seedUsers();
+runSeeders();
 
 // rate limiting
 const limiter = rateLimit({

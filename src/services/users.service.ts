@@ -3,6 +3,27 @@ import { UserModel } from "@models/user/user.model";
 import { Service, User, UserDoc } from "@/types/db";
 
 export class UserService implements Partial<Service<User>> {
+  async index(filter?: any | null): Promise<[User[], number]> {
+    // TODO: apply pagination if needed
+    try {
+      const query = UserModel.find(
+        // filter by model fields
+        filter || {},
+        // select model fields to return
+        { name: 1, email: 1, phone: 1, address: 1, orders: 1 }
+      );
+
+      const [users, count] = await Promise.all([
+        query.exec(),
+        UserModel.estimatedDocumentCount(),
+      ]);
+
+      return [users, count];
+    } catch (err) {
+      throw new Error(`UserService::find::${err}`);
+    }
+  }
+
   async create(u: Partial<User>): Promise<UserDoc> {
     try {
       const user = new UserModel({
@@ -23,7 +44,9 @@ export class UserService implements Partial<Service<User>> {
 
   async login(u: Partial<User>): Promise<UserDoc | null> {
     try {
-      const user = await UserModel.findOne({ email: u.email });
+      const user = await UserModel.findOne({ email: u.email }).select(
+        "+password"
+      );
 
       if (!user) {
         return null;
@@ -43,34 +66,4 @@ export class UserService implements Partial<Service<User>> {
       throw new Error(`UserService::login::${err}`);
     }
   }
-
-  // async find(
-  //   find: TFindBy<User> | TFindBy<User>[]
-  // ): Promise<UserDoc | UserDoc[] | null> {
-  //   try {
-  //     let users: UserDoc | UserDoc[] | null = [];
-
-  //     if (Array.isArray(find)) {
-  //       let query: any = [];
-
-  //       for (let i in find) {
-  //         query = [...query, { [String(find[i].by)]: find[i].value }];
-  //       }
-
-  //       users = await UserModel.find({
-  //         $or: query,
-  //       });
-  //     } else {
-  //       users = await UserModel.findOne({ [String(find.by)]: find.value });
-  //     }
-
-  //     if (!users) {
-  //       return null;
-  //     }
-
-  //     return users;
-  //   } catch (err) {
-  //     throw new Error(`UserService::find::${err}`);
-  //   }
-  // }
 }

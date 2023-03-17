@@ -1,5 +1,9 @@
-import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
-import { User } from "@/types/db";
+import {
+  CallbackWithoutResultAndOptionalError,
+  Document,
+  Schema,
+} from "mongoose";
+import { User, UserDoc } from "@/types/db";
 import { hashPassword } from "@lib/utils/auth";
 
 export const UserSchema = new Schema<User>(
@@ -27,7 +31,11 @@ export const UserSchema = new Schema<User>(
         "phone must be egyptian valid mobile number",
       ],
     },
-    password: { type: String, required: [true, "password required"] },
+    password: {
+      type: String,
+      required: [true, "password required"],
+      select: false,
+    },
     address: {
       type: [String],
       default: [],
@@ -40,6 +48,14 @@ export const UserSchema = new Schema<User>(
   },
   {
     timestamps: true,
+    toJSON: {
+      transform: function (doc: UserDoc, ret: Partial<UserDoc>, opt) {
+        delete ret["password"];
+        delete ret["_id"];
+        delete ret["__v"];
+        return ret;
+      },
+    },
   }
 );
 
