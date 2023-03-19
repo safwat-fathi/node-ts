@@ -109,7 +109,7 @@ export const forgotPassword = asyncHandler(
 
     // TODO: should be handled by FE
     // link to reset password page
-    const resetUrl: string = `${CLIENT_HOST}/auth/forgot-password/${resetToken}`;
+    const resetUrl = `${CLIENT_HOST}/auth/forgot-password/${resetToken}`;
 
     // message template
     const message = `Please follow this reset password URL ${resetUrl} to change your password`;
