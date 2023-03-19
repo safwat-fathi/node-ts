@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { signup, login, logout } from "@api/controllers/auth.controller";
+import {
+  signup,
+  login,
+  logout,
+  forgotPassword,
+} from "@api/controllers/auth.controller";
 import {
   validateEmail,
   validateName,
@@ -26,5 +31,7 @@ auth.post(
 auth.post("/login", login);
 // logout
 auth.get("/logout", logout);
+// forgot password
+auth.post("/forgot-password", forgotPassword);
 
 export default auth;

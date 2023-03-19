@@ -36,6 +36,14 @@ export const UserSchema = new Schema<User>(
       required: [true, "password required"],
       select: false,
     },
+    resetPasswordToken: {
+      type: String,
+      select: false,
+    },
+    resetPasswordExpire: {
+      type: Date,
+      select: false,
+    },
     address: {
       type: [String],
       default: [],
@@ -49,6 +57,7 @@ export const UserSchema = new Schema<User>(
   {
     timestamps: true,
     toJSON: {
+      virtuals: true,
       transform: function (doc: UserDoc, ret: Partial<UserDoc>, opt) {
         delete ret["password"];
         delete ret["_id"];
@@ -59,13 +68,16 @@ export const UserSchema = new Schema<User>(
   }
 );
 
-UserSchema.pre<User>(
+UserSchema.pre<UserDoc>(
   "save",
   async function (next: CallbackWithoutResultAndOptionalError) {
-    // hash password
-    const hashedPassword = await hashPassword(this.password);
+    // run password hash only if password modified
+    if (this.isModified("password")) {
+      // hash password
+      const hashedPassword = await hashPassword(this.password);
 
-    this.password = hashedPassword;
+      this.password = hashedPassword;
+    }
 
     next();
   }

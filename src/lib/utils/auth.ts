@@ -1,10 +1,37 @@
+import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import dotenv from "dotenv";
+import nodemailer from "nodemailer";
+import { TSendEmailOptions } from "@/types/utils";
 
 dotenv.config();
 
-const secret = (process.env.SECRET as string) || "";
+const {
+  FROM_EMAIL,
+  FROM_NAME,
+  SMTP_EMAIL,
+  SMTP_HOST,
+  SMTP_PASSWORD,
+  SMTP_PORT,
+  SECRET,
+} = (process.env as {
+  SMTP_EMAIL: string;
+  SMTP_HOST: string;
+  SMTP_PASSWORD: string;
+  SMTP_PORT: number;
+  FROM_NAME: string;
+  FROM_EMAIL: string;
+  SECRET: string;
+}) || {
+  SECRET: "",
+  SMTP_EMAIL: "",
+  SMTP_HOST: "",
+  SMTP_PASSWORD: "",
+  SMTP_PORT: 2525,
+  FROM_EMAIL: "",
+  FROM_NAME: "",
+};
 
 /**
  * Hash given password
@@ -52,10 +79,66 @@ export const generateAccessToken = async (
   name: string
 ): Promise<string> => {
   try {
-    const token = sign({ id, name }, secret);
+    const token = sign({ id, name }, SECRET);
 
     return token;
   } catch (err) {
     throw new Error(`Utils::auth::generateAccessToken::${err}`);
+  }
+};
+
+/**
+ * Generate & hash password token
+ * @returns {string} Returns password token
+ */
+export const generateResetPasswordToken = (): string => {
+  try {
+    const resetToken = crypto.randomBytes(20).toString("hex");
+
+    // hash token
+    const resetpasswordToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+
+    return resetpasswordToken;
+  } catch (err) {
+    throw new Error(`Utils::auth::generateResetPasswordToken::${err}`);
+  }
+};
+
+/**
+ * Send email via nodemailer
+ * @param {string} options message options
+ * @returns {string} Returns access token
+ */
+export const sendEmail = async (options: TSendEmailOptions): Promise<void> => {
+  try {
+    const transport = nodemailer.createTransport({
+      host: SMTP_HOST,
+      port: SMTP_PORT,
+      auth: {
+        user: SMTP_EMAIL,
+        pass: SMTP_PASSWORD,
+      },
+    });
+
+    const message = {
+      from: `${FROM_NAME} <${FROM_EMAIL}>`,
+      to: options.email,
+      subject: options.subject,
+      text: options.message,
+      // html: "<b>Hello !</b>",
+    };
+
+    await transport.sendMail(message, (err, info) => {
+      if (err) {
+        throw new Error(`Sending email failed: ${err}`);
+      }
+
+      console.log("Message sent:", info.messageId, info.response);
+    });
+  } catch (err) {
+    throw new Error(`Utils::auth::sendEmail::${err}`);
   }
 };

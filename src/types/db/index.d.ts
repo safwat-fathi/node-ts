@@ -25,6 +25,8 @@ export interface User {
   name: string;
   email: string;
   password: string;
+  resetPasswordToken: string;
+  resetPasswordExpire: Date;
   phone: string;
   address: string[];
   orders: ObjectId[];

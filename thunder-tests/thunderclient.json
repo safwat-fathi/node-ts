@@ -287,5 +287,24 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "9af1dc07-dfe1-49c5-976b-8f198d113f4a",
+    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+    "containerId": "97fbbf4e-ec0c-4bde-b2cc-07d96dcb6e22",
+    "name": "forgot-password",
+    "url": "{{baseUrl}}/api/auth/forgot-password",
+    "method": "POST",
+    "sortNum": 160000,
+    "created": "2023-03-17T14:49:43.924Z",
+    "modified": "2023-03-18T18:18:41.652Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"test1@gmail.com\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]

@@ -19,7 +19,7 @@ export const seedUsers = () => {
         .insertMany([
           {
             name: "Safwat",
-            email: "test1@example.com",
+            email: "test1@gmail.com",
             phone: "01100000001",
             password: await hashPassword("123456789"),
             address: "cairo - el nozha",

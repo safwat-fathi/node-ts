@@ -1,4 +1,4 @@
-import { comparePassword } from "@lib/utils/auth";
+import { comparePassword, generateResetPasswordToken } from "@lib/utils/auth";
 import { UserModel } from "@models/user/user.model";
 import { Service, User, UserDoc } from "@/types/db";
 
@@ -21,6 +21,27 @@ export class UserService implements Partial<Service<User>> {
       return [users, count];
     } catch (err) {
       throw new Error(`UserService::find::${err}`);
+    }
+  }
+
+  async forgotPassword(email: string): Promise<boolean> {
+    try {
+      const user = await UserModel.findOne({ email });
+
+      if (!user) {
+        return false;
+      }
+
+      const resetpasswordToken = generateResetPasswordToken();
+
+      user.resetPasswordToken = resetpasswordToken;
+      user.resetPasswordExpire = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes expire time
+
+      await user.save();
+
+      return true;
+    } catch (err) {
+      throw new Error(`UserService::forgotPassword::${err}`);
     }
   }
 

@@ -12,7 +12,7 @@ const { NODE_ENV } = process.env || {
 export const runSeeders = () => {
   if (NODE_ENV === "development") {
     seedCategories();
-    seedProducts();
+    // seedProducts();
     seedUsers();
   }
 };

@@ -13,6 +13,16 @@ declare global {
       GEOCODER_API_SECRET: string;
       MONGO_DB_USER: string;
       MONGO_DB_PASS: string;
+      SMTP_HOST: string;
+      SMTP_PORT: number;
+      SMTP_EMAIL: string;
+      SMTP_PASSWORD: string;
+      FROM_EMAIL: string;
+      FROM_NAME: string;
+      CLIENT_HOST_DEV: string;
+      CLIENT_PORT_DEV: number;
+      CLIENT_HOST_PROD: string;
+      CLIENT_PORT_PROD: number;
     }
   }
 }

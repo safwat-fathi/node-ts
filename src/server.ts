@@ -65,11 +65,10 @@ app.use(
     store: MongoStore.create({ mongoUrl: MONGO_URI }),
   })
 );
-// error handler middleware
-app.use(errorHandler);
 // routes
 app.use("/api", routes);
-
+// error handler middleware
+app.use(errorHandler);
 // fix issue parsing query params array limit
 // app.set("query parser", function (str: string) {
 //   return qs.parse(str, { arrayLimit: 1000 });

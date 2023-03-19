@@ -1,9 +1,38 @@
+import dotenv from "dotenv";
 import { NextFunction, Request, Response } from "express";
-import { generateAccessToken } from "@lib/utils/auth";
+import { generateAccessToken, sendEmail } from "@lib/utils/auth";
 import { validationResult } from "express-validator";
 import { HttpError } from "@lib/classes/errors/http";
 import { asyncHandler } from "@api/middlewares/async.middleware";
 import { UserService } from "@services/users.service";
+import { User } from "@/types/db";
+
+dotenv.config();
+
+const {
+  NODE_ENV,
+  CLIENT_HOST_DEV,
+  CLIENT_PORT_DEV,
+  CLIENT_HOST_PROD,
+  CLIENT_PORT_PROD,
+} = (process.env as {
+  NODE_ENV: "development" | "production";
+  CLIENT_HOST_DEV: string;
+  CLIENT_PORT_DEV: number;
+  CLIENT_HOST_PROD: string;
+  CLIENT_PORT_PROD: number;
+}) || {
+  NODE_ENV: "development",
+  CLIENT_HOST_DEV: "",
+  CLIENT_HOST_PROD: "",
+  CLIENT_PORT_DEV: 3000,
+  CLIENT_PORT_PROD: 3000,
+};
+
+const CLIENT_HOST =
+  NODE_ENV === "development"
+    ? `${CLIENT_HOST_DEV}:${CLIENT_PORT_DEV}`
+    : `${CLIENT_HOST_PROD}:${CLIENT_PORT_PROD}`;
 
 export const signup = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -62,6 +91,37 @@ export const login = asyncHandler(
         accessToken: token,
         user,
       },
+    });
+  }
+);
+
+export const forgotPassword = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { email } = req.body as User;
+
+    const userService = new UserService();
+
+    const resetToken = await userService.forgotPassword(email);
+
+    if (!resetToken) {
+      return next(new HttpError(422, "This email is not registered"));
+    }
+
+    // TODO: should be handled by FE
+    // link to reset password page
+    const resetUrl: string = `${CLIENT_HOST}/auth/forgot-password/${resetToken}`;
+
+    // message template
+    const message = `Please follow this reset password URL ${resetUrl} to change your password`;
+
+    // send email with the message
+    await sendEmail({ email, message, subject: "Reset password request" });
+    // console.log(" sendEmail success");
+
+    // TODO: if not success delete resetPasswordToken & resetPasswordExpire fields from DB
+    res.status(200).json({
+      success: true,
+      data: "Email sent successfully",
     });
   }
 );
