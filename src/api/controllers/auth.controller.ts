@@ -4,7 +4,7 @@ import { generateAccessToken, sendEmail } from "@lib/utils/auth";
 import { validationResult } from "express-validator";
 import { HttpError } from "@lib/classes/errors/http";
 import { asyncHandler } from "@api/middlewares/async.middleware";
-import { UserService } from "@services/users.service";
+import { AuthService } from "@services/auth.service";
 import { User } from "@/types/db";
 
 dotenv.config();
@@ -37,7 +37,7 @@ const CLIENT_HOST =
 export const signup = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { name, email, phone, password } = req.body;
-    const userService = new UserService();
+    const authService = new AuthService();
 
     const errors = validationResult(req);
 
@@ -49,7 +49,7 @@ export const signup = asyncHandler(
       return next(new HttpError(400, "Signup failed", errorsMapped));
     }
 
-    const user = await userService.create({
+    const user = await authService.signup({
       name,
       email,
       phone,
@@ -73,9 +73,9 @@ export const login = asyncHandler(
       );
     }
 
-    const userService = new UserService();
+    const authService = new AuthService();
 
-    const user = await userService.login({ email, password });
+    const user = await authService.login({ email, password });
 
     if (!user) {
       return next(new HttpError(422, "Please enter valid email or password"));
@@ -99,9 +99,9 @@ export const forgotPassword = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { email } = req.body as User;
 
-    const userService = new UserService();
+    const authService = new AuthService();
 
-    const resetToken = await userService.forgotPassword(email);
+    const resetToken = await authService.forgotPassword(email);
 
     if (!resetToken) {
       return next(new HttpError(422, "This email is not registered"));

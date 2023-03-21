@@ -8,8 +8,12 @@
     "modified": "2022-09-22T08:42:31.369Z",
     "data": [
       {
-        "name": "baseUrl",
+        "name": "devUrl",
         "value": "http://localhost:8000"
+      },
+      {
+        "name": "prodUrl",
+        "value": "http://139.59.209.27:8000/api/products/"
       }
     ]
   }

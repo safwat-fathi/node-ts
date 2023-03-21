@@ -1,29 +1,15 @@
 import { comparePassword, generateResetPasswordToken } from "@lib/utils/auth";
 import { UserModel } from "@models/user/user.model";
-import { Service, User, UserDoc } from "@/types/db";
+import { TDoc, User, UserDoc } from "@/types/db";
 
-export class UserService implements Partial<Service<User>> {
-  async index(filter?: any | null): Promise<[User[], number]> {
-    // TODO: apply pagination if needed
-    try {
-      const query = UserModel.find(
-        // filter by model fields
-        filter || {},
-        // select model fields to return
-        { name: 1, email: 1, phone: 1, address: 1, orders: 1 }
-      );
+export interface IAuthService<T> {
+  signup(newDoc: T): Promise<TDoc<T>> | null;
+  update(docToUpdate: T): Promise<TDoc<T>>;
+  forgotPassword(email: string): Promise<boolean>;
+  login(doc: T): Promise<TDoc<T> | null>;
+}
 
-      const [users, count] = await Promise.all([
-        query.exec(),
-        UserModel.estimatedDocumentCount(),
-      ]);
-
-      return [users, count];
-    } catch (err) {
-      throw new Error(`UserService::find::${err}`);
-    }
-  }
-
+export class AuthService implements Partial<IAuthService<User>> {
   async forgotPassword(email: string): Promise<boolean> {
     try {
       const user = await UserModel.findOne({ email });
@@ -41,11 +27,11 @@ export class UserService implements Partial<Service<User>> {
 
       return true;
     } catch (err) {
-      throw new Error(`UserService::forgotPassword::${err}`);
+      throw new Error(`AuthService::forgotPassword::${err}`);
     }
   }
 
-  async create(u: Partial<User>): Promise<UserDoc> {
+  async signup(u: Partial<User>): Promise<UserDoc> {
     try {
       const user = new UserModel({
         name: u.name,
@@ -59,7 +45,7 @@ export class UserService implements Partial<Service<User>> {
 
       return user;
     } catch (err) {
-      throw new Error(`UserService::signup::${err}`);
+      throw new Error(`AuthService::signup::${err}`);
     }
   }
 
@@ -84,7 +70,7 @@ export class UserService implements Partial<Service<User>> {
 
       return user;
     } catch (err) {
-      throw new Error(`UserService::login::${err}`);
+      throw new Error(`AuthService::login::${err}`);
     }
   }
 }

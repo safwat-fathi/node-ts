@@ -5,31 +5,11 @@ import { body } from "express-validator";
 import { verify } from "jsonwebtoken";
 import { HttpError } from "@lib/classes/errors/http";
 import { asyncHandler } from "./async.middleware";
-import { UserService } from "@/services/users.service";
+import { AuthService } from "@/services/auth.service";
 
 dotenv.config();
 
 const secret = (process.env.SECRET as string) || "";
-
-// export const validateSubscription = asyncHandler(
-//   async (req: Request, res: Response, next: NextFunction) => {
-//     const email = await UserModel.findOne({
-//       name: req.body.email,
-//     });
-
-//     const phone = await UserModel.findOne({
-//       phone: req.body.phone,
-//     });
-
-//     if (phone || email) {
-//       return next(
-//         new HttpError(400, "Sorry, email or phone is already in use!")
-//       );
-//     }
-
-//     next();
-//   }
-// );
 
 // express validators
 export const validateName = body("name")
@@ -92,9 +72,9 @@ export const checkDuplicate = asyncHandler(
   async (req: Request, _: Response, next: NextFunction) => {
     const { email, password } = req.body;
 
-    const userService = new UserService();
+    const authService = new AuthService();
 
-    const user = await userService.login({ email, password });
+    const user = await authService.login({ email, password });
 
     if (user) {
       return next(new HttpError(409, `Email ${email} already is in use`));
