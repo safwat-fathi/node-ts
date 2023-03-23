@@ -80,7 +80,7 @@ const server = app.listen(PORT, () => {
 
 // websocket server
 const wss = new WebSocketServer(server);
-wss.attachEventListeners();
+wss.init();
 
 export const Notification = new EventEmitter();
 

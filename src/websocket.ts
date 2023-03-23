@@ -8,6 +8,10 @@ import { Server as HttpServer, IncomingMessage } from "http";
 
 type WebSocketClient = WebSocket & { id: string };
 type WebSocketClients = Set<WebSocketClient>;
+interface IMessage {
+  to: WebSocketClient["id"] | "public";
+  payload: string;
+}
 
 export default class WebSocketServer {
   private readonly _wss: WSS;
@@ -18,24 +22,29 @@ export default class WebSocketServer {
     this._clients = new Set();
 
     process.on("unhandledRejection", err => {
-      console.log("Server error", err);
+      console.log("Websocket server error", err);
       this._wss.close(() => process.exit(1));
     });
   }
 
+  public init() {
+    this._attachEventListeners();
+  }
+
   send(
-    id: string,
-    message: string,
+    message: IMessage,
     socket: WebSocketClient
     // req: IncomingMessage
   ) {
+    const { to, payload } = message;
+
     this._clients.forEach(client => {
       if (
         client !== socket &&
         client.readyState === WebSocket.OPEN &&
-        id === client.id
+        to === client.id
       ) {
-        client.send(message);
+        client.send(JSON.stringify(payload));
       }
     });
   }
@@ -49,7 +58,7 @@ export default class WebSocketServer {
     });
   }
 
-  public attachEventListeners(): void {
+  private _attachEventListeners(): void {
     try {
       this._wss.on(
         "connection",
@@ -66,11 +75,12 @@ export default class WebSocketServer {
             if (parsedData.to === "public") {
               this.broadcast(JSON.stringify(parsedData.payload), socket);
             } else {
-              this.send(
-                parsedData.to,
-                JSON.stringify(parsedData.payload),
-                socket
-              );
+              const message: IMessage = {
+                to: parsedData.to,
+                payload: JSON.stringify(parsedData.payload),
+              };
+
+              this.send(message, socket);
             }
           });
 
@@ -83,18 +93,18 @@ export default class WebSocketServer {
         }
       );
     } catch (err) {
-      console.log("Websocket error: ", err);
+      console.log("Websocket server error: ", err);
       this._wss.close();
       this._clients.clear();
     }
 
     this._wss.on("close", () => {
-      console.log("Server closed");
+      console.log("Websocket Server closed");
       this._clients.clear();
     });
 
     this._wss.on("error", (err: Error) => {
-      console.log("Websocket error", err);
+      console.log("Websocket server error:", err);
       this._clients.clear();
       this._wss.close(() => process.exit(1));
     });
