@@ -59,14 +59,21 @@
   - last page link
 - seeder
 
+## Users (admin dashboard)
+
+- role
+- moderators role for users (to add products)
+- admin role for users (to make CRUD operations on users)
+
 ## Users
 
 - password hashing should be handled in pre save hook or as implemented now?
-- moderators role for users (to add products)
-- admin role for users (to make CRUD operations on users)
 - seeder
 - orders
-- role
+
+## Auth
+
+- refresh token on JWT token expire
 
 ## Reviews
 

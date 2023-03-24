@@ -13,7 +13,7 @@
       },
       {
         "name": "prodUrl",
-        "value": "http://139.59.209.27:8000/api/products/"
+        "value": "http://139.59.209.27:8000"
       }
     ]
   }

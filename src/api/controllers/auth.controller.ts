@@ -56,7 +56,9 @@ export const signup = asyncHandler(
       password,
     });
 
-    res.status(201).json({ success: true, data: user });
+    res
+      .status(201)
+      .json({ success: true, message: "Signup completed successfully" });
   }
 );
 
@@ -81,12 +83,14 @@ export const login = asyncHandler(
       return next(new HttpError(422, "Please enter valid email or password"));
     }
 
+    // token expires in 24 hrs
     const token = await generateAccessToken(user.id, user.name);
 
     req.session.userToken = token;
 
     res.status(200).json({
       success: true,
+      message: "Logged in successfully",
       data: {
         accessToken: token,
         user,
@@ -121,7 +125,7 @@ export const forgotPassword = asyncHandler(
     // TODO: if not success delete resetPasswordToken & resetPasswordExpire fields from DB
     res.status(200).json({
       success: true,
-      data: "Email sent successfully",
+      message: "Email sent successfully",
     });
   }
 );
@@ -135,7 +139,9 @@ export const logout = asyncHandler(
         if (err) next(new HttpError(404, err));
       });
 
-      res.status(200).json({ success: true });
+      res
+        .status(200)
+        .json({ success: true, message: "Logged out successfully" });
     } else {
       return next(new HttpError(404, "Not logged in"));
     }

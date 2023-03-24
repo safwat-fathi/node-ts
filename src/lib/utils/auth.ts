@@ -76,10 +76,10 @@ export const comparePassword = async (
  */
 export const generateAccessToken = async (
   id: string,
-  name: string
+  name: string,
 ): Promise<string> => {
   try {
-    const token = sign({ id, name }, SECRET);
+    const token = sign({ id, name }, SECRET, {expiresIn: '24h'});
 
     return token;
   } catch (err) {

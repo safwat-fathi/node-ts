@@ -9,7 +9,7 @@ import { AuthService } from "@/services/auth.service";
 
 dotenv.config();
 
-const secret = (process.env.SECRET as string) || "";
+const SECRET = (process.env.SECRET as string) || "";
 
 // express validators
 export const validateName = body("name")
@@ -84,35 +84,39 @@ export const checkDuplicate = asyncHandler(
   }
 );
 
-export const checkRolesExisted = asyncHandler(
-  async (req: Request, _: Response, next: NextFunction) => {
-    if (req.body.roles) {
-      for (let i = 0; i < req.body.roles.length; i++) {
-        if (!["user", "admin", "moderator"].includes(req.body.roles[i])) {
-          return next(
-            new HttpError(
-              400,
-              `Failed! Role ${req.body.roles[i]} does not exist!`
-            )
-          );
-        }
-      }
-    }
+// export const checkRolesExisted = asyncHandler(
+//   async (req: Request, _: Response, next: NextFunction) => {
+//     if (req.body.roles) {
+//       for (let i = 0; i < req.body.roles.length; i++) {
+//         if (!["user", "admin", "moderator"].includes(req.body.roles[i])) {
+//           return next(
+//             new HttpError(
+//               400,
+//               `Failed! Role ${req.body.roles[i]} does not exist!`
+//             )
+//           );
+//         }
+//       }
+//     }
 
-    next();
-  }
-);
+//     next();
+//   }
+// );
 
 export const verifyToken = asyncHandler(
   async (req: Request, _, next: NextFunction) => {
-    const token: string = req.headers.authorization || "";
+    const token = req.headers["authorization"];
 
     if (!token) {
       return next(new HttpError(401, "Unauthorized"));
     }
 
-    const decoded = <CustomJwtPayload>verify(token?.split(" ")[1], secret);
+    const decoded = <CustomJwtPayload>verify(token.split(" ")[1], SECRET);
 
-    req.body.userId = decoded.id;
+    if (!decoded.id) {
+      return next(new HttpError(403, "Access forbidden"));
+    }
+
+    next();
   }
 );

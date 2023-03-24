@@ -60,7 +60,7 @@
       "headers": [],
       "auth": {
         "type": "bearer",
-        "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmMyODk1NWEwN2VhN2IwZWI0ZDEzYiIsImlhdCI6MTY2Mzg0ODkzMSwiZXhwIjoxNjYzOTM1MzMxfQ.gRW7tlmj_TQrp0Cmf904Vqc6pyKZnsBz6aw3L2BfaUk"
+        "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MWQyNDA5MzY4NzBhZWJhNTM4Yzk5NCIsIm5hbWUiOiJzYWZ3YXQiLCJpYXQiOjE2Nzk2MzEzNzN9.Jy5Ko9w3GeeqmfBjmjE0cslmuJgr4MFcHZAVxi3biEk"
       },
       "tests": [],
       "envId": "270a27b4-2ff5-4da0-a120-1dec051c3d4b"

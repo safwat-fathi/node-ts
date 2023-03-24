@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import MongoStore from "connect-mongo";
 import express, { Express } from "express";
 import session from "express-session";
+import cookieParser from "cookie-parser";
 import compression from "compression";
 import cors from "cors";
 import { rateLimit } from "express-rate-limit";
@@ -55,13 +56,15 @@ app.use(
 );
 // security headers
 app.use(helmet());
+// use cookie-parser so server can access the necessary option to save, read and access a cookie
+app.use(cookieParser());
 // session middleware
 app.use(
   session({
     secret: SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true },
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }, // max age is 24 hrs
     store: MongoStore.create({ mongoUrl: MONGO_URI }),
   })
 );

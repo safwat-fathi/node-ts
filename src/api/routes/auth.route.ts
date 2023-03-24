@@ -12,6 +12,7 @@ import {
   validatePhone,
   validatePassword,
   checkDuplicate,
+  verifyToken,
 } from "@api/middlewares/auth.middleware";
 
 const auth = Router();
@@ -30,7 +31,7 @@ auth.post(
 // login
 auth.post("/login", login);
 // logout
-auth.get("/logout", logout);
+auth.get("/logout", verifyToken, logout);
 // forgot password
 auth.post("/forgot-password", forgotPassword);
 
