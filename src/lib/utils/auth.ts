@@ -8,6 +8,7 @@ import { TSendEmailOptions } from "@/types/utils";
 dotenv.config();
 
 const {
+  NODE_ENV,
   FROM_EMAIL,
   FROM_NAME,
   SMTP_EMAIL,
@@ -16,6 +17,7 @@ const {
   SMTP_PORT,
   SECRET,
 } = (process.env as {
+  NODE_ENV: string;
   SMTP_EMAIL: string;
   SMTP_HOST: string;
   SMTP_PASSWORD: string;
@@ -24,6 +26,7 @@ const {
   FROM_EMAIL: string;
   SECRET: string;
 }) || {
+  NODE_ENV: "development",
   SECRET: "",
   SMTP_EMAIL: "",
   SMTP_HOST: "",
@@ -76,10 +79,10 @@ export const comparePassword = async (
  */
 export const generateAccessToken = async (
   id: string,
-  name: string,
+  name: string
 ): Promise<string> => {
   try {
-    const token = sign({ id, name }, SECRET, {expiresIn: '24h'});
+    const token = sign({ id, name }, SECRET, { expiresIn: "24h" });
 
     return token;
   } catch (err) {
@@ -116,22 +119,23 @@ export const sendEmail = async (options: TSendEmailOptions): Promise<void> => {
   try {
     const transport = nodemailer.createTransport({
       host: SMTP_HOST,
-      port: SMTP_PORT,
+      // port: +SMTP_PORT,
       auth: {
         user: SMTP_EMAIL,
         pass: SMTP_PASSWORD,
       },
+      debug: NODE_ENV === "development" ? true : false,
+      logger: true,
     });
 
     const message = {
       from: `${FROM_NAME} <${FROM_EMAIL}>`,
       to: options.email,
       subject: options.subject,
-      text: options.message,
-      // html: "<b>Hello !</b>",
+      html: options.message,
     };
 
-    await transport.sendMail(message, (err, info) => {
+    transport.sendMail(message, (err, info) => {
       if (err) {
         throw new Error(`Sending email failed: ${err}`);
       }

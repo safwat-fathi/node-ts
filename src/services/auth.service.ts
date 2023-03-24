@@ -5,17 +5,17 @@ import { TDoc, User, UserDoc } from "@/types/db";
 export interface IAuthService<T> {
   signup(newDoc: T): Promise<TDoc<T>> | null;
   update(docToUpdate: T): Promise<TDoc<T>>;
-  forgotPassword(email: string): Promise<boolean>;
+  forgotPassword(email: string): Promise<string | null>;
   login(doc: T): Promise<TDoc<T> | null>;
 }
 
 export class AuthService implements Partial<IAuthService<User>> {
-  async forgotPassword(email: string): Promise<boolean> {
+  async forgotPassword(email: string): Promise<string | null> {
     try {
       const user = await UserModel.findOne({ email });
 
       if (!user) {
-        return false;
+        return null;
       }
 
       const resetpasswordToken = generateResetPasswordToken();
@@ -25,7 +25,7 @@ export class AuthService implements Partial<IAuthService<User>> {
 
       await user.save();
 
-      return true;
+      return resetpasswordToken;
     } catch (err) {
       throw new Error(`AuthService::forgotPassword::${err}`);
     }

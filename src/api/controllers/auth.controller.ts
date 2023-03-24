@@ -49,7 +49,7 @@ export const signup = asyncHandler(
       return next(new HttpError(400, "Signup failed", errorsMapped));
     }
 
-    const user = await authService.signup({
+    await authService.signup({
       name,
       email,
       phone,
@@ -111,16 +111,15 @@ export const forgotPassword = asyncHandler(
       return next(new HttpError(422, "This email is not registered"));
     }
 
-    // TODO: should be handled by FE
     // link to reset password page
     const resetUrl = `${CLIENT_HOST}/auth/forgot-password/${resetToken}`;
 
+    // TODO: message template should be HTML
     // message template
-    const message = `Please follow this reset password URL ${resetUrl} to change your password`;
+    const message = `<h1>Please reset your password from <a href="${resetUrl}">here</a></h1>`;
 
     // send email with the message
     await sendEmail({ email, message, subject: "Reset password request" });
-    // console.log(" sendEmail success");
 
     // TODO: if not success delete resetPasswordToken & resetPasswordExpire fields from DB
     res.status(200).json({
