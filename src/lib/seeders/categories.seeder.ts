@@ -3,36 +3,41 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const seedCategories = () => {
-  CategoryModel.estimatedDocumentCount({}, async (err, count) => {
-    // drop all stored docs
-    CategoryModel.collection.drop();
+export const seedCategories = async () => {
+  try {
+    CategoryModel.estimatedDocumentCount({}, async (err, count) => {
+      // drop all stored docs
+      // await CategoryModel.collection.drop();
 
-    // Rebuild all indexes
-    await CategoryModel.syncIndexes();
+      // Rebuild all indexes
+      await CategoryModel.syncIndexes();
 
-    if (err) throw new Error(`${err}`);
+      if (err) throw new Error(`${err}`);
 
-    if (count === 0) {
-      const parentClothsCategory = await CategoryModel.collection.insertOne({
-        name: "Cloths",
-        description: "All Cloths",
-        parent: null,
-        sub: [],
-      });
+      if (count === 0) {
+        const parentClothsCategory = await CategoryModel.create({
+          name: "Cloths",
+          description: "All Cloths",
+          parent: null,
+          sub: [],
+        });
 
-      CategoryModel.collection
-        .insertMany([
+        const categories = await CategoryModel.insertMany([
           {
             name: "Shirts",
             description: "All Shirts",
-            parent: parentClothsCategory.insertedId,
+            parent: parentClothsCategory.id,
             sub: [],
           },
           { name: "Food", description: "All food", parent: null, sub: [] },
-        ])
-        .then(users => console.log(`${users.insertedCount} category created`))
-        .catch(err => new Error(`Categories::seeder::${err}`));
-    }
-  });
+        ]);
+
+        if (categories.length) {
+          console.log(`${categories.length} category created`);
+        }
+      }
+    });
+  } catch (err) {
+    new Error(`Categories::seeder::${err}`);
+  }
 };

@@ -43,6 +43,20 @@ export class ProductService implements Partial<Service<Product>> {
     }
   }
 
+  async find(p: Partial<ProductDoc>): Promise<ProductDoc | null> {
+    try {
+      const product = await ProductModel.findOne({ _id: p.id });
+
+      if (!product) {
+        return null;
+      }
+
+      return product;
+    } catch (err) {
+      throw new Error(`ProductService::find::${err}`);
+    }
+  }
+
   async create(newProduct: Product): Promise<ProductDoc> {
     try {
       const product = await ProductModel.create(newProduct);

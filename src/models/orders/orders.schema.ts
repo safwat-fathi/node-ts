@@ -11,7 +11,7 @@ export const OrderSchema = new Schema<OrderDoc>(
     },
     total: {
       type: Number,
-      required: [true, "{VALUE} can not be null"],
+      // required: [true, "{VALUE} can not be null"],
     },
     products: {
       type: [
@@ -33,24 +33,17 @@ export const OrderSchema = new Schema<OrderDoc>(
     status: {
       type: String,
       enum: {
-        // active: still in user cart user
-        // confirmed: confirmed by user
-        // on-route: confirmed by seller
-        // delivered: delivered to user
-        // cancelled: cancelled by user
-        // terminated: cancelled by seller
         values: [
-          "active",
-          "confirmed",
-          "on-route",
-          "delivered",
-          "cancelled",
-          "terminated",
+          "active", // active: still in user cart
+          "confirmed", // confirmed: confirmed by user
+          "on-route", // on-route: confirmed by seller
+          "delivered", // delivered: delivered to user
+          "cancelled", // cancelled: cancelled by user
+          "terminated", // terminated: cancelled by seller
         ],
         default: "active",
         message: "{VALUE} is not supported",
       },
-      required: [true, "{VALUE} can not be null"],
     },
     address: {
       type: String,

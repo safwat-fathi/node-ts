@@ -6,43 +6,46 @@ import { slugify } from "@lib/utils/string";
 dotenv.config();
 
 export const seedProducts = () => {
-  ProductModel.estimatedDocumentCount({}, async (err, count) => {
-    const categoryCloths = await CategoryModel.findOne({ name: "Cloths" });
+  try {
+    ProductModel.estimatedDocumentCount({}, async (err, count) => {
+      const categoryCloths = await CategoryModel.findOne({ name: "Cloths" });
 
-    // drop all stored docs
-    ProductModel.collection.drop();
+      // drop all stored docs
+      // await ProductModel.collection.drop();
 
-    // Rebuild all indexes
-    await ProductModel.syncIndexes();
+      // Rebuild all indexes
+      await ProductModel.syncIndexes();
 
-    if (err || !categoryCloths) throw new Error(`${err}`);
+      if (err) throw new Error(`${err}`);
 
-    if (count === 0) {
-      ProductModel.collection
-        .insertMany([
+      if (count === 0) {
+        const products = await ProductModel.insertMany([
           {
             name: "Long Sleeve White Shirt",
-            slug: slugify("Long Sleeve White Shirt"),
+            // slug: slugify("Long Sleeve White Shirt"),
             description: "Long sleeve white shirt - spring collection",
             images: [{ url: "http://test.images.white-shirt" }],
             price: 240,
             stock: 120,
-            category: [categoryCloths?._id],
+            categories: [categoryCloths?.id],
           },
           {
             name: "Grey shirt",
-            slug: slugify("Grey shirt"),
+            // slug: slugify("Grey shirt"),
             description: "Grey shirt with hoodie - winter collection",
             images: [{ url: "http://test.images.grey-shirt" }],
             price: 600,
             stock: 90,
-            category: [categoryCloths?._id],
+            categories: [categoryCloths?.id],
           },
-        ])
-        .then(products =>
-          console.log(`${products.insertedCount} products created`)
-        )
-        .catch(err => new Error(`Products::seeder::${err}`));
-    }
-  });
+        ]);
+
+        if (products.length) {
+          console.log(`${products.length} products created`);
+        }
+      }
+    });
+  } catch (err) {
+    new Error(`Products::seeder::${err}`);
+  }
 };

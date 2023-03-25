@@ -20,11 +20,6 @@ export default class WebSocketServer {
   constructor(httpServer: HttpServer) {
     this._wss = new WebSocket.Server({ server: httpServer });
     this._clients = new Set();
-
-    process.on("unhandledRejection", err => {
-      console.log("Websocket server error", err);
-      this._wss.close(() => process.exit(1));
-    });
   }
 
   public init() {
@@ -93,7 +88,6 @@ export default class WebSocketServer {
         }
       );
     } catch (err) {
-      console.log("Websocket server error: ", err);
       this._wss.close();
       this._clients.clear();
     }

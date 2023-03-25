@@ -26,10 +26,8 @@ const SECRET = <string>process.env.SECRET || "";
 
 // connect to DB
 connectDB();
-
-// seeders
+// seed database
 runSeeders();
-
 // rate limiting
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,

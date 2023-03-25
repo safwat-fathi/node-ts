@@ -1,32 +1,37 @@
 import { NextFunction, Request, Response } from "express";
-import { UserModel } from "@models/user/user.model";
-import { OrderModel } from "@models/orders/orders.model";
-import { ProductModel } from "@models/products/products.model";
-import { Order, ProductDoc } from "@/types/db";
+// import { UserModel } from "@models/user/user.model";
+// import { OrderModel } from "@models/orders/orders.model";
+// import { ProductModel } from "@models/products/products.model";
+import { Order, User } from "@/types/db";
 import { HttpError } from "@lib/classes/errors/http";
 import { asyncHandler } from "@api/middlewares/async.middleware";
+import { UserService } from "@/services/user.service";
+import { OrderService } from "@/services/orders.service";
+import { ProductService } from "@/services/products.service";
+import { ObjectId } from "mongoose";
 
-export const create = asyncHandler(
+const userService = new UserService();
+const orderService = new OrderService();
+const productService = new ProductService();
+
+export const add = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { products, user }: Order = req.body;
+    const { products, email }: Partial<Order & User> = req.body;
 
-    const orderOwner = await UserModel.findOne({ user });
+    const orderOwner = await userService.find({ email });
 
-    if (!orderOwner) {
-      return new HttpError(404, "No user found");
+    if (!orderOwner || !email) {
+      return new HttpError(400, "No user found, please provide user email");
     }
 
-    let orderTotal = 0;
-
     for (const i in products) {
-      const productId = products[i].product;
-      const qty = products[i].quantity;
-      const product: ProductDoc | null = await ProductModel.findOne({
-        _id: productId,
-      });
+      const productId = products[+i].product;
+      const qty = products[+i].quantity;
+
+      const product = await productService.find({ id: productId });
 
       if (!product) {
-        return new HttpError(404, "Product not found");
+        return new HttpError(400, "Product not found");
       }
 
       if (product && product.stock < qty) {
@@ -37,24 +42,15 @@ export const create = asyncHandler(
       }
 
       if (product) {
-        orderTotal += product.price;
         product.updateOne({ stock: product.stock - qty });
 
         await product.save();
       }
     }
 
-    // if (orderTotal !== total) {
-    // 	res.status(400).json({
-    // 		message: `Order total is not correct`,
-    // 	});
-    // 	return false;
-    // }
-
-    const newOrder = await OrderModel.create({
-      user,
+    const newOrder = await orderService.create({
+      user: orderOwner.id,
       products,
-      total: orderTotal,
       ...req.body,
     });
 
@@ -64,7 +60,21 @@ export const create = asyncHandler(
 
     res.status(200).json({
       success: true,
+      message: "Order created successfully",
       data: newOrder,
+    });
+  }
+);
+
+export const remove = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const orderId: unknown = req.params["orderId"];
+
+    await orderService.delete(orderId as ObjectId);
+
+    res.status(200).json({
+      success: true,
+      message: "Order deleted",
     });
   }
 );

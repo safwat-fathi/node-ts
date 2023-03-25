@@ -1,7 +1,8 @@
+import { ObjectId } from "mongoose";
 import { OrderModel } from "@models/orders/orders.model";
 import { Order, OrderDoc, Service, TSortBy } from "@/types/db";
 
-export class ProductService implements Partial<Service<Order>> {
+export class OrderService implements Partial<Service<Order>> {
   async index(
     skip?: number,
     pageSize?: number,
@@ -51,6 +52,20 @@ export class ProductService implements Partial<Service<Order>> {
       return order;
     } catch (err) {
       throw new Error(`OrderService::create::${err}`);
+    }
+  }
+
+  async delete(orderId: ObjectId): Promise<void> {
+    try {
+      const orderToDelete = await OrderModel.findById(orderId);
+
+      if (!orderToDelete) {
+        throw new Error(`Order not found`);
+      }
+
+      await orderToDelete.remove();
+    } catch (err) {
+      throw new Error(`OrderService::delete::${err}`);
     }
   }
 }

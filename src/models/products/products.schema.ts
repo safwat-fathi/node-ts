@@ -56,8 +56,8 @@ export const ProductsSchema = new Schema<ProductDoc>(
       type: [Schema.Types.ObjectId],
       ref: "Category",
       required: [true, "{VALUE} can not be null"],
-      validate: (val: Schema.Types.ObjectId[]) =>
-        Array.isArray(val) && val.length > 0,
+      // validate: (val: Schema.Types.ObjectId[]) =>
+      //   Array.isArray(val) && val.length > 0,
     },
   },
   {

@@ -17,7 +17,7 @@ export const MONGO_URI =
 mongoose.set("debug", NODE_ENV === "development" ? true : false);
 mongoose.set("strictQuery", false);
 
-export const connectDB = () =>
+export const connectDB = (): Promise<typeof mongoose> =>
   new Promise((resolve, reject) => {
     mongoose.connect(MONGO_URI);
 
@@ -38,4 +38,4 @@ export const connectDB = () =>
     });
   });
 
-export const disconnectDB = () => mongoose.connection.close();
+export const disconnectDB = (): Promise<void> => mongoose.connection.close();

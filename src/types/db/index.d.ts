@@ -18,7 +18,7 @@ export interface Service<T> {
 
   update(docToUpdate: T): Promise<TDoc<T>>;
 
-  delete(docToDelete: ObjectId): Promise<void>;
+  delete(docId: ObjectId): Promise<void>;
 }
 
 export interface User {

@@ -82,39 +82,20 @@
     "tests": []
   },
   {
-    "_id": "f30a5c15-a190-4774-988f-1aedc80b7acc",
-    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
-    "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
-    "name": "create",
-    "url": "{{devUrl}}/api/products/create",
-    "method": "POST",
-    "sortNum": 80000,
-    "created": "2022-09-30T11:18:22.983Z",
-    "modified": "2023-03-06T22:47:33.192Z",
-    "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"name\": \"Black Shirt\",\n  \"categories\": [\"64066d7986f0b9221ab5e427\"],\n  \"stock\": 50,\n  \"images\": [{\"type\": \"cover\", \"url\": \"https://www.theihcc.com/wp-content/uploads/2020/12/taking-a-drug-test-1024x800.jpg\"}],\n  \"price\": 23,\n  \"description\": \"Egyptian cotton shirt\"\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
     "_id": "9d00d433-959b-4bf1-9387-118f712e831a",
     "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
     "containerId": "0ad87be2-c243-42c8-9dd9-2b36621bbcd8",
     "name": "add",
-    "url": "{{devUrl}}/api/orders/add",
+    "url": "{{devUrl}}/api/orders/",
     "method": "POST",
     "sortNum": 90000,
     "created": "2022-10-01T12:38:37.170Z",
-    "modified": "2023-01-21T12:46:04.811Z",
+    "modified": "2023-03-25T21:17:00.946Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"user\": \"63401fe1e0412c9f02751bc2\",\n  \"products\": [{\"product\": \"6336d28fddca91102c3920ad\", \"quantity\": 1}, {\"product\": \"6336d2197d2801618f66d545\", \"quantity\": 1}],\n  \"address\": \"cairo - ramsis sq - Lmon bridge\",\n  \"delivery\": \"2022-10-22\"\n}",
+      "raw": "{\n  \"email\": \"test1@gmail.com\",\n  \"products\": [{\"product\": \"641f59f2ed0a399311056fe7\", \"quantity\": 1}, {\"product\": \"641f59f2ed0a399311056fe8\", \"quantity\": 2}],\n  \"address\": \"cairo - ramsis sq - Lmon bridge\",\n  \"delivery\": \"2022-10-22\"\n}",
       "form": []
     },
     "tests": []
@@ -153,50 +134,15 @@
     "tests": []
   },
   {
-    "_id": "9faa8687-3989-40f9-9ad9-e6353a865cd9",
-    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
-    "containerId": "3717f0b1-c73a-4326-a636-8cf7851e40fe",
-    "name": "index",
-    "url": "{{devUrl}}/api/shops?location=[lng,lat]&limit=10&skip=0&page=1",
-    "method": "GET",
-    "sortNum": 120000,
-    "created": "2023-01-27T14:49:27.205Z",
-    "modified": "2023-01-27T14:50:53.326Z",
-    "headers": [],
-    "params": [
-      {
-        "name": "location",
-        "value": "[lng,lat]",
-        "isPath": false
-      },
-      {
-        "name": "limit",
-        "value": "10",
-        "isPath": false
-      },
-      {
-        "name": "skip",
-        "value": "0",
-        "isPath": false
-      },
-      {
-        "name": "page",
-        "value": "1",
-        "isPath": false
-      }
-    ],
-    "tests": []
-  },
-  {
     "_id": "a2a80773-42c4-4a54-8c6b-dd62b48853a1",
     "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
     "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
     "name": "index",
-    "url": "{{devUrl}}/api/products/?page=1&sort[price]=desc&filter[text][search]=shirt -white",
+    "url": "{{devUrl}}/api/products/?page=1&sort[price]=desc",
     "method": "GET",
     "sortNum": 130000,
     "created": "2023-02-17T12:55:55.621Z",
-    "modified": "2023-03-16T06:32:37.897Z",
+    "modified": "2023-03-25T19:51:17.683Z",
     "headers": [],
     "params": [
       {
@@ -224,6 +170,7 @@
       {
         "name": "filter[text][search]",
         "value": "shirt -white",
+        "isDisabled": true,
         "isPath": false
       },
       {
@@ -309,6 +256,20 @@
       "raw": "{\n  \"email\": \"test1@gmail.com\"\n}",
       "form": []
     },
+    "tests": []
+  },
+  {
+    "_id": "f0dc65d4-2e10-4df8-844d-35bd7ea918e3",
+    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+    "containerId": "0ad87be2-c243-42c8-9dd9-2b36621bbcd8",
+    "name": "remove",
+    "url": "{{devUrl}}/api/orders/641f624f0f69ecaca9b3df9b",
+    "method": "DELETE",
+    "sortNum": 170000,
+    "created": "2023-03-25T20:18:24.986Z",
+    "modified": "2023-03-25T21:06:53.486Z",
+    "headers": [],
+    "params": [],
     "tests": []
   }
 ]

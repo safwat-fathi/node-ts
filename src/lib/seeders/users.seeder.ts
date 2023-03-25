@@ -7,7 +7,7 @@ dotenv.config();
 export const seedUsers = () => {
   UserModel.estimatedDocumentCount({}, async (err, count) => {
     // drop all stored docs
-    UserModel.collection.drop();
+    // await UserModel.collection.drop();
 
     // Rebuild all indexes
     await UserModel.syncIndexes();

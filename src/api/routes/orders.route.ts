@@ -1,10 +1,12 @@
 import { Router } from "express";
-import { create } from "@api/controllers/orders.controller";
+import { add, remove } from "@api/controllers/orders.controller";
 // import { verifyToken } from "@api/middlewares/auth.middleware";
 
 const orders = Router();
 
+// TODO: add verify token
 // * CREATE
-orders.post("/create", /* verifyToken, */ create);
+orders.post("/", /* verifyToken, */ add);
+orders.delete("/:orderId", /* verifyToken, */ remove);
 
 export default orders;
