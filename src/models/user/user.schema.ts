@@ -24,7 +24,6 @@ export const UserSchema = new Schema<User>(
     },
     phone: {
       type: String,
-      unique: true,
       required: [true, "phone required"],
       match: [
         /\d{3}\s?\d{4}-?\d{4}/gm,

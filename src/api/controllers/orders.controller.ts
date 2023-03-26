@@ -20,7 +20,7 @@ export const add = asyncHandler(
 
     const orderOwner = await userService.find({ email });
 
-    if (!orderOwner || !email) {
+    if (!orderOwner) {
       return new HttpError(400, "No user found, please provide user email");
     }
 
@@ -62,6 +62,17 @@ export const add = asyncHandler(
       success: true,
       message: "Order created successfully",
       data: newOrder,
+    });
+  }
+);
+
+export const edit = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { products, email }: Partial<Order & User> = req.body;
+
+    res.status(200).json({
+      success: true,
+      message: "Order deleted",
     });
   }
 );

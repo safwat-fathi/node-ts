@@ -1,6 +1,15 @@
 import { Schema } from "mongoose";
-import { OrderDoc } from "@/types/db";
+import { OrderDoc, OrderStatusEnum } from "@/types/db/index.d";
 // import { geocoder } from "@lib/utils/geocoder";
+
+const STATUSES = [
+  1, // active: still in user cart
+  2, // confirmed: confirmed by user
+  3, // on-route: confirmed by seller
+  4, // delivered: delivered to user
+  5, // cancelled: cancelled by user
+  6, // terminated: cancelled by seller
+];
 
 export const OrderSchema = new Schema<OrderDoc>(
   {
@@ -31,19 +40,12 @@ export const OrderSchema = new Schema<OrderDoc>(
         Array.isArray(val) && val.length > 0,
     },
     status: {
-      type: String,
+      type: Number,
       enum: {
-        values: [
-          "active", // active: still in user cart
-          "confirmed", // confirmed: confirmed by user
-          "on-route", // on-route: confirmed by seller
-          "delivered", // delivered: delivered to user
-          "cancelled", // cancelled: cancelled by user
-          "terminated", // terminated: cancelled by seller
-        ],
-        default: "active",
+        values: STATUSES,
         message: "{VALUE} is not supported",
       },
+      default: OrderStatusEnum.Active,
     },
     address: {
       type: String,

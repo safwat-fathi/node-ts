@@ -34,9 +34,9 @@ export interface User {
 export type UserDoc = TDoc<User>;
 
 export enum SubscriptionType {
-  Basic = "basic",
-  Silver = "silver",
-  Gold = "gold",
+  Basic = 0,
+  Silver = 1,
+  Gold = 2,
 }
 
 export interface Subscription {
@@ -45,23 +45,23 @@ export interface Subscription {
 export type SubscriptionDoc = TDoc<Subscription>;
 
 export enum OrderStatusEnum {
-  active = "active",
-  confirmed = "confirmed",
-  onRoute = "on-route",
-  delivered = "delivered",
-  cancelled = "cancelled",
-  terminated = "terminated",
+  Active = 1,
+  Confirmed = 2,
+  OnRoute = 3,
+  Delivered = 4,
+  Cancelled = 5,
+  Terminated = 6,
 }
 
 export enum ProductImage {
-  thumbnail = "thumbnail",
-  cover = "cover",
-  card = "card",
+  Thumbnail = 1,
+  Cover = 2,
+  Card = 3,
 }
 
 export enum ShopLogo {
-  thumbnail = "thumbnail",
-  cover = "cover",
+  Thumbnail = 1,
+  Cover = 2,
 }
 
 export interface Product {

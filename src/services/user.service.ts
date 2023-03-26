@@ -13,7 +13,7 @@ export class UserService {
 
       return user;
     } catch (err) {
-      throw new Error(`UserService::login::${err}`);
+      throw new Error(`UserService::find::${err}`);
     }
   }
 }

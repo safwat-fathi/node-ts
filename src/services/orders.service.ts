@@ -1,4 +1,4 @@
-import { ObjectId } from "mongoose";
+import { Document, ObjectId, Types } from "mongoose";
 import { OrderModel } from "@models/orders/orders.model";
 import { Order, OrderDoc, Service, TSortBy } from "@/types/db";
 
@@ -43,6 +43,20 @@ export class OrderService implements Partial<Service<Order>> {
     }
   }
 
+  async find(o: Partial<OrderDoc>): Promise<OrderDoc | null> {
+    try {
+      const order = await OrderModel.findById(o.id);
+
+      if (!order) {
+        return null;
+      }
+
+      return order;
+    } catch (err) {
+      throw new Error(`UserService::find::${err}`);
+    }
+  }
+
   async create(newOrder: Order): Promise<OrderDoc> {
     try {
       const order = await OrderModel.create(newOrder);
@@ -68,4 +82,6 @@ export class OrderService implements Partial<Service<Order>> {
       throw new Error(`OrderService::delete::${err}`);
     }
   }
+
+  async update(docToUpdate: Order): Promise<OrderDoc | null> {}
 }
