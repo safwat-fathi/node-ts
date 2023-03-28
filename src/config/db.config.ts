@@ -16,6 +16,7 @@ export const MONGO_URI =
 
 mongoose.set("debug", NODE_ENV === "development" ? true : false);
 mongoose.set("strictQuery", false);
+// mongoose.set("strictPopulate", false);
 
 export const connectDB = (): Promise<typeof mongoose> =>
   new Promise((resolve, reject) => {

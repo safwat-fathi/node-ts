@@ -34,10 +34,11 @@ const CLIENT_HOST =
     ? `${CLIENT_HOST_DEV}:${CLIENT_PORT_DEV}`
     : `${CLIENT_HOST_PROD}:${CLIENT_PORT_PROD}`;
 
+const authService = new AuthService();
+
 export const signup = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { name, email, phone, password } = req.body;
-    const authService = new AuthService();
 
     const errors = validationResult(req);
 
@@ -75,8 +76,6 @@ export const login = asyncHandler(
       );
     }
 
-    const authService = new AuthService();
-
     const user = await authService.login({ email, password });
 
     if (!user) {
@@ -102,8 +101,6 @@ export const login = asyncHandler(
 export const forgotPassword = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { email } = req.body as User;
-
-    const authService = new AuthService();
 
     const resetToken = await authService.forgotPassword(email);
 

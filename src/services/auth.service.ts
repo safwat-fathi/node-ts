@@ -73,4 +73,21 @@ export class AuthService implements Partial<IAuthService<User>> {
       throw new Error(`AuthService::login::${err}`);
     }
   }
+
+  async verifyEmail(email: string): Promise<boolean> {
+    try {
+      const user = await UserModel.findOne({ email });
+
+      if (!user) {
+        return false;
+      }
+
+      user.isVerified = true;
+      await user.save();
+
+      return true;
+    } catch (err) {
+      throw new Error(`AuthService::verifyEmail::${err}`);
+    }
+  }
 }

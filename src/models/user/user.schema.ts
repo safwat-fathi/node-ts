@@ -35,6 +35,10 @@ export const UserSchema = new Schema<User>(
       required: [true, "password required"],
       select: false,
     },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
     resetPasswordToken: {
       type: String,
       select: false,

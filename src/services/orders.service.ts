@@ -29,7 +29,8 @@ export class OrderService implements Partial<Service<Order>> {
           }
         )
           .skip(skip || 0)
-          .limit(pageSize || 10);
+          .limit(pageSize || 10)
+          .populate({ path: "products.product", select: "name" });
       }
 
       const [orders, count] = await Promise.all([
@@ -83,5 +84,5 @@ export class OrderService implements Partial<Service<Order>> {
     }
   }
 
-  async update(docToUpdate: Order): Promise<OrderDoc | null> {}
+  // async update(docToUpdate: Order): Promise<OrderDoc | null> {}
 }

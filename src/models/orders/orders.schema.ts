@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { OrderDoc, OrderStatusEnum } from "@/types/db/index.d";
+import { Order, OrderDoc, OrderStatusEnum } from "@/types/db/index.d";
 // import { geocoder } from "@lib/utils/geocoder";
 
 const STATUSES = [
@@ -11,7 +11,7 @@ const STATUSES = [
   6, // terminated: cancelled by seller
 ];
 
-export const OrderSchema = new Schema<OrderDoc>(
+export const OrderSchema = new Schema<Order>(
   {
     user: {
       type: Schema.Types.ObjectId,

@@ -4,6 +4,8 @@ import { HttpError } from "@lib/classes/errors/http";
 import { Category } from "@/types/db";
 import { CategoryService } from "@services/categories.service";
 
+const categoryService = new CategoryService();
+
 export const index = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     return res.status(200).json({
@@ -22,8 +24,6 @@ export const create = asyncHandler(
     if (!name || !description) {
       throw new HttpError(400, `name or description not valid`);
     }
-
-    const categoryService = new CategoryService();
 
     const newCategory = await categoryService.create({
       name,
@@ -50,8 +50,6 @@ export const update = asyncHandler(
     if (!name || !description) {
       throw new HttpError(400, `name or description not valid`);
     }
-
-    const categoryService = new CategoryService();
 
     const updatedCategory = await categoryService.update({
       name,

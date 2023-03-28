@@ -27,6 +27,7 @@ export interface User {
   password: string;
   resetPasswordToken: string;
   resetPasswordExpire: Date;
+  isVerified: boolean;
   phone: string;
   address: string[];
   orders: ObjectId[];
@@ -38,6 +39,12 @@ export enum SubscriptionType {
   Silver = 1,
   Gold = 2,
 }
+
+export interface Token {
+  userId: ObjectId;
+  token: string;
+}
+export type TokenDoc = TDoc<Token>;
 
 export interface Subscription {
   type: keyof typeof SubscriptionType;

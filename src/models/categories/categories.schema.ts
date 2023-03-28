@@ -1,8 +1,8 @@
 import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
-import { CategoryDoc } from "@/types/db";
+import { Category, CategoryDoc } from "@/types/db";
 import { CategoryModel } from "./categories.model";
 
-export const CategorySchema = new Schema<CategoryDoc>(
+export const CategorySchema = new Schema<Category>(
   {
     name: { type: String, required: true, unique: true },
     description: { type: String, required: true },

@@ -14,6 +14,17 @@ const userService = new UserService();
 const orderService = new OrderService();
 const productService = new ProductService();
 
+export const index = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    return res.status(200).json({
+      success: true,
+      data: res.locals.dataPaginated.data,
+      meta: res.locals.dataPaginated.meta,
+      links: res.locals.dataPaginated.links,
+    });
+  }
+);
+
 export const add = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { products, email }: Partial<Order & User> = req.body;
