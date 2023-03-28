@@ -15,12 +15,14 @@ export const seedCategories = async () => {
       if (err) throw new Error(`${err}`);
 
       if (count === 0) {
-        const parentClothsCategory = await CategoryModel.create({
+        const parentClothsCategory = await new CategoryModel({
           name: "Cloths",
           description: "All Cloths",
           parent: null,
           sub: [],
         });
+
+        await parentClothsCategory.save();
 
         const categories = await CategoryModel.insertMany([
           {

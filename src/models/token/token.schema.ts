@@ -1,10 +1,5 @@
-import {
-  CallbackWithoutResultAndOptionalError,
-  Document,
-  Schema,
-} from "mongoose";
-import { Token, TokenDoc } from "@/types/db";
-import { hashPassword } from "@lib/utils/auth";
+import { Schema } from "mongoose";
+import { Token } from "@/types/db";
 
 export const TokenSchema = new Schema<Token>(
   {
@@ -22,11 +17,3 @@ export const TokenSchema = new Schema<Token>(
     timestamps: true,
   }
 );
-
-// TokenSchema.pre<TokenDoc>(
-//   "save",
-//   async function (next: CallbackWithoutResultAndOptionalError) {
-
-//     next();
-//   }
-// );

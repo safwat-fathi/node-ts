@@ -1,13 +1,7 @@
-import { comparePassword, generateResetPasswordToken } from "@lib/utils/auth";
+import { comparePassword, generateToken } from "@lib/utils/auth";
 import { UserModel } from "@models/user/user.model";
 import { TDoc, User, UserDoc } from "@/types/db";
-
-export interface IAuthService<T> {
-  signup(newDoc: T): Promise<TDoc<T>> | null;
-  update(docToUpdate: T): Promise<TDoc<T>>;
-  forgotPassword(email: string): Promise<string | null>;
-  login(doc: T): Promise<TDoc<T> | null>;
-}
+import { IAuthService } from "@/types/services";
 
 export class AuthService implements Partial<IAuthService<User>> {
   async forgotPassword(email: string): Promise<string | null> {
@@ -18,14 +12,14 @@ export class AuthService implements Partial<IAuthService<User>> {
         return null;
       }
 
-      const resetpasswordToken = generateResetPasswordToken();
+      const resetPasswordToken = generateToken();
 
-      user.resetPasswordToken = resetpasswordToken;
+      user.resetPasswordToken = resetPasswordToken;
       user.resetPasswordExpire = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes expire time
 
       await user.save();
 
-      return resetpasswordToken;
+      return resetPasswordToken;
     } catch (err) {
       throw new Error(`AuthService::forgotPassword::${err}`);
     }

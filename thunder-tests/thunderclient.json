@@ -310,5 +310,19 @@
       }
     ],
     "tests": []
+  },
+  {
+    "_id": "cdbb842b-8616-4db9-aaf0-f974397ecb7f",
+    "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+    "containerId": "dc90a468-4c87-4442-91d3-71a0fe47d997",
+    "name": "get",
+    "url": "{{devUrl}}/api/token/",
+    "method": "GET",
+    "sortNum": 180000,
+    "created": "2023-03-28T21:54:07.603Z",
+    "modified": "2023-03-28T21:54:35.524Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

@@ -91,22 +91,19 @@ export const generateAccessToken = async (
 };
 
 /**
- * Generate & hash password token
- * @returns {string} Returns password token
+ * Generate & hash token
+ * @returns {string} Returns a token
  */
-export const generateResetPasswordToken = (): string => {
+export const generateToken = (): string => {
   try {
-    const resetToken = crypto.randomBytes(20).toString("hex");
+    const token = crypto.randomBytes(16).toString("hex");
 
     // hash token
-    const resetpasswordToken = crypto
-      .createHash("sha256")
-      .update(resetToken)
-      .digest("hex");
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
 
-    return resetpasswordToken;
+    return hashedToken;
   } catch (err) {
-    throw new Error(`Utils::auth::generateResetPasswordToken::${err}`);
+    throw new Error(`Utils::auth::generateToken::${err}`);
   }
 };
 

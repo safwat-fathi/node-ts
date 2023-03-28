@@ -4,7 +4,7 @@ import { Review, ReviewDoc } from "@/types/db";
 export class ReviewService {
   async create(newReview: Review): Promise<ReviewDoc> {
     try {
-      const review = await ReviewModel.create(newReview);
+      const review = await new ReviewModel(newReview);
 
       await review.save();
 

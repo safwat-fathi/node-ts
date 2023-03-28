@@ -59,7 +59,7 @@ export class ProductService implements Partial<Service<Product>> {
 
   async create(newProduct: Product): Promise<ProductDoc> {
     try {
-      const product = await ProductModel.create(newProduct);
+      const product = await new ProductModel(newProduct);
 
       await product.save();
 

@@ -56,7 +56,7 @@ export class CategoryService implements Partial<Service<Category>> {
         throw new Error(`Category ${name} already exists`);
       }
 
-      const category = await CategoryModel.create(newCategory);
+      const category = await new CategoryModel(newCategory);
 
       await category.save();
 

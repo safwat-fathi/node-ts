@@ -1,4 +1,4 @@
-import { comparePassword, generateResetPasswordToken } from "@lib/utils/auth";
+import { comparePassword, generateToken } from "@lib/utils/auth";
 import { UserModel } from "@models/user/user.model";
 import { User, UserDoc } from "@/types/db";
 

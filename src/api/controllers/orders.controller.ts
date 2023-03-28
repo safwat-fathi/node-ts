@@ -90,9 +90,13 @@ export const edit = asyncHandler(
 
 export const remove = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const orderId: unknown = req.params["orderId"];
+    const { orderId } = req.params;
 
-    await orderService.delete(orderId as ObjectId);
+    if (!orderId) {
+      return next(new HttpError(400, "Order ID not found"));
+    }
+
+    await orderService.delete(<ObjectId>(orderId as unknown));
 
     res.status(200).json({
       success: true,
