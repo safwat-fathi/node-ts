@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { index, add, remove, edit } from "@api/controllers/orders.controller";
-import { verifyToken } from "@api/middlewares/auth.middleware";
-import { paginate } from "@api/middlewares/paginate.middleware";
+import { index, add, remove, edit } from "@/api/controllers/orders.controller";
+import { verifyToken } from "@/api/middlewares/auth.middleware";
+import { paginate } from "@/api/middlewares/paginate.middleware";
 import { OrderService } from "@/services/orders.service";
 import { Order } from "@/types/db";
 

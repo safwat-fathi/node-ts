@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { CategoryDoc, Product } from "@/types/db";
-import { HttpError } from "@lib/classes/errors/http";
-import { asyncHandler } from "@api/middlewares/async.middleware";
-import { ProductService } from "@services/products.service";
-import { CategoryService } from "@services/categories.service";
+import { HttpError } from "@/lib/classes/errors/http";
+import { asyncHandler } from "@/api/middlewares/async.middleware";
+import { ProductService } from "@/services/products.service";
+import { CategoryService } from "@/services/categories.service";
 
 // * Index
 // * ----------

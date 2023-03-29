@@ -4,7 +4,7 @@ import {
   login,
   logout,
   forgotPassword,
-} from "@api/controllers/auth.controller";
+} from "@/api/controllers/auth.controller";
 import {
   validateEmail,
   validateName,
@@ -13,7 +13,7 @@ import {
   validatePassword,
   checkDuplicate,
   verifyToken,
-} from "@api/middlewares/auth.middleware";
+} from "@/api/middlewares/auth.middleware";
 
 const auth = Router();
 

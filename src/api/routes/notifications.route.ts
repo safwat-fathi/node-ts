@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { send, receive } from "@api/controllers/notifications.controller";
+import { send, receive } from "@/api/controllers/notifications.controller";
 
 const notifications = Router();
 

@@ -1,5 +1,5 @@
-import { comparePassword, generateToken } from "@lib/utils/auth";
-import { UserModel } from "@models/user/user.model";
+import { comparePassword, generateToken } from "@/lib/utils/auth";
+import { UserModel } from "@/models/user/user.model";
 import { TDoc, User, UserDoc } from "@/types/db";
 import { IAuthService } from "@/types/services";
 

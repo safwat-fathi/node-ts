@@ -4,7 +4,7 @@ import {
   Schema,
 } from "mongoose";
 import { User, UserDoc } from "@/types/db";
-import { hashPassword } from "@lib/utils/auth";
+import { hashPassword } from "@/lib/utils/auth";
 
 export const UserSchema = new Schema<User>(
   {

@@ -1,4 +1,4 @@
-import { ProductModel } from "@models/products/products.model";
+import { ProductModel } from "@/models/products/products.model";
 import { Product, ProductDoc, Service, TSortBy } from "@/types/db";
 
 export class ProductService implements Partial<Service<Product>> {

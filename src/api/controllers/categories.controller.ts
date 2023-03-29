@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { asyncHandler } from "@api/middlewares/async.middleware";
-import { HttpError } from "@lib/classes/errors/http";
+import { asyncHandler } from "@/api/middlewares/async.middleware";
+import { HttpError } from "@/lib/classes/errors/http";
 import { Category } from "@/types/db";
-import { CategoryService } from "@services/categories.service";
+import { CategoryService } from "@/services/categories.service";
 
 const categoryService = new CategoryService();
 

@@ -1,4 +1,4 @@
-import { generateToken } from "@lib/utils/auth";
+import { generateToken } from "@/lib/utils/auth";
 import { TokenModel } from "@/models/token/token.model";
 import { TDoc, Token } from "@/types/db";
 import { ITokenService } from "@/types/services";

@@ -1,4 +1,4 @@
-import { CategoryModel } from "@models/categories/categories.model";
+import { CategoryModel } from "@/models/categories/categories.model";
 import { ObjectId } from "mongoose";
 import { Category, CategoryDoc, Service, TSortBy } from "@/types/db";
 

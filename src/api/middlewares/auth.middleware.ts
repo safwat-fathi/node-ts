@@ -3,7 +3,7 @@ import { CustomJwtPayload } from "@/types/jwt";
 import { NextFunction, Request, Response } from "express";
 import { body } from "express-validator";
 import { verify } from "jsonwebtoken";
-import { HttpError } from "@lib/classes/errors/http";
+import { HttpError } from "@/lib/classes/errors/http";
 import { asyncHandler } from "./async.middleware";
 import { UserService } from "@/services/user.service";
 

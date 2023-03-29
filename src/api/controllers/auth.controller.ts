@@ -1,10 +1,10 @@
 import dotenv from "dotenv";
 import { NextFunction, Request, Response } from "express";
-import { generateAccessToken, sendEmail } from "@lib/utils/auth";
+import { generateAccessToken, sendEmail } from "@/lib/utils/auth";
 import { validationResult } from "express-validator";
-import { HttpError } from "@lib/classes/errors/http";
-import { asyncHandler } from "@api/middlewares/async.middleware";
-import { AuthService } from "@services/auth.service";
+import { HttpError } from "@/lib/classes/errors/http";
+import { asyncHandler } from "@/api/middlewares/async.middleware";
+import { AuthService } from "@/services/auth.service";
 import { User } from "@/types/db";
 
 dotenv.config();

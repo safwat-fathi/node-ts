@@ -1,6 +1,6 @@
 import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
 import { Shop } from "@/types/db";
-import { slugify } from "@lib/utils/string";
+import { slugify } from "@/lib/utils/string";
 
 export const ShopsSchema = new Schema<Shop>(
   {

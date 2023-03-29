@@ -1,7 +1,7 @@
 // import { Router } from "express";
-// import { index } from "@api/controllers/shops.controller";
-// import { verifyToken } from "@api/middlewares/auth.middleware";
-// import { paginate } from "@api/middlewares/paginate.middleware";
+// import { index } from "@/api/controllers/shops.controller";
+// import { verifyToken } from "@/api/middlewares/auth.middleware";
+// import { paginate } from "@/api/middlewares/paginate.middleware";
 // import { Shop } from "@/types/db";
 
 // const shops = Router();

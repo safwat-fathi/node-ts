@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { index, create, update } from "@api/controllers/categories.controller";
-import { paginate } from "@api/middlewares/paginate.middleware";
-import { CategoryService } from "@services/categories.service";
+import { index, create, update } from "@/api/controllers/categories.controller";
+import { paginate } from "@/api/middlewares/paginate.middleware";
+import { CategoryService } from "@/services/categories.service";
 import { Category } from "@/types/db";
 
 const category = Router();

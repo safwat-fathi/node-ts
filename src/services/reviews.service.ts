@@ -1,4 +1,4 @@
-import { ReviewModel } from "@models/reviews/reviews.model";
+import { ReviewModel } from "@/models/reviews/reviews.model";
 import { Review, ReviewDoc } from "@/types/db";
 
 export class ReviewService {

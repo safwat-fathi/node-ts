@@ -9,12 +9,12 @@ import { rateLimit } from "express-rate-limit";
 import hpp from "hpp";
 import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
-import { errorHandler } from "@api/middlewares/error.middleware";
-import { connectDB, MONGO_URI } from "@config//db.config";
+import { errorHandler } from "@/api/middlewares/error.middleware";
+import { connectDB, MONGO_URI } from "@/config/db.config";
 // seeders
-import { runSeeders } from "@lib/seeders";
+import { runSeeders } from "@/lib/seeders";
 // routes
-import routes from "@api/routes";
+import routes from "@/api/routes";
 import { EventEmitter } from "stream";
 import WebSocketServer from "websocket";
 

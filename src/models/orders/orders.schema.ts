@@ -1,14 +1,14 @@
 import { Schema } from "mongoose";
-import { Order, OrderDoc, OrderStatusEnum } from "@/types/db/index.d";
-// import { geocoder } from "@lib/utils/geocoder";
+import { Order, OrderStatusEnum } from "@/types/db";
+// import { geocoder } from "@/lib/utils/geocoder";
 
 const STATUSES = [
-  1, // active: still in user cart
-  2, // confirmed: confirmed by user
-  3, // on-route: confirmed by seller
-  4, // delivered: delivered to user
-  5, // cancelled: cancelled by user
-  6, // terminated: cancelled by seller
+  0, // active: still in user cart
+  1, // confirmed: confirmed by user
+  2, // on-route: confirmed by seller
+  3, // delivered: delivered to user
+  4, // cancelled: cancelled by user
+  5, // terminated: cancelled by seller
 ];
 
 export const OrderSchema = new Schema<Order>(

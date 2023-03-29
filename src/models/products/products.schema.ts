@@ -1,6 +1,6 @@
 import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
-import { Product, ProductDoc } from "@/types/db";
-import { slugify } from "@lib/utils/string";
+import { Product, ProductDoc, ProductImage } from "@/types/db";
+import { slugify } from "@/lib/utils/string";
 
 // TODO: fuzzy search by name (https://stackoverflow.com/questions/44833817/mongodb-full-and-partial-text-search)
 export const ProductsSchema = new Schema<Product>(
@@ -40,7 +40,7 @@ export const ProductsSchema = new Schema<Product>(
               values: ["card", "cover", "thumbnail"],
               message: "{VALUE} is not supported",
             },
-            default: "thumbnail",
+            default: ProductImage.Thumbnail,
             required: [true, "{VALUE} can not be null, please add image type"],
           },
           url: { type: String, required: [true, "{VALUE} can not be null"] },

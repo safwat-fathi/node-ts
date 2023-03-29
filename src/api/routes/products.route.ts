@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { create, index } from "@api/controllers/products.controller";
-// import { verifyToken } from "@api/middlewares/auth.middleware";
-import { paginate } from "@api/middlewares/paginate.middleware";
+import { create, index } from "@/api/controllers/products.controller";
+// import { verifyToken } from "@/api/middlewares/auth.middleware";
+import { paginate } from "@/api/middlewares/paginate.middleware";
 import { Product } from "@/types/db";
-import { ProductService } from "@services/products.service";
+import { ProductService } from "@/services/products.service";
 
 const products = Router();
 

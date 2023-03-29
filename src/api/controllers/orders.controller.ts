@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-// import { UserModel } from "@models/user/user.model";
-// import { OrderModel } from "@models/orders/orders.model";
-// import { ProductModel } from "@models/products/products.model";
+// import { UserModel } from "@/models/user/user.model";
+// import { OrderModel } from "@/models/orders/orders.model";
+// import { ProductModel } from "@/models/products/products.model";
 import { Order, User } from "@/types/db";
-import { HttpError } from "@lib/classes/errors/http";
-import { asyncHandler } from "@api/middlewares/async.middleware";
+import { HttpError } from "@/lib/classes/errors/http";
+import { asyncHandler } from "@/api/middlewares/async.middleware";
 import { UserService } from "@/services/user.service";
 import { OrderService } from "@/services/orders.service";
 import { ProductService } from "@/services/products.service";

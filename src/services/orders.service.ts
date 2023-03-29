@@ -1,5 +1,5 @@
 import { Document, ObjectId, Types } from "mongoose";
-import { OrderModel } from "@models/orders/orders.model";
+import { OrderModel } from "@/models/orders/orders.model";
 import { Order, OrderDoc, Service, TSortBy } from "@/types/db";
 
 export class OrderService implements Partial<Service<Order>> {

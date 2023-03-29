@@ -4,7 +4,7 @@ export type TDoc<T> = HydratedDocument<T>;
 
 export type TSortOrder = SortOrder;
 
-type TSortBy = { by: string; type: SortOrder };
+export type TSortBy = { by: string; type: SortOrder };
 
 export interface Service<T> {
   index(
@@ -35,9 +35,9 @@ export interface User {
 export type UserDoc = TDoc<User>;
 
 export enum SubscriptionType {
-  Basic = 0,
-  Silver = 1,
-  Gold = 2,
+  Basic,
+  Silver,
+  Gold,
 }
 
 export interface Token {
@@ -52,23 +52,23 @@ export interface Subscription {
 export type SubscriptionDoc = TDoc<Subscription>;
 
 export enum OrderStatusEnum {
-  Active = 1,
-  Confirmed = 2,
-  OnRoute = 3,
-  Delivered = 4,
-  Cancelled = 5,
-  Terminated = 6,
+  Active,
+  Confirmed,
+  OnRoute,
+  Delivered,
+  Cancelled,
+  Terminated,
 }
 
 export enum ProductImage {
-  Thumbnail = 1,
-  Cover = 2,
-  Card = 3,
+  Thumbnail,
+  Cover,
+  Card,
 }
 
 export enum ShopLogo {
-  Thumbnail = 1,
-  Cover = 2,
+  Thumbnail,
+  Cover,
 }
 
 export interface Product {

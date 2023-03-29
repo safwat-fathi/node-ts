@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 import { NextFunction, Request, Response } from "express";
-import { sendEmail } from "@lib/utils/auth";
-import { HttpError } from "@lib/classes/errors/http";
-import { asyncHandler } from "@api/middlewares/async.middleware";
+import { sendEmail } from "@/lib/utils/auth";
+import { HttpError } from "@/lib/classes/errors/http";
+import { asyncHandler } from "@/api/middlewares/async.middleware";
 import { TokenService } from "@/services/token.service";
 import { Token } from "@/types/db";
 
