@@ -138,11 +138,11 @@
     "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
     "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
     "name": "index",
-    "url": "{{devUrl}}/api/products/?page=1&sort[price]=desc",
+    "url": "{{prodUrl}}/api/products/?page=1&sort[price]=desc",
     "method": "GET",
     "sortNum": 130000,
     "created": "2023-02-17T12:55:55.621Z",
-    "modified": "2023-03-25T19:51:17.683Z",
+    "modified": "2023-03-29T22:15:26.639Z",
     "headers": [],
     "params": [
       {
