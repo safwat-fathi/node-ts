@@ -2,7 +2,7 @@ import { generateToken } from "@/lib/utils/auth";
 import { TokenModel } from "@/models/token/token.model";
 import { TDoc, Token } from "@/types/db";
 import { ITokenService } from "@/types/services";
-import { Document, ObjectId, Types } from "mongoose";
+import { ObjectId } from "mongoose";
 
 export class TokenService implements Partial<ITokenService<Token>> {
   async add(doc: Token): Promise<TDoc<Token> | null> {
@@ -23,15 +23,29 @@ export class TokenService implements Partial<ITokenService<Token>> {
     }
   }
 
-  async read(userId: ObjectId): Promise<TDoc<Token> | null> {
+  async read(token: string): Promise<boolean> {
     try {
-      const token = await TokenModel.findOne({ userId });
+      const userToken = await TokenModel.findOne({ token });
 
-      if (!token) {
-        return null;
+      if (!userToken) {
+        return false;
       }
 
-      return token;
+      return true;
+    } catch (err) {
+      throw new Error(`TokenService::read::${err}`);
+    }
+  }
+
+  async delete(tokenId: ObjectId): Promise<void> {
+    try {
+      const token = await TokenModel.findOne({ tokenId });
+
+      if (!token) {
+        throw new Error("No token found");
+      }
+
+      await token.remove();
     } catch (err) {
       throw new Error(`TokenService::read::${err}`);
     }

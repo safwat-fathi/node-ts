@@ -1,7 +1,39 @@
-import { comparePassword, generateToken } from "@/lib/utils/auth";
+import { comparePassword, generateToken, sendEmail } from "@/lib/utils/auth";
+import dotenv from "dotenv";
 import { UserModel } from "@/models/user/user.model";
+import { TokenModel } from "@/models/token/token.model";
 import { TDoc, User, UserDoc } from "@/types/db";
 import { IAuthService } from "@/types/services";
+import { TokenService } from "./token.service";
+
+dotenv.config();
+
+const {
+  NODE_ENV,
+  CLIENT_HOST_DEV,
+  CLIENT_PORT_DEV,
+  CLIENT_HOST_PROD,
+  CLIENT_PORT_PROD,
+} = (process.env as {
+  NODE_ENV: "development" | "production";
+  CLIENT_HOST_DEV: string;
+  CLIENT_PORT_DEV: number;
+  CLIENT_HOST_PROD: string;
+  CLIENT_PORT_PROD: number;
+}) || {
+  NODE_ENV: "development",
+  CLIENT_HOST_DEV: "",
+  CLIENT_HOST_PROD: "",
+  CLIENT_PORT_DEV: 3000,
+  CLIENT_PORT_PROD: 3000,
+};
+
+const CLIENT_HOST =
+  NODE_ENV === "development"
+    ? `${CLIENT_HOST_DEV}:${CLIENT_PORT_DEV}`
+    : `${CLIENT_HOST_PROD}:${CLIENT_PORT_PROD}`;
+
+const tokenService = new TokenService();
 
 export class AuthService implements Partial<IAuthService<User>> {
   async forgotPassword(email: string): Promise<string | null> {
@@ -27,12 +59,37 @@ export class AuthService implements Partial<IAuthService<User>> {
 
   async signup(u: Partial<User>): Promise<UserDoc> {
     try {
+      // create new user doc
       const user = new UserModel({
         name: u.name,
         email: u.email,
         phone: u.phone,
         password: u.password,
-        orders: [],
+      });
+
+      // token generation & new token doc
+      const generatedToken = generateToken();
+      const token = await tokenService.add({
+        userId: user.id,
+        token: generatedToken,
+      });
+
+      if (!token) {
+        throw new Error("Signup failed, token generation failed");
+      }
+
+      // link to reset password page
+      const verificationUrl = `${CLIENT_HOST}/auth/verification/${generatedToken}`;
+
+      // TODO: message template should be HTML
+      // message template
+      const message = `<p>Please follow <a href="${verificationUrl}">this link</a> to complete registration process.</p>`;
+
+      // send verification email
+      await sendEmail({
+        email: user.email,
+        message,
+        subject: "Email verification",
       });
 
       await user.save();
@@ -68,11 +125,17 @@ export class AuthService implements Partial<IAuthService<User>> {
     }
   }
 
-  async verifyEmail(email: string): Promise<boolean> {
+  async verifyEmail(token: string): Promise<boolean> {
     try {
-      const user = await UserModel.findOne({ email });
+      const userToken = await TokenModel.findOne({ token });
 
-      if (!user) {
+      if (!userToken) {
+        return false;
+      }
+
+      const user = await UserModel.findOne({ _id: userToken.userId });
+
+      if (!user || user.isVerified) {
         return false;
       }
 

@@ -4,6 +4,7 @@ import {
   login,
   logout,
   forgotPassword,
+  verification,
 } from "@/api/controllers/auth.controller";
 import {
   validateEmail,
@@ -17,7 +18,7 @@ import {
 
 const auth = Router();
 
-// signup
+// * SIGNUP
 auth.post(
   "/signup",
   checkDuplicate,
@@ -28,11 +29,13 @@ auth.post(
   validatePhone,
   signup
 );
-// login
+// * LOGIN
 auth.post("/login", login);
-// logout
+// * LOGOUT
 auth.get("/logout", verifyToken, logout);
-// forgot password
+// * FORGOT PASSWORD
 auth.post("/forgot-password", forgotPassword);
+// * VERIFICATION
+auth.get("/verification/:token", verification);
 
 export default auth;

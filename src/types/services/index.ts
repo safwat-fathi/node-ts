@@ -10,5 +10,5 @@ export interface IAuthService<T> {
 
 export interface ITokenService<T> {
   add(doc: T): Promise<TDoc<T> | null>;
-  read(userId: ObjectId): Promise<TDoc<T> | null>;
+  read(token: string): Promise<boolean>;
 }

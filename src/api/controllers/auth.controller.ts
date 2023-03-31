@@ -5,7 +5,7 @@ import { validationResult } from "express-validator";
 import { HttpError } from "@/lib/classes/errors/http";
 import { asyncHandler } from "@/api/middlewares/async.middleware";
 import { AuthService } from "@/services/auth.service";
-import { User } from "@/types/db";
+import { Token, User } from "@/types/db";
 
 dotenv.config();
 
@@ -141,5 +141,23 @@ export const logout = asyncHandler(
     } else {
       return next(new HttpError(404, "Not logged in"));
     }
+  }
+);
+
+export const verification = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { token } = req.params as Partial<Token>;
+
+    if (!token) {
+      return next(new HttpError(400, "Token is missing"));
+    }
+
+    const verified = await authService.verifyEmail(token);
+
+    if (!verified) {
+      return next(new HttpError(404, "No user found or user already verified"));
+    }
+
+    res.status(200).json({ success: true, message: "User verified" });
   }
 );
