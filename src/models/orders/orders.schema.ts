@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { Order, OrderStatusEnum } from "@/types/db";
+import { Order, OrderDoc, OrderStatusEnum } from "@/types/db";
 // import { geocoder } from "@/lib/utils/geocoder";
 
 const STATUSES = [
@@ -59,6 +59,13 @@ export const OrderSchema = new Schema<Order>(
   },
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: function (doc: OrderDoc, ret: Partial<OrderDoc>, opt) {
+        delete ret["__v"];
+        return ret;
+      },
+    },
   }
 );
 

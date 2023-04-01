@@ -91,7 +91,9 @@ export const edit = asyncHandler(
     });
 
     if (!order) {
-      return next(new HttpError(400, "Order can not be updated"));
+      return next(
+        new HttpError(400, "Order can not be updated, maybe order not found")
+      );
     }
 
     res.status(200).json({

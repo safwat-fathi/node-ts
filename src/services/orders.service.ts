@@ -85,14 +85,14 @@ export class OrderService implements Partial<Service<Order>> {
   }
 
   async update(o: Partial<Order & { id: ObjectId }>): Promise<OrderDoc | null> {
-    const order = await OrderModel.findOne({ _id: o.id });
+    const order = await OrderModel.findOneAndUpdate({ _id: o.id }, o, {
+      new: true,
+    });
 
     if (!order || order.status !== OrderStatusEnum.Active) {
       return null;
     }
 
-    const orderUpdated = await order.updateOne(o, { new: true });
-
-    return orderUpdated;
+    return order;
   }
 }
