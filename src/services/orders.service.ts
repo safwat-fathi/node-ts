@@ -1,6 +1,6 @@
 import { Document, ObjectId, Types } from "mongoose";
 import { OrderModel } from "@/models/orders/orders.model";
-import { Order, OrderDoc, Service, TSortBy } from "@/types/db";
+import { Order, OrderDoc, OrderStatusEnum, Service, TSortBy } from "@/types/db";
 
 export class OrderService implements Partial<Service<Order>> {
   async index(
@@ -84,5 +84,15 @@ export class OrderService implements Partial<Service<Order>> {
     }
   }
 
-  // async update(docToUpdate: Order): Promise<OrderDoc | null> {}
+  async update(o: Partial<Order & { id: ObjectId }>): Promise<OrderDoc | null> {
+    const order = await OrderModel.findOne({ _id: o.id });
+
+    if (!order || order.status !== OrderStatusEnum.Active) {
+      return null;
+    }
+
+    const orderUpdated = await order.updateOne(o, { new: true });
+
+    return orderUpdated;
+  }
 }

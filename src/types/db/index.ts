@@ -16,7 +16,7 @@ export interface Service<T> {
 
   create(newDoc: T): Promise<TDoc<T>>;
 
-  update(docToUpdate: T): Promise<TDoc<T>>;
+  update(docToUpdate: Partial<T & { id: ObjectId }>): Promise<TDoc<T> | null>;
 
   delete(docId: ObjectId): Promise<void>;
 }

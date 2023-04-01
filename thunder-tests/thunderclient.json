@@ -281,12 +281,12 @@
     "method": "PUT",
     "sortNum": 130000,
     "created": "2023-03-26T05:21:09.195Z",
-    "modified": "2023-03-26T05:28:46.040Z",
+    "modified": "2023-04-01T13:23:58.562Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"test2@example.com\",\n  \"products\": [{\"product\": \"641f59f2ed0a399311056fe7\", \"quantity\": 1}, {\"product\": \"641f59f2ed0a399311056fe8\", \"quantity\": 2}],\n  \"address\": \"cairo - ramsis sq - Lmon bridge\",\n  \"delivery\": \"2022-10-22\"\n}",
+      "raw": "{\n  \"id\": \"641f686a78f31dd660a5f250\",\n  \"products\": [{\"product\": \"641f59f2ed0a399311056fe7\", \"quantity\": 1}, {\"product\": \"641f59f2ed0a399311056fe8\", \"quantity\": 2}],\n  \"address\": \"Giza - 6th october - elhosary\"\n}",
       "form": []
     },
     "tests": []

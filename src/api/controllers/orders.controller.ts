@@ -79,11 +79,25 @@ export const add = asyncHandler(
 
 export const edit = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { products, email }: Partial<Order & User> = req.body;
+    const { id, ...rest }: Partial<Order & { id: ObjectId }> = req.body;
+
+    if (!id) {
+      return new HttpError(400, "Missing order id not found");
+    }
+
+    const order = await orderService.update({
+      id,
+      ...rest,
+    });
+
+    if (!order) {
+      return next(new HttpError(400, "Order can not be updated"));
+    }
 
     res.status(200).json({
       success: true,
-      message: "Order deleted",
+      message: "Order updated",
+      data: order,
     });
   }
 );
