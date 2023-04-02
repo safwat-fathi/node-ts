@@ -1,0 +1,20 @@
+config:
+  target: "http://localhost:8000"
+  phases:
+    - duration: 30 # duration of test
+      arrivalRate: 2 # how much user arrive every second
+
+scenarios:
+  - name: "Get products"
+    flow:
+      - get:
+          url: "/api/products/?page=1"
+  - name: "Add order"
+    flow:
+      - post:
+          url: "/api/order"
+          json:
+            email: "test3@ex.com"
+            products: [{"product": "641f59f2ed0a399311056fe7", "quantity": 3}]
+            address: "cairo - ramsis sq - Lmon bridge"
+
