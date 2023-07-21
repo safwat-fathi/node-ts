@@ -32,6 +32,7 @@ export const seedCategories = async () => {
             sub: [],
           },
           { name: "Food", description: "All food", parent: null, sub: [] },
+          { name: "Shoes", description: "All Shoes", parent: null, sub: [] },
         ]);
 
         if (categories.length) {

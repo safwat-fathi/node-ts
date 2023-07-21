@@ -9,6 +9,8 @@ export const seedProducts = () => {
   try {
     ProductModel.estimatedDocumentCount({}, async (err, count) => {
       const categoryCloths = await CategoryModel.findOne({ name: "Cloths" });
+      const categoryFood = await CategoryModel.findOne({ name: "Food" });
+      const categoryShoes = await CategoryModel.findOne({ name: "Shoes" });
 
       // drop all stored docs
       // await ProductModel.collection.drop();
@@ -37,6 +39,22 @@ export const seedProducts = () => {
             price: 600,
             stock: 90,
             categories: [categoryCloths?.id],
+          },
+          {
+            name: "Skimmed Milk",
+            description: "Juhanya skimmed milk - 1 liter",
+            images: [{ url: "http://test.images.grey-shirt" }],
+            price: 6,
+            stock: 20,
+            categories: [categoryFood?.id],
+          },
+          {
+            name: "Nike Air",
+            description: "Nike Air - Black",
+            images: [{ url: "http://test.images.grey-shirt" }],
+            price: 6,
+            stock: 20,
+            categories: [categoryShoes?.id],
           },
         ]);
 

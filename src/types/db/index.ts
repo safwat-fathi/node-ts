@@ -61,14 +61,14 @@ export enum OrderStatusEnum {
 }
 
 export enum ProductImage {
-  Thumbnail,
-  Cover,
-  Card,
+  Thumbnail = "thumbnail",
+  Cover = "cover",
+  Card = "card",
 }
 
 export enum ShopLogo {
-  Thumbnail,
-  Cover,
+  Thumbnail = "thumbnail",
+  Cover = "cover",
 }
 
 export interface Product {

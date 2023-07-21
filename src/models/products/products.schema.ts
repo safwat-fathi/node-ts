@@ -41,7 +41,7 @@ export const ProductsSchema = new Schema<Product>(
               message: "{VALUE} is not supported",
             },
             default: ProductImage.Thumbnail,
-            required: [true, "{VALUE} can not be null, please add image type"],
+            // required: [true, "{VALUE} can not be null, please add image type"],
           },
           url: { type: String, required: [true, "{VALUE} can not be null"] },
           _id: false,

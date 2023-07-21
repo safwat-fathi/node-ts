@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { ProductModel } from "@/models/products/products.model";
 import { Product, ProductDoc, Service, TSortBy } from "@/types/db";
 
@@ -8,6 +9,14 @@ export class ProductService implements Partial<Service<Product>> {
     sort?: TSortBy | null,
     filter?: any | null
   ): Promise<[Product[], number]> {
+    console.log("🚀 ~ filter:", filter);
+    const aa = await ProductModel.find({
+      // categories: "64baa25b328ab1c619fb1aa1",
+      categories: {
+        $in: ["64baa25b328ab1c619fb1aa0", "64baa25b328ab1c619fb1aa1"],
+      },
+    });
+    // console.log("🚀 ~ aa:", aa);
     try {
       let query = null;
 

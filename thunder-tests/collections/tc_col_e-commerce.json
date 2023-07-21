@@ -1,0 +1,438 @@
+{
+    "_id": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+    "colName": "e-commerce",
+    "created": "2022-09-22T08:41:34.656Z",
+    "sortNum": 10000,
+    "folders": [
+        {
+            "_id": "97fbbf4e-ec0c-4bde-b2cc-07d96dcb6e22",
+            "name": "auth",
+            "containerId": "",
+            "created": "2022-09-22T12:00:01.061Z",
+            "sortNum": 10000,
+            "settings": {
+                "headers": [],
+                "auth": {
+                    "type": "bearer",
+                    "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMmMyODk1NWEwN2VhN2IwZWI0ZDEzYiIsImlhdCI6MTY2Mzg0OTc0NCwiZXhwIjoxNjYzOTM2MTQ0fQ.lTfyHsKizcS_dVoA_UfS8CcoZH1kJOAmgcPvQaln3gk"
+                },
+                "tests": []
+            }
+        },
+        {
+            "_id": "573d6734-4184-4221-9bb2-051a6d82b1f6",
+            "name": "products",
+            "containerId": "",
+            "created": "2022-09-24T13:13:34.551Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "6d8f1806-956f-4d27-a4d4-3e782da419ee",
+            "name": "categories",
+            "containerId": "",
+            "created": "2022-09-27T05:03:10.729Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "0ad87be2-c243-42c8-9dd9-2b36621bbcd8",
+            "name": "orders",
+            "containerId": "",
+            "created": "2022-10-01T12:38:30.863Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "5149c2cf-1a6d-45a2-ad85-73d6d18e59fc",
+            "name": "notifications",
+            "containerId": "",
+            "created": "2023-01-25T05:58:11.202Z",
+            "sortNum": 50000
+        },
+        {
+            "_id": "dc90a468-4c87-4442-91d3-71a0fe47d997",
+            "name": "verification-token",
+            "containerId": "",
+            "created": "2023-03-28T21:53:40.149Z",
+            "sortNum": 60000
+        }
+    ],
+    "settings": {
+        "headers": [],
+        "auth": {
+            "type": "bearer",
+            "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MWQyNDA5MzY4NzBhZWJhNTM4Yzk5NCIsIm5hbWUiOiJzYWZ3YXQiLCJpYXQiOjE2Nzk2MzEzNzN9.Jy5Ko9w3GeeqmfBjmjE0cslmuJgr4MFcHZAVxi3biEk"
+        },
+        "tests": [],
+        "envId": "270a27b4-2ff5-4da0-a120-1dec051c3d4b"
+    },
+    "requests": [
+        {
+            "_id": "f8955c45-8a71-4ff8-8fc7-e5399e90cb8e",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "97fbbf4e-ec0c-4bde-b2cc-07d96dcb6e22",
+            "name": "signup",
+            "url": "{{prodUrl}}/api/auth/signup",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2022-09-22T08:41:41.481Z",
+            "modified": "2023-04-01T15:21:39.076Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"safwat\",\n  \"email\": \"test3@ex.com\",\n  \"phone\": \"01100000200\",\n  \"password\": \"123456789\",\n  \"password_confirm\": \"123056789\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "4fcca2c5-9d4f-4954-925e-e06c9132a7ad",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "97fbbf4e-ec0c-4bde-b2cc-07d96dcb6e22",
+            "name": "login",
+            "url": "{{prodUrl}}/api/auth/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2022-09-22T09:25:40.291Z",
+            "modified": "2023-04-01T15:22:00.430Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"test3@ex.com\",\n  \"password\": \"123456789\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "69c5d42d-dbba-41bc-887d-9ce1fbbdb4cf",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "97fbbf4e-ec0c-4bde-b2cc-07d96dcb6e22",
+            "name": "logout",
+            "url": "{{prodUrl}}/api/auth/logout",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2022-09-22T12:03:15.315Z",
+            "modified": "2023-04-01T22:13:55.157Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MWQzMDcyMDVjYjYyNzNiYjRjMjdlMSIsIm5hbWUiOiJzYWZ3YXQiLCJpYXQiOjE2Nzk2MzQ1NDgsImV4cCI6MTY3OTcyMDk0OH0.EGGyZCoag-pyiXcrEhVIXf7ix0UxkBOUaICX8NbFfR8"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ff30d83c-0fbb-4600-969d-20ef5a7573da",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "6d8f1806-956f-4d27-a4d4-3e782da419ee",
+            "name": "index",
+            "url": "{{devUrl}}/api/category/?page=1",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2022-09-27T05:03:25.294Z",
+            "modified": "2023-07-21T15:33:04.185Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "filter[_id]",
+                    "value": "6402d74853ec4dfeb6222707",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "filter[name]",
+                    "value": "Food",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "9d00d433-959b-4bf1-9387-118f712e831a",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "0ad87be2-c243-42c8-9dd9-2b36621bbcd8",
+            "name": "add",
+            "url": "{{prodUrl}}/api/orders/",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2022-10-01T12:38:37.170Z",
+            "modified": "2023-04-01T22:48:06.320Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"test3@ex.com\",\n  \"products\": [{\"product\": \"641f59f2ed0a399311056fe7\", \"quantity\": 3}],\n  \"address\": \"cairo - ramsis sq - Lmon bridge\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "883ad715-6bd9-4c8e-8c5a-b06e22775b48",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "5149c2cf-1a6d-45a2-ad85-73d6d18e59fc",
+            "name": "send",
+            "url": "{{devUrl}}/api/notifications/send",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2023-01-25T05:58:44.518Z",
+            "modified": "2023-01-25T06:54:06.614Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"message\": \"Heellllooooooo!\",\n  \"sendTo\": \"Test\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "b4bf36fe-6206-49a1-92af-fba32a35b1bd",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "5149c2cf-1a6d-45a2-ad85-73d6d18e59fc",
+            "name": "receive",
+            "url": "{{devUrl}}/api/notifications/receive",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-01-25T16:31:50.885Z",
+            "modified": "2023-01-25T16:33:09.962Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "a2a80773-42c4-4a54-8c6b-dd62b48853a1",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
+            "name": "index",
+            "url": "{{devUrl}}/api/products/?page=1&filter[categories][in][0]=64baa25b328ab1c619fb1aa0&filter[categories][in][1]=64baa25b328ab1c619fb1aa1",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2023-02-17T12:55:55.621Z",
+            "modified": "2023-07-21T16:16:59.568Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "skip",
+                    "value": "0",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "limit",
+                    "value": "20",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "filter[text][search]",
+                    "value": "shirt -white",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "filter[stock][gte]",
+                    "value": "1",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "filter[price][gte]",
+                    "value": "100",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "filter[price][lte]",
+                    "value": "300",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "sort[price]",
+                    "value": "desc",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "filter[categories][in][0]",
+                    "value": "64baa25b328ab1c619fb1aa0",
+                    "isPath": false
+                },
+                {
+                    "name": "filter[categories][in][1]",
+                    "value": "64baa25b328ab1c619fb1aa1",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "41eaf634-ffa9-4b24-a12e-641cff19b04f",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "6d8f1806-956f-4d27-a4d4-3e782da419ee",
+            "name": "create",
+            "url": "{{devUrl}}/api/category/create",
+            "method": "POST",
+            "sortNum": 140000,
+            "created": "2023-03-04T05:53:00.316Z",
+            "modified": "2023-03-04T13:16:24.338Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"a1\",\n  \"description\": \"All girls cloths\",\n  \"parent\": \"6403449ba102fc2419977529\",\n  \"sub\": []\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "82e6e71f-e8b8-4b4e-a7f3-a38b88b1c04d",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "6d8f1806-956f-4d27-a4d4-3e782da419ee",
+            "name": "update",
+            "url": "{{devUrl}}/api/category/update",
+            "method": "POST",
+            "sortNum": 150000,
+            "created": "2023-03-04T06:48:35.933Z",
+            "modified": "2023-03-04T06:58:12.340Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Women Clohs\",\n  \"description\": \"All women --cloths\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9af1dc07-dfe1-49c5-976b-8f198d113f4a",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "97fbbf4e-ec0c-4bde-b2cc-07d96dcb6e22",
+            "name": "forgot-password",
+            "url": "{{devUrl}}/api/auth/forgot-password",
+            "method": "POST",
+            "sortNum": 160000,
+            "created": "2023-03-17T14:49:43.924Z",
+            "modified": "2023-03-18T18:18:41.652Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"test1@gmail.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f0dc65d4-2e10-4df8-844d-35bd7ea918e3",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "0ad87be2-c243-42c8-9dd9-2b36621bbcd8",
+            "name": "remove",
+            "url": "{{devUrl}}/api/orders/641f64d8f4413ef31cbec031",
+            "method": "DELETE",
+            "sortNum": 170000,
+            "created": "2023-03-25T20:18:24.986Z",
+            "modified": "2023-03-31T21:27:15.967Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b4693bf4-0053-43bc-87a2-169d85f6381c",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "0ad87be2-c243-42c8-9dd9-2b36621bbcd8",
+            "name": "edit",
+            "url": "{{prodUrl}}/api/orders/",
+            "method": "PUT",
+            "sortNum": 130000,
+            "created": "2023-03-26T05:21:09.195Z",
+            "modified": "2023-04-01T22:48:28.697Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": \"6428b4a6e0008052929fa827\",\n  \"products\": [{\"product\": \"641f59f2ed0a399311056fe7\", \"quantity\": 1}, {\"product\": \"641f59f2ed0a399311056fe8\", \"quantity\": 2}],\n  \"address\": \"Giza - 6th october - elhosary\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "51478abf-1a55-4637-b6c3-b0498fa38591",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "0ad87be2-c243-42c8-9dd9-2b36621bbcd8",
+            "name": "index",
+            "url": "{{devUrl}}/api/orders/?page=1",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-03-27T23:55:02.329Z",
+            "modified": "2023-03-27T23:55:58.436Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "cdbb842b-8616-4db9-aaf0-f974397ecb7f",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "dc90a468-4c87-4442-91d3-71a0fe47d997",
+            "name": "get",
+            "url": "{{devUrl}}/api/token/",
+            "method": "GET",
+            "sortNum": 180000,
+            "created": "2023-03-28T21:54:07.603Z",
+            "modified": "2023-03-28T21:54:35.524Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "0b66711d-4fce-48b8-8e18-8b38edfdf58f",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "dc90a468-4c87-4442-91d3-71a0fe47d997",
+            "name": "create",
+            "url": "",
+            "method": "GET",
+            "sortNum": 190000,
+            "created": "2023-03-31T21:28:14.429Z",
+            "modified": "2023-03-31T21:28:14.429Z",
+            "headers": []
+        },
+        {
+            "_id": "bd945261-5020-4f4f-9bf1-7edef1d89dd2",
+            "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
+            "containerId": "97fbbf4e-ec0c-4bde-b2cc-07d96dcb6e22",
+            "name": "verification",
+            "url": "{{devUrl}}/api/auth/verification/e8962b240ef6d56bdcba54ba136f2a545bfd9078ff57ae8bfafa1c132b83566b",
+            "method": "GET",
+            "sortNum": 200000,
+            "created": "2023-03-31T22:15:29.037Z",
+            "modified": "2023-03-31T22:20:42.624Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
