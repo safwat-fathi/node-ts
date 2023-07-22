@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Service, TSortBy } from "@/types/db";
 import { asyncHandler } from "./async.middleware";
-import { createHash } from "crypto";
+// import { createHash } from "crypto";
 import { HttpError } from "@/lib/classes/errors/http";
 import { processQuery } from "@/lib/utils/mongoose";
 
@@ -16,6 +16,7 @@ export const paginate = <T>(index: Service<T>["index"]) =>
       sort: TSortBy | null;
       filter: any | null;
     };
+
     // process filter to match mongo query operators
     const filterQueryProcessed = processQuery(filter);
 
@@ -36,29 +37,33 @@ export const paginate = <T>(index: Service<T>["index"]) =>
       next(new HttpError(404, `Page requested not valid or no page provided`));
     }
 
-    // if (current_page > total_pages) {
-    //   next(
-    //     new HttpError(
-    //       404,
-    //       `Page requested not found, current total pages is: ${total_pages}`
-    //     )
-    //   );
-    // }
+    if (current_page > total_pages) {
+      next(
+        new HttpError(
+          404,
+          `Page requested not found, current total pages is: ${total_pages}`
+        )
+      );
+    }
 
     // hashing data to help client identify data has changed
-    const data_stringified = JSON.stringify(data);
-    const data_hash = createHash("md5")
-      .update(data_stringified)
-      .copy()
-      .digest("hex");
+    // if (data) {
+    //   const data_stringified = JSON.stringify(data);
+    //   const data_hash = createHash("md5")
+    //     .update(data_stringified)
+    //     .copy()
+    //     .digest("hex");
+
+    // 		next();
+    // 	}
 
     const meta = {
       current_page,
       total_pages,
-      hash: data_hash,
+      // hash: data_hash,
     };
 
     res.locals.dataPaginated = { data, meta, links: {} };
-
+    // res.locals.dataPaginated = { data: "No data found" };
     next();
   });

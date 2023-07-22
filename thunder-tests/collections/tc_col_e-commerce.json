@@ -130,7 +130,7 @@
             "method": "GET",
             "sortNum": 70000,
             "created": "2022-09-27T05:03:25.294Z",
-            "modified": "2023-07-21T15:33:04.185Z",
+            "modified": "2023-07-22T12:13:22.233Z",
             "headers": [],
             "params": [
                 {
@@ -139,8 +139,14 @@
                     "isPath": false
                 },
                 {
-                    "name": "filter[_id]",
-                    "value": "6402d74853ec4dfeb6222707",
+                    "name": "filter[_id][in][0]",
+                    "value": "64baa25b328ab1c619fb1a9c",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "filter[_id][in][1]",
+                    "value": "64baa25b328ab1c619fb1a9f",
                     "isDisabled": true,
                     "isPath": false
                 },
@@ -210,11 +216,11 @@
             "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
             "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
             "name": "index",
-            "url": "{{devUrl}}/api/products/?page=1&filter[categories][in][0]=64baa25b328ab1c619fb1aa0&filter[categories][in][1]=64baa25b328ab1c619fb1aa1",
+            "url": "{{devUrl}}/api/products/?page=1",
             "method": "GET",
             "sortNum": 130000,
             "created": "2023-02-17T12:55:55.621Z",
-            "modified": "2023-07-21T16:16:59.568Z",
+            "modified": "2023-07-22T13:47:04.388Z",
             "headers": [],
             "params": [
                 {
@@ -225,7 +231,7 @@
                 },
                 {
                     "name": "limit",
-                    "value": "20",
+                    "value": "10",
                     "isDisabled": true,
                     "isPath": false
                 },
@@ -267,11 +273,19 @@
                 {
                     "name": "filter[categories][in][0]",
                     "value": "64baa25b328ab1c619fb1aa0",
+                    "isDisabled": true,
                     "isPath": false
                 },
                 {
                     "name": "filter[categories][in][1]",
                     "value": "64baa25b328ab1c619fb1aa1",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "filters[categories][in][0]",
+                    "value": "64baa25b328ab1c619fb1aa0",
+                    "isDisabled": true,
                     "isPath": false
                 }
             ],
