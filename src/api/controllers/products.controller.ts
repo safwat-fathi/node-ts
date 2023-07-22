@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { CategoryDoc, Product } from "@/types/db";
+import { Product, Service } from "@/types/db";
 import { HttpError } from "@/lib/classes/errors/http";
 import { asyncHandler } from "@/api/middlewares/async.middleware";
 import { ProductService } from "@/services/products.service";
@@ -7,7 +7,20 @@ import { CategoryService } from "@/services/categories.service";
 
 // * Index
 // * ----------
-export const index = asyncHandler(async (req: Request, res: Response) => {
+export const index = <T>(index: Service<T>["index"]) =>
+  asyncHandler(async (_, res: Response) => {
+    const [data, count] = await index();
+
+    return res.status(200).json({
+      success: true,
+      data,
+      meta: { count },
+    });
+  });
+
+// * Index with pagination
+// * ----------
+export const indexPaginated = asyncHandler(async (_, res: Response) => {
   return res.status(200).json({
     success: true,
     data: res.locals.dataPaginated.data,
