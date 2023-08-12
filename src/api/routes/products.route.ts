@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import {
   create,
   index,
@@ -14,7 +14,25 @@ const products = Router();
 const productService = new ProductService();
 
 // * INDEX
-products.get("/index", index(productService.index));
+// products.get("/index", index(productService.index));
+// products.get(
+//   "/index",
+//   products.get("/", (req: Request, res: Response, next: NextFunction) => {
+//     const { page } = req.query;
+//     console.log("🚀 ~ products.get ~ page:", page);
+
+//     if (page) {
+//       console.log("page found");
+
+//       return next();
+//     }
+//     console.log("no page found");
+
+//     return index(productService.index);
+//   }),
+//   paginate<Product>(productService.index),
+//   indexPaginated
+// );
 
 // * Index with pagination
 products.get("/", paginate<Product>(productService.index), indexPaginated);

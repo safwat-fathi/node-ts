@@ -15,6 +15,11 @@ export const ProductsSchema = new Schema<Product>(
       required: [true, "{VALUE} can not be null"],
       maxlength: [500, "Description can not be more than 500 characters"],
     },
+    brand: {
+      type: String,
+      required: [true, "{VALUE} can not be null"],
+      maxlength: [50, "Description can not be more than 50 characters"],
+    },
     slug: {
       type: String,
       required: [true, "{VALUE} can not be null"],
@@ -31,30 +36,58 @@ export const ProductsSchema = new Schema<Product>(
       required: [true, "{VALUE} can not be null"],
       min: [0, "Please set a stock more than 0"],
     },
-    images: {
-      type: [
-        {
-          imgType: {
-            type: String,
-            enum: {
-              values: ["card", "cover", "thumbnail"],
-              message: "{VALUE} is not supported",
-            },
-            default: ProductImage.Thumbnail,
-            // required: [true, "{VALUE} can not be null, please add image type"],
-          },
-          url: { type: String, required: [true, "{VALUE} can not be null"] },
-          _id: false,
-        },
-      ],
+    rating: {
+      type: Number,
       required: [true, "{VALUE} can not be null"],
-      validate: (
-        val: { imgType: "card" | "cover" | "thumbnail"; url: string }[]
-      ) => Array.isArray(val) && val.length > 0,
+      min: [0, "Please set a rating more than 0"],
     },
+    discountPercentage: {
+      type: Number,
+      // required: [true, "{VALUE} can not be null"],
+      min: [0, "Please set a discount percentage more than 0"],
+      max: [100, "Please set a discount percentage less than or equal 100"],
+    },
+    thumbnail: {
+      type: String,
+      required: [true, "{VALUE} can not be null"],
+      _id: false,
+    },
+    images: {
+      type: [String],
+      _id: false,
+      required: [true, "{VALUE} can not be null"],
+      validate: (val: string[]) => Array.isArray(val) && val.length > 0,
+    },
+    // images: {
+    //   type: [
+    //     {
+    //       imgType: {
+    //         type: String,
+    //         enum: {
+    //           values: ["card", "cover", "thumbnail"],
+    //           message: "{VALUE} is not supported",
+    //         },
+    //         default: ProductImage.Thumbnail,
+    //         // required: [true, "{VALUE} can not be null, please add image type"],
+    //       },
+    //       url: { type: String, required: [true, "{VALUE} can not be null"] },
+    //       _id: false,
+    //     },
+    //   ],
+    //   required: [true, "{VALUE} can not be null"],
+    //   validate: (
+    //     val: { imgType: "card" | "cover" | "thumbnail"; url: string }[]
+    //   ) => Array.isArray(val) && val.length > 0,
+    // },
+    // categories: {
+    //   type: [Schema.Types.ObjectId],
+    //   ref: "Category",
+    //   required: [true, "{VALUE} can not be null"],
+    //   // validate: (val: Schema.Types.ObjectId[]) =>
+    //   //   Array.isArray(val) && val.length > 0,
+    // },
     categories: {
-      type: [Schema.Types.ObjectId],
-      ref: "Category",
+      type: [String],
       required: [true, "{VALUE} can not be null"],
       // validate: (val: Schema.Types.ObjectId[]) =>
       //   Array.isArray(val) && val.length > 0,

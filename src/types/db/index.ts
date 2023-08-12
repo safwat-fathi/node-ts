@@ -73,12 +73,18 @@ export enum ShopLogo {
 
 export interface Product {
   name: string;
+  brand: string;
   description: string;
   slug: string;
   price: number;
   stock: number;
-  images: { type: ProductImage; url: string }[];
-  categories: ObjectId[];
+  rating: number;
+  discountPercentage: number;
+  thumbnail: string;
+  // images: { type: ProductImage; url: string }[];
+  images: string[];
+  // categories: ObjectId[];
+  categories: string[];
 }
 export type ProductDoc = TDoc<Product>;
 

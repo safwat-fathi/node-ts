@@ -216,21 +216,21 @@
             "colId": "01cf4e8b-d79e-4287-a562-8fdd867ef7e3",
             "containerId": "573d6734-4184-4221-9bb2-051a6d82b1f6",
             "name": "index",
-            "url": "{{devUrl}}/api/products/index?skip=2&limit=10",
+            "url": "{{devUrl}}/api/products/?skip=1&limit=1&page=2",
             "method": "GET",
             "sortNum": 130000,
             "created": "2023-02-17T12:55:55.621Z",
-            "modified": "2023-07-22T15:18:16.012Z",
+            "modified": "2023-07-22T15:42:12.590Z",
             "headers": [],
             "params": [
                 {
                     "name": "skip",
-                    "value": "2",
+                    "value": "1",
                     "isPath": false
                 },
                 {
                     "name": "limit",
-                    "value": "10",
+                    "value": "1",
                     "isPath": false
                 },
                 {
@@ -259,8 +259,7 @@
                 },
                 {
                     "name": "page",
-                    "value": "1",
-                    "isDisabled": true,
+                    "value": "2",
                     "isPath": false
                 },
                 {

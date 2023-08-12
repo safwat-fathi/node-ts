@@ -32,6 +32,10 @@ export const paginate = <T>(index: Service<T>["index"]) =>
 
     const current_page = +page;
     const total_pages = Math.ceil(count / PAGE_SIZE);
+    const has_next = +page < total_pages;
+    const nextPage = has_next ? +page + 1 : null;
+    const has_previous = +page > 1;
+    const previousPage = has_previous ? +page - 1 : null;
 
     if (!current_page || current_page <= 0) {
       next(new HttpError(404, `Page requested not valid or no page provided`));
@@ -60,6 +64,10 @@ export const paginate = <T>(index: Service<T>["index"]) =>
     const meta = {
       current_page,
       total_pages,
+      has_previous,
+      previous: previousPage,
+      has_next,
+      next: nextPage,
       // hash: data_hash,
     };
 
