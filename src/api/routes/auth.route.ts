@@ -32,10 +32,10 @@ auth.post(
 // * LOGIN
 auth.post("/login", login);
 // * LOGOUT
-auth.get("/logout", verifyToken, logout);
+auth.get("/logout", logout);
 // * FORGOT PASSWORD
 auth.post("/forgot-password", forgotPassword);
 // * VERIFICATION
-auth.get("/verification/:token", verification);
+auth.get("/verification/", verifyToken, verification);
 
 export default auth;

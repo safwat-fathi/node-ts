@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
-import { seedCategories } from "./categories.seeder";
-import { seedProducts } from "./products.seeder";
-import { seedUsers } from "./users.seeder";
+// import { seedCategories } from "./categories.seeder";
+// import { seedProducts } from "./products.seeder";
+// import { seedUsers } from "./users.seeder";
 
 dotenv.config();
 
@@ -11,8 +11,8 @@ const { NODE_ENV } = process.env || {
 
 export const runSeeders = () => {
   if (NODE_ENV === "development") {
-    seedCategories();
-    seedProducts();
-    seedUsers();
+    // seedCategories();
+    // seedProducts();
+    // seedUsers();
   }
 };

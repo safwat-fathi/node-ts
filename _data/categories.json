@@ -1,0 +1,39 @@
+[
+  {
+    "name": "Cloths",
+    "description": "All Cloths",
+    "parent": null,
+    "sub": ["Shirts", "Shoes"]
+  },
+  {
+    "name": "Fashion",
+    "description": "All Men Fashion",
+    "parent": null,
+    "sub": ["Cloths", "Shirts", "Shoes", "Men Fashion", "Women Fashion"]
+  },
+  {
+    "name": "Men Fashion",
+    "description": "All Men Fashion",
+    "parent": ["Cloths", "Fashion"],
+    "sub": ["Shirts", "Shoes"]
+  },
+  {
+    "name": "Women Fashion",
+    "description": "All Women Fashion",
+    "parent": ["Cloths", "Fashion"],
+    "sub": null
+  },
+  {
+    "name": "Shirts",
+    "description": "All Shirts",
+    "parent": ["Cloths", "Fashion"],
+    "sub": null
+  },
+  { "name": "Food", "description": "All food", "parent": null, "sub": null },
+  {
+    "name": "Shoes",
+    "description": "All Shoes",
+    "parent": ["Cloths", "Fashion"],
+    "sub": null
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Safwat",
+    "email": "test1@gmail.com",
+    "phone": "01100000001",
+    "password": "",
+    "address": "cairo - el nozha"
+  },
+  {
+    "name": "Hamza",
+    "email": "test2@example.com",
+    "phone": "01100000002",
+    "password": "",
+    "address": "giza - zayed"
+  },
+  {
+    "name": "Ali",
+    "email": "test3@example.com",
+    "phone": "01100000003",
+    "password": "",
+    "address": "alexandria - Kafr abdo"
+  }
+]

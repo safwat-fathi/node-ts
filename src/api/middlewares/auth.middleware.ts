@@ -2,7 +2,12 @@ import dotenv from "dotenv";
 import { CustomJwtPayload } from "@/types/jwt";
 import { NextFunction, Request, Response } from "express";
 import { body } from "express-validator";
-import { verify } from "jsonwebtoken";
+import {
+  JsonWebTokenError,
+  TokenExpiredError,
+  VerifyErrors,
+  verify,
+} from "jsonwebtoken";
 import { HttpError } from "@/lib/classes/errors/http";
 import { asyncHandler } from "./async.middleware";
 import { UserService } from "@/services/user.service";
@@ -111,11 +116,15 @@ export const verifyToken = asyncHandler(
       return next(new HttpError(401, "Unauthorized"));
     }
 
-    const decoded = <CustomJwtPayload>verify(token.split(" ")[1], SECRET);
+    verify(token.split(" ")[1], SECRET, (err, decoded) => {
+      if (err) {
+        return next(err);
+      }
 
-    if (!decoded.id) {
-      return next(new HttpError(403, "Access forbidden"));
-    }
+      if (!(decoded as CustomJwtPayload).id) {
+        return next(new HttpError(403, "Access forbidden"));
+      }
+    });
 
     next();
   }

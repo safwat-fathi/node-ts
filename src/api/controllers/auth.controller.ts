@@ -71,7 +71,7 @@ export const login = asyncHandler(
       return next(
         new HttpError(
           401,
-          "Already logged in, Please request a password reset if you suspect this is not you."
+          "Already logged in, Please request a password reset if you suspect this is not you or logout to use another account."
         )
       );
     }

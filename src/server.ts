@@ -12,7 +12,7 @@ import mongoSanitize from "express-mongo-sanitize";
 import { errorHandler } from "@/api/middlewares/error.middleware";
 import { connectDB, MONGO_URI } from "@/config/db.config";
 // seeders
-import { runSeeders } from "@/lib/seeders";
+// import { runSeeders } from "@/lib/seeders";
 // routes
 import routes from "@/api/routes";
 import { EventEmitter } from "stream";
@@ -27,7 +27,7 @@ const SECRET = <string>process.env.SECRET || "";
 // connect to DB
 connectDB();
 // seed database
-runSeeders();
+// runSeeders();
 // rate limiting
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,

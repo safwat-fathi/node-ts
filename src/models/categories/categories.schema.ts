@@ -7,12 +7,18 @@ export const CategorySchema = new Schema<Category>(
     name: { type: String, required: true, unique: true },
     description: { type: String, required: true },
     sub: {
-      type: [{ type: Schema.Types.ObjectId, ref: "Category" }],
-      default: [],
+      type: [String],
+      default: null,
     },
+    // sub: {
+    //   type: [{ type: Schema.Types.ObjectId, ref: "Category" }],
+    //   default: [],
+    // },
     parent: {
-      type: Schema.Types.ObjectId,
-      ref: "Category",
+      // type: Schema.Types.ObjectId,
+      // ref: "Category",
+      type: [String],
+      default: null,
     },
   },
   {
@@ -38,14 +44,17 @@ CategorySchema.pre<CategoryDoc>(
 CategorySchema.pre<CategoryDoc>(
   "validate",
   async function (next: CallbackWithoutResultAndOptionalError) {
-    if (this.parent !== null) {
-      const parentDoc = await CategoryModel.findById(this.parent);
+    if (this.parent) {
+      await Promise.all(
+        this.parent.map(async item => {
+          const parentDoc = await CategoryModel.findOne({ name: item });
 
-      if (!parentDoc) {
-        return next(new Error("parent document not found"));
-      }
-
-      await parentDoc.updateOne({ $push: { sub: this.id } });
+          if (parentDoc) {
+            await parentDoc.updateOne({ $push: { sub: this.name } });
+          }
+        })
+      );
+      // return next(new Error("parent document not found"));
     }
 
     next();
