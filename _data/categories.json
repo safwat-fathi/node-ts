@@ -1,39 +1,63 @@
 [
   {
-    "name": "Cloths",
+    "name": "fragrances",
+    "description": "All Fragrances",
+    "parent": ["fashion"],
+    "sub": null
+  },
+  {
+    "name": "electronics",
+    "description": "All Electronics",
+    "parent": null,
+    "sub": ["smartphones", "laptops"]
+  },
+  {
+    "name": "smartphones",
+    "description": "All Smartphones",
+    "parent": ["electronics"],
+    "sub": null
+  },
+  {
+    "name": "laptops",
+    "description": "All Laptops",
+    "parent": ["electronics"],
+    "sub": null
+  },
+  {
+    "name": "cloths",
     "description": "All Cloths",
     "parent": null,
-    "sub": ["Shirts", "Shoes"]
+    "sub": ["shirts", "shoes"]
   },
   {
-    "name": "Fashion",
-    "description": "All Men Fashion",
+    "name": "fashion",
+    "description": "All Men fashion",
     "parent": null,
-    "sub": ["Cloths", "Shirts", "Shoes", "Men Fashion", "Women Fashion"]
+    "sub": ["cloths", "shirts", "shoes", "men-fashion", "women-fashion"]
   },
   {
-    "name": "Men Fashion",
+    "name": "men-fashion",
     "description": "All Men Fashion",
-    "parent": ["Cloths", "Fashion"],
-    "sub": ["Shirts", "Shoes"]
+    "parent": ["cloths", "fashion"],
+    "sub": ["shirts", "shoes"]
   },
   {
-    "name": "Women Fashion",
+    "name": "women-fashion",
     "description": "All Women Fashion",
-    "parent": ["Cloths", "Fashion"],
+    "parent": ["cloths", "fashion"],
     "sub": null
   },
   {
-    "name": "Shirts",
+    "name": "shirts",
     "description": "All Shirts",
-    "parent": ["Cloths", "Fashion"],
+    "parent": ["cloths", "fashion"],
     "sub": null
   },
-  { "name": "Food", "description": "All food", "parent": null, "sub": null },
+  { "name": "food", "description": "All food", "parent": null, "sub": null },
   {
-    "name": "Shoes",
+    "name": "shoes",
     "description": "All Shoes",
-    "parent": ["Cloths", "Fashion"],
+    "parent": ["cloths", "fashion"],
     "sub": null
   }
 ]

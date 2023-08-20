@@ -518,5 +518,22 @@
       "https://i.dummyjson.com/data/products/30/3.jpg",
       "https://i.dummyjson.com/data/products/30/thumbnail.jpg"
     ]
+  },
+  {
+    "name": "Nike Air",
+    "description": "What is Nike Air? Nike Air technology consists of pressurized air inside a tough yet flexible bag and provides more flexibility and spring without compromising structure. The Air Sole units maintain their given form with elasticity, lower impact and keep the shoe snug and lightweight. Shop Now Energy Absorption",
+    "price": 230,
+    "discountPercentage": 22.0,
+    "rating": 4.23,
+    "stock": 101,
+    "brand": "Nike",
+    "categories": ["fashion", "men-fashion", "shoes"],
+    "thumbnail": "https://i.dummyjson.com/data/products/30/thumbnail.jpg",
+    "images": [
+      "https://i.dummyjson.com/data/products/30/1.jpg",
+      "https://i.dummyjson.com/data/products/30/2.jpg",
+      "https://i.dummyjson.com/data/products/30/3.jpg",
+      "https://i.dummyjson.com/data/products/30/thumbnail.jpg"
+    ]
   }
 ]

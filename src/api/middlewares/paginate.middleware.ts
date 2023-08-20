@@ -29,6 +29,7 @@ export const paginate = <T>(index: Service<T>["index"]) =>
       sort,
       filterQueryProcessed
     );
+    // console.log("🚀 ~ asyncHandler ~  count:", count);
 
     const current_page = +page;
     const total_pages = Math.ceil(count / PAGE_SIZE);

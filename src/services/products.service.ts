@@ -28,16 +28,16 @@ export class ProductService implements Partial<Service<Product>> {
           }
         )
           .skip(skip || 0)
-          .limit(pageSize || 10)
-          .populate({ path: "categories", select: "name" });
+          .limit(pageSize || 10);
+        // .populate({ path: "categories", select: "name" });
       }
 
       const [products, count] = await Promise.all([
         query.exec(),
-        ProductModel.estimatedDocumentCount(),
+        ProductModel.find(filter || {}),
       ]);
 
-      return [products, count];
+      return [products, count.length];
     } catch (err) {
       throw new Error(`ProductService::index::${err}`);
     }
