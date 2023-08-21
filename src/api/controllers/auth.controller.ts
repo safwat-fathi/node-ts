@@ -142,14 +142,14 @@ export const logout = asyncHandler(
       req.session.userToken = "";
 
       req.session.destroy(err => {
-        if (err) next(new HttpError(404, err));
+        if (err) next(new HttpError(500, err));
       });
 
       res
         .status(200)
         .json({ success: true, message: "Logged out successfully" });
     } else {
-      return next(new HttpError(404, "Not logged in"));
+      return next(new HttpError(400, "Not logged in"));
     }
   }
 );

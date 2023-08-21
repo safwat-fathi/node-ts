@@ -11,8 +11,6 @@ import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
 import { errorHandler } from "@/api/middlewares/error.middleware";
 import { connectDB, MONGO_URI } from "@/config/db.config";
-// seeders
-// import { runSeeders } from "@/lib/seeders";
 // routes
 import routes from "@/api/routes";
 import { EventEmitter } from "stream";
@@ -26,8 +24,7 @@ const SECRET = <string>process.env.SECRET || "";
 
 // connect to DB
 connectDB();
-// seed database
-// runSeeders();
+
 // rate limiting
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,
@@ -36,10 +33,18 @@ const limiter = rateLimit({
   legacyHeaders: false,
 });
 app.use(limiter);
+
 // compress
 app.use(compression());
+
 // cors policy
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+const corsConfig: cors.CorsOptions = {
+  origin: true,
+  credentials: true,
+};
+app.use(cors(corsConfig));
+app.options("*", cors(corsConfig));
+
 // parse json body requests
 app.use(express.json());
 // prevent param pollution
@@ -85,6 +90,7 @@ wss.init();
 
 export const Notification = new EventEmitter();
 
+// exceptions handlers
 process.on("uncaughtException", error => {
   console.log("Server::uncaughtException::", error);
   process.exit(1); // exit application
