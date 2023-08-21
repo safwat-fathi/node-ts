@@ -67,10 +67,20 @@ export const login = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
 
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      const errorsMapped = errors
+        .array()
+        .map(err => ({ param: err.param, message: err.msg }));
+
+      return next(new HttpError(400, "Login failed", errorsMapped));
+    }
+
     if (req.session.userToken) {
       return next(
         new HttpError(
-          401,
+          400,
           "Already logged in, Please request a password reset if you suspect this is not you or logout to use another account."
         )
       );

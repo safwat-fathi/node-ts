@@ -39,7 +39,7 @@ app.use(limiter);
 // compress
 app.use(compression());
 // cors policy
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 // parse json body requests
 app.use(express.json());
 // prevent param pollution

@@ -14,7 +14,9 @@ import {
   validatePassword,
   checkDuplicate,
   verifyToken,
+  required,
 } from "@/api/middlewares/auth.middleware";
+import { body, check } from "express-validator";
 
 const auth = Router();
 
@@ -30,7 +32,16 @@ auth.post(
   signup
 );
 // * LOGIN
-auth.post("/login", login);
+auth.post(
+  "/login",
+  validateEmail,
+  body("password")
+    .exists()
+    .trim()
+    .isLength({ min: 8 })
+    .withMessage("Invalid password"),
+  login
+);
 // * LOGOUT
 auth.get("/logout", logout);
 // * FORGOT PASSWORD

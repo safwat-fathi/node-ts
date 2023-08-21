@@ -36,6 +36,9 @@ export const validateEmail = body("email")
   .trim()
   .escape();
 
+export const required = (n: string) =>
+  body(n).exists().withMessage(`${n} is required`);
+
 export const validatePassword = body("password")
   .isStrongPassword({
     minLength: 8,
