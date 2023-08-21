@@ -119,7 +119,10 @@ export const forgotPassword = asyncHandler(
     }
 
     // link to reset password page
-    const resetUrl = `${CLIENT_HOST}/auth/forgot-password/${resetToken}`;
+    const resetUrl = new URL("/profile/change-password/", CLIENT_HOST);
+
+    resetUrl.searchParams.set("resetToken", resetToken);
+    // const resetUrl = `${CLIENT_HOST}/profile/change-password/${resetToken}`;
 
     // TODO: message template should be HTML
     // message template
