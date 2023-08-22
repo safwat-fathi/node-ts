@@ -20,7 +20,7 @@ export const errorHandler = (
 
   // handle bad ObjectId mongoose requests
   if (err.stack?.includes("CastError")) {
-    castError = new HttpError(404, "Resource not found");
+    castError = new HttpError(404, res.__("not-found"));
   }
 
   res.status(err.status || 500).json({

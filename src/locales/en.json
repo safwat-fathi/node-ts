@@ -1,0 +1,7 @@
+{
+  "not-found": "Resource not found",
+  "logged-in": "Already logged in, Please request a password reset if you suspect this is not you or logout to use another account",
+  "login-failed": "Login failed",
+  "valid-credentials": "Please enter valid email or password",
+  "login-success": "Logged in successfully"
+}

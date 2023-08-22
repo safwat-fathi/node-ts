@@ -74,22 +74,17 @@ export const login = asyncHandler(
         .array()
         .map(err => ({ param: err.param, message: err.msg }));
 
-      return next(new HttpError(400, "Login failed", errorsMapped));
+      return next(new HttpError(400, res.__("login-failed"), errorsMapped));
     }
 
     if (req.session.userToken) {
-      return next(
-        new HttpError(
-          400,
-          "Already logged in, Please request a password reset if you suspect this is not you or logout to use another account."
-        )
-      );
+      return next(new HttpError(400, res.__("logged-in")));
     }
 
     const user = await authService.login({ email, password });
 
     if (!user) {
-      return next(new HttpError(422, "Please enter valid email or password"));
+      return next(new HttpError(422, res.__("valid-credentials")));
     }
 
     // token expires in 24 hrs
@@ -99,7 +94,7 @@ export const login = asyncHandler(
 
     res.status(200).json({
       success: true,
-      message: "Logged in successfully",
+      message: res.__("login-success"),
       data: {
         accessToken: token,
         user,

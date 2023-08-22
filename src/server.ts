@@ -1,3 +1,4 @@
+import path from "path";
 import dotenv from "dotenv";
 import MongoStore from "connect-mongo";
 import express, { Express } from "express";
@@ -11,6 +12,7 @@ import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
 import { errorHandler } from "@/api/middlewares/error.middleware";
 import { connectDB, MONGO_URI } from "@/config/db.config";
+import { I18n } from "i18n";
 // routes
 import routes from "@/api/routes";
 import { EventEmitter } from "stream";
@@ -19,6 +21,12 @@ import WebSocketServer from "websocket";
 dotenv.config();
 
 const app: Express = express();
+
+const i18n = new I18n({
+  locales: ["en", "ar"],
+  directory: path.join(__dirname, "locales"),
+});
+
 const PORT = <number>process.env.HTTP_SERVER_PORT || 8000;
 const SECRET = <string>process.env.SECRET || "";
 
@@ -47,8 +55,10 @@ app.options("*", cors(corsConfig));
 
 // parse json body requests
 app.use(express.json());
+
 // prevent param pollution
 app.use(hpp());
+
 // sanitize query params of mongo operators
 app.use(
   mongoSanitize({
@@ -57,10 +67,13 @@ app.use(
     },
   })
 );
+
 // security headers
 app.use(helmet());
+
 // use cookie-parser so server can access the necessary option to save, read and access a cookie
 app.use(cookieParser());
+
 // session middleware
 app.use(
   session({
@@ -71,10 +84,15 @@ app.use(
     store: MongoStore.create({ mongoUrl: MONGO_URI }),
   })
 );
+
+app.use(i18n.init);
+
 // routes
 app.use("/api", routes);
+
 // error handler middleware
 app.use(errorHandler);
+
 // fix issue parsing query params array limit
 // app.set("query parser", function (str: string) {
 //   return qs.parse(str, { arrayLimit: 1000 });
