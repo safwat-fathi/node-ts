@@ -77,8 +77,10 @@ export const login = asyncHandler(
       return next(new HttpError(400, res.__("login-failed"), errorsMapped));
     }
 
+    console.log("🚀 ~ req.session:", req.session);
     if (req.session.userToken) {
       return next(new HttpError(400, res.__("logged-in")));
+      // res.__("Hello {{name}}", { name: "Safwat" }))
     }
 
     const user = await authService.login({ email, password });
