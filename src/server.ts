@@ -85,6 +85,7 @@ app.use(
   })
 );
 
+// i18n
 app.use(i18n.init);
 
 // routes

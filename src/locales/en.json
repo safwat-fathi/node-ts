@@ -4,5 +4,7 @@
   "login-failed": "Login failed",
   "valid-credentials": "Please enter valid email or password",
   "login-success": "Logged in successfully",
+  "email-not-found": "This email is not registered",
+  "email-sent": "Email sent successfully",
   "Hello {{name}}": "Hello {{name}}, how are you today?"
 }

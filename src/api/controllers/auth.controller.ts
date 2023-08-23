@@ -77,7 +77,6 @@ export const login = asyncHandler(
       return next(new HttpError(400, res.__("login-failed"), errorsMapped));
     }
 
-    console.log("🚀 ~ req.session:", req.session);
     if (req.session.userToken) {
       return next(new HttpError(400, res.__("logged-in")));
       // res.__("Hello {{name}}", { name: "Safwat" }))
@@ -112,7 +111,7 @@ export const forgotPassword = asyncHandler(
     const resetToken = await authService.forgotPassword(email);
 
     if (!resetToken) {
-      return next(new HttpError(422, "This email is not registered"));
+      return next(new HttpError(422, res.__("email-not-found")));
     }
 
     // link to reset password page
@@ -131,7 +130,7 @@ export const forgotPassword = asyncHandler(
     // TODO: if not success delete resetPasswordToken & resetPasswordExpire fields from DB
     res.status(200).json({
       success: true,
-      message: "Email sent successfully",
+      message: res.__("email-sent"),
     });
   }
 );
