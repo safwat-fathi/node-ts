@@ -1,4 +1,3 @@
-import path from "path";
 import dotenv from "dotenv";
 import MongoStore from "connect-mongo";
 import express, { Express } from "express";
@@ -10,9 +9,11 @@ import { rateLimit } from "express-rate-limit";
 import hpp from "hpp";
 import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
+
 import { errorHandler } from "@/api/middlewares/error.middleware";
 import { connectDB, MONGO_URI } from "@/config/db.config";
-import { I18n } from "i18n";
+import i18n from "@/config/i18n.config";
+
 // routes
 import routes from "@/api/routes";
 import { EventEmitter } from "stream";
@@ -21,11 +22,6 @@ import WebSocketServer from "websocket";
 dotenv.config();
 
 const app: Express = express();
-
-const i18n = new I18n({
-  locales: ["en", "ar"],
-  directory: path.join(__dirname, "locales"),
-});
 
 const PORT = <number>process.env.HTTP_SERVER_PORT || 8000;
 const SECRET = <string>process.env.SECRET || "";

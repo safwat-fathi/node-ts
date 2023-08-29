@@ -1,10 +1,7 @@
-import {
-  CallbackWithoutResultAndOptionalError,
-  Document,
-  Schema,
-} from "mongoose";
+import { CallbackWithoutResultAndOptionalError, Schema } from "mongoose";
 import { User, UserDoc } from "@/types/db";
 import { hashPassword } from "@/lib/utils/auth";
+import i18n from "@/config/i18n.config";
 
 export const UserSchema = new Schema<User>(
   {

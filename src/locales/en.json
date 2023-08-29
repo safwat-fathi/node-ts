@@ -1,10 +1,14 @@
 {
   "not-found": "Resource not found",
   "logged-in": "Already logged in, Please request a password reset if you suspect this is not you or logout to use another account",
+  "not-logged-in": "Not logged in",
   "login-failed": "Login failed",
   "valid-credentials": "Please enter valid email or password",
   "login-success": "Logged in successfully",
+  "logout-success": "Logged out successfully",
   "email-not-found": "This email is not registered",
+  "email-required": "Email required",
+  "invalid-email": "Invalid email",
   "email-sent": "Email sent successfully",
   "Hello {{name}}": "Hello {{name}}, how are you today?"
 }

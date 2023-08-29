@@ -77,7 +77,8 @@ export const login = asyncHandler(
       return next(new HttpError(400, res.__("login-failed"), errorsMapped));
     }
 
-    if (req.session.userToken) {
+    console.log("🚀 ~ req.session:", req.session);
+    if (req.session.loggedIn) {
       return next(new HttpError(400, res.__("logged-in")));
       // res.__("Hello {{name}}", { name: "Safwat" }))
     }
@@ -91,7 +92,7 @@ export const login = asyncHandler(
     // token expires in 24 hrs
     const token = await generateAccessToken(user.id, user.name);
 
-    req.session.userToken = token;
+    req.session.loggedIn = true;
 
     res.status(200).json({
       success: true,
@@ -101,6 +102,24 @@ export const login = asyncHandler(
         user,
       },
     });
+  }
+);
+
+export const logout = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    if (req.session.loggedIn) {
+      req.session.loggedIn = false;
+
+      req.session.destroy(err => {
+        if (err) next(new HttpError(500, err));
+      });
+
+      res
+        .status(200)
+        .json({ success: true, message: res.__("logout-success") });
+    } else {
+      return next(new HttpError(400, res.__("not-logged-in")));
+    }
   }
 );
 
@@ -132,24 +151,6 @@ export const forgotPassword = asyncHandler(
       success: true,
       message: res.__("email-sent"),
     });
-  }
-);
-
-export const logout = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    if (req.session.userToken) {
-      req.session.userToken = "";
-
-      req.session.destroy(err => {
-        if (err) next(new HttpError(500, err));
-      });
-
-      res
-        .status(200)
-        .json({ success: true, message: "Logged out successfully" });
-    } else {
-      return next(new HttpError(400, "Not logged in"));
-    }
   }
 );
 
