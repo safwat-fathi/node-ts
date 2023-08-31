@@ -4,7 +4,7 @@ import {
   index,
   indexPaginated,
 } from "@/api/controllers/products.controller";
-// import { verifyToken } from "@/api/middlewares/auth.middleware";
+import { verifyToken } from "@/api/middlewares/auth.middleware";
 import { paginate } from "@/api/middlewares/paginate.middleware";
 import { Product } from "@/types/db";
 import { ProductService } from "@/services/products.service";
@@ -35,7 +35,12 @@ const productService = new ProductService();
 // );
 
 // * Index with pagination
-products.get("/", paginate<Product>(productService.index), indexPaginated);
+products.get(
+  "/",
+  // verifyToken,
+  paginate<Product>(productService.index),
+  indexPaginated
+);
 
 // * CREATE
 products.post("/create", create);

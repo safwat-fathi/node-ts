@@ -77,7 +77,6 @@ export const login = asyncHandler(
       return next(new HttpError(400, res.__("login-failed"), errorsMapped));
     }
 
-    console.log("🚀 ~ req.session:", req.session);
     if (req.session.loggedIn) {
       return next(new HttpError(400, res.__("logged-in")));
       // res.__("Hello {{name}}", { name: "Safwat" }))
@@ -159,15 +158,15 @@ export const verification = asyncHandler(
     const { token } = req.params as Partial<Token>;
 
     if (!token) {
-      return next(new HttpError(400, "Token is missing"));
+      return next(new HttpError(400, res.__("missing-token")));
     }
 
     const verified = await authService.verifyEmail(token);
 
     if (!verified) {
-      return next(new HttpError(404, "No user found or user already verified"));
+      return next(new HttpError(404, res.__("already-verified")));
     }
 
-    res.status(200).json({ success: true, message: "User verified" });
+    res.status(200).json({ success: true, message: res.__("user-verified") });
   }
 );

@@ -47,6 +47,6 @@ auth.get("/logout", logout);
 // * FORGOT PASSWORD
 auth.post("/forgot-password", forgotPassword);
 // * VERIFICATION
-auth.get("/verification/", verifyToken, verification);
+auth.get("/verification/", verification); // verification is done by sending email containing URL with token as a param when redirecting to front that uses this param to send it back to BE
 
 export default auth;

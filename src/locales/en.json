@@ -10,5 +10,10 @@
   "email-required": "Email required",
   "invalid-email": "Invalid email",
   "email-sent": "Email sent successfully",
-  "Hello {{name}}": "Hello {{name}}, how are you today?"
+  "Hello {{name}}": "Hello {{name}}, how are you today?",
+  "unauthorized": "Unauthorized",
+  "access-forbidden": "Access forbidden",
+  "already-verified": "No user found or user already verified",
+  "missing-token": "Token is missing",
+  "user-verified": "User verified"
 }

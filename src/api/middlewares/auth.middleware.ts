@@ -112,11 +112,12 @@ export const checkDuplicate = asyncHandler(
 // );
 
 export const verifyToken = asyncHandler(
-  async (req: Request, _, next: NextFunction) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers["authorization"];
+    console.log("🚀 ~ token:", token);
 
     if (!token) {
-      return next(new HttpError(401, "Unauthorized"));
+      return next(new HttpError(401, res.__("unauthorized")));
     }
 
     verify(token.split(" ")[1], SECRET, (err, decoded) => {
@@ -125,7 +126,7 @@ export const verifyToken = asyncHandler(
       }
 
       if (!(decoded as CustomJwtPayload).id) {
-        return next(new HttpError(403, "Access forbidden"));
+        return next(new HttpError(403, res.__("access-forbidden")));
       }
     });
 

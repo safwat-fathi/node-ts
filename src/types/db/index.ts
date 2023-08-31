@@ -99,10 +99,10 @@ export type ShopDoc = TDoc<Shop>;
 export interface Category {
   name: string;
   description: string;
-  sub: string[] | null;
-  // sub: ObjectId[] | null;
-  parent: string[] | null;
-  // parent: ObjectId | null;
+  // sub: string[] | null;
+  sub: ObjectId[] | null;
+  // parent: string[] | null;
+  parent: ObjectId | null;
 }
 export type CategoryDoc = TDoc<Category>;
 

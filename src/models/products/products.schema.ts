@@ -7,6 +7,8 @@ export const ProductsSchema = new Schema<Product>(
   {
     name: {
       type: String,
+      // index: false,
+      unique: false,
       required: [true, "{VALUE} can not be null"],
       maxlength: [50, "Name can not be more than 50 characters"],
     },
@@ -23,7 +25,7 @@ export const ProductsSchema = new Schema<Product>(
     slug: {
       type: String,
       required: [true, "{VALUE} can not be null"],
-      // index: true,
+      index: true,
       unique: true,
     },
     price: {
