@@ -50,15 +50,16 @@ export const ProductsSchema = new Schema<Product>(
       max: [100, "Please set a discount percentage less than or equal 100"],
     },
     thumbnail: {
+      _id: false,
       type: String,
       required: [true, "{VALUE} can not be null"],
-      _id: false,
     },
     images: {
       type: [String],
       _id: false,
       required: [true, "{VALUE} can not be null"],
       validate: (val: string[]) => Array.isArray(val) && val.length > 0,
+      select: false,
     },
     // images: {
     //   type: [

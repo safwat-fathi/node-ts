@@ -43,9 +43,9 @@ export class ProductService implements Partial<Service<Product>> {
     }
   }
 
-  async find(p: Partial<ProductDoc>): Promise<ProductDoc | null> {
+  async find(slug: string): Promise<ProductDoc | null> {
     try {
-      const product = await ProductModel.findOne({ _id: p.id });
+      const product = await ProductModel.findOne({ slug }).select("+images");
 
       if (!product) {
         return null;

@@ -1,10 +1,11 @@
-import { NextFunction, Request, Response, Router } from "express";
+import { Router } from "express";
 import {
   create,
-  index,
+  // index,
+  getProduct,
   indexPaginated,
 } from "@/api/controllers/products.controller";
-import { verifyToken } from "@/api/middlewares/auth.middleware";
+// import { verifyToken } from "@/api/middlewares/auth.middleware";
 import { paginate } from "@/api/middlewares/paginate.middleware";
 import { Product } from "@/types/db";
 import { ProductService } from "@/services/products.service";
@@ -41,6 +42,8 @@ products.get(
   paginate<Product>(productService.index),
   indexPaginated
 );
+// * Get product with slug
+products.get("/:slug", getProduct);
 
 // * CREATE
 products.post("/create", create);

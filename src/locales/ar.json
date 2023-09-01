@@ -15,5 +15,6 @@
   "access-forbidden": "ممنوع الوصول",
   "already-verified": "لم يتم العثور على مستخدم أو تم التحقق من المستخدم بالفعل",
   "missing-token": "رمز التأكيد مفقود",
-  "user-verified": "تم التحقق من المستخدم"
+  "user-verified": "تم التحقق من المستخدم",
+  "no-product-match": "ﻻيوجد منتج مطابق لـ {{product}}"
 }

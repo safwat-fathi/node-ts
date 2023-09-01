@@ -79,7 +79,7 @@ export const login = asyncHandler(
 
     if (req.session.loggedIn) {
       return next(new HttpError(400, res.__("logged-in")));
-      // res.__("Hello {{name}}", { name: "Safwat" }))
+      // res.__("hello-{{name}}", { name: "Safwat" }))
     }
 
     const user = await authService.login({ email, password });
