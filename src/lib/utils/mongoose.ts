@@ -12,7 +12,7 @@ export const processQuery = (
     const queryStringified = JSON.stringify(query);
 
     const queryProcessed = queryStringified.replace(
-      /\b(search|text|gte|lt|lte|gt|in)\b/gi,
+      /\b(search|text|gte|lt|lte|gt|in|regex|options)\b/gi,
       match => `$${match}`
     );
 
