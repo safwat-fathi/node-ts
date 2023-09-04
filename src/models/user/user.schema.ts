@@ -9,10 +9,12 @@ export const UserSchema = new Schema<User>(
       type: String,
       required: [true, "name required"],
       match: [/^[a-zA-Z ]*$/, "name is not valid"],
+      index: "text",
     },
     email: {
       type: String,
       unique: true,
+      index: 1,
       required: [true, "email required"],
       match: [
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -67,6 +69,8 @@ export const UserSchema = new Schema<User>(
     },
   }
 );
+
+// UserSchema.index({ name: "text", email: 1 });
 
 UserSchema.pre<UserDoc>(
   "save",

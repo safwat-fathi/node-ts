@@ -13,8 +13,8 @@ export const paginate = <T>(index: Service<T>["index"]) =>
       skip: string;
       limit: string;
       page: string;
-      sort: TSortBy | null;
       filter: any | null;
+      sort: any | null;
     };
 
     // process filter to match mongo query operators
@@ -23,13 +23,15 @@ export const paginate = <T>(index: Service<T>["index"]) =>
     const PAGE_SIZE = +limit || 10;
     const SKIP = +skip || (+page - 1) * PAGE_SIZE;
 
+    // convert sort values to integers to be valid key in aggregate
+    Object.keys(sort).forEach(key => (sort[key] = +sort[key]));
+
     const [data, count] = await index(
       SKIP,
       PAGE_SIZE,
       sort,
       filterQueryProcessed
     );
-    // console.log("🚀 ~ asyncHandler ~  count:", count);
 
     const current_page = +page;
     const total_pages = Math.ceil(count / PAGE_SIZE);

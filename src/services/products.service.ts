@@ -6,38 +6,32 @@ export class ProductService implements Partial<Service<Product>> {
     skip?: number,
     pageSize?: number,
     sort?: TSortBy | null,
+    // sort?: any,
     filter?: any | null
   ): Promise<[Product[], number]> {
     try {
-      let query = null;
+      const pipeline: any[] = [
+        { $match: filter || {} }, // Match the documents based on the provided filter
+        ...(sort ? [{ $sort: sort }] : []), // Apply sorting if the `sort` variable is provided
+        {
+          $facet: {
+            products: [{ $skip: skip || 0 }, { $limit: pageSize || 10 }],
+            count: [{ $count: "total" }],
+          },
+        }, // Retrieve products and count
+        {
+          $project: {
+            products: 1,
+            count: { $arrayElemAt: ["$count.total", 0] },
+          },
+        }, // Restructure the results
+      ];
 
-      // if not pagination its find query
-      if (!skip && !pageSize && !sort) {
-        query = ProductModel.find(filter);
-      } else {
-        query = ProductModel.find(
-          // filter by model fields
-          filter || {},
-          // select model fields to return
-          null,
-          // options (sort, pagination, etc...)
-          {
-            ...(sort && {
-              sort,
-            }),
-          }
-        )
-          .skip(skip || 0)
-          .limit(pageSize || 10);
-        // .populate({ path: "categories", select: "name" });
-      }
+      const [result] = await ProductModel.aggregate(pipeline);
 
-      const [products, count] = await Promise.all([
-        query.exec(),
-        ProductModel.find(filter || {}),
-      ]);
+      const { products, count } = result;
 
-      return [products, count.length];
+      return [products, count];
     } catch (err) {
       throw new Error(`ProductService::index::${err}`);
     }

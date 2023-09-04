@@ -7,7 +7,8 @@ export const ProductsSchema = new Schema<Product>(
   {
     name: {
       type: String,
-      unique: false,
+      // unique: false,
+      index: "text",
       required: [true, "{VALUE} can not be null"],
       maxlength: [50, "Name can not be more than 50 characters"],
     },
@@ -18,6 +19,7 @@ export const ProductsSchema = new Schema<Product>(
     },
     brand: {
       type: String,
+      // index: "text",
       required: [true, "{VALUE} can not be null"],
       maxlength: [50, "Description can not be more than 50 characters"],
     },
@@ -25,6 +27,7 @@ export const ProductsSchema = new Schema<Product>(
       type: String,
       required: [true, "{VALUE} can not be null"],
       unique: true,
+      index: 1,
     },
     price: {
       type: Number,
@@ -57,7 +60,7 @@ export const ProductsSchema = new Schema<Product>(
       _id: false,
       required: [true, "{VALUE} can not be null"],
       validate: (val: string[]) => Array.isArray(val) && val.length > 0,
-      select: false,
+      // select: false,
     },
     // images: {
     //   type: [
@@ -96,10 +99,19 @@ export const ProductsSchema = new Schema<Product>(
   },
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: function (doc: ProductDoc, ret: Partial<ProductDoc>, opt) {
+        delete ret["images"];
+        // delete ret["_id"];
+        delete ret["__v"];
+        return ret;
+      },
+    },
   }
 );
 
-ProductsSchema.index({ name: "text", slug: "text" });
+// ProductsSchema.index({ name: "text", brand: "text", slug: "text" });
 
 // ProductsSchema.pre(
 //   "find",
