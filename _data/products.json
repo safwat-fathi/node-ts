@@ -121,7 +121,7 @@
     "discountPercentage": 10.23,
     "rating": 4.43,
     "stock": 68,
-    "brand": "Microsoft Surface",
+    "brand": "Microsoft",
     "categories": ["laptops", "electronics"],
     "thumbnail": "https://i.dummyjson.com/data/products/8/thumbnail.jpg",
     "images": [
@@ -157,7 +157,7 @@
     "discountPercentage": 6.18,
     "rating": 4.43,
     "stock": 89,
-    "brand": "HP Pavilion",
+    "brand": "HP",
     "categories": ["laptops", "electronics"],
     "thumbnail": "https://i.dummyjson.com/data/products/10/thumbnail.jpeg",
     "images": [

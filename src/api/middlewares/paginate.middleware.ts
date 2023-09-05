@@ -16,7 +16,6 @@ export const paginate = <T>(index: Service<T>["index"]) =>
       filter: any | null;
       sort: any | null;
     };
-
     // process filter to match mongo query operators
     const filterQueryProcessed = processQuery(filter);
 
@@ -24,7 +23,22 @@ export const paginate = <T>(index: Service<T>["index"]) =>
     const SKIP = +skip || (+page - 1) * PAGE_SIZE;
 
     // convert sort values to integers to be valid key in aggregate
-    Object.keys(sort).forEach(key => (sort[key] = +sort[key]));
+    if (sort) Object.keys(sort).forEach(key => (sort[key] = +sort[key]));
+
+    if (filterQueryProcessed && filterQueryProcessed.price) {
+      const { price } = filterQueryProcessed;
+
+      Object.keys(price).forEach(
+        key =>
+          (filterQueryProcessed.price[key] = +filterQueryProcessed.price[key])
+      );
+    }
+
+    console.log(
+      "🚀 ~ asyncHandler ~ filterQueryProcessed:",
+      filterQueryProcessed
+    );
+    // console.log("🚀 ~ asyncHandler ~ filter:", filter);
 
     const [data, count] = await index(
       SKIP,
@@ -53,7 +67,7 @@ export const paginate = <T>(index: Service<T>["index"]) =>
       );
     }
 
-    // hashing data to help client identify data has changed
+    // hashing data to help client-side identify data has changed
     // if (data) {
     //   const data_stringified = JSON.stringify(data);
     //   const data_hash = createHash("md5")
@@ -76,5 +90,6 @@ export const paginate = <T>(index: Service<T>["index"]) =>
 
     res.locals.dataPaginated = { data, meta, links: {} };
     // res.locals.dataPaginated = { data: "No data found" };
+
     next();
   });

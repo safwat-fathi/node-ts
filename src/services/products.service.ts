@@ -9,6 +9,7 @@ export class ProductService implements Partial<Service<Product>> {
     // sort?: any,
     filter?: any | null
   ): Promise<[Product[], number]> {
+    console.log("🚀 ~ async index filter:", filter);
     try {
       const pipeline: any[] = [
         { $match: filter || {} }, // Match the documents based on the provided filter

@@ -5,7 +5,7 @@
  */
 export const processQuery = (
   query: Record<string, string> | null
-): Record<string, string> | null => {
+): Record<string, any> | null => {
   try {
     if (!query) return null;
 
