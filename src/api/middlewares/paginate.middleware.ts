@@ -25,6 +25,8 @@ export const paginate = <T>(index: Service<T>["index"]) =>
     // convert sort values to integers to be valid key in aggregate
     if (sort) Object.keys(sort).forEach(key => (sort[key] = +sort[key]));
 
+    // TODO: should be done in service level
+    // convert price filter values to integers to be valid key in aggregate
     if (filterQueryProcessed && filterQueryProcessed.price) {
       const { price } = filterQueryProcessed;
 
@@ -33,12 +35,6 @@ export const paginate = <T>(index: Service<T>["index"]) =>
           (filterQueryProcessed.price[key] = +filterQueryProcessed.price[key])
       );
     }
-
-    console.log(
-      "🚀 ~ asyncHandler ~ filterQueryProcessed:",
-      filterQueryProcessed
-    );
-    // console.log("🚀 ~ asyncHandler ~ filter:", filter);
 
     const [data, count] = await index(
       SKIP,
