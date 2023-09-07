@@ -14,12 +14,12 @@ const category = Router();
 
 const categoryService = new CategoryService();
 
-// * INDEX ALL
-category.get("/index", index);
+// * Get all
+category.get("/", index);
 
-// * INDEX PAGINATED
+// * INDEX
 category.get(
-  "/",
+  "/index",
   paginate<Category>(categoryService.indexPaginated),
   indexPaginated
 );

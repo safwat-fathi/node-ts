@@ -1,11 +1,11 @@
 import { CategoryModel } from "@/models/categories/categories.model";
-import { ObjectId } from "mongoose";
+import { FilterQuery, ObjectId } from "mongoose";
 import { Category, CategoryDoc, Service, TSortBy } from "@/types/db";
 
 export class CategoryService implements Partial<Service<Category>> {
   async index(
     sort?: TSortBy | null | undefined,
-    filter?: any
+    filter?: FilterQuery<Category>
   ): Promise<Category[]> {
     try {
       let query = null;
@@ -35,14 +35,14 @@ export class CategoryService implements Partial<Service<Category>> {
     skip?: number | null,
     pageSize?: number | null,
     sort?: TSortBy | null,
-    filter?: any | null
+    filter?: FilterQuery<Category> | null
   ): Promise<[CategoryDoc[], number]> {
     try {
       let query = null;
 
       // if not pagination its find query
       if (!skip && !pageSize && !sort) {
-        query = CategoryModel.find(filter);
+        query = CategoryModel.find(filter || {});
       } else {
         query = CategoryModel.find(
           // filter by model fields
@@ -73,7 +73,7 @@ export class CategoryService implements Partial<Service<Category>> {
     }
   }
 
-  async find(filter: any): Promise<CategoryDoc | null> {
+  async find(filter: FilterQuery<Category>): Promise<CategoryDoc | null> {
     try {
       if (!filter) return null;
 

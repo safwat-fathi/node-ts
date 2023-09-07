@@ -46,6 +46,7 @@ export const OrderSchema = new Schema<Order>(
         message: "{VALUE} is not supported",
       },
       default: OrderStatusEnum.Active,
+      index: true,
     },
     address: {
       type: String,

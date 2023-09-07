@@ -1,5 +1,12 @@
 import { Router } from "express";
-import { index, add, remove, edit } from "@/api/controllers/orders.controller";
+import {
+  index,
+  add,
+  remove,
+  edit,
+  getOrder,
+  indexPaginated,
+} from "@/api/controllers/orders.controller";
 import { verifyToken } from "@/api/middlewares/auth.middleware";
 import { paginate } from "@/api/middlewares/paginate.middleware";
 import { OrderService } from "@/services/orders.service";
@@ -10,12 +17,26 @@ const orders = Router();
 const orderService = new OrderService();
 
 // TODO: add verify token to all routes
-// * READ
-orders.get("/", verifyToken, paginate<Order>(orderService.index), index);
+// * Get all
+orders.get("/", verifyToken, index);
+
+// * Index
+orders.get(
+  "/index",
+  verifyToken,
+  paginate<Order>(orderService.indexPaginated),
+  indexPaginated
+);
+
+// * Get order
+orders.get("/:orderId", verifyToken, getOrder);
+
 // * CREATE
-orders.post("/", /* verifyToken, */ add);
+orders.post("/add", verifyToken, add);
+
 // * EDIT
-orders.put("/", /* verifyToken, */ edit);
+orders.put("/", verifyToken, edit);
+
 // * DELETE
 orders.delete("/:orderId", verifyToken, remove);
 

@@ -1,52 +1,85 @@
-import { Document, ObjectId, Types } from "mongoose";
+import mon, { FilterQuery, ObjectId, Types } from "mongoose";
 import { OrderModel } from "@/models/orders/orders.model";
 import { Order, OrderDoc, OrderStatusEnum, Service, TSortBy } from "@/types/db";
 
 export class OrderService implements Partial<Service<Order>> {
   async index(
-    skip?: number,
-    pageSize?: number,
-    sort?: TSortBy | null,
-    filter?: any | null
-  ): Promise<[Order[], number]> {
+    sort?: TSortBy | null | undefined,
+    filter?: FilterQuery<OrderDoc>
+  ): Promise<Order[]> {
     try {
       let query = null;
 
-      // if not pagination its find query
-      if (!skip && !pageSize && !sort) {
-        query = OrderModel.find(filter);
+      if (!sort) {
+        query = OrderModel.find(filter || {});
       } else {
         query = OrderModel.find(
-          // filter by model fields (name, price, stock, etc...)
+          // filter by model fields
           filter || {},
           // select model fields to return
           null,
           // options (sort, pagination, etc...)
-          {
-            ...(sort && {
-              sort,
-            }),
-          }
-        )
-          .skip(skip || 0)
-          .limit(pageSize || 10)
-          .populate({ path: "products.product", select: "name" });
+          { sort }
+        );
       }
 
-      const [orders, count] = await Promise.all([
-        query.exec(),
-        OrderModel.estimatedDocumentCount(),
-      ]);
+      const orders = await query.exec();
 
-      return [orders, count];
+      return orders;
     } catch (err) {
       throw new Error(`OrderService::index::${err}`);
     }
   }
 
-  async find(o: Partial<OrderDoc>): Promise<OrderDoc | null> {
+  async indexPaginated(
+    skip?: number,
+    pageSize?: number,
+    sort?: TSortBy | null,
+    filter?: FilterQuery<OrderDoc> | null
+  ): Promise<[Order[], number]> {
+    // convert status filter values to integers to be valid key in aggregate
+    if (filter?.status) {
+      filter.status = +filter.status;
+    }
+
+    // convert user filter value to ObjectId to be valid key in aggregate
+    if (filter?.user) {
+      filter.user = new Types.ObjectId(filter.user);
+    }
+
+    console.log("🚀 ~ filter:", filter);
+
     try {
-      const order = await OrderModel.findById(o.id);
+      const pipeline: any[] = [
+        { $match: filter || {} }, // Match the documents based on the provided filter
+        ...(sort ? [{ $sort: sort }] : []), // Apply sorting if the `sort` variable is provided
+        {
+          $facet: {
+            orders: [{ $skip: skip || 0 }, { $limit: pageSize || 10 }],
+            count: [{ $count: "total" }],
+          },
+        }, // Retrieve orders and count
+        {
+          $project: {
+            orders: 1,
+            count: { $arrayElemAt: ["$count.total", 0] },
+          },
+        }, // Restructure the results
+      ];
+
+      const [result] = await OrderModel.aggregate(pipeline);
+
+      const { orders, count } = result;
+
+      return [orders, count];
+    } catch (err) {
+      throw new Error(`OrderService::indexPaginated::${err}`);
+    }
+  }
+
+  async find(filter: FilterQuery<OrderDoc>): Promise<OrderDoc | null> {
+    try {
+      const order = await OrderModel.findOne(filter);
 
       if (!order) {
         return null;
@@ -54,7 +87,7 @@ export class OrderService implements Partial<Service<Order>> {
 
       return order;
     } catch (err) {
-      throw new Error(`UserService::find::${err}`);
+      throw new Error(`OrderService::find::${err}`);
     }
   }
 
@@ -78,7 +111,7 @@ export class OrderService implements Partial<Service<Order>> {
         throw new Error(`Order not found`);
       }
 
-      await orderToDelete.remove();
+      await orderToDelete.deleteOne();
     } catch (err) {
       throw new Error(`OrderService::delete::${err}`);
     }

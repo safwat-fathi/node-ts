@@ -36,7 +36,7 @@ export const getProduct = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { slug } = req.params;
 
-    const product = await productService.find(slug as string);
+    const product = await productService.find({ slug });
 
     if (!product) {
       return next(

@@ -36,12 +36,12 @@ const productService = new ProductService();
 //   indexPaginated
 // );
 
-// * Index
-products.get("/index", index);
+// * Get all
+products.get("/", index);
 
-// * Index with pagination
+// * Index
 products.get(
-  "/",
+  "/index",
   paginate<Product>(productService.indexPaginated),
   indexPaginated
 );

@@ -14,7 +14,10 @@
   "unauthorized": "Unauthorized",
   "access-forbidden": "Access forbidden",
   "already-verified": "No user found or user already verified",
-  "missing-token": "Token is missing",
+  "invalid-token": "Token is invalid",
+  "token-expired": "Token is expired",
   "user-verified": "User verified",
-  "no-product-match": "No product match {{product}}"
+  "no-product-match": "No product match {{product}}",
+  "no-order-match": "No product match {{order}}",
+  "server-error": "Internal server error"
 }

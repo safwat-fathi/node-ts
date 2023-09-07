@@ -1,10 +1,11 @@
 import { ProductModel } from "@/models/products/products.model";
 import { Product, ProductDoc, Service, TSortBy } from "@/types/db";
+import { FilterQuery, ObjectId } from "mongoose";
 
 export class ProductService implements Partial<Service<Product>> {
   async index(
     sort?: TSortBy | null | undefined,
-    filter?: any
+    filter?: FilterQuery<Product>
   ): Promise<Product[]> {
     try {
       let query = null;
@@ -34,7 +35,7 @@ export class ProductService implements Partial<Service<Product>> {
     skip?: number,
     pageSize?: number,
     sort?: TSortBy | null,
-    filter?: any | null
+    filter?: FilterQuery<Product> | null
   ): Promise<[Product[], number]> {
     try {
       // convert price filter values to integers to be valid key in aggregate
@@ -73,9 +74,14 @@ export class ProductService implements Partial<Service<Product>> {
     }
   }
 
-  async find(slug: string): Promise<ProductDoc | null> {
+  // async find(filter: any): Promise<ProductDoc | null> {
+  async find(
+    // filter: Partial<Record<keyof ProductDoc, any>>
+    filter: FilterQuery<Product>
+  ): Promise<ProductDoc | null> {
+    // async find(slug: string): Promise<ProductDoc | null> {
     try {
-      const product = await ProductModel.findOne({ slug }).select("+images");
+      const product = await ProductModel.findOne(filter).select("+images");
 
       if (!product) {
         return null;

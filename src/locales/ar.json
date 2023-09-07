@@ -14,7 +14,10 @@
   "unauthorized": "غير مصرح",
   "access-forbidden": "ممنوع الوصول",
   "already-verified": "لم يتم العثور على مستخدم أو تم التحقق من المستخدم بالفعل",
-  "missing-token": "رمز التأكيد مفقود",
+  "invalid-token": "رمز التأكيد غير صالح",
+  "token-expired": "رمز التأكيد منتهى",
   "user-verified": "تم التحقق من المستخدم",
-  "no-product-match": "ﻻيوجد منتج مطابق لـ {{product}}"
+  "no-product-match": "ﻻيوجد منتج مطابق لـ {{product}}",
+  "no-order-match": "ﻻيوجد طلب مطابق لـ {{order}}",
+  "server-error": "خطأ في الخادم الداخلي"
 }

@@ -158,7 +158,7 @@ export const verification = asyncHandler(
     const { token } = req.params as Partial<Token>;
 
     if (!token) {
-      return next(new HttpError(400, res.__("missing-token")));
+      return next(new HttpError(400, res.__("invalid-token")));
     }
 
     const verified = await authService.verifyEmail(token);

@@ -113,20 +113,31 @@ export const checkDuplicate = asyncHandler(
 
 export const verifyToken = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers["authorization"];
-    console.log("🚀 ~ token:", token);
+    const bearerToken = req.headers["authorization"];
 
-    if (!token) {
+    if (!bearerToken) {
       return next(new HttpError(401, res.__("unauthorized")));
     }
 
-    verify(token.split(" ")[1], SECRET, (err, decoded) => {
-      if (err) {
-        return next(err);
+    const token = bearerToken.replace("Bearer ", "");
+
+    verify(token, SECRET, (err, decoded) => {
+      const isExpired = err instanceof TokenExpiredError;
+
+      // if (!decoded) {
+      //   return next(new HttpError(401, res.__("invalid-token")));
+      // }
+
+      if (isExpired) {
+        return next(new HttpError(401, res.__("token-expired")));
       }
 
       if (!(decoded as CustomJwtPayload).id) {
         return next(new HttpError(403, res.__("access-forbidden")));
+      }
+
+      if (err) {
+        return next(new HttpError(500, res.__("server-error")));
       }
     });
 
