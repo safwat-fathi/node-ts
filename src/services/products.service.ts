@@ -3,14 +3,49 @@ import { Product, ProductDoc, Service, TSortBy } from "@/types/db";
 
 export class ProductService implements Partial<Service<Product>> {
   async index(
+    sort?: TSortBy | null | undefined,
+    filter?: any
+  ): Promise<Product[]> {
+    try {
+      let query = null;
+
+      if (!sort) {
+        query = ProductModel.find(filter || {});
+      } else {
+        query = ProductModel.find(
+          // filter by model fields
+          filter || {},
+          // select model fields to return
+          null,
+          // options (sort, pagination, etc...)
+          { sort }
+        );
+      }
+
+      const products = await query.exec();
+
+      return products;
+    } catch (err) {
+      throw new Error(`ProductService::index::${err}`);
+    }
+  }
+
+  async indexPaginated(
     skip?: number,
     pageSize?: number,
     sort?: TSortBy | null,
-    // sort?: any,
     filter?: any | null
   ): Promise<[Product[], number]> {
-    console.log("🚀 ~ async index filter:", filter);
     try {
+      // convert price filter values to integers to be valid key in aggregate
+      if (filter && filter.price) {
+        const { price } = filter;
+
+        Object.keys(price).forEach(
+          key => (filter.price[key] = +filter.price[key])
+        );
+      }
+
       const pipeline: any[] = [
         { $match: filter || {} }, // Match the documents based on the provided filter
         ...(sort ? [{ $sort: sort }] : []), // Apply sorting if the `sort` variable is provided
@@ -34,7 +69,7 @@ export class ProductService implements Partial<Service<Product>> {
 
       return [products, count];
     } catch (err) {
-      throw new Error(`ProductService::index::${err}`);
+      throw new Error(`ProductService::indexPaginated::${err}`);
     }
   }
 

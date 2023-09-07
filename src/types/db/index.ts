@@ -8,9 +8,11 @@ export type TSortOrder = SortOrder;
 export type TSortBy = Record<string, SortOrder>;
 
 export interface Service<T> {
-  index(
-    skip?: number,
-    pageSize?: number,
+  index(sort?: TSortBy | null, filter?: any | null): Promise<T[]>; // return array of T type
+
+  indexPaginated(
+    skip?: number | null,
+    pageSize?: number | null,
     sort?: TSortBy | null,
     filter?: any | null
   ): Promise<[T[], number]>; // return array of T type and count of found data

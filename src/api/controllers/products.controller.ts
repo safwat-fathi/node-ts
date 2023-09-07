@@ -10,16 +10,14 @@ const categoryService = new CategoryService();
 
 // * Index
 // * ----------
-// export const index = <T>(index: Service<T>["index"]) =>
-//   asyncHandler(async (_, res: Response) => {
-//     const [data, count] = await index();
+export const index = asyncHandler(async (_, res: Response) => {
+  const data = await productService.index();
 
-//     return res.status(200).json({
-//       success: true,
-//       data,
-//       meta: { count },
-//     });
-//   });
+  return res.status(200).json({
+    success: true,
+    data,
+  });
+});
 
 // * Index with pagination
 // * ----------
@@ -59,16 +57,17 @@ export const create = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { categories } = req.body as Product;
 
-    const [categoriesFound, count] = await categoryService.index(
-      null,
-      null,
-      null,
-      {
-        _id: { $in: categories },
-      }
-    );
+    const categoriesFound = categoryService.find({ name: { $in: categories } });
+    // const categoriesFound, count] = await categoryService.index(
+    //   null,
+    //   null,
+    //   null,
+    //   {
+    //     _id: { $in: categories },
+    //   }
+    // );
 
-    if (!categoriesFound || count === 0) {
+    if (!categoriesFound) {
       return next(new HttpError(429, `No categories match ${categories}`));
     }
 

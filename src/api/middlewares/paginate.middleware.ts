@@ -5,7 +5,7 @@ import { asyncHandler } from "./async.middleware";
 import { HttpError } from "@/lib/classes/errors/http";
 import { processQuery } from "@/lib/utils/mongoose";
 
-export const paginate = <T>(index: Service<T>["index"]) =>
+export const paginate = <T>(index: Service<T>["indexPaginated"]) =>
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const { skip, limit, page, sort, filter } = {
       ...req.query,
@@ -24,17 +24,6 @@ export const paginate = <T>(index: Service<T>["index"]) =>
 
     // convert sort values to integers to be valid key in aggregate
     if (sort) Object.keys(sort).forEach(key => (sort[key] = +sort[key]));
-
-    // TODO: should be done in service level
-    // convert price filter values to integers to be valid key in aggregate
-    if (filterQueryProcessed && filterQueryProcessed.price) {
-      const { price } = filterQueryProcessed;
-
-      Object.keys(price).forEach(
-        key =>
-          (filterQueryProcessed.price[key] = +filterQueryProcessed.price[key])
-      );
-    }
 
     const [data, count] = await index(
       SKIP,

@@ -3,6 +3,7 @@ import {
   create,
   // index,
   getProduct,
+  index,
   indexPaginated,
 } from "@/api/controllers/products.controller";
 // import { verifyToken } from "@/api/middlewares/auth.middleware";
@@ -35,17 +36,20 @@ const productService = new ProductService();
 //   indexPaginated
 // );
 
+// * Index
+products.get("/index", index);
+
 // * Index with pagination
 products.get(
   "/",
-  // verifyToken,
-  paginate<Product>(productService.index),
+  paginate<Product>(productService.indexPaginated),
   indexPaginated
 );
+
 // * Get product with slug
 products.get("/:slug", getProduct);
 
-// * CREATE
+// * Create
 products.post("/create", create);
 
 export default products;

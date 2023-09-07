@@ -34,7 +34,7 @@ export const CategorySchema = new Schema<Category>(
 
 // Cascade delete categories when a parent category is deleted
 CategorySchema.pre<CategoryDoc>(
-  "remove",
+  "deleteOne",
   async function (next: CallbackWithoutResultAndOptionalError) {
     await CategoryModel.deleteMany({ parent: this._id });
 

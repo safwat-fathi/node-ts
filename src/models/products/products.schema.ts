@@ -19,7 +19,7 @@ export const ProductsSchema = new Schema<Product>(
     },
     brand: {
       type: String,
-      // index: "text",
+      index: true,
       required: [true, "{VALUE} can not be null"],
       maxlength: [50, "Description can not be more than 50 characters"],
     },
@@ -27,12 +27,12 @@ export const ProductsSchema = new Schema<Product>(
       type: String,
       required: [true, "{VALUE} can not be null"],
       unique: true,
-      index: 1,
     },
     price: {
       type: Number,
       required: [true, "{VALUE} can not be null"],
       min: [0, "Please set a price more than 0"],
+      index: -1,
     },
     stock: {
       type: Number,
@@ -54,6 +54,13 @@ export const ProductsSchema = new Schema<Product>(
       _id: false,
       type: String,
       required: [true, "{VALUE} can not be null"],
+    },
+    categories: {
+      type: [String],
+      required: [true, "{VALUE} can not be null"],
+      index: true,
+      // validate: (val: Schema.Types.ObjectId[]) =>
+      //   Array.isArray(val) && val.length > 0,
     },
     images: {
       type: [String],
@@ -90,14 +97,9 @@ export const ProductsSchema = new Schema<Product>(
     //   // validate: (val: Schema.Types.ObjectId[]) =>
     //   //   Array.isArray(val) && val.length > 0,
     // },
-    categories: {
-      type: [String],
-      required: [true, "{VALUE} can not be null"],
-      // validate: (val: Schema.Types.ObjectId[]) =>
-      //   Array.isArray(val) && val.length > 0,
-    },
   },
   {
+    // versionKey: false,
     timestamps: true,
     toJSON: {
       virtuals: true,
@@ -111,7 +113,8 @@ export const ProductsSchema = new Schema<Product>(
   }
 );
 
-// ProductsSchema.index({ name: "text", brand: "text", slug: "text" });
+// ProductsSchema.index({ name: "text", brand: "text", categories: "text" });
+// console.log("🚀 ~ ProductsSchema.indexes():", ProductsSchema.indexes());
 
 // ProductsSchema.pre(
 //   "find",

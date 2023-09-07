@@ -4,6 +4,34 @@ import { Category, CategoryDoc, Service, TSortBy } from "@/types/db";
 
 export class CategoryService implements Partial<Service<Category>> {
   async index(
+    sort?: TSortBy | null | undefined,
+    filter?: any
+  ): Promise<Category[]> {
+    try {
+      let query = null;
+
+      if (!sort) {
+        query = CategoryModel.find(filter || {});
+      } else {
+        query = CategoryModel.find(
+          // filter by model fields
+          filter || {},
+          // select model fields to return
+          null,
+          // options (sort, pagination, etc...)
+          { sort }
+        );
+      }
+
+      const products = await query.exec();
+
+      return products;
+    } catch (err) {
+      throw new Error(`ProductService::index::${err}`);
+    }
+  }
+
+  async indexPaginated(
     skip?: number | null,
     pageSize?: number | null,
     sort?: TSortBy | null,
@@ -42,6 +70,20 @@ export class CategoryService implements Partial<Service<Category>> {
       return [categories, count];
     } catch (err) {
       throw new Error(`CategoryService::index::${err}`);
+    }
+  }
+
+  async find(filter: any): Promise<CategoryDoc | null> {
+    try {
+      if (!filter) return null;
+
+      const category = await CategoryModel.findOne(filter);
+
+      if (!category) return null;
+
+      return category;
+    } catch (err) {
+      throw new Error(`CategoryService::find::${err}`);
     }
   }
 
@@ -94,7 +136,7 @@ export class CategoryService implements Partial<Service<Category>> {
         throw new Error(`Category not found`);
       }
 
-      await categoryToDelete.remove();
+      await categoryToDelete.deleteOne();
     } catch (err) {
       throw new Error(`CategoryService::delete::${err}`);
     }
