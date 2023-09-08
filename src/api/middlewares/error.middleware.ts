@@ -29,6 +29,6 @@ export const errorHandler = (
       ? castError.message
       : err.errors
       ? err.errors
-      : err.message || "Server Error",
+      : err.message || res.__("server-error"),
   });
 };

@@ -47,8 +47,6 @@ export class OrderService implements Partial<Service<Order>> {
       filter.user = new Types.ObjectId(filter.user);
     }
 
-    console.log("🚀 ~ filter:", filter);
-
     try {
       const pipeline: any[] = [
         { $match: filter || {} }, // Match the documents based on the provided filter

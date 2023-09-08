@@ -88,7 +88,7 @@ app.use(i18n.init);
 app.use("/api", routes);
 
 // error handler middleware
-app.use(errorHandler);
+if (process.env.NODE_ENV === "development") app.use(errorHandler);
 
 // fix issue parsing query params array limit
 // app.set("query parser", function (str: string) {
