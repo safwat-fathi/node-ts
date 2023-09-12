@@ -124,15 +124,11 @@ export const verifyToken = asyncHandler(
     verify(token, SECRET, (err, decoded) => {
       const isExpired = err instanceof TokenExpiredError;
 
-      // if (!decoded) {
-      //   return next(new HttpError(401, res.__("invalid-token")));
-      // }
-
-      if (isExpired) {
-        return next(new HttpError(401, res.__("token-expired")));
+      if (!decoded || isExpired) {
+        return next(new HttpError(401, res.__("invalid-token")));
       }
 
-      if (!(decoded as CustomJwtPayload).id) {
+      if (decoded && !(decoded as CustomJwtPayload).id) {
         return next(new HttpError(403, res.__("access-forbidden")));
       }
 
