@@ -1,4 +1,4 @@
-import { ObjectId, HydratedDocument, SortOrder } from "mongoose";
+import { ObjectId, HydratedDocument, SortOrder, FilterQuery } from "mongoose";
 
 export type TDoc<T> = HydratedDocument<T>;
 
@@ -8,7 +8,7 @@ export type TSortOrder = SortOrder;
 export type TSortBy = Record<string, SortOrder>;
 
 export interface Service<T> {
-  index(sort?: TSortBy | null, filter?: any | null): Promise<T[]>; // return array of T type
+  index(sort?: TSortBy | null, filter?: FilterQuery<T> | null): Promise<T[]>; // return array of T type
 
   indexPaginated(
     skip?: number | null,
@@ -17,9 +17,11 @@ export interface Service<T> {
     filter?: any | null
   ): Promise<[T[], number]>; // return array of T type and count of found data
 
+  find(filter: FilterQuery<T>): Promise<TDoc<T> | null>;
+
   create(newDoc: T): Promise<TDoc<T>>;
 
-  update(docToUpdate: Partial<T & { id: ObjectId }>): Promise<TDoc<T> | null>;
+  update(docToUpdate: TDoc<T>): Promise<TDoc<T> | null>;
 
   delete(docId: ObjectId): Promise<void>;
 }

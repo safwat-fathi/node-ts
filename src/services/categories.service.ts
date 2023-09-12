@@ -23,55 +23,88 @@ export class CategoryService implements Partial<Service<Category>> {
         );
       }
 
-      const products = await query.exec();
+      const categories = await query.exec();
 
-      return products;
+      return categories;
     } catch (err) {
       throw new Error(`ProductService::index::${err}`);
     }
   }
 
   async indexPaginated(
-    skip?: number | null,
-    pageSize?: number | null,
+    skip?: number,
+    pageSize?: number,
     sort?: TSortBy | null,
-    filter?: FilterQuery<Category> | null
-  ): Promise<[CategoryDoc[], number]> {
+    filter?: FilterQuery<CategoryDoc> | null
+  ): Promise<[Category[], number]> {
     try {
-      let query = null;
+      const pipeline: any[] = [
+        { $match: filter || {} }, // Match the documents based on the provided filter
+        ...(sort ? [{ $sort: sort }] : []), // Apply sorting if the `sort` variable is provided
+        {
+          $facet: {
+            categories: [{ $skip: skip || 0 }, { $limit: pageSize || 10 }],
+            count: [{ $count: "total" }],
+          },
+        }, // Retrieve categories and count
+        {
+          $project: {
+            categories: 1,
+            count: { $arrayElemAt: ["$count.total", 0] },
+          },
+        }, // Restructure the results
+      ];
 
-      // if not pagination its find query
-      if (!skip && !pageSize && !sort) {
-        query = CategoryModel.find(filter || {});
-      } else {
-        query = CategoryModel.find(
-          // filter by model fields
-          filter || {},
-          // select model fields to return
-          null,
-          // options (sort, pagination, etc...)
-          {
-            ...(sort && {
-              sort,
-            }),
-          }
-        )
-          .skip(skip || 0)
-          .limit(pageSize || 10)
-          .populate("sub");
-        // .select("name description");
-      }
+      const [result] = await CategoryModel.aggregate(pipeline);
 
-      const [categories, count] = await Promise.all([
-        query.exec(),
-        CategoryModel.estimatedDocumentCount(),
-      ]);
+      const { categories, count } = result;
 
       return [categories, count];
     } catch (err) {
-      throw new Error(`CategoryService::index::${err}`);
+      throw new Error(`OrderService::indexPaginated::${err}`);
     }
   }
+  // async indexPaginated(
+  //   skip?: number | null,
+  //   pageSize?: number | null,
+  //   sort?: TSortBy | null,
+  //   filter?: FilterQuery<Category> | null
+  // ): Promise<[CategoryDoc[], number]> {
+  //   try {
+  //     let query = null;
+
+  //     // if not pagination its find query
+  //     if (!skip && !pageSize && !sort) {
+  //       query = CategoryModel.find(filter || {});
+  //     } else {
+  //       query = CategoryModel.find(
+  //         // filter by model fields
+  //         filter || {},
+  //         // select model fields to return
+  //         null,
+  //         // options (sort, pagination, etc...)
+  //         {
+  //           ...(sort && {
+  //             sort,
+  //           }),
+  //         }
+  //       )
+  //         .skip(skip || 0)
+  //         .limit(pageSize || 10)
+  //         .populate("sub");
+  //       // .select("name description");
+  //     }
+
+  //     const [categories, count] = await Promise.all([
+  //       query.exec(),
+  //       CategoryModel.estimatedDocumentCount(),
+  //     ]);
+
+  //     return [categories, count];
+  //   } catch (err) {
+  //     throw new Error(`CategoryService::index::${err}`);
+  //   }
+  // }
 
   async find(filter: FilterQuery<Category>): Promise<CategoryDoc | null> {
     try {

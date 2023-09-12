@@ -103,6 +103,7 @@ const server = app.listen(PORT, () => {
 const wss = new WebSocketServer(server);
 wss.init();
 
+// event emitter
 export const Notification = new EventEmitter();
 
 // exceptions handlers

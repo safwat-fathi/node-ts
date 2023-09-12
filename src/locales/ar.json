@@ -19,5 +19,7 @@
   "user-verified": "تم التحقق من المستخدم",
   "no-product-match": "ﻻيوجد منتج مطابق لـ {{product}}",
   "no-order-match": "ﻻيوجد طلب مطابق لـ {{order}}",
-  "server-error": "خطأ في الخادم الداخلي"
+  "server-error": "خطأ في الخادم الداخلي",
+  "upload-error": "نوع الملف غير صالح أو الملف كبير جدًا",
+  "upload-success": "تم رفع الملف بنجاح"
 }

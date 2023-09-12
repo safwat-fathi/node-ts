@@ -25,7 +25,9 @@ export class OrderService implements Partial<Service<Order>> {
 
       const orders = await query.exec();
 
-      return orders;
+      const transformedOrders = orders.map(doc => doc.toJSON());
+
+      return transformedOrders;
     } catch (err) {
       throw new Error(`OrderService::index::${err}`);
     }
@@ -60,12 +62,15 @@ export class OrderService implements Partial<Service<Order>> {
         {
           $project: {
             orders: 1,
+            // orders: { _id: 0, __v: 0 },
             count: { $arrayElemAt: ["$count.total", 0] },
           },
         }, // Restructure the results
       ];
 
       const [result] = await OrderModel.aggregate(pipeline);
+      // .allowDiskUse(true)
+      // .exec();
 
       const { orders, count } = result;
 
@@ -83,7 +88,7 @@ export class OrderService implements Partial<Service<Order>> {
         return null;
       }
 
-      return order;
+      return order.toJSON();
     } catch (err) {
       throw new Error(`OrderService::find::${err}`);
     }
@@ -124,6 +129,6 @@ export class OrderService implements Partial<Service<Order>> {
       return null;
     }
 
-    return order;
+    return order.toJSON();
   }
 }

@@ -19,5 +19,7 @@
   "user-verified": "User verified",
   "no-product-match": "No product match {{product}}",
   "no-order-match": "No product match {{order}}",
-  "server-error": "Internal server error"
+  "server-error": "Internal server error",
+  "upload-error": "Invalid file type or file too large",
+  "upload-success": "File uploaded successfully"
 }
