@@ -1,17 +1,21 @@
-FROM node:14.20.1
+FROM node:18-alpine
 
 # CREATE APP DIRECTORY
-WORKDIR /usr/src
+WORKDIR /app
 
 # Install app dependencies
-COPY package.json ./
-COPY yarn.lock ./
+COPY package.json .
+COPY yarn.lock .
 
+# Install app dependencies
 RUN yarn
 
 # Bundle app source
 COPY . .
 
-EXPOSE 8080
+EXPOSE 8000
 
-CMD ["NODE_ENV=development","nodemon","./src"]
+ENV NODE_ENV=development
+ENV DEBUG=express:* 
+
+CMD yarn start:dev

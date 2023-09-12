@@ -1,2 +1,10 @@
 node_modules
 npm-debug.log
+Dockerfile
+_data
+dist
+uploads
+.todo
+README.md
+*.log
+.dockerignore
