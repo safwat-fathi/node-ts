@@ -1,10 +1,14 @@
 node_modules
 npm-debug.log
-Dockerfile
-_data
+Dockerfile*
+# _data
 dist
 uploads
 .todo
 README.md
 *.log
 .dockerignore
+.git
+.gitignore
+.vscode
+artillery.yml

@@ -15,7 +15,6 @@ import Categories from "../_data/categories.json";
 
 dotenv.config();
 
-// const products = JSON.parse(fs.readFileSync(Products, 'utf-8'))
 const { MONGO_URI_DEV, MONGO_URI_PROD, NODE_ENV } = process.env || {
   MONGO_URI_DEV: "",
   MONGO_URI_PROD: "",

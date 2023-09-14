@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: node-express-ts
+    image: safwat/node-express-ts
+    restart: always
+    build: .
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    # links:
+    #   - db
+
+  db:
+    container_name: mongo-on-docker
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - 27017:27017
+    expose:
+      - 27017
+    env_file:
+      - .env
+    # entrypoint: ["/usr/bin/mongod"]
+    # command: "sudo mongod --dbpath /data/db"
+
+  db-seeder:
+    container_name: mongodb-seeder
+    image: node:18-slim
+    # working_dir: /usr/app
+    volumes:
+      - ./:/usr/app
+    depends_on:
+      - db
+      # - app
+    restart: no
+    # environment:
+    #   - NODE_ENV=development
+    command: "yarn seed:dev -i"
+    # command: "echo whyyyyyyyyyyyyyyyyyyyyyyy"

@@ -37,11 +37,11 @@
     "ws": "^8.12.0"
   },
   "scripts": {
-    "start:dev": "DEBUG=express:* NODE_ENV=development nodemon ./src",
+    "dev": "DEBUG=express:* NODE_ENV=development nodemon ./src",
     "lint": "eslint ./src --ext .ts",
     "debug": "DEBUG=express:* NODE_ENV=development node --inspect --require ts-node/register tsconfig-paths/register ./src/server.ts",
     "build": "yarn lint && rm -rf dist && tsc --build && tsc-alias",
-    "start:prod": "NODE_ENV=production node ./dist/server.js",
+    "prod": "NODE_ENV=production node ./dist/server.js",
     "seed:dev": "NODE_ENV=development yarn ts-node -r tsconfig-paths/register src/seeder.ts"
   },
   "devDependencies": {

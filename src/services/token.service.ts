@@ -39,13 +39,13 @@ export class TokenService implements Partial<ITokenService<Token>> {
 
   async delete(tokenId: ObjectId): Promise<void> {
     try {
-      const token = await TokenModel.findOne({ tokenId });
+      const tokenToDelete = await TokenModel.findOne({ tokenId });
 
-      if (!token) {
+      if (!tokenToDelete) {
         throw new Error("No token found");
       }
 
-      await token.remove();
+      await tokenToDelete.deleteOne();
     } catch (err) {
       throw new Error(`TokenService::read::${err}`);
     }

@@ -1,7 +1,7 @@
 FROM node:18-alpine
 
 # Create app directory
-WORKDIR /app
+WORKDIR /usr/app
 
 # copy package.json & yarn lock files
 COPY package.json .
@@ -20,5 +20,4 @@ EXPOSE 8000
 
 ENV NODE_ENV=production
 
-# CMD [ "yarn","start:dev" ]
-CMD yarn start:prod
+CMD [ "yarn","start:prod" ]

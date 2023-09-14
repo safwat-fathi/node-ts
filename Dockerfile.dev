@@ -1,11 +1,14 @@
 FROM node:18-alpine
 
-# CREATE APP DIRECTORY
-WORKDIR /app
+ENV NODE_ENV=development
+ENV DEBUG=express:* 
 
-# Install app dependencies
-COPY package.json .
-COPY yarn.lock .
+# CREATE APP DIRECTORY
+WORKDIR /usr/app
+
+# Copy packagesjson and yarn lock
+COPY ./package.json .
+COPY ./yarn.lock .
 
 # Install app dependencies
 RUN yarn
@@ -13,9 +16,6 @@ RUN yarn
 # Bundle app source
 COPY . .
 
-EXPOSE 8000
+EXPOSE 8080
 
-ENV NODE_ENV=development
-ENV DEBUG=express:* 
-
-CMD yarn start:dev
+CMD ["yarn", "start:dev"]
