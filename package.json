@@ -74,7 +74,6 @@
     "tsc-alias": "^1.8.3",
     "tsconfig-paths": "^4.1.2",
     "tslib": "^2.4.0",
-    "typescript": "^4.8.3",
-    "typescript-transform-paths": "^3.4.6"
+    "typescript": "^4.8.3"
   }
 }
