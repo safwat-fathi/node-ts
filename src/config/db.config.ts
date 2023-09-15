@@ -20,7 +20,7 @@ mongoose.set("strictQuery", false);
 
 export const connectDB = (): Promise<typeof mongoose> =>
   new Promise((resolve, reject) => {
-    mongoose.connect(MONGO_URI);
+    mongoose.connect(MONGO_URI, { tls: true });
 
     const db: Connection = mongoose.connection;
 
