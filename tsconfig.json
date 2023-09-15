@@ -1,6 +1,11 @@
 {
   "ts-node": {
-    "swc": true
+    "swc": true,
+    "transpileOnly": true,
+    "require": [
+      // "typescript-transform-paths/register",
+      "tsconfig-paths/register"
+    ]
   },
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
@@ -30,7 +35,7 @@
 
     /* Modules */
     "module": "commonjs" /* Specify what module code is generated. */,
-    // "rootDir": ".",                                  /* Specify the root folder within your source files. */
+    // "rootDir": "." /* Specify the root folder within your source files. */,
     "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
     "baseUrl": "src" /* Specify the base directory to resolve non-relative module names. */,
     "paths": {
@@ -42,7 +47,9 @@
       "@/services/*": ["services/*"],
       "@/types/*": ["types/*"]
     },
-    // "plugins": [],                                    /* Specify a set of entries that re-map imports to additional lookup locations. */
+    "plugins": [
+      { "transform": "typescript-transform-paths" }
+    ] /* Specify a set of entries that re-map imports to additional lookup locations. */,
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     "typeRoots": [
       "@/types",
@@ -116,6 +123,6 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "include": ["src", "src/**/*.ts", "tests/**/*.ts"],
-  "exclude": ["node_modules", ".vscode", "dist"]
+  "include": ["src", "src/**/*.ts"],
+  "exclude": ["node_modules", ".vscode", "dist", "src/seeder.ts"]
 }
