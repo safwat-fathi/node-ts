@@ -1,9 +1,14 @@
+// import fs from "fs";
 import mongoose, { Connection } from "mongoose";
 import dotenv from "dotenv";
 import dotenvExpand from "dotenv-expand";
 
 dotenv.config();
 dotenvExpand.expand(dotenv.config());
+
+// const ca = fs.readFileSync(`<path to CA certificate>`);
+// const cert = fs.readFileSync(`<path to public client certificate>`);
+// const key = fs.readFileSync(`<path to private client key>`);
 
 const { MONGO_URI_DEV, MONGO_URI_PROD, NODE_ENV } = process.env || {
   MONGO_URI_DEV: "",
@@ -20,7 +25,7 @@ mongoose.set("strictQuery", false);
 
 export const connectDB = (): Promise<typeof mongoose> =>
   new Promise((resolve, reject) => {
-    mongoose.connect(MONGO_URI, { tls: true });
+    mongoose.connect(MONGO_URI);
 
     const db: Connection = mongoose.connection;
 
