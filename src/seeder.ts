@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 
 import { hashPassword } from "./lib/utils/auth";
 
+import { connectDB } from "./config/db.config";
+
 // import models
 import { ProductModel } from "./models/products/products.model";
 import { UserModel } from "./models/user/user.model";
@@ -15,16 +17,18 @@ import Categories from "../_data/categories.json";
 
 dotenv.config();
 
-const { MONGO_URI_DEV, MONGO_URI_PROD, NODE_ENV } = process.env || {
-  MONGO_URI_DEV: "",
-  MONGO_URI_PROD: "",
-  NODE_ENV: "development",
-};
+// const { MONGO_URI_DEV, MONGO_URI_PROD, NODE_ENV } = process.env || {
+//   MONGO_URI_DEV: "",
+//   MONGO_URI_PROD: "",
+//   NODE_ENV: "development",
+// };
 
-export const MONGO_URI =
-  NODE_ENV === "development" ? MONGO_URI_DEV : MONGO_URI_PROD;
+// export const MONGO_URI =
+//   NODE_ENV === "development" ? MONGO_URI_DEV : MONGO_URI_PROD;
 
-mongoose.connect(MONGO_URI as string);
+// mongoose.connect(MONGO_URI as string);
+
+connectDB();
 
 const importData = async () => {
   try {
