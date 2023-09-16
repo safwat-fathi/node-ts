@@ -37,12 +37,11 @@ const productService = new ProductService();
 // );
 
 // * Get all
-products.get("/", verifyToken, index);
+products.get("/", index);
 
 // * Index
 products.get(
   "/index",
-  verifyToken,
   paginate<Product>(productService.indexPaginated),
   indexPaginated
 );
@@ -51,6 +50,6 @@ products.get(
 products.get("/:slug", getProduct);
 
 // * Create
-products.post("/create", create);
+products.post("/create", verifyToken, create);
 
 export default products;
