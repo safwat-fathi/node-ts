@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { hashPassword } from "./lib/utils/auth";
 
 // import models
-import { ProductModel } from "@/models/products/products.model";
+import { ProductModel } from "./models/products/products.model";
 import { UserModel } from "./models/user/user.model";
 import { CategoryModel } from "./models/categories/categories.model";
 
@@ -24,7 +24,7 @@ const { MONGO_URI_DEV, MONGO_URI_PROD, NODE_ENV } = process.env || {
 export const MONGO_URI =
   NODE_ENV === "development" ? MONGO_URI_DEV : MONGO_URI_PROD;
 
-mongoose.connect(MONGO_URI);
+mongoose.connect(MONGO_URI as string);
 
 const importData = async () => {
   try {
