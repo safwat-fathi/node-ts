@@ -42,7 +42,8 @@
     "debug": "DEBUG=express:* NODE_ENV=development node --inspect --require ts-node ./src/server.ts",
     "build": "yarn lint && rm -rf dist && tsc --build && tsc-alias",
     "prod": "NODE_ENV=production node dist/server.js",
-    "seed:dev": "NODE_ENV=development yarn ts-node src/seeder.ts"
+    "seed:dev": "NODE_ENV=development yarn ts-node src/seeder.ts",
+    "seed:prod": "NODE_ENV=production yarn ts-node src/seeder.ts"
   },
   "devDependencies": {
     "@swc/core": "^1.3.1",
