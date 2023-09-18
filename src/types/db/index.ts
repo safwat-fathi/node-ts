@@ -39,6 +39,13 @@ export interface User {
 }
 export type UserDoc = TDoc<User>;
 
+export interface Upload {
+  name: string;
+  url: string;
+  // user: ObjectId;
+}
+export type UploadDoc = TDoc<Upload>;
+
 export enum SubscriptionType {
   Basic,
   Silver,

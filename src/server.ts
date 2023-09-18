@@ -18,6 +18,7 @@ import i18n from "@/config/i18n.config";
 import routes from "@/api/routes";
 import { EventEmitter } from "stream";
 import WebSocketServer from "websocket";
+import path from "path";
 
 dotenv.config();
 
@@ -86,6 +87,9 @@ app.use(i18n.init);
 
 // routes
 app.use("/api", routes);
+
+// static paths
+app.use("/api/files", express.static(path.join(__dirname, "../uploads")));
 
 // error handler middleware
 if (process.env.NODE_ENV === "development") app.use(errorHandler);
