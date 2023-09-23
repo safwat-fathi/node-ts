@@ -30,7 +30,7 @@ export const connectDB = (): Promise<typeof mongoose> =>
     const db: Connection = mongoose.connection;
 
     db.on("error", error => {
-      console.log(`Error connecting to database.`);
+      console.log(`Error connecting to database`);
       reject(error);
     });
 

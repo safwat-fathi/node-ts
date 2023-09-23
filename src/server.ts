@@ -13,6 +13,8 @@ import mongoSanitize from "express-mongo-sanitize";
 import { errorHandler } from "@/api/middlewares/error.middleware";
 import { connectDB, MONGO_URI } from "@/config/db.config";
 import i18n from "@/config/i18n.config";
+// import { connectRedis } from "@/config/redis.config";
+import { connectRedis } from "./config/redis.config";
 
 // routes
 import routes from "@/api/routes";
@@ -29,6 +31,10 @@ const SECRET = <string>process.env.SECRET || "";
 
 // connect to DB
 connectDB();
+
+// connect to redis
+connectRedis();
+// redisClient.connect()
 
 // rate limiting
 const limiter = rateLimit({

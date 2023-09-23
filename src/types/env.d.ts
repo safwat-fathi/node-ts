@@ -6,6 +6,7 @@ declare global {
       WS_SERVER_PORT: number;
       MONGO_URI_DEV: string;
       MONGO_URI_PROD: string;
+      REDIS_URL: string;
       SECRET: string;
       CIPHER_TEXT_SECRET: string;
       GEOCODER_API_KEY: string;

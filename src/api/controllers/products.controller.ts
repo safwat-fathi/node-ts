@@ -4,6 +4,7 @@ import { HttpError } from "@/lib/classes/errors/http";
 import { asyncHandler } from "@/api/middlewares/async.middleware";
 import { ProductService } from "@/services/products.service";
 import { CategoryService } from "@/services/categories.service";
+import { redisClient } from "@/config/redis.config";
 
 const productService = new ProductService();
 const categoryService = new CategoryService();
@@ -36,6 +37,15 @@ export const getProduct = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { slug } = req.params;
 
+    const data = await redisClient.get(slug);
+
+    if (data !== null) {
+      return res.status(200).json({
+        success: true,
+        data: JSON.parse(data),
+      });
+    }
+
     const product = await productService.find({ slug });
 
     if (!product) {
@@ -44,7 +54,9 @@ export const getProduct = asyncHandler(
       );
     }
 
-    res.status(201).json({
+    await redisClient.set(slug, JSON.stringify(product));
+
+    res.status(200).json({
       success: true,
       data: product,
     });

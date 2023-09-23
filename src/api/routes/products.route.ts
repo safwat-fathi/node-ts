@@ -10,6 +10,7 @@ import { verifyToken } from "@/api/middlewares/auth.middleware";
 import { paginate } from "@/api/middlewares/paginate.middleware";
 import { Product } from "@/types/db";
 import { ProductService } from "@/services/products.service";
+import { cached } from "@/api/middlewares/cache.middleware";
 
 const products = Router();
 
@@ -47,7 +48,7 @@ products.get(
 );
 
 // * Get product with slug
-products.get("/:slug", getProduct);
+products.get("/:slug", /*  cached */ getProduct);
 
 // * Create
 products.post("/create", verifyToken, create);
