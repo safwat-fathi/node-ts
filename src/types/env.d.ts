@@ -7,7 +7,7 @@ declare global {
       MONGO_URI_DEV: string;
       MONGO_URI_PROD: string;
       REDIS_URL: string;
-      SECRET: string;
+      SESSION_SECRET: string;
       CIPHER_TEXT_SECRET: string;
       GEOCODER_API_KEY: string;
       GEOCODER_API_PROVIDER: string;

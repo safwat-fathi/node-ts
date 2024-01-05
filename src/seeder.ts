@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 import { hashPassword } from "./lib/utils/auth";
 
-import { connectDB } from "./config/db.config";
+import { MongooseDB, connectDB } from "./config/db.config";
 
 // import models
 import { ProductModel } from "./models/products/products.model";
@@ -28,10 +28,12 @@ dotenv.config();
 
 // mongoose.connect(MONGO_URI as string);
 
-connectDB();
+// connectDB();
+const mongodDB = MongooseDB.getInstance();
 
 const importData = async () => {
   try {
+    await mongodDB.connect();
     await ProductModel.insertMany(Products);
 
     // add password to users
@@ -49,12 +51,15 @@ const importData = async () => {
   } catch (error) {
     console.error("Error seeding database@seeder", error);
   } finally {
-    await mongoose.disconnect();
+    // await mongoose.disconnect();
+    await mongodDB.disconnect();
   }
 };
 
 const deleteData = async () => {
   try {
+    await mongodDB.connect();
+
     await ProductModel.deleteMany();
     await UserModel.deleteMany();
     await CategoryModel.deleteMany();
@@ -63,7 +68,8 @@ const deleteData = async () => {
   } catch (error) {
     console.error("Error deleting database@seeder.ts", error);
   } finally {
-    await mongoose.disconnect();
+    // await mongoose.disconnect();
+    await mongodDB.disconnect();
   }
 };
 
@@ -72,3 +78,17 @@ if (process.argv[2] === "-i") {
 } else if (process.argv[2] === "-d") {
   deleteData();
 }
+
+// class DataBaseSeeder {
+// 	private _dbConnection: DBConnection<typeof mongoose>;
+
+// 	constructor(dbConnection: DBConnection<typeof mongoose>) {
+// 			this._dbConnection = dbConnection;
+
+// 	}
+
+// }
+
+// const dbSeeder = new DataBaseSeeder({
+//   connect: async () => await connectDB(),
+// });

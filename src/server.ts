@@ -11,7 +11,7 @@ import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
 
 import { errorHandler } from "@/api/middlewares/error.middleware";
-import { connectDB, MONGO_URI } from "@/config/db.config";
+import { connectDB, MONGO_URI, MongooseDB } from "@/config/db.config";
 import i18n from "@/config/i18n.config";
 // import { connectRedis } from "@/config/redis.config";
 import { connectRedis } from "./config/redis.config";
@@ -27,10 +27,12 @@ dotenv.config();
 const app: Express = express();
 
 const PORT = <number>process.env.HTTP_SERVER_PORT || 8000;
-const SECRET = <string>process.env.SECRET || "";
+const SESSION_SECRET = <string>process.env.SESSION_SECRET || "";
 
 // connect to DB
-connectDB();
+const mongoDB = MongooseDB.getInstance();
+
+mongoDB.connect();
 
 // connect to redis
 connectRedis();
@@ -80,7 +82,7 @@ app.use(cookieParser());
 // session middleware
 app.use(
   session({
-    secret: SECRET,
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 1000 * 60 * 60 * 24 }, // max age is 24 hrs
