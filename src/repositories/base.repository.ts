@@ -26,11 +26,18 @@ export interface IRead<T> {
 
 // export abstract class BaseRepository<T> implements IRead<T>, IWrite<T> {
 export abstract class BaseRepository<T> {
-  // private readonly _collection: Collection<TDoc<T>>;
+  private readonly _db: MongooseDB;
   public readonly _model: Model<T>;
 
   constructor(collectionName: string, schema: Schema<T>) {
-    this._model = MongooseDB.getInstance().db.model<T>(collectionName, schema);
+    this._db = MongooseDB.getInstance();
+    this._model = this._db.connection.model<T>(collectionName, schema);
+
+    this._init();
+  }
+
+  private _init() {
+    (async () => await this._db.connect())();
   }
 
   // public async find(
@@ -79,6 +86,7 @@ export abstract class BaseRepository<T> {
   // public async count(options?: QueryOptions<TDoc<T>>): Promise<number> {
   //   throw new Error("Method not implemented")
   // }
+
   // public async update(id: string, item: UpdateQuery<T>): Promise<TDoc<T> | null> {
   //   return await this._model.findByIdAndUpdate(id, item, { new: true });
   // }

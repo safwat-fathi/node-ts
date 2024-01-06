@@ -54,11 +54,11 @@ export interface DBConnection<T> {
 export class MongooseDB implements DBConnection<Mongoose> {
   private static instance: MongooseDB;
   private _mongoose: Mongoose;
-  private _db: Connection;
+  private _connection: Connection;
 
   private constructor() {
     this._mongoose = mongoose;
-    this._db = this._mongoose.connection;
+    this._connection = this._mongoose.connection;
     this._configureDB();
   }
 
@@ -93,16 +93,16 @@ export class MongooseDB implements DBConnection<Mongoose> {
     return new Promise((resolve, reject) => {
       this._mongoose.connect(MONGO_URI);
 
-      this._db.on("error", error => {
+      this._connection.on("error", error => {
         console.log("Error connecting to database");
         reject(error);
       });
 
-      this._db.on("disconnected", () => {
+      this._connection.on("disconnected", () => {
         console.log("Database disconnected");
       });
 
-      this._db.once("open", () => {
+      this._connection.once("open", () => {
         console.log("Connected to database successfully");
         resolve(this._mongoose);
       });
@@ -117,8 +117,8 @@ export class MongooseDB implements DBConnection<Mongoose> {
     return this._mongoose;
   }
 
-  public get db(): Connection {
-    return this._db;
+  public get connection(): Connection {
+    return this._connection;
   }
 }
 
