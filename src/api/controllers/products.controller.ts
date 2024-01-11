@@ -12,7 +12,7 @@ const categoryService = new CategoryService();
 // * Index
 // * ----------
 export const index = asyncHandler(async (_, res: Response) => {
-  const data = await productService.index();
+  const data = await productService.getAll();
 
   return res.status(200).json({
     success: true,
@@ -46,7 +46,7 @@ export const getProduct = asyncHandler(
       });
     }
 
-    const product = await productService.find({ slug });
+    const product = await productService.getProductBySlug(slug);
 
     if (!product) {
       return next(
@@ -83,7 +83,7 @@ export const create = asyncHandler(
       return next(new HttpError(429, `No categories match ${categories}`));
     }
 
-    const newProduct = await productService.create(req.body);
+    const newProduct = await productService.addProduct(req.body);
 
     res.status(201).json({
       success: true,

@@ -73,8 +73,7 @@ export const paginate = <T>(index: Service<T>["indexPaginated"]) =>
       // hash: data_hash,
     };
 
-    res.locals.dataPaginated = { data, meta, links: {} };
-    // res.locals.dataPaginated = { data: "No data found" };
+    res.locals.dataPaginated = { data, meta };
 
     next();
   });

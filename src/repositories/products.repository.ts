@@ -1,17 +1,14 @@
 import { Product, TDoc } from "@/types/db";
-import { BaseRepository, IRead, IWrite } from "./base.repository";
+import { BaseRepository } from "./base.repository";
 import { FilterQuery, ProjectionType, QueryOptions } from "mongoose";
 import { ProductsSchema } from "@/models/products/products.schema";
 
-export class ProductRepository
-  extends BaseRepository<Product>
-  implements IRead<Product>, IWrite<Product>
-{
+export class ProductRepository extends BaseRepository<Product> {
   constructor() {
     super("Product", ProductsSchema);
   }
 
-  public async find(
+  protected async find(
     query: FilterQuery<TDoc<Product>>,
     projection?: ProjectionType<Product> | null,
     options?: QueryOptions<TDoc<Product>>
@@ -25,7 +22,7 @@ export class ProductRepository
     }
   }
 
-  public async findOne(
+  protected async findOne(
     query: FilterQuery<TDoc<Product>>
   ): Promise<TDoc<Product> | null> {
     try {
@@ -37,7 +34,7 @@ export class ProductRepository
     }
   }
 
-  public async findById(id: string) {
+  protected async findById(id: string) {
     try {
       const product = await this._model.findById(id).select("+images");
 
@@ -47,7 +44,7 @@ export class ProductRepository
     }
   }
 
-  public async update(id: string, data: Product) {
+  protected async update(id: string, data: Product) {
     try {
       const product = await this._model.findByIdAndUpdate(id, data, {
         new: true,
@@ -59,7 +56,7 @@ export class ProductRepository
     }
   }
 
-  public async addMany(products: Product[]) {
+  protected async addMany(products: Product[]) {
     try {
       const newProducts = await this._model.insertMany(products);
 

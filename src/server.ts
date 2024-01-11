@@ -11,10 +11,9 @@ import helmet from "helmet";
 import mongoSanitize from "express-mongo-sanitize";
 
 import { errorHandler } from "@/api/middlewares/error.middleware";
-import { connectDB, MONGO_URI, MongooseDB } from "@/config/db.config";
+import { MONGO_URI, MongooseDB } from "@/config/db.config";
 import i18n from "@/config/i18n.config";
-// import { connectRedis } from "@/config/redis.config";
-import { connectRedis } from "./config/redis.config";
+import { connectRedis } from "@/config/redis.config";
 
 // routes
 import routes from "@/api/routes";
@@ -29,14 +28,17 @@ const SESSION_SECRET = <string>process.env.SESSION_SECRET || "";
 
 async function bootstrap() {
   const app: Express = express();
+
+  // remove x-powered-by header
+  app.disable("x-powered-by");
+
   // connect to DB
   const mongoDB = MongooseDB.getInstance();
 
-  mongoDB.connect();
+  await mongoDB.connect();
 
   // connect to redis
-  connectRedis();
-  // redisClient.connect()
+  // await connectRedis();
 
   // rate limiting
   const limiter = rateLimit({
@@ -97,7 +99,7 @@ async function bootstrap() {
   app.use("/api", routes);
 
   // static paths
-  app.use("/api/files", express.static(path.join(__dirname, "../uploads")));
+  app.use("/api/uploads", express.static(path.join(__dirname, "../uploads")));
 
   // error handler middleware
   if (process.env.NODE_ENV === "development") app.use(errorHandler);

@@ -9,20 +9,20 @@ import {
   Schema,
 } from "mongoose";
 
-export interface IWrite<T> {
-  create(item: T): Promise<TDoc<T>>;
-  update(id: string, item: UpdateQuery<T>): Promise<TDoc<T> | null>;
-  delete(id: string): Promise<boolean>;
-}
+// export interface IWrite<T> {
+//   create(item: T): Promise<TDoc<T>>;
+//   update(id: string, item: UpdateQuery<T>): Promise<TDoc<T> | null>;
+//   delete(id: string): Promise<boolean>;
+// }
 
-export interface IRead<T> {
-  find(
-    query: FilterQuery<TDoc<T>>,
-    projection?: ProjectionType<T> | null,
-    options?: QueryOptions<TDoc<T>>
-  ): Promise<TDoc<T>[]>;
-  findOne(query: FilterQuery<TDoc<T>>): Promise<TDoc<T> | null>;
-}
+// export interface IRead<T> {
+//   find(
+//     query: FilterQuery<TDoc<T>>,
+//     projection?: ProjectionType<T> | null,
+//     options?: QueryOptions<TDoc<T>>
+//   ): Promise<TDoc<T>[]>;
+//   findOne(query: FilterQuery<TDoc<T>>): Promise<TDoc<T> | null>;
+// }
 
 // export abstract class BaseRepository<T> implements IRead<T>, IWrite<T> {
 export abstract class BaseRepository<T> {
@@ -52,7 +52,7 @@ export abstract class BaseRepository<T> {
   //   return await this._model.findOne(query);
   // }
 
-  public async create(item: T): Promise<TDoc<T>> {
+  protected async create(item: T): Promise<TDoc<T>> {
     const doc = await new this._model(item);
 
     await doc.save();
@@ -60,18 +60,18 @@ export abstract class BaseRepository<T> {
     return doc; // or return doc.toObject(); or return doc.toJSON(); or return doc.id; or return doc._id; or return doc.toString(); or return doc.id; or return doc._id; or return doc.toString(); or return doc.id; or return doc._id;
   }
 
-  public async update(
+  protected async update(
     id: string,
     item: UpdateQuery<T>
   ): Promise<TDoc<T> | null> {
     throw new Error("Method not implemented");
   }
 
-  public async delete(id: string): Promise<boolean> {
+  protected async delete(id: string): Promise<boolean> {
     throw new Error("Method not implemented");
   }
 
-  public async find(
+  protected async find(
     query: FilterQuery<TDoc<T>>,
     projection?: ProjectionType<T> | null,
     options?: QueryOptions<TDoc<T>>
@@ -79,7 +79,9 @@ export abstract class BaseRepository<T> {
     throw new Error("Method not implemented");
   }
 
-  public async findOne(query: FilterQuery<TDoc<T>>): Promise<TDoc<T> | null> {
+  protected async findOne(
+    query: FilterQuery<TDoc<T>>
+  ): Promise<TDoc<T> | null> {
     throw new Error("Method not implemented");
   }
 

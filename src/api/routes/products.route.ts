@@ -43,7 +43,7 @@ products.get("/", index);
 // * Index
 products.get(
   "/index",
-  paginate<Product>(productService.indexPaginated),
+  paginate<Product>(productService.getAllPaginated),
   indexPaginated
 );
 
