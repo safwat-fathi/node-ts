@@ -38,11 +38,11 @@ const productService = new ProductService();
 // );
 
 // * Get all
-products.get("/", index);
+// products.get("/", index);
 
 // * Index
 products.get(
-  "/index",
+  "/",
   paginate<Product>(productService.indexPaginated),
   indexPaginated
 );

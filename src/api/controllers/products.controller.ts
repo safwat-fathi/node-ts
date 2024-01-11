@@ -18,6 +18,10 @@ export const index = asyncHandler(async (_, res: Response) => {
     success: true,
     data,
   });
+  // return new HttpError(401, res.__("unauthorized"));
+  // return res.status(401).json({
+  //   success: false,
+  // });
 });
 
 // * Index with pagination

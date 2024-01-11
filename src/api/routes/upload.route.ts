@@ -10,7 +10,7 @@ const uploads = Router();
 // * ----------
 uploads.post(
   "/single",
-  // verifyToken,
+  verifyToken,
   upload.single("file"),
   // checkFileExist
   uploadSingle

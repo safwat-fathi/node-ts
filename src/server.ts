@@ -33,7 +33,7 @@ const SECRET = <string>process.env.SECRET || "";
 connectDB();
 
 // connect to redis
-connectRedis();
+// connectRedis();
 // redisClient.connect()
 
 // rate limiting
