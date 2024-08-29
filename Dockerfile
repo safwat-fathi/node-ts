@@ -4,7 +4,6 @@ FROM node:18-alpine
 WORKDIR /usr/app
 
 # copy package.json & yarn lock files
-COPY package.json .
 COPY yarn.lock .
 
 # Install app dependencies

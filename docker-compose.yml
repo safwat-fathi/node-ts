@@ -14,21 +14,21 @@ services:
     #   - db
 
   db:
-    container_name: mongo-on-docker
-    image: mongo
+    container_name: postgresql-on-docker
+    image: postgresql
     volumes:
       - ./data:/data/db
     ports:
-      - 27017:27017
+      - 5432:5432
     expose:
-      - 27017
+      - 5432
     env_file:
       - .env
     # entrypoint: ["/usr/bin/mongod"]
     # command: "sudo mongod --dbpath /data/db"
 
   db-seeder:
-    container_name: mongodb-seeder
+    container_name: postgresql-seeder
     image: node:18-slim
     # working_dir: /usr/app
     volumes:
