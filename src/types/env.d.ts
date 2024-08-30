@@ -6,8 +6,9 @@ declare global {
 			HTTP_SERVER_PORT: number;
 			WS_SERVER_PORT: number;
 
+			DB_TYPE: DatabaseType;
 			DB_HOST: string;
-			DB_PORT: string;
+			DB_PORT: number;
 			DB_NAME: string;
 			DB_USER: string;
 			DB_PASS: string;

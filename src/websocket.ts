@@ -3,8 +3,11 @@
 	- add singleton principle
 	- implement rooms
  */
+import dotenv from "dotenv";
 import { RawData, WebSocket, Server as WSS } from "ws";
-import { Server as HttpServer, IncomingMessage } from "http";
+import { IncomingMessage } from "http";
+
+dotenv.config();
 
 type WebSocketClient = WebSocket & { id: string };
 type WebSocketClients = Set<WebSocketClient>;
@@ -17,8 +20,8 @@ export default class WebSocketServer {
 	private readonly _wss: WSS;
 	private _clients: WebSocketClients;
 
-	constructor(httpServer: HttpServer) {
-		this._wss = new WebSocket.Server({ server: httpServer });
+	constructor() {
+		this._wss = new WebSocket.Server({ port: process.env.WS_SERVER_PORT });
 		this._clients = new Set();
 	}
 
@@ -57,7 +60,7 @@ export default class WebSocketServer {
 	broadcast(payload: any, socket: WebSocketClient) {
 		this._clients.forEach(client => {
 			if (client !== socket && client.readyState === WebSocket.OPEN) {
-				client.send(`Hello, broadcast message -> ${payload}`);
+				client.send(payload);
 			}
 		});
 	}
@@ -69,11 +72,20 @@ export default class WebSocketServer {
 				(socket: WebSocketClient, req: IncomingMessage) => {
 					// set unique id for new client
 					socket.id = <string>req.headers["sec-websocket-key"];
+
+					console.log(
+						`Client with ID:${socket.id} started a new websocket connection`
+					);
+
 					this._clients.add(socket);
 
 					socket.on("message", (data: RawData) => {
 						const parsedData: { to: string; payload: string } = JSON.parse(
 							data.toString("utf-8")
+						);
+						console.log(
+							"🚀 ~ WebSocketServer ~ socket.on ~ parsedData:",
+							parsedData
 						);
 
 						if (parsedData.to === "public") {
@@ -90,7 +102,9 @@ export default class WebSocketServer {
 
 					// When the socket connection is closed
 					socket.on("close", () => {
-						console.log(`client with clientId ${socket.id} connection closed`);
+						console.log(
+							`Client with ID:${socket.id} closed the websocket connection`
+						);
 						// delete client
 						this._clients.delete(socket);
 					});

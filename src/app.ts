@@ -39,6 +39,8 @@ class APP {
 
 	constructor(httpPort: number) {
 		this._app = express();
+		this._app.disable("x-powered-by");
+
 		this._db = AppDataSource;
 		this._httpServerPort = httpPort;
 
@@ -131,10 +133,7 @@ class APP {
 	private initializeWebSocketServer(): void {
 		if (!this._httpServer) throw new Error("HTTP server not initialized");
 
-		this._webSocketServer = new WebSocketServer(
-			this._httpServer
-			// this._webSocketPort
-		);
+		this._webSocketServer = new WebSocketServer();
 		this._webSocketServer.init();
 	}
 
