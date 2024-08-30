@@ -1,8 +1,10 @@
 import { AppDataSource } from "@/config/db.config";
-import { Product } from "@/entities/product/product.entity";
+import { Product } from "@/entities/product.entity";
+
+import { CrudService } from "@/lib/controllers/crud.controller";
 import { Repository } from "typeorm";
 
-export class ProductService {
+export class ProductService implements CrudService<Product> {
 	private _productRepository: Repository<Product>;
 
 	constructor() {
@@ -18,8 +20,8 @@ export class ProductService {
 		return this._productRepository.findOneBy({ id });
 	}
 
-	async update(id: string, product: Partial<Product>): Promise<Product | null> {
-		await this._productRepository.update(id, product);
+	async update(id: string, item: Partial<Product>): Promise<Product | null> {
+		await this._productRepository.update(id, item);
 		return this.read(id);
 	}
 
@@ -35,5 +37,25 @@ export class ProductService {
 
 	async list(): Promise<Product[]> {
 		return this._productRepository.find();
+	}
+
+	async search(query: string, field: string): Promise<Product[]> {
+		return this._productRepository.find({
+			where: {
+				[field]: query,
+			},
+		});
+	}
+
+	async count(): Promise<number> {
+		return this._productRepository.count();
+	}
+
+	async listByCategory(categoryId: string): Promise<Product[]> {
+		return this._productRepository.find({
+			where: {
+				categories: { id: categoryId },
+			},
+		});
 	}
 }

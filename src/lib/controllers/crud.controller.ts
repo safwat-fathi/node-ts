@@ -1,16 +1,17 @@
 import { HttpError } from "@/lib/classes/errors/http";
 import { asyncHandler } from "../middlewares/async.middleware";
+import { FindOperator } from "typeorm";
 
-interface CrudService<T> {
+export interface CrudService<T> {
 	create(item: T): Promise<T>;
-	read(id: string | number): Promise<T>;
-	update(id: string | number, item: T): Promise<T>;
-	delete(id: string | number): Promise<T>;
+	read(id: string | FindOperator<string>): Promise<T | null>;
+	update(id: string | FindOperator<string>, item: T): Promise<T | null>;
+	delete(id: string | FindOperator<string>): Promise<T | null>;
 	list(): Promise<T[]>;
 }
 
 class CrudController<T, S extends CrudService<T>> {
-	private _service: S;
+	protected _service: S;
 
 	constructor(_service: S) {
 		this._service = _service;

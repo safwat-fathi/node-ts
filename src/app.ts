@@ -18,7 +18,7 @@ import WebSocketServer from "websocket";
 import path from "path";
 import { errorHandler } from "@/lib/middlewares/error.middleware";
 import { AppDataSource } from "@/config/db.config";
-import { Session } from "@/entities/product/session.entity";
+import { Session } from "@/entities/session.entity";
 import { TypeormStore } from "connect-typeorm";
 import { IncomingMessage, Server, ServerResponse } from "http";
 import { DataSource } from "typeorm";
