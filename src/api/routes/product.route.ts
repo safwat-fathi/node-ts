@@ -11,6 +11,6 @@ products.get("/products/:id", productController.read);
 products.put("/products/:id", productController.update);
 products.delete("/products/:id", productController.delete);
 products.get("/products/:categoryId", productController.getProductByCategory);
-products.get("/products/search", productController.getProductByCategory);
+products.get("/products/search", productController.search);
 
 export default products;
