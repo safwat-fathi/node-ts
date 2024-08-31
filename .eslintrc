@@ -1,19 +1,17 @@
 {
-  "root": true,
-	// "env": {
-		
-	// },
-  "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint"
-  ],
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
-  ],
+	"root": true,
+	"plugins": ["@typescript-eslint", "prettier", "sonarjs", "security"],
+	"parser": "@typescript-eslint/parser",
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:sonarjs/recommended-legacy",
+		"plugin:security/recommended-legacy"
+	],
 	"rules": {
-		"no-useless-escape": 1
-		// "no-console": 1
+		"@typescript-eslint/no-unused-vars": "error",
+		"@typescript-eslint/no-explicit-any": "error",
+		"no-console": "error"
 	}
 }

@@ -12,6 +12,14 @@ export class ProductService implements CrudService<Product> {
 	}
 
 	async create(product: Partial<Product>): Promise<Product> {
+		const existingProduct = await this._productRepository.findOneBy({
+			name: product.name,
+		});
+
+		if (existingProduct) {
+			throw new Error("Product already exist");
+		}
+
 		const newProduct = this._productRepository.create(product);
 		return this._productRepository.save(newProduct);
 	}
@@ -21,6 +29,12 @@ export class ProductService implements CrudService<Product> {
 	}
 
 	async update(id: string, item: Partial<Product>): Promise<Product | null> {
+		const product = await this.read(id);
+
+		if (!product) {
+			return null;
+		}
+
 		await this._productRepository.update(id, item);
 		return this.read(id);
 	}
@@ -39,10 +53,10 @@ export class ProductService implements CrudService<Product> {
 		return this._productRepository.find();
 	}
 
-	async search(query: string, field: string): Promise<Product[]> {
+	async search(searchTerm: string, field: string): Promise<Product[]> {
 		return this._productRepository.find({
 			where: {
-				[field]: query,
+				[field]: searchTerm,
 			},
 		});
 	}

@@ -24,14 +24,14 @@ class ProductController extends CrudController<Product, ProductService> {
 
 	async search() {
 		return asyncHandler(async (req, res) => {
-			const term = req.query.term as string;
+			const searchTerm = req.query.searchTerm as string;
 			const field = req.query.field as string;
 
-			if (!term || !field) {
+			if (!searchTerm || !field) {
 				return new HttpError(400, "Missing search term or field");
 			}
 
-			const result = await this._service.search(term, field);
+			const result = await this._service.search(searchTerm, field);
 
 			res
 				.status(200)

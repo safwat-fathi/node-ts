@@ -2,10 +2,7 @@
 	"ts-node": {
 		"swc": true,
 		"transpileOnly": true,
-		"require": [
-			// "typescript-transform-paths/register",
-			"tsconfig-paths/register"
-		]
+		"require": ["tsconfig-paths/register"]
 	},
 	"compilerOptions": {
 		/* Visit https://aka.ms/tsconfig.json to read more about this file */
