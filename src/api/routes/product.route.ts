@@ -4,6 +4,7 @@ import ProductController from "../controllers/product.controller";
 const productController = new ProductController();
 
 const products = Router();
+console.log("sd");
 
 products.post("/products", productController.create);
 products.get("/products", productController.list);
