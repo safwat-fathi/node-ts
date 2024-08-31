@@ -4,13 +4,15 @@ import ProductController from "../controllers/product.controller";
 const productController = new ProductController();
 
 const products = Router();
-console.log("sd");
 
-products.post("/products", productController.create);
-products.get("/products", productController.list);
-products.get("/products/:id", productController.read);
-products.put("/products/:id", productController.update);
-products.delete("/products/:id", productController.delete);
+const productsRoute = "/products";
+const productByIdRoute = "/products/:id";
+
+products.post(productsRoute, productController.create);
+products.get(productsRoute, productController.list);
+products.get(productByIdRoute, productController.read);
+products.put(productByIdRoute, productController.update);
+products.delete(productByIdRoute, productController.delete);
 products.get("/products/:categoryId", productController.getProductByCategory);
 products.get("/products/search", productController.search);
 

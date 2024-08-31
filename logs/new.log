@@ -1,0 +1,15 @@
+{"level":30,"time":1725092442391,"pid":12243,"hostname":"192.168.1.4","msg":"test"}
+{"level":30,"time":1725092488891,"pid":12308,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725092488892,"pid":12308,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725092731666,"pid":12487,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725092731667,"pid":12487,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725092788631,"pid":12709,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725092788632,"pid":12709,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725092850090,"pid":12791,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725092850092,"pid":12791,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":50,"time":1725093076770,"pid":12791,"hostname":"192.168.1.4","msg":"Server::SIGINT"}
+{"level":30,"time":1725094631165,"pid":13948,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725094631167,"pid":13948,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725094935165,"pid":14100,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725094935166,"pid":14100,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":50,"time":1725094935824,"pid":14100,"hostname":"192.168.1.4","msg":"Server::SIGINT"}

@@ -3,15 +3,15 @@ import { Product } from "./product.entity";
 
 @Entity()
 export class Category {
-	@PrimaryGeneratedColumn("increment")
-	id!: string;
+  @PrimaryGeneratedColumn("increment")
+  id!: string;
 
-	@Column()
-	name!: string;
+  @Column()
+  name!: string;
 
-	@Column("text")
-	description!: string;
+  @Column("text")
+  description!: string;
 
-	@ManyToMany(type => Product, product => product.categories)
-	products!: Product[];
+  @ManyToMany(() => Product, (product_id) => product_id.categories)
+  products!: Product[];
 }

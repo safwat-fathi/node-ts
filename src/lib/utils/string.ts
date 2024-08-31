@@ -4,8 +4,8 @@ export const slugify = (text: string): string => {
       .toString()
       .toLowerCase()
       .replace(/\s+/g, "-") // Replace spaces with -
-      .replace(/[^\w\-]+/g, "") // Remove all non-word chars
-      .replace(/\-\-+/g, "-") // Replace multiple - with single -
+      .replace(/[^\w]+/g, "") // Remove all non-word chars
+      .replace(/--+/g, "-") // Replace multiple - with single -
       .replace(/^-+/, "") // Trim - from start of text
       .replace(/-+$/, ""); // Trim - from end of text
   } catch (err) {
@@ -23,8 +23,6 @@ export const isSafeToParse = (v: string): boolean => {
   return true;
 };
 
-export const encode = (str: string): string =>
-  Buffer.from(str).toString("base64");
+export const encode = (str: string): string => Buffer.from(str).toString("base64");
 
-export const decode = (str: string): string =>
-  Buffer.from(str, "base64").toString("ascii");
+export const decode = (str: string): string => Buffer.from(str, "base64").toString("ascii");
