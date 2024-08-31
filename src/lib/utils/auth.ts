@@ -7,16 +7,7 @@ import { TSendEmailOptions } from "@/types/utils";
 
 dotenv.config();
 
-const {
-  NODE_ENV,
-  FROM_EMAIL,
-  FROM_NAME,
-  SMTP_EMAIL,
-  SMTP_HOST,
-  SMTP_PASSWORD,
-  SMTP_PORT,
-  SECRET,
-} = (process.env as {
+const { NODE_ENV, FROM_EMAIL, FROM_NAME, SMTP_EMAIL, SMTP_HOST, SMTP_PASSWORD, SMTP_PORT, SECRET } = (process.env as {
   NODE_ENV: string;
   SMTP_EMAIL: string;
   SMTP_HOST: string;
@@ -44,9 +35,7 @@ const {
 export const hashPassword = async (password: string): Promise<string> => {
   try {
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    return hashedPassword;
+    return await bcrypt.hash(password, salt);
   } catch (err) {
     throw new Error(`Utils::auth::hashPassword::${err}`);
   }
@@ -58,14 +47,9 @@ export const hashPassword = async (password: string): Promise<string> => {
  * @param {string} userPassword The user password
  * @returns {boolean} Returns true or false if given password does match user password
  */
-export const comparePassword = async (
-  password: string,
-  userPassword: string
-): Promise<boolean> => {
+export const comparePassword = async (password: string, userPassword: string): Promise<boolean> => {
   try {
-    const passwordIsValid = await bcrypt.compare(password, userPassword);
-
-    return passwordIsValid;
+    return await bcrypt.compare(password, userPassword);
   } catch (err) {
     throw new Error(`Utils::auth::comparePassword::${err}`);
   }
@@ -77,14 +61,9 @@ export const comparePassword = async (
  * @param {string} name User name
  * @returns {string} Returns access token
  */
-export const generateAccessToken = async (
-  id: string,
-  name: string
-): Promise<string> => {
+export const generateAccessToken = async (id: string, name: string): Promise<string> => {
   try {
-    const token = sign({ id, name }, SECRET, { expiresIn: "24h" });
-
-    return token;
+    return sign({ id, name }, SECRET, { expiresIn: "24h" });
   } catch (err) {
     throw new Error(`Utils::auth::generateAccessToken::${err}`);
   }
@@ -99,9 +78,7 @@ export const generateToken = (): string => {
     const token = crypto.randomBytes(16).toString("hex");
 
     // hash token
-    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
-
-    return hashedToken;
+    return crypto.createHash("sha256").update(token).digest("hex");
   } catch (err) {
     throw new Error(`Utils::auth::generateToken::${err}`);
   }
@@ -116,7 +93,7 @@ export const sendEmail = async (options: TSendEmailOptions): Promise<void> => {
   try {
     const transport = nodemailer.createTransport({
       host: SMTP_HOST,
-      // port: +SMTP_PORT,
+      port: +SMTP_PORT,
       auth: {
         user: SMTP_EMAIL,
         pass: SMTP_PASSWORD,
@@ -132,12 +109,10 @@ export const sendEmail = async (options: TSendEmailOptions): Promise<void> => {
       html: options.message,
     };
 
-    transport.sendMail(message, (err, info) => {
+    transport.sendMail(message, (err) => {
       if (err) {
         throw new Error(`Sending email failed: ${err}`);
       }
-
-      console.log("Message sent:", info.messageId, info.response);
     });
   } catch (err) {
     throw new Error(`Utils::auth::sendEmail::${err}`);
