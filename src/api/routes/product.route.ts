@@ -5,11 +5,10 @@ const productController = new ProductController();
 
 const products = Router();
 
-const productsRoute = "/products";
-const productByIdRoute = "/products/:id";
+const productByIdRoute = "/:id";
 
-products.post(productsRoute, productController.create);
-products.get(productsRoute, productController.list);
+products.get("/", productController.list);
+products.post("/", productController.create);
 products.get(productByIdRoute, productController.read);
 products.put(productByIdRoute, productController.update);
 products.delete(productByIdRoute, productController.delete);

@@ -1,15 +1,14 @@
-export class HttpError extends Error {
+import { TUnknownObject } from "@/types/utils";
+import BaseError from "./base";
+
+class HttpError extends BaseError {
   status: number;
-  success: boolean;
-  message: string;
-  errors: (Record<string, never> | object)[];
 
-  constructor(status: number, message: string, errors?: (Record<string, never> | object)[]) {
-    super(message);
+  constructor(name: string, status: number, message: string, errors?: TUnknownObject[]) {
+    super(name, message, errors);
 
-    this.success = false;
     this.status = status;
-    this.message = message;
-    this.errors = <(Record<string, never> | object)[]>errors;
   }
 }
+
+export default HttpError;

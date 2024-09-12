@@ -1,5 +1,7 @@
-import { HttpError } from "@/lib/classes/errors/http";
-import { asyncHandler } from "./async.middleware";
+import { Request, Response } from "express";
+import HttpError from "@/lib/classes/errors/http";
+import { HttpStatusCode } from "@/types/http";
+import logger from "../utils/logger";
 
 /**
  * Custom error handler to standardize error objects returned to
@@ -10,17 +12,25 @@ import { asyncHandler } from "./async.middleware";
  * @param res Response object provided by Express
  * @param next NextFunction function provided by Express
  */
-export const errorHandler = (err: HttpError) =>
-  asyncHandler((_, res) => {
-    let castError = null;
+export const errorHandler = (err: HttpError, _: Request, res: Response) => {
+  const errResponse = {
+    success: false,
+    message: err?.message || res.__("server-error"),
+    stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
+  } as HttpError;
 
-    // handle bad ObjectId mongoose requests
-    if (err.stack?.includes("CastError")) {
-      castError = new HttpError(404, res.__("not-found"));
-    }
+  if (!err.isOperational) logger.fatal(err, "Non-Operational error");
+  else logger.error(err, "Operational error");
 
-    res.status(err.status || 500).json({
-      success: false,
-      error: castError ? castError.message : err.errors ? err.errors : err.message || res.__("server-error"),
+  if (err instanceof HttpError) {
+    return res.status(err?.status || HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+      ...err,
+      ...errResponse,
     });
+  }
+
+  return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+    success: false,
+    message: res.__("server-error"),
   });
+};

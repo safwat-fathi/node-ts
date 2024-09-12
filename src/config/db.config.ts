@@ -1,3 +1,7 @@
+import { Category } from "@/entities/category.entity";
+import { Product } from "@/entities/product.entity";
+import { Session } from "@/entities/session.entity";
+import { User } from "@/entities/user.entity";
 import dotenv from "dotenv";
 
 import { DataSource } from "typeorm";
@@ -14,6 +18,5 @@ export const AppDataSource = new DataSource({
   password: DB_PASS,
   database: DB_NAME,
   synchronize: NODE_ENV === "development" ? true : false, // synchronize is not recommended in production
-  // entities: [User, Product, Category],
-  entities: ["@/entities/*.entity.ts"],
+  entities: [Session, User, Product, Category],
 });

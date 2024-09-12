@@ -50,8 +50,8 @@ class APP {
   }
 
   private setupMiddlewares(): void {
-    this._app.use(express.json({}));
-    this._app.use(express.urlencoded({ extended: true }));
+    this._app.use(express.json({ limit: "5mb" }));
+    this._app.use(express.urlencoded({ extended: true, limit: "5mb" }));
     this._app.use(cookieParser());
     this._app.use(compression());
 
@@ -71,6 +71,14 @@ class APP {
       max: 100,
       standardHeaders: true,
       legacyHeaders: false,
+      message: i18n.__("too-many-requests"),
+      // statusCode: 429,
+      // eslint-disable-next-line
+      store: new (TypeormStore as any)({
+        cleanupLimit: 2,
+        limitSubquery: false, // Set to true if your database type requires subqueries
+        ttl: 86400, // 24 hours
+      }),
     });
     this._app.use(limiter);
   }
@@ -81,15 +89,10 @@ class APP {
 
     // Static paths
     this._app.use("/api/files", express.static(path.join(__dirname, "../uploads")));
-
-    // Error handler middleware
-    if (process.env.NODE_ENV === "development") {
-      this._app.use(errorHandler);
-    }
   }
 
   private setupErrorHandling(): void {
-    this._app.use(errorHandler);
+    if (process.env.NODE_ENV === "development") this._app.use(errorHandler);
   }
 
   private async initializeDatabase(): Promise<void> {
@@ -129,54 +132,61 @@ class APP {
   private initializeWebSocketServer(): void {
     if (!this._httpServer) throw new Error("HTTP server not initialized");
 
-    this._webSocketServer = new WebSocketServer();
+    this._webSocketServer = WebSocketServer.getInstance();
     this._webSocketServer.init();
   }
 
+  private async shutdown(exitCode: number): Promise<void> {
+    if (this._httpServer) {
+      if (this._webSocketServer) {
+        this._webSocketServer.close();
+      }
+
+      this._httpServer.close(async () => {
+        await this.closeDatabaseConnection();
+
+        logger.info("HTTP server closed");
+        process.exit(exitCode);
+      });
+
+      setTimeout(() => {
+        logger.error("Forcing shutdown due to timeout.");
+        process.exit(exitCode);
+      });
+    } else {
+      logger.error("HTTP server not initialized");
+      process.exit(1); // 1 for 'failure' status
+    }
+  }
+
+  private closeDatabaseConnection = async () => {
+    try {
+      await this._db.destroy();
+      logger.info("Database connection closed.");
+    } catch (err) {
+      logger.error(err, "Error while closing database connection.");
+    }
+  };
+
   private handleExceptions(): void {
-    process.on("uncaughtException", (error) => {
-      logger.error("Server::uncaughtException::", error);
-
-      process.exit(1); // Exit application
+    process.on("uncaughtException", async (error) => {
+      logger.fatal(error, "Uncaught Exception! Shutting down...");
+      await this.shutdown(1);
     });
 
-    process.on("unhandledRejection", (error, promise) => {
-      logger.error("Server::unhandledRejection::promise", promise);
-
-      logger.error("Server::unhandledRejection::error", error);
-
-      process.exit(1); // Exit application
+    process.on("unhandledRejection", async (error, promise) => {
+      logger.fatal({ error, promise }, "Unhandled Rejection! Shutting down...");
+      await this.shutdown(1);
     });
 
-    process.on("SIGTERM", (error) => {
-      logger.error("Server::SIGTERM", error);
-      this._webSocketServer?.close(() => {
-        process.exit(0); // Exit application
-      });
-
-      this._httpServer?.close(() => {
-        process.exit(0); // Exit application
-      });
-
-      this._db.destroy().then(() => {
-        process.exit(0); // Exit application
-      });
+    process.on("SIGTERM", async () => {
+      logger.info("Received SIGTERM. Gracefully shutting down...");
+      await this.shutdown(0); // 0 for 'success' status
     });
 
-    process.on("SIGINT", (error) => {
-      logger.error("Server::SIGINT", error);
-
-      this._webSocketServer?.close(() => {
-        process.exit(0); // Exit application
-      });
-
-      this._httpServer?.close(() => {
-        process.exit(0); // Exit application
-      });
-
-      this._db.destroy().then(() => {
-        process.exit(0); // Exit application
-      });
+    process.on("SIGINT", async () => {
+      logger.info("Received SIGINT (Ctrl+C). Gracefully shutting down...");
+      await this.shutdown(0);
     });
   }
 

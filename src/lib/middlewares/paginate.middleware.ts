@@ -2,7 +2,7 @@
 // import { Service, TSortBy } from "@/types/db";
 // import { asyncHandler } from "./async.middleware";
 // // import { createHash } from "crypto";
-// import { HttpError } from "@/lib/classes/errors/http";
+// import { BaseError } from "@/lib/classes/error/base";
 // import { processQuery } from "@/lib/utils/mongoose";
 
 // export const paginate = <T>(index: Service<T>["indexPaginated"]) =>
@@ -40,12 +40,12 @@
 //     const previousPage = has_previous ? +page - 1 : null;
 
 //     if (current_page <= 0) {
-//       next(new HttpError(404, `Page requested not valid or no page provided`));
+//       next(new BaseError(404, `Page requested not valid or no page provided`));
 //     }
 
 //     if (current_page > total_pages) {
 //       next(
-//         new HttpError(
+//         new BaseError(
 //           404,
 //           `Page requested not found, current total pages is: ${total_pages}`
 //         )

@@ -1,7 +1,13 @@
 /*
 	TODO: add to WebSocketServer class
-	- add singleton principle
 	- implement rooms
+	- implement peer to peer connections
+	- implement encryption
+	- implement authentication
+	- implement authorization
+	- implement error handling
+	- implement graceful shutdown
+
  */
 import dotenv from "dotenv";
 import { RawData, WebSocket, Server as WSS } from "ws";
@@ -13,15 +19,17 @@ dotenv.config();
 type WebSocketClient = WebSocket & { id: string };
 type WebSocketClients = Set<WebSocketClient>;
 interface IMessage {
+  from: WebSocketClient["id"] | "server";
   to: WebSocketClient["id"] | "public";
   payload: string;
 }
 
 export default class WebSocketServer {
+  private static _instance: WebSocketServer | null = null;
   private readonly _wss: WSS;
   private _clients: WebSocketClients;
 
-  constructor() {
+  private constructor() {
     this._wss = new WebSocket.Server({ port: process.env.WS_SERVER_PORT });
     this._clients = new Set();
   }
@@ -30,20 +38,22 @@ export default class WebSocketServer {
     this._attachEventListeners();
   }
 
-  // make close method accept a callback
+  public static getInstance(): WebSocketServer {
+    if (!WebSocketServer._instance) {
+      WebSocketServer._instance = new WebSocketServer();
+    }
 
-  public close(cb: (err?: Error) => void) {
+    return WebSocketServer._instance;
+  }
+
+  public close(cb?: (err?: Error) => void) {
     this._wss.close();
     this._clients.clear();
 
-    cb();
+    cb?.();
   }
 
-  send(
-    message: IMessage,
-    socket: WebSocketClient
-    // req: IncomingMessage
-  ) {
+  send(message: IMessage, socket: WebSocketClient) {
     const { to, payload } = message;
 
     this._clients.forEach((client) => {
@@ -68,9 +78,17 @@ export default class WebSocketServer {
         // set unique id for new client
         socket.id = <string>req.headers["sec-websocket-key"];
 
-        logger.info(`Client with ID:${socket.id} started a new websocket connection`);
-
         this._clients.add(socket);
+
+        logger.info(`Client with ID:${socket.id} opened a new websocket connection`);
+
+        socket.send(JSON.stringify({ from: "server", payload: { myId: socket.id } }));
+
+        socket.on("error", (err) => {
+          logger.error("Websocket server error:", err);
+          this._clients.clear();
+          this._wss.close(() => process.exit(1));
+        });
 
         socket.on("message", (data: RawData) => {
           const parsedData: { to: string; payload: string } = JSON.parse(data.toString("utf-8"));
@@ -79,6 +97,7 @@ export default class WebSocketServer {
             this.broadcast(JSON.stringify(parsedData.payload), socket);
           } else {
             const message: IMessage = {
+              from: socket.id,
               to: parsedData.to,
               payload: JSON.stringify(parsedData.payload),
             };
@@ -102,6 +121,10 @@ export default class WebSocketServer {
     this._wss.on("close", () => {
       logger.warn("Websocket Server closed");
       this._clients.clear();
+    });
+
+    this._wss.on("open", () => {
+      logger.info("Websocket Server opened");
     });
 
     this._wss.on("error", (err: Error) => {

@@ -13,3 +13,356 @@
 {"level":30,"time":1725094935165,"pid":14100,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
 {"level":30,"time":1725094935166,"pid":14100,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
 {"level":50,"time":1725094935824,"pid":14100,"hostname":"192.168.1.4","msg":"Server::SIGINT"}
+{"level":30,"time":1725174411646,"pid":3650,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725174411648,"pid":3650,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725174790666,"pid":3836,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725174790667,"pid":3836,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725174796491,"pid":3891,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725174796493,"pid":3891,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725174954366,"pid":4017,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725174954367,"pid":4017,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725174978176,"pid":4085,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725174978178,"pid":4085,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725175056557,"pid":4191,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725175056559,"pid":4191,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725175146247,"pid":4277,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725175146249,"pid":4277,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":50,"time":1725175191175,"pid":4277,"hostname":"192.168.1.4","msg":"Server::SIGINT"}
+{"level":30,"time":1725175196117,"pid":4417,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":50,"time":1725175196119,"pid":4417,"hostname":"192.168.1.4","msg":"Server::uncaughtException::"}
+{"level":30,"time":1725175222587,"pid":4489,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725175222589,"pid":4489,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8000"}
+{"level":50,"time":1725175248136,"pid":4489,"hostname":"192.168.1.4","msg":"Server::SIGINT"}
+{"level":30,"time":1725175253136,"pid":4600,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725175253138,"pid":4600,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":50,"time":1725175558249,"pid":4600,"hostname":"192.168.1.4","msg":"Server::SIGINT"}
+{"level":30,"time":1725175894941,"pid":5730,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725175894943,"pid":5730,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":50,"time":1725175898294,"pid":5730,"hostname":"192.168.1.4","msg":"Server::uncaughtException::"}
+{"level":30,"time":1725175965959,"pid":5804,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725175965961,"pid":5804,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":50,"time":1725175969011,"pid":5804,"hostname":"192.168.1.4","msg":"Server::uncaughtException::EntityMetadataNotFoundError: No metadata for \"Session\" was found."}
+{"level":30,"time":1725176065545,"pid":5895,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725176065547,"pid":5895,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":50,"time":1725176127727,"pid":5895,"hostname":"192.168.1.4","msg":"Server::uncaughtException::EntityMetadataNotFoundError: No metadata for \"Session\" was found."}
+{"level":30,"time":1725176188294,"pid":5997,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725176188296,"pid":5997,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176317948,"pid":6087,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725176317951,"pid":6087,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176354535,"pid":6157,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725176354536,"pid":6157,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176367410,"pid":6216,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725176367412,"pid":6216,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176372284,"pid":6281,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725176372285,"pid":6281,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176401842,"pid":6348,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725176401844,"pid":6348,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176471556,"pid":6438,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725176471558,"pid":6438,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176547719,"pid":6542,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725176547720,"pid":6542,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176592998,"pid":6622,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725176593000,"pid":6622,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176613569,"pid":6692,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176754873,"pid":6938,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176800845,"pid":7021,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176808698,"pid":7077,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725176808700,"pid":7077,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176893741,"pid":7192,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725176893743,"pid":7192,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176965373,"pid":7260,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725176965375,"pid":7260,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725176990185,"pid":7313,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725176990186,"pid":7313,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725177011604,"pid":7386,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725177011606,"pid":7386,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725177074026,"pid":7533,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725177074028,"pid":7533,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725177100658,"pid":7601,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725177100659,"pid":7601,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725177144057,"pid":7673,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725177144059,"pid":7673,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725177162295,"pid":7747,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725177162297,"pid":7747,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725177240616,"pid":7872,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725177240617,"pid":7872,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725177262885,"pid":7945,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725177262886,"pid":7945,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725177326309,"pid":8011,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725177326310,"pid":8011,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725177330801,"pid":8067,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725177330802,"pid":8067,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725177386198,"pid":8144,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725177386200,"pid":8144,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725177435581,"pid":8225,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725177435583,"pid":8225,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725177490355,"pid":8329,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725177490357,"pid":8329,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725177544452,"pid":8407,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725177544454,"pid":8407,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":50,"time":1725188129996,"pid":8407,"hostname":"192.168.1.4","msg":"Server::SIGINT::SIGINT"}
+{"level":30,"time":1725476675517,"pid":2384,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725476675520,"pid":2384,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725476689906,"pid":2384,"hostname":"192.168.1.4","msg":"Client with ID:Kbbi/wKfw0IXqEBipA+/cQ== started a new websocket connection"}
+{"level":30,"time":1725476800965,"pid":2384,"hostname":"192.168.1.4","msg":"Client with ID:Kbbi/wKfw0IXqEBipA+/cQ== closed the websocket connection"}
+{"level":30,"time":1725476800992,"pid":2384,"hostname":"192.168.1.4","msg":"Client with ID:e28ixzN0fXfZQCJxO7NOYg== started a new websocket connection"}
+{"level":30,"time":1725476853550,"pid":2384,"hostname":"192.168.1.4","msg":"Client with ID:e28ixzN0fXfZQCJxO7NOYg== closed the websocket connection"}
+{"level":30,"time":1725476853579,"pid":2384,"hostname":"192.168.1.4","msg":"Client with ID:gv1c8JrPogN1U1PaVKojYA== started a new websocket connection"}
+{"level":50,"time":1725477104382,"pid":2384,"hostname":"192.168.1.4","msg":"Server::SIGINT::SIGINT"}
+{"level":30,"time":1725477221024,"pid":2695,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725477221026,"pid":2695,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725477308229,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:3WI8Ua6kpCJt+zkx19Vrqg== started a new websocket connection"}
+{"level":30,"time":1725477313136,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:3WI8Ua6kpCJt+zkx19Vrqg== closed the websocket connection"}
+{"level":30,"time":1725477313165,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:8VzGFrGsQDWTW+YgdHJfxQ== started a new websocket connection"}
+{"level":30,"time":1725477316339,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:8VzGFrGsQDWTW+YgdHJfxQ== closed the websocket connection"}
+{"level":30,"time":1725477316365,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:j+mq0xD5BL0GZutPUsVZHA== started a new websocket connection"}
+{"level":30,"time":1725477793736,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:j+mq0xD5BL0GZutPUsVZHA== closed the websocket connection"}
+{"level":30,"time":1725477793764,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:tQ95d8MCBqyOONGR8UvkSA== started a new websocket connection"}
+{"level":30,"time":1725477810344,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:tQ95d8MCBqyOONGR8UvkSA== closed the websocket connection"}
+{"level":30,"time":1725477810361,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:zwvAcSgvTsmIq/+1riU5lQ== started a new websocket connection"}
+{"level":30,"time":1725477849001,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:2PrJsswsIYjP6iTKgxIecQ== started a new websocket connection"}
+{"level":30,"time":1725477910828,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:zwvAcSgvTsmIq/+1riU5lQ== closed the websocket connection"}
+{"level":30,"time":1725477910831,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:2PrJsswsIYjP6iTKgxIecQ== closed the websocket connection"}
+{"level":30,"time":1725477910867,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:+HpxrkOD7HaVCnAV5zNdbQ== started a new websocket connection"}
+{"level":30,"time":1725477910868,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:gVhBjXQCM2ETYgGmedPd9Q== started a new websocket connection"}
+{"level":30,"time":1725477938332,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:gVhBjXQCM2ETYgGmedPd9Q== closed the websocket connection"}
+{"level":30,"time":1725477938334,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:+HpxrkOD7HaVCnAV5zNdbQ== closed the websocket connection"}
+{"level":30,"time":1725477938362,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:x7FlOYt6ouxt+fA51S1L3Q== started a new websocket connection"}
+{"level":30,"time":1725477938364,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:OJlhilLoHjRNJOT5vcx1qA== started a new websocket connection"}
+{"level":30,"time":1725477990082,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:x7FlOYt6ouxt+fA51S1L3Q== closed the websocket connection"}
+{"level":30,"time":1725477990085,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:OJlhilLoHjRNJOT5vcx1qA== closed the websocket connection"}
+{"level":30,"time":1725477990107,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:F1OVHVdD2YaYPZTV+pPK/w== started a new websocket connection"}
+{"level":30,"time":1725477990110,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:YEce613VxBHtVufcymf03A== started a new websocket connection"}
+{"level":30,"time":1725478036997,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:F1OVHVdD2YaYPZTV+pPK/w== closed the websocket connection"}
+{"level":30,"time":1725478037006,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:YEce613VxBHtVufcymf03A== closed the websocket connection"}
+{"level":30,"time":1725478037034,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:1J4hJKPAVbiYiewoGQJ2bg== started a new websocket connection"}
+{"level":30,"time":1725478037035,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:RqnrzUZ5ZwHf5HYxdqiHDQ== started a new websocket connection"}
+{"level":30,"time":1725478068791,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:RqnrzUZ5ZwHf5HYxdqiHDQ== closed the websocket connection"}
+{"level":30,"time":1725478068799,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:1J4hJKPAVbiYiewoGQJ2bg== closed the websocket connection"}
+{"level":30,"time":1725478068829,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:c+IXfNQn5uMzXjEouGgJaw== started a new websocket connection"}
+{"level":30,"time":1725478068831,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:q7Urofe9z/846C2mPtDKUA== started a new websocket connection"}
+{"level":30,"time":1725478101579,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:q7Urofe9z/846C2mPtDKUA== closed the websocket connection"}
+{"level":30,"time":1725478101587,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:c+IXfNQn5uMzXjEouGgJaw== closed the websocket connection"}
+{"level":30,"time":1725478101602,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:LhBwZPVUkLLARr/Qydyw2A== started a new websocket connection"}
+{"level":30,"time":1725478101607,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:LNDQM7LH1f3pnZ2HQnUszw== started a new websocket connection"}
+{"level":30,"time":1725478159216,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:LhBwZPVUkLLARr/Qydyw2A== closed the websocket connection"}
+{"level":30,"time":1725478159218,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:LNDQM7LH1f3pnZ2HQnUszw== closed the websocket connection"}
+{"level":30,"time":1725478159248,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:uJ3zSIu1LnpCTR3x17IDiQ== started a new websocket connection"}
+{"level":30,"time":1725478159251,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:DEoZKKb7nH7FB+n3U+386g== started a new websocket connection"}
+{"level":30,"time":1725478280954,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:uJ3zSIu1LnpCTR3x17IDiQ== closed the websocket connection"}
+{"level":30,"time":1725478280957,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:DEoZKKb7nH7FB+n3U+386g== closed the websocket connection"}
+{"level":30,"time":1725478280985,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:8mK5k3x4hpIk4M+PznwZvg== started a new websocket connection"}
+{"level":30,"time":1725478280987,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:ZIhwo7wJr8KHIweLIEzH2w== started a new websocket connection"}
+{"level":30,"time":1725478419713,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:8mK5k3x4hpIk4M+PznwZvg== closed the websocket connection"}
+{"level":30,"time":1725478419715,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:ZIhwo7wJr8KHIweLIEzH2w== closed the websocket connection"}
+{"level":30,"time":1725478419773,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:Ov7Vq4lvDACX1bM07T3KaA== started a new websocket connection"}
+{"level":30,"time":1725478419774,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:wPi1HKzN1t9DCX+sv7TUdQ== started a new websocket connection"}
+{"level":30,"time":1725478858721,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:Ov7Vq4lvDACX1bM07T3KaA== closed the websocket connection"}
+{"level":30,"time":1725478858724,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:wPi1HKzN1t9DCX+sv7TUdQ== closed the websocket connection"}
+{"level":30,"time":1725478858767,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:YUBBLjOVyoqBF9lqkXhfdw== started a new websocket connection"}
+{"level":30,"time":1725478858767,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:Slu4PwSUKm7Ofb2b06rFig== started a new websocket connection"}
+{"level":30,"time":1725478859845,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:YUBBLjOVyoqBF9lqkXhfdw== closed the websocket connection"}
+{"level":30,"time":1725478859848,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:Slu4PwSUKm7Ofb2b06rFig== closed the websocket connection"}
+{"level":30,"time":1725478903787,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:JSfGBsiUjEFSVI+m+83PHA== started a new websocket connection"}
+{"level":30,"time":1725478943814,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:9BDjcRD7eBe2Zmj5Yb6gDw== started a new websocket connection"}
+{"level":30,"time":1725479004400,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:JSfGBsiUjEFSVI+m+83PHA== closed the websocket connection"}
+{"level":30,"time":1725479004427,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:iBEJYS3aNyL4Cl0dAN2aTA== started a new websocket connection"}
+{"level":30,"time":1725479334528,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:9BDjcRD7eBe2Zmj5Yb6gDw== closed the websocket connection"}
+{"level":30,"time":1725479334529,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:iBEJYS3aNyL4Cl0dAN2aTA== closed the websocket connection"}
+{"level":30,"time":1725479334562,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:8+ldo7cb3UW4tUKwgmTEJA== started a new websocket connection"}
+{"level":30,"time":1725479334562,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:WIiWyWV4OoSIHcsuZj9CXA== started a new websocket connection"}
+{"level":30,"time":1725479479594,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:WIiWyWV4OoSIHcsuZj9CXA== closed the websocket connection"}
+{"level":30,"time":1725480045488,"pid":2695,"hostname":"192.168.1.4","msg":"Client with ID:8+ldo7cb3UW4tUKwgmTEJA== closed the websocket connection"}
+{"level":50,"time":1725480047957,"pid":2695,"hostname":"192.168.1.4","msg":"Server::SIGINT::SIGINT"}
+{"level":30,"time":1725527309021,"pid":2793,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725527309025,"pid":2793,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725527314733,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:7PL7fjUu2Uy8eV7Eqj2DiA== started a new websocket connection"}
+{"level":30,"time":1725527317150,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:teW9XVOIDCaHsTXEzPbKUA== started a new websocket connection"}
+{"level":30,"time":1725527371046,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:7PL7fjUu2Uy8eV7Eqj2DiA== closed the websocket connection"}
+{"level":30,"time":1725527371047,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:teW9XVOIDCaHsTXEzPbKUA== closed the websocket connection"}
+{"level":30,"time":1725527371085,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:XAVLRev0GLwhp2+u41URbQ== started a new websocket connection"}
+{"level":30,"time":1725527371086,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:seNpbKJSjBwaK6fAmojS3A== started a new websocket connection"}
+{"level":30,"time":1725527511221,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:XAVLRev0GLwhp2+u41URbQ== closed the websocket connection"}
+{"level":30,"time":1725527511221,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:seNpbKJSjBwaK6fAmojS3A== closed the websocket connection"}
+{"level":30,"time":1725527511248,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:t9piVnWWBIl65+6nOhp6FA== started a new websocket connection"}
+{"level":30,"time":1725527511249,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:+Hrvsf7WhDa5Z/FMNExNSA== started a new websocket connection"}
+{"level":30,"time":1725528123400,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:t9piVnWWBIl65+6nOhp6FA== closed the websocket connection"}
+{"level":30,"time":1725528123401,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:+Hrvsf7WhDa5Z/FMNExNSA== closed the websocket connection"}
+{"level":30,"time":1725528123422,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:PCEgpdX8kER6ZKg77DO2GQ== started a new websocket connection"}
+{"level":30,"time":1725528123426,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:TFdFD/0XB6Q+ZcPutbeH1A== started a new websocket connection"}
+{"level":30,"time":1725528156090,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:PCEgpdX8kER6ZKg77DO2GQ== closed the websocket connection"}
+{"level":30,"time":1725528156094,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:TFdFD/0XB6Q+ZcPutbeH1A== closed the websocket connection"}
+{"level":30,"time":1725528156126,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:VtCTWyd8l1IhSlkxMv+GPA== started a new websocket connection"}
+{"level":30,"time":1725528156127,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:hM+BWM4zPASM5wL9m0cV7w== started a new websocket connection"}
+{"level":30,"time":1725528206158,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:VtCTWyd8l1IhSlkxMv+GPA== closed the websocket connection"}
+{"level":30,"time":1725528206162,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:hM+BWM4zPASM5wL9m0cV7w== closed the websocket connection"}
+{"level":30,"time":1725528206190,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:KcaZsznfYE4AqL6jIxup3Q== started a new websocket connection"}
+{"level":30,"time":1725528206194,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:3iEkTdx8x9lhmtm68QbrFA== started a new websocket connection"}
+{"level":30,"time":1725528216335,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:KcaZsznfYE4AqL6jIxup3Q== closed the websocket connection"}
+{"level":30,"time":1725528216338,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:3iEkTdx8x9lhmtm68QbrFA== closed the websocket connection"}
+{"level":30,"time":1725528216360,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:L+WnxfBMFTBgarUr+n4pig== started a new websocket connection"}
+{"level":30,"time":1725528216361,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:Y/5vBFOdcHqZhK2b+fi9Dg== started a new websocket connection"}
+{"level":30,"time":1725528247059,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:L+WnxfBMFTBgarUr+n4pig== closed the websocket connection"}
+{"level":30,"time":1725528247063,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:Y/5vBFOdcHqZhK2b+fi9Dg== closed the websocket connection"}
+{"level":30,"time":1725528247094,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:oYzR5Yl1Y2tgWGY6jbBFxA== started a new websocket connection"}
+{"level":30,"time":1725528247097,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:twN0nZWJj1/S9DNfpNdHyw== started a new websocket connection"}
+{"level":30,"time":1725528313957,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:oYzR5Yl1Y2tgWGY6jbBFxA== closed the websocket connection"}
+{"level":30,"time":1725528313961,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:twN0nZWJj1/S9DNfpNdHyw== closed the websocket connection"}
+{"level":30,"time":1725528313990,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:H2YXO0UIjWI9QIfOn1Feaw== started a new websocket connection"}
+{"level":30,"time":1725528313995,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:Vk9SeDg2YLgt+aLp99p6nw== started a new websocket connection"}
+{"level":30,"time":1725528316543,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:H2YXO0UIjWI9QIfOn1Feaw== closed the websocket connection"}
+{"level":30,"time":1725528316544,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:Vk9SeDg2YLgt+aLp99p6nw== closed the websocket connection"}
+{"level":30,"time":1725528316575,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:ocfRgdQOCdQ2pDWncq9Wsg== started a new websocket connection"}
+{"level":30,"time":1725528316577,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:MAkYytkjr+LSJmecxN9Fpw== started a new websocket connection"}
+{"level":30,"time":1725528324958,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:ocfRgdQOCdQ2pDWncq9Wsg== closed the websocket connection"}
+{"level":30,"time":1725528324961,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:MAkYytkjr+LSJmecxN9Fpw== closed the websocket connection"}
+{"level":30,"time":1725528324990,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:Wnv96hH0WatflOfw31Lqsw== started a new websocket connection"}
+{"level":30,"time":1725528324994,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:jp3Pm2tyNbTMoeUNL4Enzg== started a new websocket connection"}
+{"level":30,"time":1725528335637,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:Wnv96hH0WatflOfw31Lqsw== closed the websocket connection"}
+{"level":30,"time":1725528335645,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:jp3Pm2tyNbTMoeUNL4Enzg== closed the websocket connection"}
+{"level":30,"time":1725528335680,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:yvRj9KsW0hYgfErsjf0f4g== started a new websocket connection"}
+{"level":30,"time":1725528335682,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:sifjeW+ZlMcKScYgPgpA2Q== started a new websocket connection"}
+{"level":30,"time":1725528607308,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:yvRj9KsW0hYgfErsjf0f4g== closed the websocket connection"}
+{"level":30,"time":1725528607308,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:sifjeW+ZlMcKScYgPgpA2Q== closed the websocket connection"}
+{"level":30,"time":1725528607332,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:mX7xVzdkvU/2hZ5EEf+Iyw== started a new websocket connection"}
+{"level":30,"time":1725528607332,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:CpqeXM2V7wa56sr6sNFU9A== started a new websocket connection"}
+{"level":30,"time":1725528655172,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:mX7xVzdkvU/2hZ5EEf+Iyw== closed the websocket connection"}
+{"level":30,"time":1725528655178,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:CpqeXM2V7wa56sr6sNFU9A== closed the websocket connection"}
+{"level":30,"time":1725528655202,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:q4/4eG8/kqA7Liz4SdOOsg== started a new websocket connection"}
+{"level":30,"time":1725528655205,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:PcRmaJmRe4dAYoEqJ8D06Q== started a new websocket connection"}
+{"level":30,"time":1725528690696,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:q4/4eG8/kqA7Liz4SdOOsg== closed the websocket connection"}
+{"level":30,"time":1725528690701,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:PcRmaJmRe4dAYoEqJ8D06Q== closed the websocket connection"}
+{"level":30,"time":1725528690728,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:Ipj6ScyCnFjvyxijgoTTEA== started a new websocket connection"}
+{"level":30,"time":1725528690731,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:OQkRS0cG3Y8I1v5/MN1+rA== started a new websocket connection"}
+{"level":30,"time":1725528742498,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:Ipj6ScyCnFjvyxijgoTTEA== closed the websocket connection"}
+{"level":30,"time":1725528742506,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:OQkRS0cG3Y8I1v5/MN1+rA== closed the websocket connection"}
+{"level":30,"time":1725528742530,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:fV8Q3pb5bHmMF9TuMvK69Q== started a new websocket connection"}
+{"level":30,"time":1725528742531,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:ccJyCmbbgzl5Vo5hoE8nJg== started a new websocket connection"}
+{"level":30,"time":1725528821211,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:ccJyCmbbgzl5Vo5hoE8nJg== closed the websocket connection"}
+{"level":30,"time":1725528821220,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:fV8Q3pb5bHmMF9TuMvK69Q== closed the websocket connection"}
+{"level":30,"time":1725528821263,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:Y7ivkqPv76asQfa6/7PzKg== started a new websocket connection"}
+{"level":30,"time":1725528821263,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:ZMJHxvovCkspd9o+E/TqhA== started a new websocket connection"}
+{"level":30,"time":1725528842311,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:ZMJHxvovCkspd9o+E/TqhA== closed the websocket connection"}
+{"level":30,"time":1725528842313,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:Y7ivkqPv76asQfa6/7PzKg== closed the websocket connection"}
+{"level":30,"time":1725528842335,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:wHiRvLZrJWWP1n9PLSdkcQ== started a new websocket connection"}
+{"level":30,"time":1725528842340,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:zQjN9odgrMkBLqEooo+cGA== started a new websocket connection"}
+{"level":30,"time":1725528959848,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:wHiRvLZrJWWP1n9PLSdkcQ== closed the websocket connection"}
+{"level":30,"time":1725528959852,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:zQjN9odgrMkBLqEooo+cGA== closed the websocket connection"}
+{"level":30,"time":1725528959884,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:pObifncTH3JMZ25wrRznIw== started a new websocket connection"}
+{"level":30,"time":1725528959891,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:1pLsDbejZ+8iS7yG+K8stA== started a new websocket connection"}
+{"level":30,"time":1725528977782,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:1pLsDbejZ+8iS7yG+K8stA== closed the websocket connection"}
+{"level":30,"time":1725528977784,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:pObifncTH3JMZ25wrRznIw== closed the websocket connection"}
+{"level":30,"time":1725528977815,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:+gq3V3TFBUMr1nVqljZ9tw== started a new websocket connection"}
+{"level":30,"time":1725528977816,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:ww2duAAEdE9kO2Q6guauCg== started a new websocket connection"}
+{"level":30,"time":1725529059511,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:ww2duAAEdE9kO2Q6guauCg== closed the websocket connection"}
+{"level":30,"time":1725529059515,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:+gq3V3TFBUMr1nVqljZ9tw== closed the websocket connection"}
+{"level":30,"time":1725529059540,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:4O5aqDJWQOiCJmRwCytsAA== started a new websocket connection"}
+{"level":30,"time":1725529059545,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:nILyV0c9Pzdi8IPoI69P/w== started a new websocket connection"}
+{"level":30,"time":1725529090520,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:nILyV0c9Pzdi8IPoI69P/w== closed the websocket connection"}
+{"level":30,"time":1725529090524,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:4O5aqDJWQOiCJmRwCytsAA== closed the websocket connection"}
+{"level":30,"time":1725529090575,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:1Mgh0Fva83xzO4DW7LcjXA== started a new websocket connection"}
+{"level":30,"time":1725529090583,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:47njRrcHHaA1ylnJM/Ww6w== started a new websocket connection"}
+{"level":30,"time":1725529116481,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:47njRrcHHaA1ylnJM/Ww6w== closed the websocket connection"}
+{"level":30,"time":1725529116482,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:1Mgh0Fva83xzO4DW7LcjXA== closed the websocket connection"}
+{"level":30,"time":1725529116525,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:H8I0w4i8x6VNZ4snU5zB3g== started a new websocket connection"}
+{"level":30,"time":1725529116526,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:F0/TeyG8dv8ohOZUbOGcfA== started a new websocket connection"}
+{"level":30,"time":1725529152326,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:H8I0w4i8x6VNZ4snU5zB3g== closed the websocket connection"}
+{"level":30,"time":1725529152335,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:F0/TeyG8dv8ohOZUbOGcfA== closed the websocket connection"}
+{"level":30,"time":1725529152364,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:JSR+j3n4r+w2VBQ/CAHvEw== started a new websocket connection"}
+{"level":30,"time":1725529152366,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:SdgtKA/HenrP/at25m9FfQ== started a new websocket connection"}
+{"level":30,"time":1725529213328,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:JSR+j3n4r+w2VBQ/CAHvEw== closed the websocket connection"}
+{"level":30,"time":1725529213329,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:SdgtKA/HenrP/at25m9FfQ== closed the websocket connection"}
+{"level":30,"time":1725529213373,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:I26iPM8ES+TVkrH8NdquLw== started a new websocket connection"}
+{"level":30,"time":1725529213376,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:VJNwjx7IRaRM6V8lkTVrQg== started a new websocket connection"}
+{"level":30,"time":1725529259083,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:I26iPM8ES+TVkrH8NdquLw== closed the websocket connection"}
+{"level":30,"time":1725529259095,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:VJNwjx7IRaRM6V8lkTVrQg== closed the websocket connection"}
+{"level":30,"time":1725529259124,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:IsP6v2Q2DvPb24D8skAG/w== started a new websocket connection"}
+{"level":30,"time":1725529259129,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:R74KjBUWBCpGmJmRCECTEg== started a new websocket connection"}
+{"level":30,"time":1725529288206,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:IsP6v2Q2DvPb24D8skAG/w== closed the websocket connection"}
+{"level":30,"time":1725529288209,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:R74KjBUWBCpGmJmRCECTEg== closed the websocket connection"}
+{"level":30,"time":1725529288242,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:usGnKp4quGI5gzTI1mBmLg== started a new websocket connection"}
+{"level":30,"time":1725529288248,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:E7Q0GgUUrBdNnr5TIB2PBg== started a new websocket connection"}
+{"level":30,"time":1725529338075,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:E7Q0GgUUrBdNnr5TIB2PBg== closed the websocket connection"}
+{"level":30,"time":1725529338076,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:usGnKp4quGI5gzTI1mBmLg== closed the websocket connection"}
+{"level":30,"time":1725529338114,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:fUu53iTZeD3KHMtsUiNDow== started a new websocket connection"}
+{"level":30,"time":1725529338114,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:8jZhrwmOq984nvDIUrIC0g== started a new websocket connection"}
+{"level":30,"time":1725529346262,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:8jZhrwmOq984nvDIUrIC0g== closed the websocket connection"}
+{"level":30,"time":1725529346266,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:fUu53iTZeD3KHMtsUiNDow== closed the websocket connection"}
+{"level":30,"time":1725529346301,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:l2EWEopOFsg4XasVLyuP1Q== started a new websocket connection"}
+{"level":30,"time":1725529346311,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:YzIFTNQ21H5kyCxD6Lyy8Q== started a new websocket connection"}
+{"level":30,"time":1725529459581,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:YzIFTNQ21H5kyCxD6Lyy8Q== closed the websocket connection"}
+{"level":30,"time":1725529459582,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:l2EWEopOFsg4XasVLyuP1Q== closed the websocket connection"}
+{"level":30,"time":1725529459626,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:5hD9tUfiGRbw4L9YhN1PSQ== started a new websocket connection"}
+{"level":30,"time":1725529459630,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:mAg/pQjLYw2lcucKbgHmlg== started a new websocket connection"}
+{"level":30,"time":1725529475017,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:5hD9tUfiGRbw4L9YhN1PSQ== closed the websocket connection"}
+{"level":30,"time":1725529475022,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:mAg/pQjLYw2lcucKbgHmlg== closed the websocket connection"}
+{"level":30,"time":1725529475062,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:3sQ/BDv6cyUYuPu1pEMtbQ== started a new websocket connection"}
+{"level":30,"time":1725529475065,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:F2k/bCkGYSxsaNS8t+F28A== started a new websocket connection"}
+{"level":30,"time":1725529512003,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:3sQ/BDv6cyUYuPu1pEMtbQ== closed the websocket connection"}
+{"level":30,"time":1725529512007,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:F2k/bCkGYSxsaNS8t+F28A== closed the websocket connection"}
+{"level":30,"time":1725529512036,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:gtGCIAJq9PL0gBJGdS2Rlg== started a new websocket connection"}
+{"level":30,"time":1725529512038,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:czzSPAi12xJDnWc/vKYptw== started a new websocket connection"}
+{"level":30,"time":1725529560132,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:czzSPAi12xJDnWc/vKYptw== closed the websocket connection"}
+{"level":30,"time":1725529560137,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:gtGCIAJq9PL0gBJGdS2Rlg== closed the websocket connection"}
+{"level":30,"time":1725529560173,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:7v+ds34xadhYyGrAl/BXcA== started a new websocket connection"}
+{"level":30,"time":1725529560174,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:1pajNeFAWMunZcbSL+uHvg== started a new websocket connection"}
+{"level":30,"time":1725529590100,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:7v+ds34xadhYyGrAl/BXcA== closed the websocket connection"}
+{"level":30,"time":1725529590112,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:1pajNeFAWMunZcbSL+uHvg== closed the websocket connection"}
+{"level":30,"time":1725529590141,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:+R+RX0fldamcAdYitXODGg== started a new websocket connection"}
+{"level":30,"time":1725529590146,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:fmWoyk5N5mIXlRtM4f0ZUA== started a new websocket connection"}
+{"level":30,"time":1725529642212,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:fmWoyk5N5mIXlRtM4f0ZUA== closed the websocket connection"}
+{"level":30,"time":1725529642217,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:+R+RX0fldamcAdYitXODGg== closed the websocket connection"}
+{"level":30,"time":1725529642268,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:yUTKUaluq/g+21xyvlq81Q== started a new websocket connection"}
+{"level":30,"time":1725529642268,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:xJiz6TFhEbCBud61+NiDbg== started a new websocket connection"}
+{"level":30,"time":1725529657118,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:yUTKUaluq/g+21xyvlq81Q== closed the websocket connection"}
+{"level":30,"time":1725529657126,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:xJiz6TFhEbCBud61+NiDbg== closed the websocket connection"}
+{"level":30,"time":1725529657158,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:S87pk7Rpg/nEd/C4QTSWtA== started a new websocket connection"}
+{"level":30,"time":1725529657163,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:KLmJh8v3ELeCBuDSN0i2Ig== started a new websocket connection"}
+{"level":30,"time":1725529671388,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:S87pk7Rpg/nEd/C4QTSWtA== closed the websocket connection"}
+{"level":30,"time":1725529671393,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:KLmJh8v3ELeCBuDSN0i2Ig== closed the websocket connection"}
+{"level":30,"time":1725529671419,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:CfBOBp8QLtba0//f+UCzvg== started a new websocket connection"}
+{"level":30,"time":1725529671421,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:sQBuW4XNdcoH/56oa9Vu1A== started a new websocket connection"}
+{"level":30,"time":1725529708025,"pid":2793,"hostname":"192.168.1.4","msg":"Client with ID:CfBOBp8QLtba0//f+UCzvg== closed the websocket connection"}
+{"level":50,"time":1725529711384,"pid":2793,"hostname":"192.168.1.4","msg":"Server::SIGINT::SIGINT"}
+{"level":30,"time":1725886905829,"pid":20046,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725886905832,"pid":20046,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725886940804,"pid":20120,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725886940805,"pid":20120,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725887025850,"pid":20120,"hostname":"192.168.1.4","msg":"Client with ID:/lXkOf8rL6CyRvFtHTNL0g== started a new websocket connection"}
+{"level":30,"time":1725887233683,"pid":20420,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725887233685,"pid":20420,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725887968212,"pid":20726,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725887968214,"pid":20726,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725888087007,"pid":20817,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725888087009,"pid":20817,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725888102831,"pid":20877,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725888102833,"pid":20877,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725888105722,"pid":20877,"hostname":"192.168.1.4","msg":"Client with ID:D4kt6Xt0hrGGkap3wjEoYA== opened a new websocket connection"}
+{"level":30,"time":1725888283000,"pid":21006,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725888283001,"pid":21006,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725888381638,"pid":21112,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725888381639,"pid":21112,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725888388239,"pid":21112,"hostname":"192.168.1.4","msg":"Client with ID:7hW1R+uTNzR1SlNJPXEDdg== opened a new websocket connection"}
+{"level":30,"time":1725888531800,"pid":22814,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725888531802,"pid":22814,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725888534651,"pid":22814,"hostname":"192.168.1.4","msg":"Client with ID:WwEqpKZhjcMQfgXqU/4NdQ== opened a new websocket connection"}
+{"level":30,"time":1725888569309,"pid":22814,"hostname":"192.168.1.4","msg":"Client with ID:WwEqpKZhjcMQfgXqU/4NdQ== closed the websocket connection"}
+{"level":30,"time":1725888569310,"pid":22814,"hostname":"192.168.1.4","msg":"Client with ID:jGCchUTlMe/wPA+JW4MMzA== opened a new websocket connection"}
+{"level":30,"time":1725888627055,"pid":23440,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725888627057,"pid":23440,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725888630044,"pid":23440,"hostname":"192.168.1.4","msg":"Client with ID:Gbw8saxOuMH242+1S1o5vw== opened a new websocket connection"}
+{"level":30,"time":1725888665026,"pid":23580,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725888665028,"pid":23580,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725888668805,"pid":23580,"hostname":"192.168.1.4","msg":"Client with ID:E7TjJgs6o4XEVm2k6U1l7A== opened a new websocket connection"}
+{"level":30,"time":1725888714999,"pid":23580,"hostname":"192.168.1.4","msg":"Client with ID:E7TjJgs6o4XEVm2k6U1l7A== closed the websocket connection"}
+{"level":30,"time":1725888715000,"pid":23580,"hostname":"192.168.1.4","msg":"Client with ID:OZaGIJZPxoS0dFhcXP9P0g== opened a new websocket connection"}
+{"level":30,"time":1725888819622,"pid":23692,"hostname":"192.168.1.4","msg":"Data Source has been initialized!"}
+{"level":30,"time":1725888819624,"pid":23692,"hostname":"192.168.1.4","msg":"⚡️[server]: Server is running at 8080"}
+{"level":30,"time":1725888822469,"pid":23692,"hostname":"192.168.1.4","msg":"Client with ID:5Lokf/APUVfVzisNm1YiQA== opened a new websocket connection"}
+{"level":30,"time":1725888912492,"pid":23692,"hostname":"192.168.1.4","msg":"Client with ID:5Lokf/APUVfVzisNm1YiQA== closed the websocket connection"}
+{"level":30,"time":1725888912500,"pid":23692,"hostname":"192.168.1.4","msg":"Client with ID:EqE8hzjEVK1Mb30TLXdZqw== opened a new websocket connection"}
+{"level":30,"time":1725888989528,"pid":23692,"hostname":"192.168.1.4","msg":"Client with ID:EqE8hzjEVK1Mb30TLXdZqw== closed the websocket connection"}
+{"level":30,"time":1725888989553,"pid":23692,"hostname":"192.168.1.4","msg":"Client with ID:VzObAo/mNEAnEGFUYjBFZA== opened a new websocket connection"}
+{"level":30,"time":1725889056849,"pid":23692,"hostname":"192.168.1.4","msg":"Client with ID:VzObAo/mNEAnEGFUYjBFZA== closed the websocket connection"}
+{"level":30,"time":1725889056866,"pid":23692,"hostname":"192.168.1.4","msg":"Client with ID:PMDtDifFPMyBisVCqiZ62g== opened a new websocket connection"}
+{"level":30,"time":1725889155702,"pid":23692,"hostname":"192.168.1.4","msg":"Client with ID:PMDtDifFPMyBisVCqiZ62g== closed the websocket connection"}

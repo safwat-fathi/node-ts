@@ -8,7 +8,7 @@
 // 	VerifyErrors,
 // 	verify,
 // } from "jsonwebtoken";
-// import { HttpError } from "@/lib/classes/errors/http";
+// import { BaseError } from "@/lib/classes/error/base";
 
 // import { UserService } from "@/services/user.service";
 // import { asyncHandler } from "@/lib/middlewares/async.middleware";
@@ -86,7 +86,7 @@
 // 		const user = await userService.find({ email });
 
 // 		if (user) {
-// 			return next(new HttpError(409, `${email} is already in use`));
+// 			return next(new BaseError(409, `${email} is already in use`));
 // 		}
 
 // 		next();
@@ -99,7 +99,7 @@
 // //       for (let i = 0; i < req.body.roles.length; i++) {
 // //         if (!["user", "admin", "moderator"].includes(req.body.roles[i])) {
 // //           return next(
-// //             new HttpError(
+// //             new BaseError(
 // //               400,
 // //               `Failed! Role ${req.body.roles[i]} does not exist!`
 // //             )
@@ -117,7 +117,7 @@
 // 		const bearerToken = req.headers["authorization"];
 
 // 		if (!bearerToken) {
-// 			return next(new HttpError(401, res.__("unauthorized")));
+// 			return next(new BaseError(401, res.__("unauthorized")));
 // 		}
 
 // 		const token = bearerToken.replace("Bearer ", "");
@@ -126,15 +126,15 @@
 // 			const isExpired = err instanceof TokenExpiredError;
 
 // 			if (!decoded || isExpired) {
-// 				return next(new HttpError(401, res.__("invalid-token")));
+// 				return next(new BaseError(401, res.__("invalid-token")));
 // 			}
 
 // 			if (decoded && !(decoded as CustomJwtPayload).id) {
-// 				return next(new HttpError(403, res.__("access-forbidden")));
+// 				return next(new BaseError(403, res.__("access-forbidden")));
 // 			}
 
 // 			if (err) {
-// 				return next(new HttpError(500, res.__("server-error")));
+// 				return next(new BaseError(500, res.__("server-error")));
 // 			}
 // 		});
 

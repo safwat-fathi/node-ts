@@ -1,4 +1,10 @@
 {
+  "item-found": "Item found",
+  "items-found": "Items found",
+  "item-deleted": "Item deleted",
+  "item-created": "Item created",
+  "item-updated": "Items updated",
+  "too-many-requests": "Too many requests, please try again later.",
   "not-found": "Resource not found",
   "logged-in": "Already logged in, Please request a password reset if you suspect this is not you or logout to use another account",
   "not-logged-in": "Not logged in",
