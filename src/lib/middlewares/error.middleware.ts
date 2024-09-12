@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import HttpError from "@/lib/classes/errors/http";
 import { HttpStatusCode } from "@/types/http";
 import logger from "../utils/logger";
@@ -12,11 +12,12 @@ import logger from "../utils/logger";
  * @param res Response object provided by Express
  * @param next NextFunction function provided by Express
  */
-export const errorHandler = (err: HttpError, _: Request, res: Response) => {
+export const errorHandler = (err: HttpError, _req: Request, res: Response, _next: NextFunction) => {
   const errResponse = {
     success: false,
     message: err?.message || res.__("server-error"),
     stack: process.env.NODE_ENV === "development" ? err.stack : undefined,
+    errors: err?.errors,
   } as HttpError;
 
   if (!err.isOperational) logger.fatal(err, "Non-Operational error");
@@ -24,7 +25,6 @@ export const errorHandler = (err: HttpError, _: Request, res: Response) => {
 
   if (err instanceof HttpError) {
     return res.status(err?.status || HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-      ...err,
       ...errResponse,
     });
   }
