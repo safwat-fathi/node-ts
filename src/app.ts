@@ -74,11 +74,11 @@ class APP {
       message: i18n.__("too-many-requests"),
       // statusCode: 429,
       // eslint-disable-next-line
-      store: new (TypeormStore as any)({
-        cleanupLimit: 2,
-        limitSubquery: false, // Set to true if your database type requires subqueries
-        ttl: 86400, // 24 hours
-      }),
+      // store: new (TypeormStore as any)({
+      //   cleanupLimit: 2,
+      //   limitSubquery: false, // Set to true if your database type requires subqueries
+      //   ttl: 86400, // 24 hours
+      // }),
     });
     this._app.use(limiter);
   }
