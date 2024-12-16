@@ -15,7 +15,7 @@ COPY . .
 # Build app
 RUN yarn build
 
-EXPOSE 8000
+EXPOSE 4000
 
 ENV NODE_ENV=production
 
